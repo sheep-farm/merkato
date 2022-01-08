@@ -7,16 +7,10 @@ prefix = environ.get('MESON_INSTALL_PREFIX', '/usr/local')
 schemadir = path.join(environ['MESON_INSTALL_PREFIX'], 'share', 'glib-2.0', 'schemas')
 datadir = path.join(prefix, 'share')
 
-# prefix = environ.get('MESON_INSTALL_PREFIX', '/home/flavio/bin')
-# schemadir = path.join(environ['MESON_INSTALL_PREFIX'], 'share', 'glib-2.0', 'schemas')
-# datadir = path.join(prefix, 'share')
 desktop_database_dir = path.join(datadir, 'applications')
 
 # Package managers set this so we don't need to run
 if not environ.get('DESTDIR'):
-    # print('Compiling gsettings schema...')
-    # call(['glib-compile-schemas', schemadir])
-
     print('Updating icon cache...')
     call(['gtk-update-icon-cache', '-qtf', path.join(datadir, 'icons', 'hicolor')])
 
@@ -25,5 +19,3 @@ if not environ.get('DESTDIR'):
 
     print('Compiling GSettings schemas...')
     call(['glib-compile-schemas', path.join(datadir, 'glib-2.0', 'schemas')])
-
-
