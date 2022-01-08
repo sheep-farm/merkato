@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <template class="MktSymbolRow" parent="GtkListBoxRow">
+    <property name="width-request">150</property>
+    <property name="height-request">60</property>
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="margin-bottom">1</property>
+    <signal name="drag-data-received" handler="on_drag_received" swapped="yes"/>
+    <child>
+      <object class="GtkEventBox" id="drag_handle">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <signal name="drag-begin" handler="on_drag_begin" swapped="yes"/>
+        <signal name="drag-data-get" handler="on_drag_data_get" swapped="yes"/>
+        <signal name="drag-end" handler="on_drag_end" swapped="yes"/>
+        <child>
+          <object class="GtkBox" id="symbol_row">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="shortName_label">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="valign">start</property>
+                        <property name="ellipsize">end</property>
+                        <property name="single-line-mode">True</property>
+                        <style>
+                          <class name="text-md"/>
+                          <class name="text-bold"/>
+                          <class name="pd-bottom-sm"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="symbol_label">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="valign">center</property>
+                        <property name="ellipsize">end</property>
+                        <property name="single-line-mode">True</property>
+                        <style>
+                          <class name="pd-bottom-sm"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="extra_info">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <child>
+                          <object class="GtkLabel" id="market">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <style>
+                              <class name="text-sm"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="label"> · </property>
+                            <style>
+                              <class name="dim-label"/>
+                              <class name="text-sm"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="time">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="ellipsize">end</property>
+                            <style>
+                              <class name="dim-label"/>
+                              <class name="text-sm"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="price_info">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">end</property>
+                        <child>
+                          <object class="GtkLabel" id="price">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">end</property>
+                            <property name="xpad">0</property>
+                            <property name="single-line-mode">True</property>
+                            <style>
+                              <class name="text-smd"/>
+                              <class name="galdeano"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="currency">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">end</property>
+                            <property name="margin-start">5</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="change">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">end</property>
+                        <style>
+                          <class name="text-smd"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="remove_symbol_button">
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="border-width">6</property>
+                <signal name="clicked" handler="on_remove_symbol_slot" swapped="no"/>
+                <child>
+                  <object class="GtkImage" id="remove-image">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="icon-name">edit-delete-symbolic</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="row"/>
+    </style>
+  </template>
+</interface>

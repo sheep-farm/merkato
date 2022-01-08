@@ -1,0 +1,72 @@
+* {
+    font-family: Ubuntu;
+    font-style: normal;
+}
+
+.market_open {
+    color: @success_color;
+    /* font-weight: 600; */
+}
+
+.market_close {
+    /* color: @error_color; */
+    /* font-weight: 600; */
+}
+
+.profit {
+    color: @success_color;
+    /* font-weight: 600; */
+}
+
+.loss {
+    color: @error_color;
+    /* font-weight: 600; */
+}
+
+.text-lg {
+    font-size: 2em;
+    /* margin:0.5em; */
+}
+
+.text-md {
+    font-size: 1.1em;
+}
+
+.text-smd {
+    font-size: 0.9em;
+}
+
+.text-sm {
+    font-size: 0.7em;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.drag-begin {
+    background-color: alpha(@theme_selected_bg_color,0.2);
+    box-shadow: inset 0 0 0 0.15em alpha(@theme_selected_bg_color,0.2);
+}
+
+.pd-left-sm {
+    padding-left: 10px;
+}
+
+.pd-left-md {
+    padding-left: 20px;
+}
+
+.pd-right-sm {
+    padding-right: 10px;
+}
+
+.pd-bottom-sm {
+    padding-bottom: 5px;
+}
+
+.row {
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 3px;
+}

@@ -1,0 +1,154 @@
+# com.ekonomikas.merkato.
+# Copyright (C) 2022 GPL v3.
+# This file is distributed under the same license as the com.bitstower.Markets package.
+# Flávio Vasconcellos Corrêa <flavio.vcorrea at ufpel.edu.br>, 2021 - 2022.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.ekonomikas.merkato\n"
+"Report-Msgid-Bugs-To: flavio.vcorrea at ufpel.edu.br\n"
+"POT-Creation-Date: 2022-01-07 14:44-0300\n"
+"PO-Revision-Date: 2022-01-03 22:03-0300\n"
+"Last-Translator: Flávio Vasconcellos Corrêa <flavio.vcorrea at ufpel.edu.br>\n"
+"Language-Team: LANGUAGE <flavio.vcorrea at ufpel.edu.br>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: src\n"
+"X-Poedit-SearchPath-1: src/beans\n"
+"X-Poedit-SearchPath-2: src/persistence\n"
+"X-Poedit-SearchPath-3: src/rest\n"
+"X-Poedit-SearchPath-4: src/tools\n"
+"X-Poedit-SearchPath-5: src/views\n"
+"X-Poedit-SearchPath-6: src/AboutDialog.vala\n"
+"X-Poedit-SearchPath-7: src/Application.vala\n"
+"X-Poedit-SearchPath-8: src/ApplicationSet.vala\n"
+"X-Poedit-SearchPath-9: src/MainWindow.vala\n"
+"X-Poedit-SearchPath-10: src/PreferencesWindow.vala\n"
+"X-Poedit-SearchPath-11: data/ui\n"
+
+#: data/ui/MktErrorView.ui:37
+msgid "Ops! Catastrophic failure."
+msgstr ""
+
+#: data/ui/MktNoSymbolView.ui:37
+msgid "No symbols here"
+msgstr ""
+
+#: data/ui/MktNoSymbolView.ui:60
+msgid "Press + to search quotes"
+msgstr ""
+
+#: data/ui/MktNoTickerView.ui:37
+msgid "No tickers found"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:24
+msgid "General"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:30
+msgid "Update Interval"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:31
+msgid "Pull data every X seconds"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:57
+msgid "Order"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:63
+msgid "Custom"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:85
+msgid "By Title"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:108
+msgid "By Title (desc)"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:131
+msgid "By Profit (%)"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:154
+msgid "By Loss (%)"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:178
+msgid "Appearance"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:184
+msgid "Dark Theme"
+msgstr ""
+
+#: data/ui/MktPreferencesWindow.ui:185
+msgid "Use dark GTK+ theme"
+msgstr ""
+
+#: data/ui/MktSymbolRow.ui:219
+msgid "Click and move"
+msgstr ""
+
+#: data/ui/MktSymbolView.ui:42 data/ui/MktTickerView.ui:44
+msgid "Source: <a href=\"https://finance.yahoo.com/\">Yahoo Finance</a>"
+msgstr ""
+
+#: data/ui/MktSymbolViewBox.ui:23 data/ui/MktTickerViewBox.ui:23
+msgid "Preferences"
+msgstr ""
+
+#: data/ui/MktSymbolViewBox.ui:48 data/ui/MktTickerViewBox.ui:48
+msgid "About Merkato"
+msgstr ""
+
+#: data/ui/MktSymbolViewBox.ui:72
+msgid "My symbols"
+msgstr ""
+
+#: data/ui/MktSymbolViewBox.ui:80 data/ui/MktTickerViewBox.ui:80
+msgid "Open menu options"
+msgstr ""
+
+#: data/ui/MktSymbolViewBox.ui:111 data/ui/MktTickerViewBox.ui:72
+msgid "Search and add symbols"
+msgstr ""
+
+#: data/ui/MktSymbolViewBox.ui:130
+msgid " Active mode remove symbols in watchlist"
+msgstr ""
+
+#: data/ui/MktTickerViewBox.ui:114
+msgid "Return to watchlist"
+msgstr ""
+
+#: data/ui/MktTickerViewBox.ui:144
+msgid "Insert text or ticker symbol and press <RETURN> to search"
+msgstr ""
+
+#: data/ui/MktTickerViewBox.ui:154
+msgid "Search"
+msgstr ""
+
+#: src/AboutDialog.vala:28
+msgid "Track yours investiments."
+msgstr ""
+
+#: src/AboutDialog.vala:33
+msgid "Official webpage"
+msgstr ""
+
+#: src/views/symbol/SymbolRow.vala:111
+msgid "Market Closed"
+msgstr ""
+
+#: src/views/symbol/SymbolRow.vala:115
+msgid "Market Open"
+msgstr ""

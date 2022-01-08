@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <requires lib="libhandy" version="1.0"/>
+  <object class="GtkPopoverMenu" id="selection_options_popover">
+    <property name="can-focus">False</property>
+    <property name="border-width">8</property>
+    <property name="position">bottom</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkModelButton" id="prefbutton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="action-name">app.preferences</property>
+            <property name="text" translatable="yes">Preferences</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="option_about_menu">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="action-name">app.about</property>
+            <property name="text" translatable="yes">About Merkato</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="submenu">main</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+  </object>
+  <template class="MktSymbolViewBox" parent="GtkBox">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="HdyHeaderBar">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="title">Merkato</property>
+        <property name="subtitle" translatable="yes">My symbols</property>
+        <property name="has-subtitle">False</property>
+        <property name="show-close-button">True</property>
+        <child>
+          <object class="GtkMenuButton" id="menu_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">False</property>
+            <property name="tooltip-text" translatable="yes">Open menu options</property>
+            <property name="valign">center</property>
+            <property name="popover">selection_options_popover</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">open-menu-symbolic</property>
+                <property name="icon_size">1</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinner" id="spinner">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="add_symbol_view_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Search and add symbols</property>
+            <signal name="clicked" handler="on_add_view" swapped="no"/>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">list-add-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="remove_symbol_view_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes"> Active mode remove symbols in watchlist</property>
+            <signal name="toggled" handler="on_remove_symbol" swapped="no"/>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">edit-delete-symbolic</property>
+                <property name="use-fallback">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="position">4</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="StocksWorkspace">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkStack" id="stack">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+  </template>
+</interface>

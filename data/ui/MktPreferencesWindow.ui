@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <requires lib="libhandy" version="0.0"/>
+  <template class="MktPreferencesWindow" parent="HdyPreferencesWindow">
+    <property name="can-focus">False</property>
+    <property name="modal">True</property>
+    <property name="window-position">center</property>
+    <property name="default-width">400</property>
+    <property name="default-height">600</property>
+    <property name="destroy-with-parent">True</property>
+    <property name="search-enabled">False</property>
+    <property name="can-swipe-back">True</property>
+    <signal name="delete-event" handler="on_delete_event" swapped="no"/>
+    <child>
+      <object class="HdyPreferencesPage">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="HdyPreferencesGroup">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="title" translatable="yes">General</property>
+            <child>
+              <object class="HdyActionRow">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="activatable">False</property>
+                <property name="title" translatable="yes">Update Interval</property>
+                <property name="subtitle" translatable="yes">Pull data every X seconds</property>
+                <property name="use-underline">True</property>
+                <child>
+                  <object class="GtkComboBoxText" id="pull_interval">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="hexpand">False</property>
+                    <property name="active-id">30</property>
+                    <items>
+                      <item id="30">30</item>
+                      <item id="45">45</item>
+                      <item id="60">60</item>
+                    </items>
+                    <signal name="changed" handler="on_pull_interval_changed" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="HdyPreferencesGroup">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="title" translatable="yes">Order</property>
+            <child>
+              <object class="HdyActionRow">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="activatable">False</property>
+                <property name="title" translatable="yes">Custom</property>
+                <property name="use-underline">True</property>
+                <property name="title-lines">2</property>
+                <child>
+                  <object class="GtkRadioButton" id="order_custom">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="hexpand">False</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="on_order_button_toggle" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="HdyActionRow">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="activatable">False</property>
+                <property name="title" translatable="yes">By Title</property>
+                <property name="use-underline">True</property>
+                <property name="title-lines">2</property>
+                <child>
+                  <object class="GtkRadioButton" id="order_title_asc">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="hexpand">False</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">order_custom</property>
+                    <signal name="toggled" handler="on_order_button_toggle" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="HdyActionRow">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="activatable">False</property>
+                <property name="title" translatable="yes">By Title (desc)</property>
+                <property name="use-underline">True</property>
+                <property name="title-lines">2</property>
+                <child>
+                  <object class="GtkRadioButton" id="order_title_desc">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="hexpand">False</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">order_custom</property>
+                    <signal name="toggled" handler="on_order_button_toggle" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="HdyActionRow">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="activatable">False</property>
+                <property name="title" translatable="yes">By Profit (%)</property>
+                <property name="use-underline">True</property>
+                <property name="title-lines">2</property>
+                <child>
+                  <object class="GtkRadioButton" id="order_change_up">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="hexpand">False</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">order_custom</property>
+                    <signal name="toggled" handler="on_order_button_toggle" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="HdyActionRow">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="activatable">False</property>
+                <property name="title" translatable="yes">By Loss (%)</property>
+                <property name="use-underline">True</property>
+                <property name="title-lines">2</property>
+                <child>
+                  <object class="GtkRadioButton" id="order_change_down">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="hexpand">False</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">order_custom</property>
+                    <signal name="toggled" handler="on_order_button_toggle" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="HdyPreferencesGroup">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="title" translatable="yes">Appearance</property>
+            <child>
+              <object class="HdyActionRow">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="activatable">False</property>
+                <property name="title" translatable="yes">Dark Theme</property>
+                <property name="subtitle" translatable="yes">Use dark GTK+ theme</property>
+                <property name="use-underline">True</property>
+                <child>
+                  <object class="GtkSwitch" id="dark_theme">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="hexpand">False</property>
+                    <signal name="state-set" handler="on_dark_theme_state_set" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

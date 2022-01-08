@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <template class="MktTickerRow" parent="GtkListBoxRow">
+    <property name="width-request">150</property>
+    <property name="height-request">60</property>
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="margin-bottom">1</property>
+    <property name="activatable">False</property>
+    <property name="selectable">False</property>
+    <child>
+      <object class="GtkBox" id="quoterow">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="valign">baseline</property>
+            <property name="margin-start">6</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="symbol">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="ellipsize">end</property>
+                <property name="single-line-mode">True</property>
+                <style>
+                  <class name="text-md"/>
+                  <class name="text-bold"/>
+                  <class name="pd-bottom-sm"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="shortname">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="ellipsize">end</property>
+                <property name="single-line-mode">True</property>
+                <style>
+                  <class name="pd-bottom-sm"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="add_button">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="focus-on-click">False</property>
+            <property name="receives-default">True</property>
+            <property name="margin-top">12</property>
+            <property name="margin-bottom">12</property>
+            <property name="border-width">6</property>
+            <property name="always-show-image">True</property>
+            <signal name="clicked" handler="on_add_slot" swapped="no"/>
+            <child>
+              <object class="GtkImage" id="add-image">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">list-add-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="quote-row"/>
+    </style>
+  </template>
+</interface>
