@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/ekonomikas/merkato">
+    <file compressed="true">Application.css</file>
+
+    <file compressed="true">MktMainWindow.ui</file>
+    <file compressed="true">MktSymbolViewBox.ui</file>
+    <file compressed="true">MktTickerViewBox.ui</file>
+
+    <file compressed="true">MktNoSymbolView.ui</file>
+    <file compressed="true">MktSymbolRow.ui</file>
+    <file compressed="true">MktSymbolView.ui</file>
+
+    <file compressed="true">MktNoTickerView.ui</file>
+    <file compressed="true">MktTickerRow.ui</file>
+    <file compressed="true">MktTickerView.ui</file>
+    <file compressed="true">MktPreferencesWindow.ui</file>
+
+    <file compressed="true">MktErrorView.ui</file>
+
+  </gresource>
+</gresources>
