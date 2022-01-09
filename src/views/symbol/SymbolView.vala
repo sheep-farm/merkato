@@ -35,4 +35,9 @@ public class Mkt.SymbolView : Box {
         var symbol = (Symbol) item;
         return new SymbolRow.from_object (symbol);
     }
+
+    [GtkCallback]
+    private void on_symbol_list_box_row_activated (Gtk.ListBox box, Gtk.ListBoxRow row) {
+        ((SymbolRow) row).on_row_clicked ();
+    }
 }

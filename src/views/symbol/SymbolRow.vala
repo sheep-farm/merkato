@@ -104,6 +104,14 @@ public class Mkt.SymbolRow : ListBoxRow {
         }
     }
 
+    public void on_row_clicked () {
+        try {
+            Gtk.show_uri_on_window (null,@"https://finance.yahoo.com/quote/$(symbol.symbol)", Gdk.CURRENT_TIME);
+        } catch (Error e) {
+            warning (@"An error occured when opening the link, message: $(e.message)");
+        }
+    }
+
     [GtkCallback]
     private void on_remove_symbol_slot () {
         var symbol_store = app_set.symbol_store;
@@ -153,4 +161,5 @@ public class Mkt.SymbolRow : ListBoxRow {
         }
         app_set.order_view = ApplicationSet.OrderView.CUSTOM;
     }
+
 }
