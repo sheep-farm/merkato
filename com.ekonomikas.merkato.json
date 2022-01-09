@@ -43,7 +43,7 @@
             ]
         },
         {
-            "name" : "ekonomikas-merkato",
+            "name" : "com.ekonomikas.merkato",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [

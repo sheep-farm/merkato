@@ -32,13 +32,13 @@ app_deps = [
   dependency ('gee-0.8')
 ]
 
-gnome = import ('gnome')
+# gnome = import ('gnome')
 
-app_sources += gnome.compile_resources (
-  'merkato-resources',
-  'merkato.gresource.xml',
-  c_name: 'merkato'
-)
+# app_sources += gnome.compile_resources (
+#   'merkato-resources',
+#   'merkato.gresource.xml',
+#   c_name: 'merkato'
+# )
 
 app_c_args = [
   '-DHANDY_USE_UNSTABLE_API',
