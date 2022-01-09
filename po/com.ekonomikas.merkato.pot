@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.ekonomikas.merkato\n"
 "Report-Msgid-Bugs-To: flavio.vcorrea at ufpel.edu.br\n"
-"POT-Creation-Date: 2022-01-09 11:01-0300\n"
+"POT-Creation-Date: 2022-01-09 13:12-0300\n"
 "PO-Revision-Date: 2022-01-03 22:03-0300\n"
 "Last-Translator: Flávio Vasconcellos Corrêa <flavio.vcorrea at ufpel.edu.br>\n"
 "Language-Team: LANGUAGE <flavio.vcorrea at ufpel.edu.br>\n"
@@ -118,7 +118,7 @@ msgid "Search and add symbols"
 msgstr ""
 
 #: data/ui/MktSymbolViewBox.ui:130
-msgid " Active mode remove symbols in watchlist"
+msgid "If selected, open remove symbols mode."
 msgstr ""
 
 #: data/ui/MktTickerViewBox.ui:89

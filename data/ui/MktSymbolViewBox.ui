@@ -127,7 +127,7 @@
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="tooltip-text" translatable="yes"> Active mode remove symbols in watchlist</property>
+            <property name="tooltip-text" translatable="yes">If selected, open remove symbols mode.</property>
             <signal name="toggled" handler="on_remove_symbol" swapped="no"/>
             <child>
               <object class="GtkImage">
