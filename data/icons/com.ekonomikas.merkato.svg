@@ -1,9 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg height="128px"
-     viewBox="0 0 128 128"
-     width="128px"
-     xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="128"
+   viewBox="0 0 128 128.00001"
+   width="128"
+   version="1.1"
+   id="svg39"
+   sodipodi:docname="com.ekonomikas.merkato.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#">
+  <sodipodi:namedview
+     id="namedview41"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     showgrid="false"
+     inkscape:zoom="4.1171875"
+     inkscape:cx="94.360531"
+     inkscape:cy="48.57685"
+     inkscape:window-width="1366"
+     inkscape:window-height="699"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="false"
+     units="px" />
   <defs
      id="defs2454">
     <linearGradient
@@ -59,7 +89,7 @@
        lpeversion="1" />
     <linearGradient
        id="a"
-       gradientTransform="matrix(0.26458333,0,0,-0.26458333,2.0921095,-47.804353)"
+       gradientTransform="matrix(0.91234989,0,0,-0.92762032,-34.305216,-183.57159)"
        gradientUnits="userSpaceOnUse"
        x1="-7.0000001e-06"
        x2="111.99999"
@@ -131,87 +161,394 @@
        x2="-18.511702"
        y2="43.694782"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(35.664011,2.286868)" />
+       gradientTransform="matrix(3.4482516,0,0,3.5059666,81.459149,-7.9534464)" />
+    <linearGradient
+       id="a-3"
+       gradientTransform="matrix(1,0,0,-1,93.984582,-196.98114)"
+       gradientUnits="userSpaceOnUse"
+       x1="-7.0000001e-06"
+       x2="111.99999"
+       y1="-212.00002"
+       y2="-212.00002">
+      <stop
+         offset="0"
+         stop-color="#77767b"
+         id="stop862" />
+      <stop
+         offset="0.0357143"
+         stop-color="#c0bfbc"
+         id="stop864" />
+      <stop
+         offset="0.0713653"
+         stop-color="#9a9996"
+         id="stop866" />
+      <stop
+         offset="0.928571"
+         stop-color="#9a9996"
+         id="stop868" />
+      <stop
+         offset="0.964286"
+         stop-color="#c0bfbc"
+         id="stop870" />
+      <stop
+         offset="1"
+         stop-color="#77767b"
+         id="stop872" />
+    </linearGradient>
+    <clipPath
+       id="e">
+      <rect
+         height="152"
+         width="192"
+         id="rect888"
+         x="0"
+         y="0" />
+    </clipPath>
+    <mask
+       id="c">
+      <g
+         filter="url(#b)"
+         id="g880">
+        <rect
+           fill-opacity="0.5"
+           height="128"
+           width="128"
+           id="rect878"
+           x="0"
+           y="0" />
+      </g>
+    </mask>
+    <filter
+       id="b"
+       height="1"
+       width="1"
+       x="0"
+       y="0">
+      <feColorMatrix
+         in="SourceGraphic"
+         type="matrix"
+         values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
+         id="feColorMatrix875" />
+    </filter>
+    <linearGradient
+       id="d"
+       gradientTransform="matrix(-1,0,0,1,16,-156)"
+       gradientUnits="userSpaceOnUse"
+       x1="-31.093782"
+       x2="-32.359253"
+       y1="201.34406"
+       y2="284.54291">
+      <stop
+         offset="0"
+         stop-color="#f6f5f4"
+         stop-opacity="0.5"
+         id="stop883" />
+      <stop
+         offset="1"
+         stop-color="#f6f5f4"
+         stop-opacity="0"
+         id="stop885" />
+    </linearGradient>
+    <linearGradient
+       id="f"
+       gradientTransform="matrix(-1,0,0,1,213.98458,-16.981135)"
+       gradientUnits="userSpaceOnUse"
+       x1="66.710762"
+       x2="66.624916"
+       y1="70.108971"
+       y2="92.238159">
+      <stop
+         offset="0"
+         stop-color="#33d17a"
+         id="stop891" />
+      <stop
+         offset="1"
+         stop-color="#8ff0a4"
+         stop-opacity="0.023585"
+         id="stop893" />
+    </linearGradient>
+    <linearGradient
+       id="g"
+       gradientTransform="matrix(1.018182,0,0,-1,92.948222,-196.98114)"
+       gradientUnits="userSpaceOnUse"
+       x1="2"
+       x2="112"
+       y1="-300"
+       y2="-300">
+      <stop
+         offset="0"
+         stop-color="#3d3846"
+         id="stop896" />
+      <stop
+         offset="0.0357143"
+         stop-color="#9a9996"
+         id="stop898" />
+      <stop
+         offset="0.0713653"
+         stop-color="#5e5c64"
+         id="stop900" />
+      <stop
+         offset="0.928571"
+         stop-color="#5e5c64"
+         id="stop902" />
+      <stop
+         offset="0.964286"
+         stop-color="#9a9996"
+         id="stop904" />
+      <stop
+         offset="1"
+         stop-color="#3d3846"
+         id="stop906" />
+    </linearGradient>
+    <clipPath
+       id="j">
+      <rect
+         height="152"
+         width="192"
+         id="rect919"
+         x="0"
+         y="0" />
+    </clipPath>
+    <mask
+       id="h">
+      <g
+         filter="url(#b)"
+         id="g911">
+        <rect
+           fill-opacity="0.5"
+           height="128"
+           width="128"
+           id="rect909"
+           x="0"
+           y="0" />
+      </g>
+    </mask>
+    <filter
+       id="filter1393"
+       height="1"
+       width="1"
+       x="0"
+       y="0">
+      <feColorMatrix
+         in="SourceGraphic"
+         type="matrix"
+         values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
+         id="feColorMatrix1391" />
+    </filter>
+    <linearGradient
+       id="i"
+       gradientTransform="matrix(-1,0,0,1,16,-156)"
+       gradientUnits="userSpaceOnUse"
+       x1="-32"
+       x2="-32"
+       y1="208"
+       y2="276">
+      <stop
+         offset="0"
+         stop-color="#5e5c64"
+         id="stop914" />
+      <stop
+         offset="1"
+         stop-color="#241f31"
+         id="stop916" />
+    </linearGradient>
+    <clipPath
+       id="k-6">
+      <path
+         d="m 16,38 h 96 v 65 H 16 Z m 0,0"
+         id="path922" />
+    </clipPath>
+    <clipPath
+       id="m">
+      <rect
+         height="152"
+         width="192"
+         id="rect930"
+         x="0"
+         y="0" />
+    </clipPath>
+    <mask
+       id="l">
+      <g
+         filter="url(#b)"
+         id="g927">
+        <rect
+           fill-opacity="0.5"
+           height="128"
+           width="128"
+           id="rect925"
+           x="0"
+           y="0" />
+      </g>
+    </mask>
+    <filter
+       id="filter1407"
+       height="1"
+       width="1"
+       x="0"
+       y="0">
+      <feColorMatrix
+         in="SourceGraphic"
+         type="matrix"
+         values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
+         id="feColorMatrix1405" />
+    </filter>
+    <linearGradient
+       id="n"
+       gradientTransform="rotate(-90,14.001723,94.017142)"
+       gradientUnits="userSpaceOnUse"
+       x1="64"
+       x2="74"
+       y1="236"
+       y2="236">
+      <stop
+         offset="0"
+         stop-color="#33d17a"
+         id="stop933" />
+      <stop
+         offset="1"
+         stop-color="#c8f8d2"
+         id="stop935" />
+    </linearGradient>
   </defs>
   <g
      inkscape:label="Camada 1"
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline">
-    <path
-       d="M 4.7379425,28.395646 H 29.608775 c 1.168921,0 2.116667,-0.947745 2.116667,-2.116667 V 10.40398 c 0,-1.168922 -0.947746,-2.116667 -2.116667,-2.116667 H 4.7379425 c -1.168921,0 -2.116666,0.947745 -2.116666,2.116667 v 15.874999 c 0,1.168922 0.947745,2.116667 2.116666,2.116667 z m 0,0"
-       fill="url(#a)"
-       id="path1636"
-       style="fill:url(#a);stroke-width:0.264583" />
-    <path
-       d="M 29.600889,5.410075 H 4.7300565 c -1.168921,0 -2.116667,0.947746 -2.116667,2.116667 v 17.991666 c 0,1.168922 0.947746,2.116667 2.116667,2.116667 H 29.600889 c 1.168918,0 2.116666,-0.947745 2.116666,-2.116667 V 7.526742 c 0,-1.168921 -0.947748,-2.116667 -2.116666,-2.116667 z m 0,0"
-       fill="#deddda"
-       id="path1638"
-       style="fill:#5e5c64;fill-opacity:1;stroke-width:0.264583" />
-    <path
-       d="M 29.807488,6.533498 H 4.4074895 c -0.584978,0 -1.058334,0.473356 -1.058334,1.058334 v 17.991666 c 0,0.584977 0.473356,1.058333 1.058334,1.058333 H 29.807488 c 0.584978,0 1.058334,-0.473356 1.058334,-1.058333 V 7.591832 c 0,-0.584978 -0.473356,-1.058334 -1.058334,-1.058334 z m 0,0"
-       fill="#241f31"
-       id="path1640"
-       style="fill:#454837;stroke-width:0.264583" />
-    <rect
-       style="fill:url(#linearGradient3668);fill-opacity:1;stroke-width:0.264583"
-       id="rect3272"
-       width="25.103598"
-       height="17.876917"
-       x="4.5607281"
-       y="7.6376486" />
-    <rect
-       style="fill:#c6e9af;stroke-width:0.131344"
-       id="rect3586-2"
-       width="3.276397"
-       height="3.2203884"
-       x="5.7078171"
-       y="22.275984" />
-    <rect
-       style="fill:#c6e9af;stroke-width:0.207693"
-       id="rect3586"
-       width="3.276397"
-       height="8.0525579"
-       x="10.367831"
-       y="17.447371" />
-    <rect
-       style="fill:#c6e9af;stroke-width:0.174947"
-       id="rect3586-7"
-       width="3.276397"
-       height="5.7135305"
-       x="15.16285"
-       y="19.786398" />
-    <rect
-       style="fill:#c6e9af;stroke-width:0.25479"
-       id="rect3586-5"
-       width="3.276397"
-       height="12.118625"
-       x="19.957872"
-       y="13.381303" />
-    <rect
-       style="fill:#c6e9af;stroke-width:0.241543"
-       id="rect3586-56"
-       width="3.276397"
-       height="10.891192"
-       x="24.752892"
-       y="14.608735" />
-    <path
-       sodipodi:type="star"
-       style="fill:#00aa00"
-       id="path2909"
-       inkscape:flatsided="false"
-       sodipodi:sides="5"
-       sodipodi:cx="-75.12764"
-       sodipodi:cy="54.940228"
-       sodipodi:r1="11.079512"
-       sodipodi:r2="5.5397563"
-       sodipodi:arg1="0.92813977"
-       sodipodi:arg2="1.5564583"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m -68.487421,63.809448 -6.560792,-3.330034 -6.462616,3.516777 1.139654,-7.268722 -5.341712,-5.059569 7.265138,-1.162283 3.161256,-6.643762 3.350448,6.55039 7.295476,0.953499 -5.194447,5.210647 z"
-       transform="matrix(0.26458333,0,0,0.26458333,27.692821,-3.5064458)"
-       inkscape:transform-center-x="0.012987684"
-       inkscape:transform-center-y="-0.26754813" />
+    <g
+       id="g1922"
+       transform="matrix(1.115697,0,0,1.0919924,43.215866,11.994974)">
+      <path
+         d="m -25.181718,83.583057 h 85.760889 c 4.030734,0 7.298798,-3.322762 7.298798,-7.420964 V 20.504877 c 0,-4.098201 -3.268064,-7.420964 -7.298798,-7.420964 h -85.760889 c -4.030734,0 -7.298797,3.322763 -7.298797,7.420964 v 55.657216 c 0,4.098202 3.268063,7.420964 7.298797,7.420964 z m 0,0"
+         fill="url(#a)"
+         id="path1636"
+         style="fill:url(#a);stroke-width:0.919952"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <path
+         d="m 60.551978,2.9964128 h -85.760889 c -4.030734,0 -7.298801,3.3227658 -7.298801,7.4209642 v 63.07818 c 0,4.098201 3.268067,7.420964 7.298801,7.420964 h 85.760889 c 4.030723,0 7.298801,-3.322763 7.298801,-7.420964 v -63.07818 c 0,-4.0981984 -3.268078,-7.4209642 -7.298801,-7.4209642 z m 0,0"
+         fill="#deddda"
+         id="path1638"
+         style="fill:#5e5c64;fill-opacity:1;stroke-width:0.919952"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <path
+         d="m 61.264383,6.9350963 h -87.585586 c -2.017152,0 -3.649402,1.6595705 -3.649402,3.7104837 v 63.07818 c 0,2.05091 1.63225,3.71048 3.649402,3.71048 h 87.585586 c 2.017152,0 3.649406,-1.65957 3.649406,-3.71048 V 10.64558 c 0,-2.0509132 -1.632254,-3.7104837 -3.649406,-3.7104837 z m 0,0"
+         fill="#241f31"
+         id="path1640"
+         style="fill:#454837;stroke-width:0.919952"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:url(#linearGradient3668);fill-opacity:1;stroke-width:0.919952"
+         id="rect3272"
+         width="86.563522"
+         height="62.675873"
+         x="-25.792797"
+         y="10.806211"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#c6e9af;stroke-width:0.456682"
+         id="rect3586-2"
+         width="11.297841"
+         height="11.290574"
+         x="-21.837347"
+         y="62.127728"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#c6e9af;stroke-width:0.722146"
+         id="rect3586"
+         width="11.297841"
+         height="28.231998"
+         x="-5.768446"
+         y="45.198769"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#c6e9af;stroke-width:0.608289"
+         id="rect3586-7"
+         width="11.297841"
+         height="20.031446"
+         x="10.765987"
+         y="53.399323"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#c6e9af;stroke-width:0.885902"
+         id="rect3586-5"
+         width="11.297841"
+         height="42.487492"
+         x="27.30043"
+         y="30.943272"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#c6e9af;stroke-width:0.839842"
+         id="rect3586-56"
+         width="11.297841"
+         height="38.184158"
+         x="43.834862"
+         y="35.246609"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <path
+         sodipodi:type="star"
+         style="fill:#00aa00"
+         id="path2909"
+         inkscape:flatsided="false"
+         sodipodi:sides="5"
+         sodipodi:cx="-75.12764"
+         sodipodi:cy="54.940228"
+         sodipodi:r1="11.079512"
+         sodipodi:r2="5.5397563"
+         sodipodi:arg1="0.92813977"
+         sodipodi:arg2="1.5564583"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m -68.487421,63.809448 -6.560792,-3.330034 -6.462616,3.516777 1.139654,-7.268722 -5.341712,-5.059569 7.265138,-1.162283 3.161256,-6.643762 3.350448,6.55039 7.295476,0.953499 -5.194447,5.210647 z"
+         transform="matrix(0.9123499,0,0,0.92762032,53.972479,-28.264611)"
+         inkscape:transform-center-x="0.044784973"
+         inkscape:transform-center-y="-0.9380146"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+    </g>
   </g>
+  <metadata
+     id="metadata473">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
 </svg>
