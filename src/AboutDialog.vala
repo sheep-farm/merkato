@@ -23,8 +23,9 @@ class Mkt.AboutDialog : Gtk.AboutDialog {
         set_transient_for (owner);
         set_modal (true);
         logo_icon_name = Constants.APP_ID;
+        version        = Constants.APP_VERSION;
         program_name  = "Merkato";
-        comments      = _("Track yours investiments.");
+        comments      = _("Track your investiments.");
         authors       = {"Flávio Vasconcellos Corrêa"};
         artists       = {"Flávio Vasconcellos Corrêa"};
         license_type  = Gtk.License.GPL_3_0;
