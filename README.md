@@ -1,6 +1,7 @@
+
 ![](data/icons/com.ekonomikas.merkato.svg?raw=true)
 
-# merkato
+# com.ekonomikas.merkato
 
 Just another stock, currency and cryptocurrency tracker. Inspirated in Markets Project 
 
