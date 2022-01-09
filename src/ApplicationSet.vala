@@ -135,7 +135,7 @@ public class Mkt.ApplicationSet : Object {
         Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = dark_theme;
     }
 
-    private void on_sort_symbols () {
+    public void on_sort_symbols () {
         if (symbol_store != null) {
             if (order_view == OrderView.TITLE_ASC) {
                 symbol_store.sort (compare_symbols_name_asc);

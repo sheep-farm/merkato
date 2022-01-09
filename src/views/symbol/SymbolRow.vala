@@ -59,6 +59,7 @@ public class Mkt.SymbolRow : ListBoxRow {
     public SymbolRow.from_object (Symbol symbol) {
         app_set = (ApplicationSet) Lookup.singleton (). find (ApplicationSet.ID);
 
+
         this.symbol = symbol;
         this.symbol.notify.connect (on_update);
 
@@ -91,7 +92,7 @@ public class Mkt.SymbolRow : ListBoxRow {
         var market_style = market.get_style_context ();
         market_style.remove_class ("open");
         market_style.remove_class ("dim-label");
-        if (s.isMarkedClosed) {
+        if (s.isMarketClosed) {
             market.label = (_("Market Closed"));
             market_style.add_class ("dim-label");
             market_style.add_class ("market_close");

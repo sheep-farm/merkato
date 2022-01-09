@@ -52,7 +52,7 @@ public class Mkt.Symbol : Object {
 	public double forwardPE {get; set; default = 0.00;}
 	public string fullExchangeName {get; set; default = "";}
 	public int    gmtOffSetMilliseconds {get; set; default = 0;}
-	public bool   isMarkedClosed {get {return this.marketState.down () != "regular";}}
+	public bool   isMarketClosed {get {return this.marketState.down () != "regular";}}
 	public string language {get; set; default = "";}
 	public string longName {get; set; default = "";}
 	public string market {get; set; default = "";}

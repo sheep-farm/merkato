@@ -68,6 +68,7 @@ public class Mkt.TickerView : Box {
                 EqualFunc<Symbol> equal_func = (a, b) => { return a.symbol == b.symbol;};
                 if (!app_set.symbol_store.find_with_equal_func (symbol, equal_func, out pos)) {
                     app_set.symbol_store.append (symbol);
+                    app_set.on_sort_symbols ();
                 }
             }
         });

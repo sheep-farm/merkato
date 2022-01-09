@@ -28,12 +28,11 @@ public class Mkt.SymbolView : Box {
 
     public SymbolView () {
         Lookup.singleton ().put (ID, this);
-        symbol_list_box.bind_model (app_set.symbol_store, create_quote_row_widget);
+        symbol_list_box.bind_model (app_set.symbol_store, create_row_widget);
     }
 
-    private Widget create_quote_row_widget (Object item) {
-        var symbol = (Symbol) item;
-        return new SymbolRow.from_object (symbol);
+    private Widget create_row_widget (Object item) {
+        return new SymbolRow.from_object ((Symbol) item);
     }
 
     [GtkCallback]
