@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.ekonomikas.merkato\n"
 "Report-Msgid-Bugs-To: flavio.vcorrea at ufpel.edu.br\n"
-"POT-Creation-Date: 2022-01-07 14:44-0300\n"
+"POT-Creation-Date: 2022-01-09 11:01-0300\n"
 "PO-Revision-Date: 2022-01-03 22:03-0300\n"
 "Last-Translator: Flávio Vasconcellos Corrêa <flavio.vcorrea at ufpel.edu.br>\n"
 "Language-Team: LANGUAGE <flavio.vcorrea at ufpel.edu.br>\n"
@@ -93,19 +93,15 @@ msgstr ""
 msgid "Use dark GTK+ theme"
 msgstr ""
 
-#: data/ui/MktSymbolRow.ui:219
-msgid "Click and move"
-msgstr ""
-
 #: data/ui/MktSymbolView.ui:42 data/ui/MktTickerView.ui:44
 msgid "Source: <a href=\"https://finance.yahoo.com/\">Yahoo Finance</a>"
 msgstr ""
 
-#: data/ui/MktSymbolViewBox.ui:23 data/ui/MktTickerViewBox.ui:23
+#: data/ui/MktSymbolViewBox.ui:23
 msgid "Preferences"
 msgstr ""
 
-#: data/ui/MktSymbolViewBox.ui:48 data/ui/MktTickerViewBox.ui:48
+#: data/ui/MktSymbolViewBox.ui:48 data/ui/MktTickerViewBox.ui:23
 msgid "About Merkato"
 msgstr ""
 
@@ -113,11 +109,11 @@ msgstr ""
 msgid "My symbols"
 msgstr ""
 
-#: data/ui/MktSymbolViewBox.ui:80 data/ui/MktTickerViewBox.ui:80
+#: data/ui/MktSymbolViewBox.ui:80 data/ui/MktTickerViewBox.ui:55
 msgid "Open menu options"
 msgstr ""
 
-#: data/ui/MktSymbolViewBox.ui:111 data/ui/MktTickerViewBox.ui:72
+#: data/ui/MktSymbolViewBox.ui:111 data/ui/MktTickerViewBox.ui:47
 msgid "Search and add symbols"
 msgstr ""
 
@@ -125,30 +121,30 @@ msgstr ""
 msgid " Active mode remove symbols in watchlist"
 msgstr ""
 
-#: data/ui/MktTickerViewBox.ui:114
+#: data/ui/MktTickerViewBox.ui:89
 msgid "Return to watchlist"
 msgstr ""
 
-#: data/ui/MktTickerViewBox.ui:144
+#: data/ui/MktTickerViewBox.ui:119
 msgid "Insert text or ticker symbol and press <RETURN> to search"
 msgstr ""
 
-#: data/ui/MktTickerViewBox.ui:154
+#: data/ui/MktTickerViewBox.ui:129
 msgid "Search"
 msgstr ""
 
 #: src/AboutDialog.vala:28
-msgid "Track yours investiments."
+msgid "Track your investiments."
 msgstr ""
 
 #: src/AboutDialog.vala:33
 msgid "Official webpage"
 msgstr ""
 
-#: src/views/symbol/SymbolRow.vala:111
+#: src/views/symbol/SymbolRow.vala:95
 msgid "Market Closed"
 msgstr ""
 
-#: src/views/symbol/SymbolRow.vala:115
+#: src/views/symbol/SymbolRow.vala:99
 msgid "Market Open"
 msgstr ""
