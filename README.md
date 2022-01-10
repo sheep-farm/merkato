@@ -1,4 +1,3 @@
-
 ![](data/icons/com.ekonomikas.merkato.svg?raw=true)
 
 # com.ekonomikas.merkato
