@@ -15,7 +15,7 @@
         <property name="vexpand">True</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkModelButton" id="prefbutton">
+          <object class="GtkModelButton" id="option_preferences_button">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
@@ -128,7 +128,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="tooltip-text" translatable="yes">If selected, open remove symbols mode.</property>
-            <signal name="toggled" handler="on_remove_symbol" swapped="no"/>
+            <signal name="toggled" handler="on_remove_symbol_view_button_toggled" swapped="no"/>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>

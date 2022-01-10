@@ -24,6 +24,12 @@ public class Mkt.SymbolViewBox : Box {
     private MainWindow window;
 
     [GtkChild]
+    private unowned ModelButton option_preferences_button;
+
+    [GtkChild]
+    private unowned Button add_symbol_view_button;
+
+    [GtkChild]
     private unowned ToggleButton remove_symbol_view_button;
 
     [GtkChild]
@@ -89,13 +95,15 @@ public class Mkt.SymbolViewBox : Box {
     }
 
     [GtkCallback]
-    private void on_remove_symbol () {
+    private void on_remove_symbol_view_button_toggled () {
         var children = symbol_view.symbol_list_box.get_children ();
         foreach (Gtk.Widget widget in children) {
             var symbol_row = (SymbolRow) widget;
             symbol_row.remove_symbol_button.visible = remove_symbol_view_button.active;
         }
         app_set.tick_enable = !remove_symbol_view_button.active;
+        add_symbol_view_button.set_sensitive (!remove_symbol_view_button.active);
+        option_preferences_button.set_sensitive (!remove_symbol_view_button.active);
 
     }
 
