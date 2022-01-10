@@ -2,9 +2,7 @@
 
 # com.ekonomikas.merkato
 
-Just another stock, currency and cryptocurrency tracker. Inspirated in Markets Project 
-
-([GitHub - bitstower/markets: A stock, currency and cryptocurrency tracker](https://github.com/bitstower/markets)), with some equals features.
+Just another stock, currency and cryptocurrency tracker. Inspirated in Markets Project ([GitHub - bitstower/markets: A stock, currency and cryptocurrency tracker](https://github.com/bitstower/markets)), with some equals features.
 The merkato application delivers financial data to your fingertips. Track stocks, currencies and cryptocurrencies.
 
 ## Screenshots
