@@ -1,7 +1,7 @@
 {
     "app-id" : "com.ekonomikas.merkato",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "3.38",
+    "runtime-version" : "41",
     "sdk" : "org.gnome.Sdk",
     "command" : "com.ekonomikas.merkato",
     "finish-args" : [
@@ -44,12 +44,14 @@
         },
         {
             "name" : "com.ekonomikas.merkato",
-            "builddir" : true,
             "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dprofile=development"
+            ],
             "sources" : [
                 {
-                    "type" : "dir",
-                    "path" : "."
+                    "type" : "git",
+                    "path" : "https://github.com/sheep-farm/merkato.git"
                 }
             ]
         }
