@@ -22,14 +22,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="true"
      showgrid="false"
-     inkscape:zoom="3"
-     inkscape:cx="81.166667"
-     inkscape:cy="54.666667"
-     inkscape:window-width="1366"
-     inkscape:window-height="699"
-     inkscape:window-x="0"
+     inkscape:zoom="4.12"
+     inkscape:cx="91.626214"
+     inkscape:cy="74.393204"
+     inkscape:window-width="1024"
+     inkscape:window-height="692"
+     inkscape:window-x="468"
      inkscape:window-y="32"
-     inkscape:window-maximized="1"
+     inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      showguides="true"
      units="px"
@@ -407,144 +407,148 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline">
-    <path
-       d="m 15.120699,103.26704 h 95.683171 c 4.49707,0 8.14324,-3.628434 8.14324,-8.103639 V 34.386144 c 0,-4.475204 -3.64617,-8.103636 -8.14324,-8.103636 H 15.120699 c -4.497078,0 -8.1432461,3.628432 -8.1432461,8.103636 v 60.777257 c 0,4.475205 3.6461681,8.103639 8.1432461,8.103639 z m 0,0"
-       fill="url(#a)"
-       id="path1636"
-       style="fill:url(#a);stroke-width:1.01543"
-       inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
-       inkscape:export-xdpi="534.59631"
-       inkscape:export-ydpi="534.59631" />
-    <path
-       d="M 110.77353,15.267034 H 15.09036 c -4.497078,0 -8.1432508,3.628435 -8.1432508,8.103637 v 68.880893 c 0,4.475204 3.6461728,8.103636 8.1432508,8.103636 h 95.68317 c 4.49706,0 8.14325,-3.628432 8.14325,-8.103636 V 23.370671 c 0,-4.475202 -3.64619,-8.103637 -8.14325,-8.103637 z m 0,0"
-       fill="#deddda"
-       id="path1638"
-       style="fill:#5e5c64;fill-opacity:1;stroke-width:1.01543"
-       inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
-       inkscape:export-xdpi="534.59631"
-       inkscape:export-ydpi="534.59631" />
-    <path
-       d="M 111.56835,19.568046 H 13.849379 c -2.250531,0 -4.0716271,1.812239 -4.0716271,4.05182 V 92.50076 c 0,2.239578 1.8210961,4.051816 4.0716271,4.051816 h 97.718971 c 2.25053,0 4.07164,-1.812238 4.07164,-4.051816 V 23.619866 c 0,-2.239581 -1.82111,-4.05182 -4.07164,-4.05182 z m 0,0"
-       fill="#241f31"
-       id="path1640"
-       style="fill:#241c1c;stroke-width:1.01543"
-       inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
-       inkscape:export-xdpi="534.59631"
-       inkscape:export-ydpi="534.59631" />
-    <rect
-       style="fill:#2b3443;fill-opacity:1;stroke-width:1.01543;opacity:1;filter:url(#filter1766)"
-       id="rect3272"
-       width="96.578659"
-       height="68.441574"
-       x="14.43892"
-       y="23.795275"
-       inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
-       inkscape:export-xdpi="534.59631"
-       inkscape:export-ydpi="534.59631" />
-    <rect
-       style="fill:#1b8366;stroke-width:0.504077;fill-opacity:1"
-       id="rect3586-2"
-       width="12.604967"
-       height="12.329221"
-       x="18.852003"
-       y="79.837982"
-       inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
-       inkscape:export-xdpi="534.59631"
-       inkscape:export-ydpi="534.59631" />
-    <rect
-       style="fill:#57c478;stroke-width:0.604401;fill-opacity:1"
-       id="rect3586"
-       width="12.604967"
-       height="17.725395"
-       x="36.780029"
-       y="74.455421"
-       inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
-       inkscape:export-xdpi="534.59631"
-       inkscape:export-ydpi="534.59631" />
-    <rect
-       style="fill:#ff5f00;stroke-width:0.84207;fill-opacity:1"
-       id="rect3586-7"
-       width="12.604967"
-       height="34.406677"
-       x="55.227448"
-       y="57.774136"
-       inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
-       inkscape:export-xdpi="534.59631"
-       inkscape:export-ydpi="534.59631" />
-    <rect
-       style="fill:#ffdd0e;stroke-width:0.977842;fill-opacity:1"
-       id="rect3586-5"
-       width="12.604967"
-       height="46.396019"
-       x="73.674873"
-       y="45.78479"
-       inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
-       inkscape:export-xdpi="534.59631"
-       inkscape:export-ydpi="534.59631" />
-    <rect
-       style="fill:#e9ae0b;stroke-width:0.734789;fill-opacity:1"
-       id="rect3586-56"
-       width="12.604967"
-       height="26.197952"
-       x="92.122292"
-       y="65.982864"
-       inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
-       inkscape:export-xdpi="534.59631"
-       inkscape:export-ydpi="534.59631" />
-    <path
-       style="opacity:0.5;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 24.427006,69.461801 42.891558,53.364859"
-       id="path23337"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="4" />
-    <circle
-       style="fill:#ff5f00;stroke-width:0.496098;fill-opacity:1"
-       id="path763-2"
-       cx="24.427006"
-       cy="69.4618"
-       r="5.633163" />
-    <path
-       style="opacity:0.5;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 42.891558,53.364859 61.847821,47.143755"
-       id="path23339"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="4" />
-    <circle
-       style="fill:#008000;stroke-width:0.496098"
-       id="path763-6-9"
-       cx="42.89156"
-       cy="53.364861"
-       r="5.633163" />
-    <circle
-       style="fill:#aa0000;stroke-width:0.496098"
-       id="path763-3"
-       cx="99.661133"
-       cy="48.822903"
-       r="5.633163" />
-    <path
-       style="opacity:0.5;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 61.847821,47.143755 79.393112,37.057984"
-       id="path23341"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="4" />
-    <circle
-       style="fill:#000080;stroke-width:0.496098"
-       id="path763-6"
-       cx="61.84782"
-       cy="47.143757"
-       r="5.633163" />
-    <path
-       style="opacity:0.5;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 79.393112,37.057984 15.396189,8.936982"
-       id="path23343"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="4" />
-    <circle
-       style="fill:#ffcc00;stroke-width:0.496098"
-       id="path763"
-       cx="79.393112"
-       cy="37.057983"
-       r="5.633163" />
+    <g
+       id="g1891"
+       transform="translate(1.526027,13.723444)">
+      <path
+         d="m 15.120699,103.26704 h 95.683171 c 4.49707,0 8.14324,-3.628434 8.14324,-8.103639 V 34.386144 c 0,-4.475204 -3.64617,-8.103636 -8.14324,-8.103636 H 15.120699 c -4.497078,0 -8.1432461,3.628432 -8.1432461,8.103636 v 60.777257 c 0,4.475205 3.6461681,8.103639 8.1432461,8.103639 z m 0,0"
+         fill="url(#a)"
+         id="path1636"
+         style="fill:url(#a);stroke-width:1.01543"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <path
+         d="M 110.77353,15.267034 H 15.09036 c -4.497078,0 -8.1432508,3.628435 -8.1432508,8.103637 v 68.880893 c 0,4.475204 3.6461728,8.103636 8.1432508,8.103636 h 95.68317 c 4.49706,0 8.14325,-3.628432 8.14325,-8.103636 V 23.370671 c 0,-4.475202 -3.64619,-8.103637 -8.14325,-8.103637 z m 0,0"
+         fill="#deddda"
+         id="path1638"
+         style="fill:#5e5c64;fill-opacity:1;stroke-width:1.01543"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <path
+         d="M 111.56835,19.568046 H 13.849379 c -2.250531,0 -4.0716271,1.812239 -4.0716271,4.05182 V 92.50076 c 0,2.239578 1.8210961,4.051816 4.0716271,4.051816 h 97.718971 c 2.25053,0 4.07164,-1.812238 4.07164,-4.051816 V 23.619866 c 0,-2.239581 -1.82111,-4.05182 -4.07164,-4.05182 z m 0,0"
+         fill="#241f31"
+         id="path1640"
+         style="fill:#241c1c;stroke-width:1.01543"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="opacity:1;fill:#2b3443;fill-opacity:1;stroke-width:1.01543;filter:url(#filter1766)"
+         id="rect3272"
+         width="96.578659"
+         height="68.441574"
+         x="14.43892"
+         y="23.795275"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#1b8366;fill-opacity:1;stroke-width:0.504077"
+         id="rect3586-2"
+         width="12.604967"
+         height="12.329221"
+         x="18.852003"
+         y="79.837982"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#57c478;fill-opacity:1;stroke-width:0.604401"
+         id="rect3586"
+         width="12.604967"
+         height="17.725395"
+         x="36.780029"
+         y="74.455421"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#ff5f00;fill-opacity:1;stroke-width:0.84207"
+         id="rect3586-7"
+         width="12.604967"
+         height="34.406677"
+         x="55.227448"
+         y="57.774136"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#ffdd0e;fill-opacity:1;stroke-width:0.977842"
+         id="rect3586-5"
+         width="12.604967"
+         height="46.396019"
+         x="73.674873"
+         y="45.78479"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <rect
+         style="fill:#e9ae0b;fill-opacity:1;stroke-width:0.734789"
+         id="rect3586-56"
+         width="12.604967"
+         height="26.197952"
+         x="92.122292"
+         y="65.982864"
+         inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
+         inkscape:export-xdpi="534.59631"
+         inkscape:export-ydpi="534.59631" />
+      <path
+         style="opacity:0.5;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 24.427006,69.461801 42.891558,53.364859"
+         id="path23337"
+         inkscape:connector-type="polyline"
+         inkscape:connector-curvature="4" />
+      <circle
+         style="fill:#ff5f00;fill-opacity:1;stroke-width:0.496098"
+         id="path763-2"
+         cx="24.427006"
+         cy="69.4618"
+         r="5.633163" />
+      <path
+         style="opacity:0.5;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 42.891558,53.364859 61.847821,47.143755"
+         id="path23339"
+         inkscape:connector-type="polyline"
+         inkscape:connector-curvature="4" />
+      <circle
+         style="fill:#008000;stroke-width:0.496098"
+         id="path763-6-9"
+         cx="42.89156"
+         cy="53.364861"
+         r="5.633163" />
+      <circle
+         style="fill:#aa0000;stroke-width:0.496098"
+         id="path763-3"
+         cx="99.661133"
+         cy="48.822903"
+         r="5.633163" />
+      <path
+         style="opacity:0.5;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 61.847821,47.143755 79.393112,37.057984"
+         id="path23341"
+         inkscape:connector-type="polyline"
+         inkscape:connector-curvature="4" />
+      <circle
+         style="fill:#000080;stroke-width:0.496098"
+         id="path763-6"
+         cx="61.84782"
+         cy="47.143757"
+         r="5.633163" />
+      <path
+         style="opacity:0.5;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 79.393112,37.057984 15.396189,8.936982"
+         id="path23343"
+         inkscape:connector-type="polyline"
+         inkscape:connector-curvature="4" />
+      <circle
+         style="fill:#ffcc00;stroke-width:0.496098"
+         id="path763"
+         cx="79.393112"
+         cy="37.057983"
+         r="5.633163" />
+    </g>
   </g>
   <metadata
      id="metadata473">
