@@ -7,6 +7,46 @@
   <url type="bugtracker">https://github.com/sheep-farm/merkato/issues</url>
   <launchable type="desktop-id">com.ekonomikas.merkato.desktop</launchable>
   <translation type="gettext">com.ekonomikas.merkato</translation>
-	<description>
-	</description>
+  <name>merkato</name>
+  <summary>Track of your investments</summary>
+  <description>
+    <p>
+        Just another stock, currency and cryptocurrency tracker. Inspirated in Markets Project ([GitHub - bitstower/markets: A stock, currency and cryptocurrency tracker](https://github.com/bitstower/markets)), with some equals features.
+        The merkato application delivers financial data to your fingertips. Track stocks, currencies and cryptocurrencies.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Create your personal portfolio</li>
+      <li>Track stocks, currencies, cryptocurrencies, commodities and indexes</li>
+      <li>Designed for Gnome</li>
+      <li>Open any symbol in Yahoo Finance for more details</li>
+      <li>Adjust the refresh rate</li>
+      <li>Dark Mode</li>
+    </ul>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image width="400" height="547">https://raw.githubusercontent.com/sheep-farm/merkato/main/preview.png</image>
+      <caption>Live Prices</caption>
+    </screenshot>
+  </screenshots>
+  <recommends>
+      <control>keyboard</control>
+      <control>pointing</control>
+      <control>touch</control>
+  </recommends>
+  <requires>
+      <display_length compare="ge">360</display_length>
+  </requires>
+  <releases>
+    <release version="0.1.1" date="2022-01-11">
+      <description>
+        <p>Initial release</p>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+  </custom>
 </component>
