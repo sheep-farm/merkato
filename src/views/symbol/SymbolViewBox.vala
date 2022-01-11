@@ -85,6 +85,7 @@ public class Mkt.SymbolViewBox : Box {
             //var symbol_store_only_one = app_set.symbol_store.get_n_items () == 1;
             if (symbol_store_is_empty) {
                 stack.set_visible_child_name (NoSymbolView.ID);
+                remove_symbol_view_button.active = false;
             } else {
                 stack.set_visible_child_name (SymbolView.ID);
             }
