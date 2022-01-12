@@ -45,9 +45,6 @@
         {
             "name" : "com.ekonomikas.merkato",
             "buildsystem" : "meson",
-            "config-opts" : [
-                "-Dprofile=development"
-            ],
             "sources" : [
                 {
                     "type" : "git",
@@ -55,5 +52,8 @@
                 }
             ]
         }
-    ]
+    ],
+    "build-options" : {
+        "env" : {        }
+    }
 }
