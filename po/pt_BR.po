@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: com.ekonomikas.merkato\n"
 "Report-Msgid-Bugs-To: flavio.vcorrea at ufpel.edu.br\n"
 "POT-Creation-Date: 2022-01-11 19:44-0300\n"
-"PO-Revision-Date: 2022-01-11 19:44-0300\n"
+"PO-Revision-Date: 2022-01-13 11:22-0300\n"
 "Last-Translator: Flávio Vasconcellos Corrêa <flavio.vcorrea@ufpel.edu.br>\n"
 "Language-Team: LANGUAGE <flavio.vcorrea at ufpel.edu.br>\n"
 "Language: pt_BR\n"
@@ -72,7 +72,7 @@ msgstr "Pelo Título"
 
 #: data/ui/MktPreferencesWindow.ui:108
 msgid "By Title (desc)"
-msgstr "Pelo Título (%)"
+msgstr "Pelo Título (desc)"
 
 #: data/ui/MktPreferencesWindow.ui:131
 msgid "By Profit (%)"

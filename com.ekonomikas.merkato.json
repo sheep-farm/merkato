@@ -47,8 +47,9 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "https://github.com/sheep-farm/merkato.git"
+                    "type"  : "git",
+                    "url"   : "https://github.com/sheep-farm/merkato.git",
+                    "commit": ""
                 }
             ]
         }
