@@ -23,11 +23,11 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="true"
      showgrid="false"
-     inkscape:zoom="0.75"
-     inkscape:cx="24.666667"
-     inkscape:cy="73.333333"
-     inkscape:window-width="1366"
-     inkscape:window-height="699"
+     inkscape:zoom="1.5"
+     inkscape:cx="-48.333333"
+     inkscape:cy="122.66667"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
      inkscape:window-x="0"
      inkscape:window-y="32"
      inkscape:window-maximized="1"
@@ -409,7 +409,7 @@
        xlink:href="#a"
        id="linearGradient1368"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.017906,0,0,-1.0380684,6.61151,-173.70596)"
+       gradientTransform="matrix(1.017906,0,0,-1.0380684,6.8594755,-189.98385)"
        x1="-7.0000001e-06"
        y1="-212.00002"
        x2="111.99999"
@@ -421,7 +421,7 @@
      id="layer1"
      style="display:inline">
     <path
-       d="m 16.79057,125.25774 h 95.68317 c 4.49707,0 8.14324,-3.71839 8.14324,-8.30456 V 54.669095 c 0,-4.58616 -3.64617,-8.30455 -8.14324,-8.30455 H 16.79057 c -4.49708,0 -8.14325,3.71839 -8.14325,8.30455 v 62.284085 c 0,4.58617 3.64617,8.30456 8.14325,8.30456 z m 0,0"
+       d="m 17.038535,108.97985 h 95.683175 c 4.49707,0 8.14324,-3.71839 8.14324,-8.30456 V 38.391202 c 0,-4.58616 -3.64617,-8.30455 -8.14324,-8.30455 H 17.038535 c -4.49708,0 -8.1432495,3.71839 -8.1432495,8.30455 v 62.284088 c 0,4.58617 3.6461695,8.30456 8.1432495,8.30456 z m 0,0"
        fill="url(#a)"
        id="path1636-9"
        style="display:inline;fill:url(#linearGradient1368);stroke-width:1.02794"
@@ -429,7 +429,7 @@
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
     <path
-       d="M 112.2397,35.554025 H 16.55653 c -4.49708,0 -8.14325,3.62843 -8.14325,8.10363 v 68.880895 c 0,4.4752 3.64617,8.10363 8.14325,8.10363 h 95.68317 c 4.49706,0 8.14325,-3.62843 8.14325,-8.10363 V 43.657655 c 0,-4.4752 -3.64619,-8.10363 -8.14325,-8.10363 z m 0,0"
+       d="M 112.48767,19.276132 H 16.804495 c -4.49708,0 -8.1432495,3.62843 -8.1432495,8.10363 v 68.880895 c 0,4.475203 3.6461695,8.103633 8.1432495,8.103633 h 95.683175 c 4.49706,0 8.14325,-3.62843 8.14325,-8.103633 V 27.379762 c 0,-4.4752 -3.64619,-8.10363 -8.14325,-8.10363 z m 0,0"
        fill="#deddda"
        id="path1638-7"
        style="display:inline;fill:#5e5c64;fill-opacity:1;stroke-width:1.01543"
@@ -437,7 +437,7 @@
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
     <path
-       d="M 113.23822,39.650085 H 15.51925 c -2.25054,0 -4.07163,1.81224 -4.07163,4.05182 v 68.880885 c 0,2.23958 1.82109,4.05182 4.07163,4.05182 h 97.71897 c 2.25053,0 4.07164,-1.81224 4.07164,-4.05182 V 43.701905 c 0,-2.23958 -1.82111,-4.05182 -4.07164,-4.05182 z m 0,0"
+       d="M 113.48619,23.372192 H 15.767215 c -2.25054,0 -4.071629,1.81224 -4.071629,4.05182 v 68.880885 c 0,2.23958 1.82109,4.051823 4.071629,4.051823 h 97.718975 c 2.25053,0 4.07164,-1.812243 4.07164,-4.051823 V 27.424012 c 0,-2.23958 -1.82111,-4.05182 -4.07164,-4.05182 z m 0,0"
        fill="#241f31"
        id="path1640-3"
        style="display:inline;fill:#241c1c;stroke-width:1.01543"
@@ -449,18 +449,18 @@
        id="rect3272-6"
        width="96.578659"
        height="68.441574"
-       x="16.108788"
-       y="43.877316"
+       x="16.356752"
+       y="27.599422"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
     <rect
-       style="display:inline;fill:#8ecae6;fill-opacity:0.69999999;stroke-width:0.504077"
+       style="display:inline;fill:#8ecae6;fill-opacity:0.7;stroke-width:0.504077"
        id="rect3586-2-1"
        width="12.604967"
        height="12.329221"
-       x="20.49279"
-       y="100.07197"
+       x="20.740755"
+       y="83.794075"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
@@ -469,18 +469,18 @@
        id="rect3586-2-1-0"
        width="3.7795277"
        height="12.329221"
-       x="20.49279"
-       y="100.07197"
+       x="20.740755"
+       y="83.794075"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
     <rect
-       style="display:inline;fill:#219ebc;fill-opacity:0.69999999;stroke-width:0.604401"
+       style="display:inline;fill:#219ebc;fill-opacity:0.7;stroke-width:0.604401"
        id="rect3586-29"
        width="12.604967"
        height="17.725395"
-       x="38.449898"
-       y="94.537453"
+       x="38.697865"
+       y="78.25956"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
@@ -489,18 +489,18 @@
        id="rect3586-29-6"
        width="3.7795277"
        height="17.725395"
-       x="38.449898"
-       y="94.537453"
+       x="38.697865"
+       y="78.25956"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
     <rect
-       style="display:inline;fill:#0080ff;fill-opacity:0.69803923;stroke-width:0.84207"
+       style="display:inline;fill:#0080ff;fill-opacity:0.698039;stroke-width:0.84207"
        id="rect3586-7-3"
        width="12.604967"
        height="34.406677"
-       x="56.897316"
-       y="77.856178"
+       x="57.145283"
+       y="61.578285"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
@@ -509,18 +509,18 @@
        id="rect3586-7-3-3"
        width="3.7795277"
        height="34.406677"
-       x="56.897316"
-       y="77.856178"
+       x="57.145283"
+       y="61.578285"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
     <rect
-       style="display:inline;fill:#ffb703;fill-opacity:0.69999999;stroke-width:0.977842"
+       style="display:inline;fill:#ffb703;fill-opacity:0.7;stroke-width:0.977842"
        id="rect3586-5-1"
        width="12.604967"
        height="46.396019"
-       x="75.344734"
-       y="65.866829"
+       x="75.592697"
+       y="49.588936"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
@@ -529,18 +529,18 @@
        id="rect3586-5-1-2"
        width="3.7795277"
        height="46.396019"
-       x="75.344734"
-       y="65.866829"
+       x="75.592697"
+       y="49.588936"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
     <rect
-       style="display:inline;fill:#fb8500;fill-opacity:0.69999999;stroke-width:0.734789;opacity:1"
+       style="display:inline;fill:#fb8500;fill-opacity:0.7;stroke-width:0.734789"
        id="rect3586-56-9"
        width="12.604967"
        height="26.197952"
-       x="94.075661"
-       y="86.064903"
+       x="94.323624"
+       y="69.78701"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
@@ -549,64 +549,64 @@
        id="rect3586-56-9-0"
        width="3.7795277"
        height="26.197952"
-       x="94.075661"
-       y="86.064903"
+       x="94.323624"
+       y="69.78701"
        inkscape:export-filename="/home/flavio/Projetos/merkato/data/icons/com.ekonomikas.merkato.png"
        inkscape:export-xdpi="534.59631"
        inkscape:export-ydpi="534.59631" />
     <path
        style="display:inline;opacity:0.5;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 26.09687,89.543835 44.56142,73.446895"
+       d="m 26.344835,73.265942 18.46455,-16.09694"
        id="path23337-4"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="4" />
     <circle
        style="display:inline;fill:#ff5f00;fill-opacity:1;stroke-width:0.496098"
        id="path763-2-7"
-       cx="26.79528"
-       cy="89.543831"
+       cx="27.043245"
+       cy="73.265938"
        r="5.633163" />
     <path
        style="display:inline;opacity:0.5;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 44.56142,73.446895 18.95627,-6.2211"
+       d="m 44.809385,57.169002 18.95627,-6.2211"
        id="path23339-8"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="4" />
     <circle
        style="display:inline;fill:#008000;stroke-width:0.496098"
        id="path763-6-9-4"
-       cx="44.752373"
-       cy="73.446892"
+       cx="45.00034"
+       cy="57.168999"
        r="5.633163" />
     <path
        style="display:inline;opacity:0.5;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 63.51769,67.225795 81.06298,57.140025"
+       d="M 63.765655,50.947902 81.310946,40.862132"
        id="path23341-5"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="4" />
     <circle
-       style="display:inline;fill:#0000ff;stroke-width:0.496098"
+       style="display:inline;fill:#00d0ff;stroke-width:0.496098;fill-opacity:1"
        id="path763-6-0"
-       cx="63.199791"
-       cy="67.225792"
+       cx="63.447758"
+       cy="50.947899"
        r="5.633163" />
     <path
        style="display:inline;opacity:0.5;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 81.06298,57.140025 15.39619,8.93698"
+       d="m 81.310946,40.862132 15.39619,8.93698"
        id="path23343-3"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="4" />
     <circle
        style="display:inline;fill:#aa0000;stroke-width:0.496098"
        id="path763-3-6"
-       cx="100.37815"
-       cy="68.904945"
+       cx="100.62611"
+       cy="52.627052"
        r="5.633163" />
     <circle
        style="display:inline;fill:#ffcc00;stroke-width:0.496098"
        id="path763-1"
-       cx="81.647224"
-       cy="57.140026"
+       cx="81.895187"
+       cy="40.862133"
        r="5.633163" />
   </g>
   <metadata
