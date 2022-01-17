@@ -80,6 +80,8 @@ public class Mkt.SymbolViewBox : Box {
     }
 
     private void on_update_view () {
+        remove_symbol_view_button.visible = true;
+        add_symbol_view_button.visible = true;
         if (app_set.query_status == ApplicationSet.QueryStatus.SUCCESS) {
             var symbol_store_is_empty = app_set.symbol_store.get_n_items () == 0;
             //var symbol_store_only_one = app_set.symbol_store.get_n_items () == 1;
@@ -92,6 +94,8 @@ public class Mkt.SymbolViewBox : Box {
             remove_symbol_view_button.visible = !symbol_store_is_empty;
         } else {
             stack.set_visible_child_name (ErrorView.ID);
+            remove_symbol_view_button.visible = false;
+            add_symbol_view_button.visible = false;
         }
     }
 

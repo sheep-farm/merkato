@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.ekonomikas.merkato\n"
 "Report-Msgid-Bugs-To: flavio.vcorrea at ufpel.edu.br\n"
-"POT-Creation-Date: 2022-01-11 19:44-0300\n"
-"PO-Revision-Date: 2022-01-13 11:22-0300\n"
+"POT-Creation-Date: 2022-01-17 11:02-0300\n"
+"PO-Revision-Date: 2022-01-17 11:05-0300\n"
 "Last-Translator: Flávio Vasconcellos Corrêa <flavio.vcorrea@ufpel.edu.br>\n"
 "Language-Team: LANGUAGE <flavio.vcorrea at ufpel.edu.br>\n"
 "Language: pt_BR\n"
@@ -141,6 +141,10 @@ msgstr "Acompanhe seus investimentos."
 #: src/AboutDialog.vala:33
 msgid "Official webpage"
 msgstr "Página oficial"
+
+#: src/AboutDialog.vala:34
+msgid "translator-credits"
+msgstr "Flávio Vasconcellos Corrêa <flavio.vcorrea@ufpel.edu.br>"
 
 #: src/views/symbol/SymbolRow.vala:96
 msgid "Market Closed"

@@ -31,6 +31,8 @@ class Mkt.AboutDialog : Gtk.AboutDialog {
         license_type  = Gtk.License.GPL_3_0;
         website       = "https://github.com/sheep-farm/merkato";
         website_label = _("Official webpage");
+        translator_credits = _("translator-credits");
+
     }
 }
 
