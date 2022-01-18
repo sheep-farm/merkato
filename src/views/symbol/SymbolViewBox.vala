@@ -79,6 +79,7 @@ public class Mkt.SymbolViewBox : Box {
     }
 
     private void on_update_view () {
+        if (app_set.query_status == ApplicationSet.QueryStatus.IDLE) return;
         remove_symbol_view_button.visible = true;
         add_symbol_view_button.visible = true;
         if (app_set.query_status == ApplicationSet.QueryStatus.SUCCESS) {
@@ -91,7 +92,7 @@ public class Mkt.SymbolViewBox : Box {
                 stack.set_visible_child_name (SymbolView.ID);
             }
             remove_symbol_view_button.visible = !symbol_store_is_empty;
-        } else {
+        } else if (app_set.query_status == ApplicationSet.QueryStatus.FAILURE) {
             stack.set_visible_child_name (ErrorView.ID);
             remove_symbol_view_button.visible = false;
             add_symbol_view_button.visible = false;

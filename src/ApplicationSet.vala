@@ -27,7 +27,8 @@ public class Mkt.ApplicationSet : Object {
 
     public enum QueryStatus {
         SUCCESS,
-        FAILURE
+        FAILURE,
+        IDLE
     }
 
     public enum OrderView {
@@ -97,8 +98,8 @@ public class Mkt.ApplicationSet : Object {
         settings = new Settings ("com.ekonomikas.merkato");
         persistence = (SymbolPersistence) Lookup.singleton ().find (SymbolPersistence.ID);
         symbol_store = new GLib.ListStore (typeof (Symbol));
-        init_default_values ();
         attach_listeners ();
+        init_default_values ();
         on_dark_theme ();
     }
 
@@ -161,9 +162,10 @@ public class Mkt.ApplicationSet : Object {
 
     public bool on_tick () {
         if (tick_enable) {
-            this.update_symbols.begin ((obj, res) => {
-                this.update_symbols.end (res);
-            });
+            // this.update_symbols.begin ((obj, res) => {
+            //     this.update_symbols.end (res);
+            // });
+            update_symbols ();
         }
         return true;
     }
@@ -178,7 +180,7 @@ public class Mkt.ApplicationSet : Object {
         on_sort_symbols ();
     }
 
-    public async void update_symbols () {
+    public /*async*/ void update_symbols () {
         var yahoo_client = (YahooFinanceClient) Lookup.singleton (). find (YahooFinanceClient.ID);
         uint n = symbol_store.get_n_items ();
         var str_symbol = "";
@@ -194,10 +196,11 @@ public class Mkt.ApplicationSet : Object {
                     var symbol = (Symbol) symbol_store.get_object (j);
                     symbol.clone (symbol_found);
                 }
+                on_sort_symbols ();
+                persist_symbols ();
             }
         });
-        on_sort_symbols ();
-        persist_symbols ();
+
     }
 
     public void persist_symbols () {
