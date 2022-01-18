@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Mkt;
+using Mkt, Gee;
 
 public class Mkt.ApplicationSet : Object {
     public const string ID = "Mkt.ApplicationSet";
@@ -183,26 +183,29 @@ public class Mkt.ApplicationSet : Object {
     public async void update_symbols () {
         var yahoo_client = (YahooFinanceClient) Lookup.singleton (). find (YahooFinanceClient.ID);
         uint n = symbol_store.get_n_items ();
-        for (var i=0; i < n; i++) {
+        var str_symbol = "";
+        for (var i = 0; i < n; i++) {
             var symbol = (Symbol) symbol_store.get_object (i);
-            yahoo_client.search_symbols.begin (symbol.symbol, (obj, res) => {
-                var symbol_list = yahoo_client.search_symbols.end (res);
-                if (symbol_list.size > 0) {
-                    var symbol_found = symbol_list.@get (0);
-                    if (symbol_found != null && symbol.symbol == symbol_found.symbol) {
-                        symbol.clone (symbol_found);
-                    }
-                }
-            });
+            str_symbol += symbol.symbol + ",";
         }
+        yahoo_client.search_symbols.begin (str_symbol, (obj, res) => {
+            var symbol_list = yahoo_client.search_symbols.end (res);
+            if (symbol_list.size > 0) {
+                for (var j = 0; j < symbol_list.size; j++) {
+                    var symbol_found = symbol_list.@get (j);
+                    var symbol = (Symbol) symbol_store.get_object (j);
+                    symbol.clone (symbol_found);
+                }
+            }
+        });
         on_sort_symbols ();
         persist_symbols ();
     }
 
     public void persist_symbols () {
-        var list_symbols = new Gee.ArrayList<Symbol> ();
+        var list_symbols = new ArrayList<Symbol> ();
         uint n = symbol_store.get_n_items ();
-        for (var i=0; i < n; i++) {
+        for (var i = 0; i < n; i++) {
             var o = (Symbol) symbol_store.get_object (i);
             list_symbols.add (o);
         }
