@@ -18,6 +18,13 @@ The merkato application delivers financial data to your fingertips. Track stocks
 * Adjust the refresh rate
 * Dark Mode
 
+## Translations
+
+* Brazilian portuguese
+* Esperanto
+* Swedish
+* Slovakia
+
 ## Building from source
 
 ### Option 1: with GNOME Builder
