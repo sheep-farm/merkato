@@ -22,7 +22,7 @@ public class Mkt.ApplicationSet : Object {
 
     public enum NetworkStatus {
         IDLE,
-        IN_PROGRESS,
+        IN_PROGRESS
     }
 
     public enum QueryStatus {
@@ -97,8 +97,8 @@ public class Mkt.ApplicationSet : Object {
         settings = new Settings ("com.ekonomikas.merkato");
         persistence = (SymbolPersistence) Lookup.singleton ().find (SymbolPersistence.ID);
         symbol_store = new GLib.ListStore (typeof (Symbol));
-        attach_listeners ();
         init_default_values ();
+        attach_listeners ();
         on_dark_theme ();
     }
 
@@ -160,13 +160,11 @@ public class Mkt.ApplicationSet : Object {
     }
 
     public bool on_tick () {
-        network_status = NetworkStatus.IN_PROGRESS;
         if (tick_enable) {
             this.update_symbols.begin ((obj, res) => {
                 this.update_symbols.end (res);
             });
         }
-        network_status = NetworkStatus.IDLE;
         return true;
     }
 

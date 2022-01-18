@@ -51,7 +51,7 @@ public class Mkt.TickerViewBox : Box  {
         );
         window.notify["stack-view"].connect (on_window_stack_view_slot);
         app_set = (ApplicationSet) Lookup.singleton(). find (ApplicationSet.ID);
-        app_set.notify["network-status"].connect (on_network_status_slot);
+        app_set.notify["network-status"].connect (on_network_status);
 
         ticker_view = new TickerView (this);
         ticker_view.notify["ticker-list"].connect (on_update_view);
@@ -63,7 +63,7 @@ public class Mkt.TickerViewBox : Box  {
         on_update_view ();
     }
 
-    private void on_network_status_slot () {
+    private void on_network_status () {
         if (app_set.network_status == ApplicationSet.NetworkStatus.IDLE) {
             spinner.stop ();
         } else if (app_set.network_status == ApplicationSet.NetworkStatus.IN_PROGRESS) {

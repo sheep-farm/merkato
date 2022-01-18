@@ -61,7 +61,6 @@ public class Mkt.SymbolViewBox : Box {
         app_set.notify["network-status"].connect (on_network_status);
         app_set.notify["query-status"].connect (on_update_view);
         app_set.symbol_store.items_changed.connect (on_update_view);
-
         symbol_view = new SymbolView ();
 
         stack.add_named (new NoSymbolView (), NoSymbolView.ID);

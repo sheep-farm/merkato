@@ -26,9 +26,7 @@ public class Mkt.RestClient {
     }
 
     public async Json.Node fetch (string url) {
-        app_set = (ApplicationSet) Lookup.singleton ().find (ApplicationSet.ID);
         try {
-            app_set.network_status = ApplicationSet.NetworkStatus.IN_PROGRESS;
             var message = new Soup.Message ("GET", url);
             yield this.queue_message (this.session, message);
             if (message.status_code < 200 || message.status_code >= 300) {
@@ -36,13 +34,11 @@ public class Mkt.RestClient {
             } else {
                 var body = (string) message.response_body.data;
                 if (body != null && body != "") {
-                    app_set.network_status = ApplicationSet.NetworkStatus.IDLE;
                     app_set.query_status = ApplicationSet.QueryStatus.SUCCESS;
                     return Json.from_string (body);
                 }
             }
         } catch (Error e) {}
-        app_set.query_status = ApplicationSet.QueryStatus.FAILURE;
         return (Json.Node) null;
     }
 
