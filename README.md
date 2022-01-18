@@ -73,6 +73,14 @@ sudo ninja install
 com.ekonomikas.merkato
 ```
 
+### Flatpak
+
+<p align="center">
+  <a href="https://flathub.org/apps/details/com.ekonomikas.merkato">
+    <img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/>
+  </a>
+</p>
+
 ## License
 
 The GNU General Public License, version 3.0 or later
