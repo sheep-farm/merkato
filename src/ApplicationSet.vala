@@ -137,7 +137,7 @@ public class Mkt.ApplicationSet : Object {
     }
 
     public void on_sort_symbols () {
-        if (symbol_store != null) {
+        if (symbol_store != null && symbol_store.get_n_items () > 1) {
             if (order_view == OrderView.TITLE_ASC) {
                 symbol_store.sort (compare_symbols_name_asc);
             } else
@@ -162,9 +162,6 @@ public class Mkt.ApplicationSet : Object {
 
     public bool on_tick () {
         if (tick_enable) {
-            // this.update_symbols.begin ((obj, res) => {
-            //     this.update_symbols.end (res);
-            // });
             update_symbols ();
         }
         return true;
@@ -180,7 +177,7 @@ public class Mkt.ApplicationSet : Object {
         on_sort_symbols ();
     }
 
-    public /*async*/ void update_symbols () {
+    public void update_symbols () {
         var yahoo_client = (YahooFinanceClient) Lookup.singleton (). find (YahooFinanceClient.ID);
         uint n = symbol_store.get_n_items ();
         var str_symbol = "";
@@ -200,7 +197,6 @@ public class Mkt.ApplicationSet : Object {
                 persist_symbols ();
             }
         });
-
     }
 
     public void persist_symbols () {
