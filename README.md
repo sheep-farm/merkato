@@ -24,6 +24,7 @@ The merkato application delivers financial data to your fingertips. Track stocks
 * Esperanto
 * Swedish
 * Slovakia
+* Russian
 
 ## Building from source
 
