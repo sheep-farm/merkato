@@ -24,6 +24,8 @@ public class Mkt.Application : Gtk.Application {
 
     private MainWindow window;
 
+    private Broadcast broadcast = new Broadcast ();
+
     private const ActionEntry[] app_entries =
     {
         {"about"      , on_about_action_slot},
@@ -43,6 +45,10 @@ public class Mkt.Application : Gtk.Application {
         Lookup.singleton ().put (YahooFinanceClient.ID, new YahooFinanceClient ());
         Lookup.singleton ().put (SymbolPersistence.ID , new SymbolPersistence ());
         Lookup.singleton ().put (ApplicationSet.ID    , new ApplicationSet ());
+        Lookup.singleton ().put (Broadcast.ID         , broadcast);
+
+
+        init_channels ();
 
         if (active_window != null) {
             return;
@@ -62,6 +68,9 @@ public class Mkt.Application : Gtk.Application {
 
         window = new MainWindow (this);
         window.present ();
+    }
+
+    private void init_channels () {
     }
 
     private void on_quit_slot () {

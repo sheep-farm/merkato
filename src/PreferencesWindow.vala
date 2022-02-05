@@ -35,12 +35,17 @@ public class Mkt.PreferencesWindow : Hdy.PreferencesWindow {
     private unowned Switch dark_theme;
 
     private ApplicationSet app_set;
+    private SymbolQuestDaemon symbol_quest_daemon;
 
     public PreferencesWindow (Gtk.Application app, Window parent) {
         Object (transient_for: parent, application: app);
         app_set = (ApplicationSet) Lookup.singleton ().find (ApplicationSet.ID);
+
+        symbol_quest_daemon = (SymbolQuestDaemon) Lookup.singleton ().find (SymbolQuestDaemon.UUID);
+
+        pull_interval.active_id = symbol_quest_daemon.pull_interval.to_string ();
+
         dark_theme.active        = app_set.dark_theme;
-        pull_interval.active_id = app_set.pull_interval.to_string ();
         order_custom.active = (app_set.order_view == ApplicationSet.OrderView.CUSTOM);
         order_title_asc.active = (app_set.order_view == ApplicationSet.OrderView.TITLE_ASC);
         order_title_desc.active = (app_set.order_view == ApplicationSet.OrderView.TITLE_DESC);
@@ -75,7 +80,7 @@ public class Mkt.PreferencesWindow : Hdy.PreferencesWindow {
 
     [GtkCallback]
     private void on_pull_interval_changed () {
-        app_set.pull_interval = int.parse (pull_interval.active_id);
+        symbol_quest_daemon.pull_interval = int.parse (pull_interval.active_id);
     }
 
     [GtkCallback]

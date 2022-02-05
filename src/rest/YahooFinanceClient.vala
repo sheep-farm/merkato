@@ -20,14 +20,14 @@ using Mkt;
 
 const string BASE_URL = "https://query1.finance.yahoo.com";
 
-class Mkt.YahooFinanceClient : Object {
+class Mkt.YahooFinanceClient : GLib.Object {
     public const string ID = "Mkt.YahooFinanceClient";
     private ApplicationSet app_set;
 
     public YahooFinanceClient () {
     }
 
-    public async Gee.List <Ticker> search_tickers (string query) {
+    public async Gee.List<Ticker> search_tickers (string query) {
         var ticker_list = new Gee.ArrayList <Ticker> ();
         if (query != null && query != "") {
             app_set = (ApplicationSet) Lookup.singleton ().find (ApplicationSet.ID);

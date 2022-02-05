@@ -1,19 +1,39 @@
 app_sources = [
   'beans/Symbol.vala',
   'beans/Ticker.vala',
+
+  'channel/SearchTickerChannel.vala',
+  'channel/SettingChannel.vala',
+
+  'daemon/SymbolQuestDaemon.vala',
+
+  'io/MerkatoIO.vala',
+  'io/MerkatoIOFactory.vala',
+  'io/MerkatoJSON.vala',
+
   'persistence/SymbolPersistence.vala',
+
   'rest/RestClient.vala',
   'rest/YahooFinanceClient.vala',
+
+  'tools/Broadcast.vala',
+  'tools/Channel.vala',
+  'tools/Consumer.vala',
+  'tools/Daemon.vala',
   'tools/Lookup.vala',
+
   'views/symbol/NoSymbolView.vala',
   'views/symbol/SymbolRow.vala',
   'views/symbol/SymbolView.vala',
   'views/symbol/SymbolViewBox.vala',
+
   'views/ticker/NoTickerView.vala',
   'views/ticker/TickerRow.vala',
   'views/ticker/TickerView.vala',
   'views/ticker/TickerViewBox.vala',
+
   'views/ErrorView.vala',
+
   'AboutDialog.vala',
   'Application.vala',
   'ApplicationSet.vala',
