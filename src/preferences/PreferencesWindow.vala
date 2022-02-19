@@ -34,48 +34,44 @@ public class Mkt.PreferencesWindow : Hdy.PreferencesWindow {
     [GtkChild]
     private unowned Switch dark_theme;
 
-    private ApplicationSet app_set;
+    private Preferences preferences;
 
-    public PreferencesWindow (Gtk.Application app, Window parent) {
+    public PreferencesWindow (Gtk.Application app, Window parent, Preferences preferences) {
         Object (transient_for: parent, application: app);
-        app_set = (ApplicationSet) Lookup.singleton ().find (ApplicationSet.ID);
-        dark_theme.active        = app_set.dark_theme;
-        pull_interval.active_id = app_set.pull_interval.to_string ();
-        order_custom.active = (app_set.order_view == ApplicationSet.OrderView.CUSTOM);
-        order_title_asc.active = (app_set.order_view == ApplicationSet.OrderView.TITLE_ASC);
-        order_title_desc.active = (app_set.order_view == ApplicationSet.OrderView.TITLE_DESC);
-        order_change_up.active = (app_set.order_view == ApplicationSet.OrderView.CHANGE_UP);
-        order_change_down.active = (app_set.order_view == ApplicationSet.OrderView.CHANGE_DOWN);
+        this.preferences = preferences;
+        dark_theme.active        = this.preferences.dark_theme;
+        pull_interval.active_id  = this.preferences.pull_interval.to_string ();
+        order_custom.active      = (this.preferences.order_view == Preferences.OrderView.CUSTOM.to_value ());
+        order_title_asc.active   = (this.preferences.order_view == Preferences.OrderView.TITLE_ASC.to_value ());
+        order_title_desc.active  = (this.preferences.order_view == Preferences.OrderView.TITLE_DESC.to_value ());
+        order_change_up.active   = (this.preferences.order_view == Preferences.OrderView.CHANGE_UP.to_value ());
+        order_change_down.active = (this.preferences.order_view == Preferences.OrderView.CHANGE_DOWN.to_value ());
     }
 
     [GtkCallback]
     private bool on_dark_theme_state_set (Switch sender, bool enabled) {
-        app_set.dark_theme = enabled;
+        this.preferences.dark_theme = enabled;
         return false;
     }
 
     [GtkCallback]
     private void on_order_button_toggle (ToggleButton sender) {
         if (sender == order_custom) {
-            app_set.order_view = ApplicationSet.OrderView.CUSTOM;
-        } else
-        if (sender == order_title_asc) {
-            app_set.order_view = ApplicationSet.OrderView.TITLE_ASC;
-        } else
-        if (sender == order_title_desc) {
-            app_set.order_view = ApplicationSet.OrderView.TITLE_DESC;
-        } else
-        if (sender == order_change_up) {
-            app_set.order_view = ApplicationSet.OrderView.CHANGE_UP;
-        } else
-        if (sender == order_change_down) {
-            app_set.order_view = ApplicationSet.OrderView.CHANGE_DOWN;
+            this.preferences.order_view = Preferences.OrderView.CUSTOM.to_value ();
+        } else if (sender == order_title_asc) {
+            this.preferences.order_view = Preferences.OrderView.TITLE_ASC.to_value ();
+        } else if (sender == order_title_desc) {
+            this.preferences.order_view = Preferences.OrderView.TITLE_DESC.to_value ();
+        } else if (sender == order_change_up) {
+            this.preferences.order_view = Preferences.OrderView.CHANGE_UP.to_value ();
+        } else if (sender == order_change_down) {
+            this.preferences.order_view = Preferences.OrderView.CHANGE_DOWN.to_value ();
         }
     }
 
     [GtkCallback]
     private void on_pull_interval_changed () {
-        app_set.pull_interval = int.parse (pull_interval.active_id);
+        this.preferences.pull_interval = int.parse (pull_interval.active_id);
     }
 
     [GtkCallback]
@@ -83,8 +79,8 @@ public class Mkt.PreferencesWindow : Hdy.PreferencesWindow {
         int width;
         int height;
         get_size (out width, out height);
-        app_set.pref_window_width = width;
-        app_set.pref_window_height = height;
+        this.preferences.pref_window_width = width;
+        this.preferences.pref_window_height = height;
         return false;
     }
 }

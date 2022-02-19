@@ -16,6 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 [GtkTemplate (ui = "/com/ekonomikas/merkato/MktNoSymbolView.ui")]
-public class Mkt.NoSymbolView : Gtk.Box {
-    public const string ID = "Mkt.NoSymbolView";
-}
+public class Mkt.NoSymbolView : Gtk.Box {}

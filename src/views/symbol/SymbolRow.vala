@@ -15,12 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Mkt, Gtk;
-
 [GtkTemplate (ui = "/com/ekonomikas/merkato/MktSymbolRow.ui")]
-public class Mkt.SymbolRow : ListBoxRow {
-    public const string ID = "Mkt.SymbolRow";
-
+public class Mkt.SymbolRow : Gtk.ListBoxRow {
     [GtkChild]
     private unowned Gtk.Label symbol_label;
 
@@ -43,23 +39,18 @@ public class Mkt.SymbolRow : ListBoxRow {
     private unowned Gtk.Label time;
 
     [GtkChild]
-    public unowned Gtk.EventBox drag_handle;
+    private unowned Gtk.EventBox drag_handle;
 
     [GtkChild]
     public unowned Gtk.Button remove_symbol_button {get;}
 
-    private Symbol symbol;
-    private ApplicationSet app_set;
-
+    public Mkt.Symbol symbol {get; protected set;}
 
     private const Gtk.TargetEntry[] TARGET_ENTRIES = {
         {"symbolROW", Gtk.TargetFlags.SAME_APP, 0}
     };
 
-    public SymbolRow.from_object (Symbol symbol) {
-        app_set = (ApplicationSet) Lookup.singleton (). find (ApplicationSet.ID);
-
-
+    public SymbolRow (Symbol symbol, bool remove_symbol) {
         this.symbol = symbol;
         this.symbol.notify.connect (on_update);
 
@@ -69,12 +60,12 @@ public class Mkt.SymbolRow : ListBoxRow {
         Gtk.drag_dest_set (
             this, Gtk.DestDefaults.ALL, TARGET_ENTRIES, Gdk.DragAction.MOVE
         );
+        remove_symbol_button.visible = remove_symbol;
         on_update ();
     }
 
     private void on_update () {
         var s = symbol;
-
         symbol_label.label = s.symbol;
         shortName_label.label = s.shortName;
         price.label = @"%'.$(s.priceHint)F".printf (s.regularMarketPrice);
@@ -114,15 +105,6 @@ public class Mkt.SymbolRow : ListBoxRow {
     }
 
     [GtkCallback]
-    private void on_remove_symbol_slot () {
-        var symbol_store = app_set.symbol_store;
-        uint pos;
-        if (symbol_store.find (symbol, out pos)) {
-            symbol_store.remove (pos);
-        }
-    }
-
-    [GtkCallback]
     private void on_drag_begin (Gtk.Widget widget, Gdk.DragContext context) {
         var row = ((SymbolRow) widget);
         row.get_style_context ().add_class ("drag-begin");
@@ -143,24 +125,5 @@ public class Mkt.SymbolRow : ListBoxRow {
         ((Gtk.Widget[]) data)[0] = this.parent;
         selection_data.set (Gdk.Atom.intern_static_string ("symbolROW"), 32, data);
 	}
-
-    [GtkCallback]
-    private void on_drag_received (
-        Gdk.DragContext context, int x, int y,
-        Gtk.SelectionData selection_data, uint target_type
-    ) {
-        uint src_pos, dst_pos;
-        bool src_fnd, dst_fnd;
-        var row = ((Gtk.Widget[]) selection_data.get_data ())[0];
-        Symbol src = ((SymbolRow) row).symbol;
-        Symbol dst = this.symbol;
-        dst_fnd = app_set.symbol_store.find (dst, out dst_pos);
-        src_fnd = app_set.symbol_store.find (src, out src_pos);
-        if(dst_fnd && src_fnd) {
-            app_set.symbol_store.remove (src_pos);
-            app_set.symbol_store.insert (dst_pos, src);
-        }
-        app_set.order_view = ApplicationSet.OrderView.CUSTOM;
-    }
 
 }

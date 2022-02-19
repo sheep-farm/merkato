@@ -19,7 +19,6 @@ using Mkt;
 
 public class Mkt.RestClient {
     private Soup.Session session;
-    private ApplicationSet app_set;
 
     public RestClient () {
         this.session = new Soup.Session ();
@@ -27,8 +26,6 @@ public class Mkt.RestClient {
 
     public async Json.Node fetch (string url) {
         try {
-            app_set = (ApplicationSet) Lookup.singleton ().find (ApplicationSet.ID);
-            app_set.query_status = ApplicationSet.QueryStatus.IDLE;
             var message = new Soup.Message ("GET", url);
             yield this.queue_message (this.session, message);
             if (message.status_code < 200 || message.status_code >= 300) {
@@ -36,10 +33,7 @@ public class Mkt.RestClient {
             } else {
                 var body = (string) message.response_body.data;
                 if (body != null && body != "") {
-                    app_set.query_status = ApplicationSet.QueryStatus.SUCCESS;
                     return Json.from_string (body);
-                } else {
-                    app_set.query_status = ApplicationSet.QueryStatus.FAILURE;
                 }
             }
         } catch (Error e) {}

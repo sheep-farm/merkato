@@ -22,7 +22,6 @@ const string BASE_URL = "https://query1.finance.yahoo.com";
 
 class Mkt.YahooFinanceClient : Object {
     public const string ID = "Mkt.YahooFinanceClient";
-    private ApplicationSet app_set;
 
     public YahooFinanceClient () {
     }
@@ -30,8 +29,6 @@ class Mkt.YahooFinanceClient : Object {
     public async Gee.List <Ticker> search_tickers (string query) {
         var ticker_list = new Gee.ArrayList <Ticker> ();
         if (query != null && query != "") {
-            app_set = (ApplicationSet) Lookup.singleton ().find (ApplicationSet.ID);
-            app_set.network_status = ApplicationSet.NetworkStatus.IN_PROGRESS;
             var rest_client = new RestClient ();
             var url = @"$BASE_URL/v1/finance/search" +
                       @"?q=$query" +
@@ -56,7 +53,6 @@ class Mkt.YahooFinanceClient : Object {
                     }
                 }
             }
-            app_set.network_status = ApplicationSet.NetworkStatus.IDLE;
         }
         return ticker_list;
     }
@@ -64,8 +60,6 @@ class Mkt.YahooFinanceClient : Object {
     public async Gee.List<Symbol> search_symbols (string tickers) {
         var symbol_list = new Gee.ArrayList <Symbol> ();
         if (tickers != null && tickers != "") {
-            app_set = (ApplicationSet) Lookup.singleton ().find (ApplicationSet.ID);
-            app_set.network_status = ApplicationSet.NetworkStatus.IN_PROGRESS;
             var rest_client = new RestClient ();
             var url = @"$BASE_URL/v7/finance/quote?"+
                       "lang=en-US"+
@@ -88,7 +82,6 @@ class Mkt.YahooFinanceClient : Object {
                     }
                 }
             }
-            app_set.network_status = ApplicationSet.NetworkStatus.IDLE;
         }
         return symbol_list;
    }

@@ -82,12 +82,12 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="goback_symbol_view_button1">
+          <object class="GtkButton" id="go_back_button">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="tooltip-text" translatable="yes">Return to watchlist</property>
-            <signal name="clicked" handler="on_go_back_slot" swapped="no"/>
+            <!--signal name="clicked" handler="on_go_back_slot" swapped="no"/-->
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
@@ -127,9 +127,9 @@
             <property name="primary-icon-activatable">False</property>
             <property name="primary-icon-sensitive">False</property>
             <property name="placeholder-text" translatable="yes">Search</property>
-            <signal name="activate" handler="on_search_active_slot" swapped="no"/>
-            <signal name="search-changed" handler="on_search_changed_slot" swapped="no"/>
-            <signal name="stop-search" handler="on_stop_search_slot" swapped="no"/>
+            <!-- <signal name="activate" handler="on_search_active_slot" swapped="no"/> -->
+            <!-- <signal name="search-changed" handler="on_search_changed_slot" swapped="no"/> -->
+            <!-- <signal name="stop-search" handler="on_stop_search_slot" swapped="no"/> -->
           </object>
           <packing>
             <property name="expand">False</property>

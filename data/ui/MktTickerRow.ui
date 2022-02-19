@@ -76,7 +76,7 @@
             <property name="margin-bottom">12</property>
             <property name="border-width">6</property>
             <property name="always-show-image">True</property>
-            <signal name="clicked" handler="on_add_slot" swapped="no"/>
+            <!-- <signal name="clicked" handler="on_add_slot" swapped="no"/> -->
             <child>
               <object class="GtkImage" id="add-image">
                 <property name="visible">True</property>

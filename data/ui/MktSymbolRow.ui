@@ -217,7 +217,6 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="border-width">6</property>
-                <signal name="clicked" handler="on_remove_symbol_slot" swapped="no"/>
                 <child>
                   <object class="GtkImage" id="remove-image">
                     <property name="visible">True</property>

@@ -17,6 +17,4 @@
  */
 
 [GtkTemplate (ui = "/com/ekonomikas/merkato/MktErrorView.ui")]
-public class Mkt.ErrorView : Gtk.Box {
-    public const string ID = "Mkt.ErrorView";
-}
+public class Mkt.ErrorView : Gtk.Box {}

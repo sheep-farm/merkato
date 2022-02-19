@@ -109,7 +109,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="tooltip-text" translatable="yes">Search and add symbols</property>
-            <signal name="clicked" handler="on_add_view" swapped="no"/>
+            <!--signal name="clicked" handler="on_add_view" swapped="no"/-->
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
@@ -128,7 +128,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="tooltip-text" translatable="yes">If selected, open remove symbols mode.</property>
-            <signal name="toggled" handler="on_remove_symbol_view_button_toggled" swapped="no"/>
+          <!--signal name="toggled" handler="on_remove_symbol_view_button_toggled" swapped="no"/-->
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>

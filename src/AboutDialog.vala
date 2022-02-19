@@ -16,7 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 class Mkt.AboutDialog : Gtk.AboutDialog {
-    public const string ID = "Mkt.AboutDialog";
 
     public AboutDialog (Gtk.Window owner) {
         set_destroy_with_parent (true);

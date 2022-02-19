@@ -15,106 +15,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Mkt, Gtk;
-
 [GtkTemplate (ui = "/com/ekonomikas/merkato/MktSymbolViewBox.ui")]
-public class Mkt.SymbolViewBox : Box {
-    public const string ID = "Mkt.SymbolViewBox";
-
-    private MainWindow window;
+public class Mkt.SymbolViewBox : Gtk.Box {
+    [GtkChild]
+    public unowned Gtk.ModelButton option_preferences_button {get;}
 
     [GtkChild]
-    private unowned ModelButton option_preferences_button;
+    public unowned Gtk.Button add_symbol_view_button {get;}
 
     [GtkChild]
-    private unowned Button add_symbol_view_button;
+    public unowned Gtk.ToggleButton remove_symbol_view_button {get;}
 
     [GtkChild]
-    private unowned ToggleButton remove_symbol_view_button;
+    public unowned Gtk.MenuButton menu_button {get;}
 
     [GtkChild]
-    private unowned MenuButton menu_button;
+    public unowned Gtk.Stack stack {get;}
 
     [GtkChild]
-    private unowned Stack stack;
+    public unowned Gtk.Spinner spinner {get;}
 
-    [GtkChild]
-    private unowned Spinner spinner;
-
-    private SymbolView symbol_view;
-    private ApplicationSet app_set;
-
-    public SymbolViewBox (MainWindow window) {
-        this.window = window;
-
+    public SymbolViewBox (Mkt.MainWindow window) {
         menu_button.add_accelerator (
             "clicked",
-            this.window.accel_group,
+            window.accel_group,
             Gdk.Key.F10,
             0,
             Gtk.AccelFlags.VISIBLE
         );
-
-        Lookup.singleton ().put (ID, this);
-
-        app_set = (ApplicationSet) Lookup.singleton (). find (ApplicationSet.ID);
-        app_set.notify["network-status"].connect (on_network_status);
-        app_set.notify["query-status"].connect (on_update_view);
-        app_set.symbol_store.items_changed.connect (on_update_view);
-        symbol_view = new SymbolView ();
-
-        stack.add_named (new NoSymbolView (), NoSymbolView.ID);
-        stack.add_named (new ErrorView (), ErrorView.ID);
-        stack.add_named (symbol_view   , SymbolView.ID);
-
-        on_update_view ();
-    }
-
-    private void on_network_status () {
-        if (app_set.network_status == ApplicationSet.NetworkStatus.IDLE) {
-            spinner.stop ();
-        } else if (app_set.network_status == ApplicationSet.NetworkStatus.IN_PROGRESS) {
-            spinner.start ();
-        }
-    }
-
-    private void on_update_view () {
-        if (app_set.query_status == ApplicationSet.QueryStatus.IDLE) return;
-        remove_symbol_view_button.visible = true;
-        add_symbol_view_button.visible = true;
-        if (app_set.query_status == ApplicationSet.QueryStatus.SUCCESS) {
-            var symbol_store_is_empty = app_set.symbol_store.get_n_items () == 0;
-            //var symbol_store_only_one = app_set.symbol_store.get_n_items () == 1;
-            if (symbol_store_is_empty) {
-                stack.set_visible_child_name (NoSymbolView.ID);
-                remove_symbol_view_button.active = false;
-            } else {
-                stack.set_visible_child_name (SymbolView.ID);
-            }
-            remove_symbol_view_button.visible = !symbol_store_is_empty;
-        } else if (app_set.query_status == ApplicationSet.QueryStatus.FAILURE) {
-            stack.set_visible_child_name (ErrorView.ID);
-            remove_symbol_view_button.visible = false;
-            add_symbol_view_button.visible = false;
-        }
-    }
-
-    [GtkCallback]
-    private void on_remove_symbol_view_button_toggled () {
-        var children = symbol_view.symbol_list_box.get_children ();
-        foreach (Gtk.Widget widget in children) {
-            var symbol_row = (SymbolRow) widget;
-            symbol_row.remove_symbol_button.visible = remove_symbol_view_button.active;
-        }
-        app_set.tick_enable = !remove_symbol_view_button.active;
-        add_symbol_view_button.set_sensitive (!remove_symbol_view_button.active);
-        option_preferences_button.set_sensitive (!remove_symbol_view_button.active);
-
-    }
-
-    [GtkCallback]
-    private void on_add_view () {
-        remove_symbol_view_button.active = false;
-        window.stack_view = TickerViewBox.ID;
     }
 }

@@ -15,32 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Mkt, Gtk;
-
 [GtkTemplate (ui = "/com/ekonomikas/merkato/MktTickerRow.ui")]
-public class Mkt.TickerRow : ListBoxRow {
-    public const string ID = "Mkt.TickerRow";
-
+public class Mkt.TickerRow : Gtk.ListBoxRow {
     [GtkChild]
-    private unowned Label symbol {get;}
-
+    private unowned Gtk.Label symbol {get;}
     [GtkChild]
-    private unowned Label shortname {get;}
+    private unowned Gtk.Label shortname {get;}
+    [GtkChild]
+    public unowned Gtk.Button add_button {get;}
 
-    private Ticker ticker;
+    public Mkt.Ticker ticker {get; private set;}
 
-    private TickerView ticker_view;
-
-    public TickerRow (Ticker ticker, TickerView ticker_view) {
+    public TickerRow (Mkt.Ticker ticker) {
         this.ticker = ticker;
-        this.ticker_view = ticker_view;
         symbol.label = ticker.symbol;
         shortname.label = ticker.shortname;
-    }
-
-    [GtkCallback]
-    private void on_add_slot () {
-        ticker_view.on_add_ticker (ticker);
     }
 
 }

@@ -12,7 +12,6 @@
     <accel-groups>
       <group name="accel_group"/>
     </accel-groups>
-    <signal name="delete-event" handler="on_delete_event_listener" swapped="no"/>
     <child>
       <object class="GtkStack" id="stack">
         <property name="visible">True</property>

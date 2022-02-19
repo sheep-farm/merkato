@@ -18,17 +18,13 @@
 using Mkt;
 
 public class Mkt.Application : Gtk.Application {
-    public const string ID = "Mkt.Application";
-
-    public const string APP_TITLE = "Merkato";
-
-    private MainWindow window;
+    private Controller controller;
 
     private const ActionEntry[] app_entries =
     {
-        {"about"      , on_about_action_slot},
-        {"preferences", on_preferences_action_slot},
-        {"quit"       , on_quit_slot        },
+        {"about"      , on_about_action},
+        {"preferences", on_preferences_action},
+        {"quit"       , on_quit_action},
     };
 
     public Application () {
@@ -39,11 +35,6 @@ public class Mkt.Application : Gtk.Application {
     }
 
     public override void activate () {
-        Lookup.singleton ().put (ID, this);
-        Lookup.singleton ().put (YahooFinanceClient.ID, new YahooFinanceClient ());
-        Lookup.singleton ().put (SymbolPersistence.ID , new SymbolPersistence ());
-        Lookup.singleton ().put (ApplicationSet.ID    , new ApplicationSet ());
-
         if (active_window != null) {
             return;
         }
@@ -60,20 +51,22 @@ public class Mkt.Application : Gtk.Application {
         set_accels_for_action ("app.about", {"<control>A"});
         set_accels_for_action ("app.preferences", {"<control>P"});
 
-        window = new MainWindow (this);
-        window.present ();
+        if (controller == null) {
+            controller = new Controller (this);
+        }
+        controller.activate ();
     }
 
-    private void on_quit_slot () {
-        this.window.close ();
+    private void on_quit_action () {
+        controller.close_main_window ();
     }
 
-    private void on_about_action_slot () {
-        window.show_about_dialog ();
+    private void on_about_action () {
+        controller.show_about_dialog ();
     }
 
-    private void on_preferences_action_slot () {
-        window.show_preferences_dialog ();
+    private void on_preferences_action () {
+        controller.show_preferences_dialog ();
     }
 
     public static int main (string[] args) {
