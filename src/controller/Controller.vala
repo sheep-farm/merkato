@@ -63,6 +63,7 @@ public class Mkt.Controller : GLib.Object {
 
     public Controller (Application application) {
         preferences = new Preferences ();
+        Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = preferences.dark_theme;
         preferences.notify["order-view"].connect (() => {
             order_symbol_list ();
             update_symbol_view_box ();
@@ -71,6 +72,9 @@ public class Mkt.Controller : GLib.Object {
             pull_interval = preferences.pull_interval;
             stop_update_symbol_list_loop ();
             begin_update_symbol_list_loop ();
+        });
+        preferences.notify["dark-theme"].connect (() => {
+            Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = preferences.dark_theme;
         });
 
         pull_interval = preferences.pull_interval;
