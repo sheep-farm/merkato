@@ -272,7 +272,7 @@ public class Mkt.Controller : GLib.Object {
                 tickers += s.symbol + ",";
             }
             symbol_view_spinner.start ();
-                yahoo_finance_client.search_symbols.begin (tickers, (obj, res) => {
+            yahoo_finance_client.search_symbols.begin (tickers, (obj, res) => {
                 var result = yahoo_finance_client.search_symbols.end (res);
                 if (!result.is_empty) {
                     symbol_list.clear ();
