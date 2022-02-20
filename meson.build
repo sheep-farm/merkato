@@ -1,5 +1,5 @@
 project('com.ekonomikas.merkato', ['c', 'vala'],
-          version: '0.1.4.2 build 20220219',
+          version: '0.1.4.2',
     meson_version: '>= 0.50.0',
   default_options: [ 'warning_level=2',
                    ],
@@ -16,7 +16,7 @@ conf_data = configuration_data()
 conf_data.set_quoted('APP_ID', app_id)
 conf_data.set_quoted('APP_VERSION', meson.project_version())
 conf_data.set_quoted('APP_INSTALL_PREFIX', app_install_prefix)
-app_constants = configure_file(
+app_constants = configure_file (
     input : 'constants.vala.in',
     output : 'constants.vala',
     configuration : conf_data
