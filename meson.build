@@ -1,5 +1,5 @@
 project('com.ekonomikas.merkato', ['c', 'vala'],
-          version: '0.1.4 build 20220219',
+          version: '0.1.4.1 build 20220219',
     meson_version: '>= 0.50.0',
   default_options: [ 'warning_level=2',
                    ],

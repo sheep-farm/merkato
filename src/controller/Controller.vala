@@ -272,12 +272,15 @@ public class Mkt.Controller : GLib.Object {
                 tickers += s.symbol + ",";
             }
             symbol_view_spinner.start ();
-            symbol_list.clear ();
-            yahoo_finance_client.search_symbols.begin (tickers, (obj, res) => {
-                symbol_list.add_all (yahoo_finance_client.search_symbols.end (res));
-                order_symbol_list ();
-                update_symbol_view_box ();
-                persistence.persist_symbols (symbol_list);
+                yahoo_finance_client.search_symbols.begin (tickers, (obj, res) => {
+                var result = yahoo_finance_client.search_symbols.end (res);
+                if (!result.is_empty) {
+                    symbol_list.clear ();
+                    symbol_list.add_all (result);
+                    order_symbol_list ();
+                    update_symbol_view_box ();
+                    persistence.persist_symbols (symbol_list);
+                }
                 symbol_view_spinner.stop ();
             });
         }
