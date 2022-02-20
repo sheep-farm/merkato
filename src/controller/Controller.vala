@@ -46,10 +46,6 @@ public class Mkt.Controller : GLib.Object {
     private uint? timeout_id = null;
     private int? pull_interval = 30;
 
-    private CompareDataFunc<Symbol> compare_symbols_name_asc;
-    private CompareDataFunc<Symbol> compare_symbols_name_desc;
-    private CompareDataFunc<Symbol> compare_symbols_market_change_up;
-    private CompareDataFunc<Symbol> compare_symbols_market_change_down;
     private SymbolPersistence persistence;
 
     private Preferences preferences;
@@ -154,11 +150,6 @@ public class Mkt.Controller : GLib.Object {
         yahoo_finance_client = new YahooFinanceClient ();
         symbol_list = new Gee.ArrayList<Symbol> ();
         ticker_list = new Gee.ArrayList<Ticker> ();
-
-        compare_symbols_name_asc           = (a, b)  => { return (a.shortName.up () < b.shortName.up () ? -1 : 1); };
-        compare_symbols_name_desc          = (a, b)  => { return (a.shortName.up () > b.shortName.up () ? -1 : 1); };
-        compare_symbols_market_change_down = (a, b)  => { return (a.regularMarketChangePercent < b.regularMarketChangePercent ? -1 : 1); };
-        compare_symbols_market_change_up   = (a, b)  => { return (a.regularMarketChangePercent > b.regularMarketChangePercent ? -1 : 1); };
 
         init_symbol_list ();
         update_symbol_view_box ();
@@ -289,22 +280,21 @@ public class Mkt.Controller : GLib.Object {
     private void order_symbol_list () {
         if ((symbol_list != null && !symbol_list.is_empty) && !(preferences.order_view == Preferences.OrderView.CUSTOM.to_value())) {
             if (preferences.order_view == Preferences.OrderView.TITLE_ASC.to_value()) {
-                symbol_list.sort (compare_symbols_name_asc);
+                symbol_list.sort ((a, b)  => { return (a.shortName.up () < b.shortName.up () ? -1 : 1); });
             } else
             if (preferences.order_view == Preferences.OrderView.TITLE_DESC.to_value()) {
-                symbol_list.sort (compare_symbols_name_desc);
+                symbol_list.sort ((a, b)  => { return (a.shortName.up () > b.shortName.up () ? -1 : 1); });
             } else
             if (preferences.order_view == Preferences.OrderView.CHANGE_UP.to_value()) {
-                symbol_list.sort (compare_symbols_market_change_up);
+                symbol_list.sort ((a, b)  => { return (a.regularMarketChangePercent > b.regularMarketChangePercent ? -1 : 1); });
             } else
             if (preferences.order_view == Preferences.OrderView.CHANGE_DOWN.to_value()) {
-                symbol_list.sort (compare_symbols_market_change_down);
+                symbol_list.sort ((a, b)  => { return (a.regularMarketChangePercent < b.regularMarketChangePercent ? -1 : 1); });
             }
         }
     }
 
     private void update_ticker_view_box () {
-        var size = ticker_list.size;
         var children = ticker_list_box.get_children ();
         foreach (Gtk.Widget widget in children) ticker_list_box.remove (widget);
         foreach (Ticker t in ticker_list) {
