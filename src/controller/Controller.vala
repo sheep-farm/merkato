@@ -90,8 +90,8 @@ public class Mkt.Controller : GLib.Object {
 
         add_symbol_view_button = symbol_view_box.add_symbol_view_button;
         add_symbol_view_button.clicked.connect (() => {
-            update_ticker_view_box ();
             stop_update_symbol_list_loop ();
+            update_ticker_view_box ();
         });
 
         remove_symbol_view_button = symbol_view_box.remove_symbol_view_button;
