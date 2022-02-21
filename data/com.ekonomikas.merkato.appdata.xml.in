@@ -3,6 +3,7 @@
 	<id>com.ekonomikas.merkato.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
+  <developer_name translatable="no">Flávio Vasconcellos Corrêa</developer_name>
   <url type="homepage">https://github.com/sheep-farm/merkato</url>
   <url type="bugtracker">https://github.com/sheep-farm/merkato/issues</url>
   <launchable type="desktop-id">com.ekonomikas.merkato.desktop</launchable>
