@@ -8,7 +8,7 @@
     <property name="visible">True</property>
     <property name="can-focus">False</property>
     <property name="margin-bottom">1</property>
-    <signal name="drag-data-received" handler="on_drag_received" swapped="yes"/>
+    <!-- <signal name="drag-data-received" handler="on_drag_received" swapped="yes"/> -->
     <child>
       <object class="GtkEventBox" id="drag_handle">
         <property name="visible">True</property>
