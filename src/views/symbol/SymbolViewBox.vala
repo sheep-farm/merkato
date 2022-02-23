@@ -1,6 +1,6 @@
 /* WatchSymbolViewBox.vala
  *
- * Copyright 2021 Flávio Vasconcellos Corrêa
+ * Copyright 2021 - 2022 Flávio Vasconcellos Corrêa
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

@@ -1,26 +1,21 @@
-* {
-    font-family: Ubuntu;
-    font-style: normal;
-}
-
 .market_open {
     color: @success_color;
-    /* font-weight: 600; */
+    font-weight: 600;
 }
 
 .market_close {
-    /* color: @error_color; */
-    /* font-weight: 600; */
+    color: @error_color;
+    font-weight: 600;
 }
 
 .profit {
     color: @success_color;
-    /* font-weight: 600; */
+    font-weight: 600;
 }
 
 .loss {
     color: @error_color;
-    /* font-weight: 600; */
+    font-weight: 600;
 }
 
 .text-lg {
