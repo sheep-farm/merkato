@@ -229,21 +229,20 @@ public class Mkt.Controller : GLib.Object {
     }
 
     private void update_symbol_view_box () {
-        var children = symbol_list_box.get_children ();
-        foreach (Gtk.Widget widget in children) symbol_list_box.remove (widget);
+        foreach (Gtk.Widget widget in symbol_list_box.get_children ()) symbol_list_box.remove (widget);
         foreach (Symbol s in symbol_list){
             SymbolRow symbol_row = new SymbolRow (s, remove_symbol_view_button.active);
-            symbol_list_box.add (symbol_row);
+            symbol_list_box.prepend (symbol_row);
             symbol_row.remove_symbol_button.clicked.connect (() => {
                 symbol_list.remove_at (symbol_list.index_of (s));
                 update_symbol_view_box ();
             });
             symbol_row.drag_data_received.connect ((context, x, y, selection_data, target_type) => {
-                var row = ((Gtk.Widget[]) selection_data.get_data ())[0];
-                Symbol src = ((SymbolRow) row).symbol;
+                SymbolRow row = (SymbolRow) ((Gtk.Widget[]) selection_data.get_data ())[0];
+                Symbol src = row.symbol;
                 Symbol dst = s;
-                var src_pos = symbol_list.index_of (src);
-                var dst_pos = symbol_list.index_of (dst);
+                int src_pos = symbol_list.index_of (src);
+                int dst_pos = symbol_list.index_of (dst);
                 symbol_list.remove_at (src_pos);
                 symbol_list.insert (dst_pos, src);
                 preferences.order_view = Preferences.OrderView.CUSTOM;
@@ -280,16 +279,16 @@ public class Mkt.Controller : GLib.Object {
     private void order_symbol_list () {
         if ((symbol_list != null && !symbol_list.is_empty) && !(preferences.order_view == Preferences.OrderView.CUSTOM.to_value())) {
             if (preferences.order_view == Preferences.OrderView.TITLE_ASC.to_value()) {
-                symbol_list.sort ((a, b)  => { return (a.shortName.up () < b.shortName.up () ? -1 : 1); });
-            } else
-            if (preferences.order_view == Preferences.OrderView.TITLE_DESC.to_value()) {
                 symbol_list.sort ((a, b)  => { return (a.shortName.up () > b.shortName.up () ? -1 : 1); });
             } else
+            if (preferences.order_view == Preferences.OrderView.TITLE_DESC.to_value()) {
+                symbol_list.sort ((a, b)  => { return (a.shortName.up () < b.shortName.up () ? -1 : 1); });
+            } else
             if (preferences.order_view == Preferences.OrderView.CHANGE_UP.to_value()) {
-                symbol_list.sort ((a, b)  => { return (a.regularMarketChangePercent > b.regularMarketChangePercent ? -1 : 1); });
+                symbol_list.sort ((a, b)  => { return (a.regularMarketChangePercent < b.regularMarketChangePercent ? -1 : 1); });
             } else
             if (preferences.order_view == Preferences.OrderView.CHANGE_DOWN.to_value()) {
-                symbol_list.sort ((a, b)  => { return (a.regularMarketChangePercent < b.regularMarketChangePercent ? -1 : 1); });
+                symbol_list.sort ((a, b)  => { return (a.regularMarketChangePercent > b.regularMarketChangePercent ? -1 : 1); });
             }
         }
     }
@@ -311,10 +310,11 @@ public class Mkt.Controller : GLib.Object {
                     }
                 });
             });
-            ticker_list_box.add (ticker_row);
+            ticker_list_box.prepend (ticker_row);
         }
         stack_visible (TICKER_VIEW_BOX);
         stack_visible (ticker_list.is_empty ? NO_TICKER_VIEW : TICKER_VIEW);
+        search_entry.grab_focus ();
     }
 
     private void update_ticker_list () {
@@ -331,3 +331,4 @@ public class Mkt.Controller : GLib.Object {
         }
     }
 }
+

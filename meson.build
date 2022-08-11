@@ -1,5 +1,5 @@
 project('com.ekonomikas.merkato', ['c', 'vala'],
-          version: '0.1.4.2',
+          version: '0.1.4.3',
     meson_version: '>= 0.50.0',
   default_options: [ 'warning_level=2',
                    ],
@@ -7,7 +7,7 @@ project('com.ekonomikas.merkato', ['c', 'vala'],
 
 app_binary = 'com.ekonomikas.merkato'
 
-app_id = meson.project_name() # com.bitstower.Markets
+app_id = meson.project_name() # com.ekonomikas.merkato
 app_install_prefix = get_option('prefix')
 
 add_project_arguments('-DGETTEXT_PACKAGE="@0@"'.format(app_id), language: 'c')
