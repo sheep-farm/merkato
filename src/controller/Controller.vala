@@ -45,6 +45,7 @@ public class Mkt.Controller : GLib.Object {
     private YahooFinanceClient yahoo_finance_client;
     private uint? timeout_id = null;
     private int? pull_interval = 30;
+    private bool only_open_markets = false;
 
     private SymbolPersistence persistence;
 
@@ -72,6 +73,11 @@ public class Mkt.Controller : GLib.Object {
         preferences.notify["dark-theme"].connect (() => {
             Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = preferences.dark_theme;
         });
+        preferences.notify["only-open-markets"].connect (() => {
+            update_symbol_view_box ();
+        });
+
+
 
         pull_interval = preferences.pull_interval;
 
@@ -231,6 +237,9 @@ public class Mkt.Controller : GLib.Object {
     private void update_symbol_view_box () {
         foreach (Gtk.Widget widget in symbol_list_box.get_children ()) symbol_list_box.remove (widget);
         foreach (Symbol s in symbol_list){
+            if (preferences.only_open_markets && s.isMarketClosed) {
+                continue;
+            }
             SymbolRow symbol_row = new SymbolRow (s, remove_symbol_view_button.active);
             symbol_list_box.prepend (symbol_row);
             symbol_row.remove_symbol_button.clicked.connect (() => {
@@ -238,15 +247,17 @@ public class Mkt.Controller : GLib.Object {
                 update_symbol_view_box ();
             });
             symbol_row.drag_data_received.connect ((context, x, y, selection_data, target_type) => {
-                SymbolRow row = (SymbolRow) ((Gtk.Widget[]) selection_data.get_data ())[0];
-                Symbol src = row.symbol;
-                Symbol dst = s;
-                int src_pos = symbol_list.index_of (src);
-                int dst_pos = symbol_list.index_of (dst);
-                symbol_list.remove_at (src_pos);
-                symbol_list.insert (dst_pos, src);
-                preferences.order_view = Preferences.OrderView.CUSTOM;
-                update_symbol_view_box ();
+                if (!preferences.only_open_markets) {
+                    SymbolRow row = (SymbolRow) ((Gtk.Widget[]) selection_data.get_data ())[0];
+                    Symbol src = row.symbol;
+                    Symbol dst = s;
+                    int src_pos = symbol_list.index_of (src);
+                    int dst_pos = symbol_list.index_of (dst);
+                    symbol_list.remove_at (src_pos);
+                    symbol_list.insert (dst_pos, src);
+                    preferences.order_view = Preferences.OrderView.CUSTOM;
+                    update_symbol_view_box ();
+                }
             });
 
         }

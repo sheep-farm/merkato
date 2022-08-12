@@ -33,6 +33,8 @@ public class Mkt.PreferencesWindow : Hdy.PreferencesWindow {
     private unowned RadioButton order_change_down;
     [GtkChild]
     private unowned Switch dark_theme;
+    [GtkChild]
+    private unowned Switch only_open_markets;
 
     private Preferences preferences;
 
@@ -46,11 +48,18 @@ public class Mkt.PreferencesWindow : Hdy.PreferencesWindow {
         order_title_desc.active  = (this.preferences.order_view == Preferences.OrderView.TITLE_DESC.to_value ());
         order_change_up.active   = (this.preferences.order_view == Preferences.OrderView.CHANGE_UP.to_value ());
         order_change_down.active = (this.preferences.order_view == Preferences.OrderView.CHANGE_DOWN.to_value ());
+        only_open_markets.active = this.preferences.only_open_markets;
     }
 
     [GtkCallback]
     private bool on_dark_theme_state_set (Switch sender, bool enabled) {
         this.preferences.dark_theme = enabled;
+        return false;
+    }
+
+    [GtkCallback]
+    private bool only_open_markets_set (Switch sender, bool enabled) {
+        this.preferences.only_open_markets = enabled;
         return false;
     }
 

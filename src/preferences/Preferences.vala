@@ -56,6 +56,7 @@ public class Mkt.Preferences : GLib.Object {
             }
         }
     }
+
     public bool dark_theme {get; set;}
     public int pull_interval {get; set;}
     public int window_width {get; set;}
@@ -63,6 +64,7 @@ public class Mkt.Preferences : GLib.Object {
     public int pref_window_width {get; set;}
     public int pref_window_height {get; set;}
     public int order_view {get; set;}
+    public bool only_open_markets {get; set;}
 
     private Settings settings;
 
@@ -75,6 +77,7 @@ public class Mkt.Preferences : GLib.Object {
         bind_setting ("dark-theme", "dark_theme");
         bind_setting ("pull-interval", "pull_interval");
         bind_setting ("order-view", "order_view");
+        bind_setting ("only-open-markets", "only_open_markets");
         bind_setting ("window-width", "window_width");
         bind_setting ("window-height", "window_height");
         bind_setting ("pref-window-width", "pref_window_width");

@@ -72,9 +72,8 @@ public class Mkt.Application : Gtk.Application {
     public static int main (string[] args) {
         // Init internationalization support
         Intl.setlocale (LocaleCategory.ALL, "");
-        string langpack_dir = Path.build_filename (Constants.APP_INSTALL_PREFIX, "share", "locale");
 
-        Intl.bindtextdomain (Constants.APP_ID, langpack_dir);
+        Intl.bindtextdomain (Constants.APP_ID, Path.build_filename (Constants.APP_INSTALL_PREFIX, "share", "locale"));
         Intl.bind_textdomain_codeset (Constants.APP_ID, "UTF-8");
         Intl.textdomain (Constants.APP_ID);
 
