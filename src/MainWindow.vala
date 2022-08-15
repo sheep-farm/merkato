@@ -27,4 +27,13 @@ public class Mkt.MainWindow : Hdy.ApplicationWindow {
     public MainWindow (Application app) {
         Object (application: app);
     }
+
+    [GtkCallback]
+    private void check_resize_set () {
+        // int width;
+        // int height;
+        // get_size (out width, out height);
+        // string res = "width: %i; height: %i\n".printf (width, height);
+        // print (res);
+    }
 }

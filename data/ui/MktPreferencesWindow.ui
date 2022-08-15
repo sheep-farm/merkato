@@ -53,8 +53,8 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="activatable">False</property>
-                <property name="title" translatable="yes">Market view</property>
-                <property name="subtitle" translatable="yes">Show only open markets</property>
+                <property name="title" translatable="yes">Market Open</property>
+                <property name="subtitle" translatable="yes">Show only 'Market Open'</property>
                 <property name="use-underline">True</property>
                 <child>
                   <object class="GtkSwitch" id="only_open_markets">

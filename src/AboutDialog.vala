@@ -21,15 +21,15 @@ class Mkt.AboutDialog : Gtk.AboutDialog {
         set_destroy_with_parent (true);
         set_transient_for (owner);
         set_modal (true);
-        logo_icon_name = Constants.APP_ID;
-        version        = Constants.APP_VERSION;
-        program_name  = "Merkato";
-        comments      = _("Track of your investiments.");
-        authors       = {"Flávio Vasconcellos Corrêa"};
-        artists       = {"Flávio Vasconcellos Corrêa"};
-        license_type  = Gtk.License.GPL_3_0;
-        website       = "https://github.com/sheep-farm/merkato";
-        website_label = _("Official webpage");
+        logo_icon_name     = Constants.APP_ID;
+        version            = Constants.APP_VERSION;
+        program_name       = "Merkato";
+        comments           = _("Track of your investiments.");
+        authors            = {"Flávio Vasconcellos Corrêa"};
+        artists            = {"Flávio Vasconcellos Corrêa"};
+        license_type       = Gtk.License.GPL_3_0;
+        website            = "https://github.com/sheep-farm/merkato";
+        website_label      = _("Official webpage");
         translator_credits = _("translator-credits");
 
     }

@@ -45,7 +45,6 @@ public class Mkt.Controller : GLib.Object {
     private YahooFinanceClient yahoo_finance_client;
     private uint? timeout_id = null;
     private int? pull_interval = 30;
-    private bool only_open_markets = false;
 
     private SymbolPersistence persistence;
 
@@ -342,4 +341,3 @@ public class Mkt.Controller : GLib.Object {
         }
     }
 }
-
