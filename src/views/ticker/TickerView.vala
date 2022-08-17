@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-[GtkTemplate (ui = "/com/ekonomikas/merkato/MktTickerView.ui")]
+[GtkTemplate (ui = "/ui/MktTickerView.ui")]
 public class Mkt.TickerView : Gtk.Box {
     [GtkChild]
     public unowned Gtk.ListBox ticker_list_box {get;}

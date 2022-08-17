@@ -1,20 +1,22 @@
 .market_open {
-    color: @success_color;
+    /*color: #21638B;*/
+    color: #118C4F;
     font-weight: 600;
 }
 
 .market_close {
-    color: @error_color;
+    color: #E42A33;
     font-weight: 600;
 }
 
 .profit {
-    color: @success_color;
+    color: #118C4F;
     font-weight: 600;
 }
 
 .loss {
-    color: @error_color;
+    color: #F40000;
+    /*color: #C91E0B;*/
     font-weight: 600;
 }
 
@@ -40,8 +42,8 @@
 }
 
 .drag-begin {
-    background-color: alpha(@theme_selected_bg_color,0.2);
-    box-shadow: inset 0 0 0 0.15em alpha(@theme_selected_bg_color,0.2);
+    background-color: alpha(#46F953,0.2);
+    box-shadow: inset 0 0 0 0.30em alpha(#46F9530,0.2);
 }
 
 .pd-left-sm {

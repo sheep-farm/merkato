@@ -1,7 +1,7 @@
 subdir('icons')
 subdir('ui')
 
-desktop_file = i18n.merge_file(
+desktop_file = i18n.merge_file (
   input: app_id + '.desktop.in',
   output: app_id + '.desktop',
   type: 'desktop',

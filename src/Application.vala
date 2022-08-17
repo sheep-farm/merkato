@@ -20,8 +20,7 @@ using Mkt;
 public class Mkt.Application : Gtk.Application {
     private Controller controller;
 
-    private const ActionEntry[] app_entries =
-    {
+    private const ActionEntry[] app_entries = {
         {"about"      , on_about_action},
         {"preferences", on_preferences_action},
         {"quit"       , on_quit_action},
@@ -35,16 +34,13 @@ public class Mkt.Application : Gtk.Application {
     }
 
     public override void activate () {
+        Gtk.IconTheme.get_default ().add_resource_path ("/icons");
         if (active_window != null) {
             return;
         }
         var provider = new Gtk.CssProvider ();
-        provider.load_from_resource ("/com/ekonomikas/merkato/Application.css");
-        Gtk.StyleContext.add_provider_for_screen (
-            Gdk.Screen.get_default (),
-            provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        );
+        provider.load_from_resource ("/ui/Application.css");
+        Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         add_action_entries (app_entries, this);
         set_accels_for_action ("app.quit", {"<control>Q"});

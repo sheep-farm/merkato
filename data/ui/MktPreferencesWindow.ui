@@ -39,9 +39,11 @@
                     <property name="hexpand">False</property>
                     <property name="active-id">30</property>
                     <items>
+                      <item id="5">5</item>
+                      <item id="15">15</item>
                       <item id="30">30</item>
-                      <item id="45">45</item>
-                      <item id="60">60</item>
+                      <item id="45" translatable="yes">45</item>
+                      <item id="60" translatable="yes">60</item>
                     </items>
                     <signal name="changed" handler="on_pull_interval_changed" swapped="no"/>
                   </object>

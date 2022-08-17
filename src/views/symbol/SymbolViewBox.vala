@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-[GtkTemplate (ui = "/com/ekonomikas/merkato/MktSymbolViewBox.ui")]
+[GtkTemplate (ui = "/ui/MktSymbolViewBox.ui")]
 public class Mkt.SymbolViewBox : Gtk.Box {
     [GtkChild]
     public unowned Gtk.ModelButton option_preferences_button {get;}

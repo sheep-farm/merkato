@@ -32,19 +32,21 @@ app_deps = [
   dependency ('gee-0.8')
 ]
 
-# gnome = import ('gnome')
+# Include the GNOME module
+gnome = import('gnome')
 
-# app_sources += gnome.compile_resources (
-#   'merkato-resources',
-#   'merkato.gresource.xml',
-#   c_name: 'merkato'
-# )
+
 
 app_c_args = [
   '-DHANDY_USE_UNSTABLE_API',
 ]
 
-executable (app_binary, app_sources,
+
+
+executable (
+  app_binary,
+  icon_gresource,
+  app_sources,
   vala_args: '--target-glib=2.50',
   dependencies: app_deps,
   c_args: app_c_args,

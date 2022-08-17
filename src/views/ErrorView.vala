@@ -16,5 +16,5 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-[GtkTemplate (ui = "/com/ekonomikas/merkato/MktErrorView.ui")]
+[GtkTemplate (ui = "/ui/MktErrorView.ui")]
 public class Mkt.ErrorView : Gtk.Box {}

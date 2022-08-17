@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-[GtkTemplate (ui = "/com/ekonomikas/merkato/MktSymbolRow.ui")]
+[GtkTemplate (ui = "/ui/MktSymbolRow.ui")]
 public class Mkt.SymbolRow : Gtk.ListBoxRow {
     [GtkChild]
     private unowned Gtk.Label symbol_label;
@@ -43,6 +43,9 @@ public class Mkt.SymbolRow : Gtk.ListBoxRow {
 
     [GtkChild]
     public unowned Gtk.Button remove_symbol_button {get;}
+
+    [GtkChild]
+    public unowned Gtk.Image change_icon {get;}
 
     public Mkt.Symbol symbol {get; protected set;}
 
@@ -93,6 +96,13 @@ public class Mkt.SymbolRow : Gtk.ListBoxRow {
         }
         if (s.regularMarketTime != null) {
             time.label = s.regularMarketTime.to_local ().format ("%b %e, %X");
+        }
+        if (s.regularMarketOpen == s.regularMarketPrice) {
+            change_icon.icon_name = "abar";
+        } else if (s.regularMarketOpen < s.regularMarketPrice) {
+            change_icon.icon_name = "aup";
+        } else {
+            change_icon.icon_name = "adown";
         }
     }
 

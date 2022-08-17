@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-[GtkTemplate (ui = "/com/ekonomikas/merkato/MktTickerRow.ui")]
+[GtkTemplate (ui = "/ui/MktTickerRow.ui")]
 public class Mkt.TickerRow : Gtk.ListBoxRow {
     [GtkChild]
     private unowned Gtk.Label symbol {get;}

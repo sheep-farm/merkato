@@ -17,7 +17,7 @@
  */
 using Mkt;
 
-[GtkTemplate (ui = "/com/ekonomikas/merkato/MktMainWindow.ui")]
+[GtkTemplate (ui = "/ui/MktMainWindow.ui")]
 public class Mkt.MainWindow : Hdy.ApplicationWindow {
     [GtkChild]
     public unowned Gtk.AccelGroup accel_group {get;}

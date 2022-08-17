@@ -194,19 +194,6 @@
                         <property name="can-focus">False</property>
                         <property name="halign">end</property>
                         <child>
-                          <object class="GtkImage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="margin-end">4</property>
-                            <property name="resource">icons/aup.svg</property>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkLabel" id="change">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -219,6 +206,27 @@
                           <packing>
                             <property name="expand">True</property>
                             <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="change_icon">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">baseline</property>
+                            <property name="valign">baseline</property>
+                            <property name="margin-start">2</property>
+                            <property name="margin-end">2</property>
+                            <property name="margin-top">2</property>
+                            <property name="margin-bottom">2</property>
+                            <property name="xpad">0</property>
+                            <property name="ypad">0</property>
+                            <property name="icon-name">abar</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="padding">1</property>
                             <property name="position">1</property>
                           </packing>
                         </child>

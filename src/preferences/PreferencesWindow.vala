@@ -17,7 +17,7 @@
  */
 using Mkt, Gtk;
 
-[GtkTemplate (ui = "/com/ekonomikas/merkato/MktPreferencesWindow.ui")]
+[GtkTemplate (ui = "/ui/MktPreferencesWindow.ui")]
 public class Mkt.PreferencesWindow : Hdy.PreferencesWindow {
     [GtkChild]
     private unowned ComboBoxText pull_interval;

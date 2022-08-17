@@ -76,8 +76,6 @@ public class Mkt.Controller : GLib.Object {
             update_symbol_view_box ();
         });
 
-
-
         pull_interval = preferences.pull_interval;
 
         this.application = application;
