@@ -1,5 +1,4 @@
 .market_open {
-    /*color: #21638B;*/
     color: #118C4F;
     font-weight: 600;
 }
@@ -16,13 +15,11 @@
 
 .loss {
     color: #F40000;
-    /*color: #C91E0B;*/
     font-weight: 600;
 }
 
 .text-lg {
     font-size: 2em;
-    /* margin:0.5em; */
 }
 
 .text-md {
@@ -42,8 +39,8 @@
 }
 
 .drag-begin {
-    background-color: alpha(#46F953,0.2);
-    box-shadow: inset 0 0 0 0.30em alpha(#46F9530,0.2);
+    background-color: alpha(#1FFF0F, 0.3);
+    box-shadow: inset 0 0 0 0.1em alpha(#1FFF0F, 0.8);
 }
 
 .pd-left-sm {
