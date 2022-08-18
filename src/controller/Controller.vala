@@ -245,6 +245,7 @@ public class Mkt.Controller : GLib.Object {
                 update_symbol_view_box ();
             });
             symbol_row.drag_data_received.connect ((context, x, y, selection_data, target_type) => {
+                stop_update_symbol_list_loop ();
                 if (!preferences.only_open_markets) {
                     SymbolRow row = (SymbolRow) ((Gtk.Widget[]) selection_data.get_data ())[0];
                     Symbol src = row.symbol;
@@ -256,6 +257,7 @@ public class Mkt.Controller : GLib.Object {
                     preferences.order_view = Preferences.OrderView.CUSTOM;
                     update_symbol_view_box ();
                 }
+                begin_update_symbol_list_loop ();
             });
 
         }
