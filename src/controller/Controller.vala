@@ -245,7 +245,6 @@ public class Mkt.Controller : GLib.Object {
                 update_symbol_view_box ();
             });
             symbol_row.drag_data_received.connect ((context, x, y, selection_data, target_type) => {
-                stop_update_symbol_list_loop ();
                 if (!preferences.only_open_markets) {
                     SymbolRow row = (SymbolRow) ((Gtk.Widget[]) selection_data.get_data ())[0];
                     Symbol src = row.symbol;
@@ -257,7 +256,6 @@ public class Mkt.Controller : GLib.Object {
                     preferences.order_view = Preferences.OrderView.CUSTOM;
                     update_symbol_view_box ();
                 }
-                begin_update_symbol_list_loop ();
             });
 
         }
@@ -272,6 +270,11 @@ public class Mkt.Controller : GLib.Object {
             foreach (Symbol s in symbol_list) {
                 tickers += s.symbol + ",";
             }
+            var add_symbol_view_button_active = add_symbol_view_button.sensitive;
+            var remove_symbol_view_button_active = remove_symbol_view_button.sensitive;
+            add_symbol_view_button.sensitive = false;
+            remove_symbol_view_button.sensitive = false;
+            stop_update_symbol_list_loop ();
             symbol_view_spinner.start ();
             yahoo_finance_client.search_symbols.begin (tickers, (obj, res) => {
                 var result = yahoo_finance_client.search_symbols.end (res);
@@ -283,6 +286,9 @@ public class Mkt.Controller : GLib.Object {
                     persistence.persist_symbols (symbol_list);
                 }
                 symbol_view_spinner.stop ();
+                begin_update_symbol_list_loop ();
+                add_symbol_view_button.sensitive = add_symbol_view_button_active;
+                remove_symbol_view_button.sensitive = remove_symbol_view_button_active;
             });
         }
     }
