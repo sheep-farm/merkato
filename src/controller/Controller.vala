@@ -105,6 +105,7 @@ public class Mkt.Controller : GLib.Object {
             } else {
                 begin_update_symbol_list_loop ();
             }
+            add_symbol_view_button.sensitive = !remove_symbol_view_button.active;
         });
 
         symbol_view = new SymbolView ();
