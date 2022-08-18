@@ -72,8 +72,8 @@ public class Mkt.SymbolRow : Gtk.ListBoxRow {
         symbol_label.label = s.symbol;
         shortName_label.label = s.shortName;
         price.label = @"%'.$(s.priceHint)F".printf (s.regularMarketPrice);
+        currency.visible = !(s.symbol.length == 0 || s.symbol[0:1] == "^");
         currency.label = s.currency.up ();
-        currency.visible = s.currency != ""; // Hide currency for market indices
         change.label = @"%'+.$(s.priceHint)F (%'+.2F%)".printf (s.regularMarketChange, s.regularMarketChangePercent);
         var change_style = change.get_style_context ();
         change_style.remove_class ("profit");
