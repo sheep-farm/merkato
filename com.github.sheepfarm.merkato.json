@@ -4,13 +4,13 @@
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
   "command": "merkato",
-"finish-args": [
-  "--share=network",
-  "--share=ipc",
-  "--socket=fallback-x11",
-  "--socket=wayland",
-  "--device=dri"
-],
+  "finish-args": [
+    "--share=network",
+    "--share=ipc",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--device=dri"
+  ],
   "cleanup": [
     "/include",
     "/lib/pkgconfig",
@@ -30,27 +30,27 @@
         "pip3 install --verbose --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation *.whl"
       ],
       "sources": [
-        {"type": "file", "path": "beautifulsoup4-4.14.2-py3-none-any.whl"},
-        {"type": "file", "path": "certifi-2025.10.5-py3-none-any.whl"},
-        {"type": "file", "path": "cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"},
-        {"type": "file", "path": "charset_normalizer-3.4.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"},
-        {"type": "file", "path": "curl_cffi-0.13.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"},
-        {"type": "file", "path": "idna-3.10-py3-none-any.whl"},
-        {"type": "file", "path": "lxml-6.0.2-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl"},
-        {"type": "file", "path": "numpy-2.3.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"},
-        {"type": "file", "path": "pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl"},
-        {"type": "file", "path": "pycparser-2.23-py3-none-any.whl"},
-        {"type": "file", "path": "python_dateutil-2.9.0.post0-py2.py3-none-any.whl"},
-        {"type": "file", "path": "pytz-2025.2-py2.py3-none-any.whl"},
-        {"type": "file", "path": "requests-2.32.5-py3-none-any.whl"},
-        {"type": "file", "path": "requests_futures-1.0.2-py2.py3-none-any.whl"},
-        {"type": "file", "path": "six-1.17.0-py2.py3-none-any.whl"},
-        {"type": "file", "path": "soupsieve-2.8-py3-none-any.whl"},
-        {"type": "file", "path": "tqdm-4.67.1-py3-none-any.whl"},
-        {"type": "file", "path": "typing_extensions-4.15.0-py3-none-any.whl"},
-        {"type": "file", "path": "tzdata-2025.2-py2.py3-none-any.whl"},
-        {"type": "file", "path": "urllib3-2.5.0-py3-none-any.whl"},
-        {"type": "file", "path": "yahooquery-2.4.1-py3-none-any.whl"}
+        {"type": "file", "path": "python-wheels/beautifulsoup4-4.14.2-py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/certifi-2025.10.5-py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"},
+        {"type": "file", "path": "python-wheels/charset_normalizer-3.4.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"},
+        {"type": "file", "path": "python-wheels/curl_cffi-0.13.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"},
+        {"type": "file", "path": "python-wheels/idna-3.10-py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/lxml-6.0.2-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl"},
+        {"type": "file", "path": "python-wheels/numpy-2.3.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"},
+        {"type": "file", "path": "python-wheels/pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl"},
+        {"type": "file", "path": "python-wheels/pycparser-2.23-py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/python_dateutil-2.9.0.post0-py2.py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/pytz-2025.2-py2.py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/requests-2.32.5-py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/requests_futures-1.0.2-py2.py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/six-1.17.0-py2.py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/soupsieve-2.8-py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/tqdm-4.67.1-py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/typing_extensions-4.15.0-py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/tzdata-2025.2-py2.py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/urllib3-2.5.0-py3-none-any.whl"},
+        {"type": "file", "path": "python-wheels/yahooquery-2.4.1-py3-none-any.whl"}
       ]
     },
     {
@@ -74,7 +74,7 @@
         {
           "type": "git",
           "url": "https://github.com/sheep-farm/merkato.git",
-          "tag": "v0.2.0"
+          "commit": ""
         }
       ]
     }
