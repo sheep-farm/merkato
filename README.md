@@ -2,6 +2,10 @@
 
 A financial markets tracker for stocks, currencies, and cryptocurrencies.
 
+## Screenshots
+
+![](preview.png?raw=true)
+
 ## Features
 
 - Track stocks, currencies, and cryptocurrencies
