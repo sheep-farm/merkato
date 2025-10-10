@@ -20,6 +20,10 @@
 import sys
 import gi
 
+import locale
+import gettext
+import os
+
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
@@ -54,7 +58,7 @@ class MerkatoApplication(Adw.Application):
         about = Adw.AboutDialog(application_name='merkato',
                                 application_icon='com.github.sheepfarm.merkato',
                                 developer_name='Flávio de Vasconcellos Corrêa',
-                                version='0.1.0',
+                                version='0.2.0',
                                 developers=['Flávio de Vasconcellos Corrêa'],
                                 copyright='© 2025 Flávio de Vasconcellos Corrêa')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
@@ -80,8 +84,26 @@ class MerkatoApplication(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
-
 def main(version):
     """The application's entry point."""
+    # Config locale e gettext
+    try:
+        locale.setlocale(locale.LC_ALL, '')
+    except locale.Error:
+        pass
+
+    # Diretório de traduções
+    localedir = os.path.join(os.path.dirname(__file__), 'locale')
+    if not os.path.exists(localedir):
+        localedir = '/usr/local/share/locale'
+
+    gettext.bindtextdomain('merkato', localedir)
+    gettext.textdomain('merkato')
+    locale.bindtextdomain('merkato', localedir)
+    locale.textdomain('merkato')
+
+    gettext.bindtextdomain('merkato', '/usr/local/share/locale')
+    gettext.textdomain('merkato')
+
     app = MerkatoApplication()
     return app.run(sys.argv)
