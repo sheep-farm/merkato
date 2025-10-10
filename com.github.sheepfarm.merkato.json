@@ -46,7 +46,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "."
+                    "url" : "https://github.com/sheep-farm/merkato.git",
+                    "commit" : ""
                 }
             ],
             "config-opts" : [
