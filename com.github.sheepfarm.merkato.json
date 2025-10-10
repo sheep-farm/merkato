@@ -27,7 +27,7 @@
   "name": "python3-dependencies",
   "buildsystem": "simple",
   "build-commands": [
-    "pip3 install --verbose --no-index --find-links=. --prefix=${FLATPAK_DEST} *.whl"
+    "pip3 install --verbose --no-index --find-links=python-wheels --prefix=${FLATPAK_DEST} *.whl"
   ],
   "sources": [
     {"type": "file", "path": "python-wheels/beautifulsoup4-4.14.2-py3-none-any.whl"},
