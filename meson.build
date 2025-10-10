@@ -8,6 +8,7 @@ project('Merkato',
 i18n = import('i18n')
 gnome = import('gnome')
 
+subdir('wls')
 subdir('data')
 subdir('src')
 subdir('po')
