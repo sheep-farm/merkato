@@ -48,7 +48,7 @@ class MerkatoApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='com.github.sheepfarm.merkato',
+        super().__init__(application_id='com.ekonomikas.merkato',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
                          resource_base_path='/com/github/sheepfarm/merkato')
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
