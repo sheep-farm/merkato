@@ -39,3 +39,19 @@ msgstr "Inga aktier ännu"
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
 msgstr "Sök och lägg till aktier i din bevakningslista"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "Källa: Yahoo Finance"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "Senast uppdaterad: "
+
+#: window.py
+msgid "Last updated: {}"
+msgstr "Senast uppdaterad: {}"
+
+#: window.py
+msgid "Last updated: in cache"
+msgstr "Senast uppdaterad: i cache"

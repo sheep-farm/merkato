@@ -50,14 +50,20 @@ template $MerkatoWindow: Adw.ApplicationWindow {
           styles ["dim-label"]
 
           Label status_label {
-            label: "Source: Yahoo Finance";
+            label: _("Source: Yahoo Finance");
             halign: center;
             hexpand: true;
             styles ["caption"]
           }
 
+          Label {
+            label: _("Last updated: ");
+            halign: end;
+            styles ["caption"]
+          }
+
           Label last_updated_label {
-            label: "Last updated: --";
+            label: "--";
             halign: end;
             styles ["caption"]
           }

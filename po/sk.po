@@ -39,3 +39,19 @@ msgstr "Zatiaľ žiadne akcie"
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
 msgstr "Vyhľadajte a pridajte akcie do sledovaného zoznamu"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "Zdroj: Yahoo Finance"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "Posledná aktualizácia: "
+
+#: window.py
+msgid "Last updated: {}"
+msgstr "Posledná aktualizácia: {}"
+
+#: window.py
+msgid "Last updated: in cache"
+msgstr "Posledná aktualizácia: v cache"

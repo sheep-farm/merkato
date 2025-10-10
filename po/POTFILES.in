@@ -3,8 +3,10 @@
 data/com.github.sheepfarm.merkato.desktop.in
 data/com.github.sheepfarm.merkato.gschema.xml
 data/com.github.sheepfarm.merkato.metainfo.xml.in
-src/list_stock.ui
+src/blp/list_stock.blp
+src/blp/search_stock.blp
+src/blp/window.blp
+src/list_stock.py
 src/main.py
-src/search_stock.ui
+src/search_stock.py
 src/window.py
-src/window.ui

@@ -39,9 +39,7 @@ class MerkatoListStock(Gtk.Box):
         """Configura estilos CSS customizados"""
         css_provider = Gtk.CssProvider()
         css_provider.load_from_data(b"""
-            /* Mercado fechado - listras diagonais sutis */
-
-            .market-closed {
+              .market-closed {
                 background: repeating-linear-gradient(
                     45deg,
                     rgba(255, 193, 7, 0.04),

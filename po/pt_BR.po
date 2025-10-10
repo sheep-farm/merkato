@@ -21,8 +21,8 @@ msgid "_Refresh All"
 msgstr "_Atualizar Tudo"
 
 #: window.blp
-msgid "_About Merkato"
-msgstr "_Sobre o Merkato"
+msgid "_About Quartz"
+msgstr "_Sobre o Quartz"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
@@ -39,3 +39,19 @@ msgstr "Nenhuma Ação Ainda"
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
 msgstr "Busque e adicione ações à sua lista de observação"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "Fonte: Yahoo Finance"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "Última atualização: "
+
+#: window.py
+msgid "Last updated: {}"
+msgstr "Última atualização: {}"
+
+#: window.py
+msgid "Last updated: in cache"
+msgstr "Última atualização: em cache"

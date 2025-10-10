@@ -46,11 +46,11 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "."
+                    "url" : "file:///home/flavio/Projects"
                 }
             ],
             "config-opts" : [
-                "--libdir=lib"
+                "--libdir=lib",
             ]
         }
     ],

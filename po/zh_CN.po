@@ -21,8 +21,8 @@ msgid "_Refresh All"
 msgstr "全部刷新(_R)"
 
 #: window.blp
-msgid "_About Merkato"
-msgstr "关于 Merkato(_A)"
+msgid "_About Quartz"
+msgstr "关于 Quartz(_A)"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
@@ -39,3 +39,19 @@ msgstr "暂无股票"
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
 msgstr "搜索并添加股票到您的关注列表"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "来源：Yahoo Finance"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "最后更新："
+
+#: window.py
+msgid "Last updated: {}"
+msgstr "最后更新：{}"
+
+#: window.py
+msgid "Last updated: in cache"
+msgstr "最后更新：缓存中"

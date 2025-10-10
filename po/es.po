@@ -1,0 +1,57 @@
+# Spanish translation for Merkato
+# Copyright (C) 2025
+# This file is distributed under the same license as the Merkato package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Merkato\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-10 12:00+0000\n"
+"PO-Revision-Date: 2025-10-10 12:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: window.blp
+msgid "_Refresh All"
+msgstr "_Actualizar Todo"
+
+#: window.blp
+msgid "_About Quartz"
+msgstr "_Acerca de Quartz"
+
+#: search_stock.blp
+msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
+msgstr "Ingrese el símbolo bursátil (ej: AAPL, GOOGL)"
+
+#: search_stock.blp
+msgid "Search"
+msgstr "Buscar"
+
+#: list_stock.blp
+msgid "No Stocks Yet"
+msgstr "Aún No Hay Acciones"
+
+#: list_stock.blp
+msgid "Search and add stocks to your watchlist"
+msgstr "Busque y agregue acciones a su lista de seguimiento"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "Fuente: Yahoo Finance"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "Última actualización: "
+
+#: window.py
+msgid "Last updated: {}"
+msgstr "Última actualización: {}"
+
+#: window.py
+msgid "Last updated: in cache"
+msgstr "Última actualización: en caché"

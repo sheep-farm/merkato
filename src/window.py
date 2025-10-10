@@ -139,8 +139,6 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
 
     def _refresh_results(self, results, errors):
-        """Atualiza a interface com os resultados (executa na thread principal)"""
-        # self.list_stock.clear_all()
         for symbol, stock in results.items():
             self.list_stock.update(stock.symbol, stock.price, stock.change)
 
@@ -148,7 +146,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.search_stock_entry.freeze(False)
 
         self.last_updated_label.set_label(
-            f"Last updated: {datetime.now().strftime('%H:%M:%S')}"
+            _(f"Last updated: {datetime.now().strftime('%H:%M:%S')}")
         )
 
         return False  # Remove o idle callback

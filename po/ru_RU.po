@@ -39,3 +39,19 @@ msgstr "Акций Пока Нет"
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
 msgstr "Найдите и добавьте акции в список наблюдения"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "Источник: Yahoo Finance"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "Последнее обновление: "
+
+#: window.py
+msgid "Last updated: {}"
+msgstr "Последнее обновление: {}"
+
+#: window.py
+msgid "Last updated: in cache"
+msgstr "Последнее обновление: из кеша"

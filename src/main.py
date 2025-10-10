@@ -18,11 +18,24 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
-import gi
-
 import locale
 import gettext
 import os
+import builtins
+
+localedir = '/app/share/locale'
+if not os.path.exists(localedir):
+    localedir = '/usr/local/share/locale'
+
+gettext.bindtextdomain('merkato', localedir)
+gettext.textdomain('merkato')
+locale.bindtextdomain('merkato', localedir)
+locale.textdomain('merkato')
+
+# Define _ globalmente
+builtins._ = gettext.gettext
+
+import gi
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
@@ -42,6 +55,7 @@ class MerkatoApplication(Adw.Application):
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
 
+
     def do_activate(self):
         """Called when the application is activated.
 
@@ -52,6 +66,7 @@ class MerkatoApplication(Adw.Application):
         if not win:
             win = MerkatoWindow(application=self)
         win.present()
+
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""
@@ -65,9 +80,11 @@ class MerkatoApplication(Adw.Application):
         about.set_translator_credits(_('translator-credits'))
         about.present(self.props.active_window)
 
+
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
         print('app.preferences action activated')
+
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
@@ -84,26 +101,6 @@ class MerkatoApplication(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
+
 def main(version):
-    """The application's entry point."""
-    # Config locale e gettext
-    try:
-        locale.setlocale(locale.LC_ALL, '')
-    except locale.Error:
-        pass
-
-    # Diretório de traduções
-    localedir = os.path.join(os.path.dirname(__file__), 'locale')
-    if not os.path.exists(localedir):
-        localedir = '/usr/local/share/locale'
-
-    gettext.bindtextdomain('merkato', localedir)
-    gettext.textdomain('merkato')
-    locale.bindtextdomain('merkato', localedir)
-    locale.textdomain('merkato')
-
-    gettext.bindtextdomain('merkato', '/usr/local/share/locale')
-    gettext.textdomain('merkato')
-
-    app = MerkatoApplication()
-    return app.run(sys.argv)
+    return MerkatoApplication().run(sys.argv)
