@@ -4,6 +4,10 @@
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
   "command": "com.ekonomikas.merkato",
+  "build-options": {
+    "strip": true,
+    "no-debuginfo": true
+  },
   "finish-args": [
     "--share=network",
     "--share=ipc",
