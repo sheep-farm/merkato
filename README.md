@@ -18,7 +18,7 @@ A financial markets tracker for stocks, currencies, and cryptocurrencies.
 
 - Python 3.10+
 - GTK 4
-- See `requirements.txt` for Python dependencies
+- See `python-deps.json` for Python dependencies
 
 ## License
 
