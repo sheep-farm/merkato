@@ -1,0 +1,92 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $MerkatoWindow: Adw.ApplicationWindow {
+  title: "Merkato";
+  default-width: 420;
+  default-height: 700;
+  width-request: 420;
+
+  content: Adw.ToolbarView
+  {
+    [top]
+    Adw.HeaderBar {
+      title-widget: Adw.WindowTitle {
+        title: "Merkato";
+      };
+
+      [end]
+      MenuButton {
+        icon-name: "open-menu-symbolic";
+        menu-model: primary_menu;
+        primary: true;
+      }
+      [end]
+      Spinner spinner {
+        spinning: false;
+      }
+    }
+    content: Adw.ToastOverlay toast_overlay {
+      Box left_side {
+        orientation: vertical;
+        spacing: 6;
+        width-request: 360;
+        hexpand: false;
+        $MerkatoSearchStock search_stock_entry {}
+        Separator {}
+        $MerkatoListStock list_stock {}
+        // BARRA DE STATUS
+        Separator {
+          orientation: horizontal;
+        }
+
+        Box statusbar {
+          orientation: horizontal;
+          spacing: 6;
+          margin-start: 12;
+          margin-end: 12;
+          margin-top: 6;
+          margin-bottom: 6;
+          styles ["dim-label"]
+
+          Label status_label {
+            label: "Source: Yahoo Finance";
+            halign: center;
+            hexpand: true;
+            styles ["caption"]
+          }
+
+          Label last_updated_label {
+            label: "Last updated: --";
+            halign: end;
+            styles ["caption"]
+          }
+        }
+      }
+    };
+  };
+
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("_Refresh All");
+      action: "win.refresh";
+    }
+  }
+  section {
+    // item {
+    //   label: _("_Preferences");
+    //   action: "app.preferences";
+    // }
+    // item {
+    //   label: _("_Keyboard Shortcuts");
+    //   action: "win.show-help-overlay";
+    // }
+    item {
+      label: _("_About Quartz");
+      action: "app.about";
+    }
+  }
+}

@@ -1,0 +1,30 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $MerkatoListStock: Box {
+  orientation: vertical;
+  vexpand: true;
+
+  ScrolledWindow _list_scroll {
+    vexpand: true;
+    // hexpand: true;
+    hscrollbar-policy: never;
+    visible: true;
+
+    ListBox _list_stock {
+      styles [
+        "navigation-sidebar",
+      ]
+
+      selection-mode: single;
+    }
+  }
+
+  Adw.StatusPage _empty_watchlist_state {
+    icon-name: "view-list-symbolic";
+    title: _("No Stocks Yet");
+    description: _("Search and add stocks to your watchlist");
+    vexpand: true;
+    visible: bind _list_scroll.visible inverted;
+  }
+}

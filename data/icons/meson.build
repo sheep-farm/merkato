@@ -1,16 +1,13 @@
-install_data (
-  app_id + '.svg',
-  install_dir: join_paths (
-  	app_install_prefix,
-  	get_option('datadir'),
-  	'icons',
-  	'hicolor',
-  	'scalable',
-  	'apps'),
+application_id = 'com.github.sheepfarm.merkato'
+
+scalable_dir = 'hicolor' / 'scalable' / 'apps'
+install_data(
+  scalable_dir / ('@0@.svg').format(application_id),
+  install_dir: get_option('datadir') / 'icons' / scalable_dir
 )
 
-icon_gresource = gnome.compile_resources (
-    'gresource',
-    'icon.gresource.xml',
-    source_dir: 'data'
+symbolic_dir = 'hicolor' / 'symbolic' / 'apps'
+install_data(
+  symbolic_dir / ('@0@-symbolic.svg').format(application_id),
+  install_dir: get_option('datadir') / 'icons' / symbolic_dir
 )

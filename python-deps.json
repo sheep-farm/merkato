@@ -1,0 +1,15 @@
+{
+  "name": "python-dependencies",
+  "buildsystem": "simple",
+  "build-options": {
+    "build-args": [
+      "--share=network"
+    ]
+  },
+  "build-commands": [
+    "pip3 install --prefix=/app --no-cache-dir pandas",
+    "pip3 install --prefix=/app --no-cache-dir requests",
+    "pip3 install --prefix=/app --no-cache-dir requests-futures",
+    "pip3 install --prefix=/app --no-cache-dir yahooquery"
+  ]
+}

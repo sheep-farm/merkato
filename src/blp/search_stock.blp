@@ -1,0 +1,20 @@
+using Gtk 4.0;
+
+template $MerkatoSearchStock: Gtk.Box {
+    orientation: horizontal;
+    spacing: 6;
+
+    Gtk.SearchEntry _entry {
+      placeholder-text: _("Enter ticker symbol (e.g., AAPL, GOOGL)");
+      hexpand: true;
+      activates-default: true;
+    }
+
+    Gtk.Button _button {
+      label: _("Search");
+
+      styles [
+        "suggested-action",
+      ]
+    }
+  }

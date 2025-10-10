@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gresources>
-    <gresource prefix="/icons">
-        <file alias="adown.svg" compressed="true" preprocess="xml-stripblanks">adown.svg</file>
-        <file alias="aup.svg"   compressed="true" preprocess="xml-stripblanks">aup.svg</file>
-        <file alias="abar.svg"  compressed="true" preprocess="xml-stripblanks">abar.svg</file>
-    </gresource>
-</gresources>

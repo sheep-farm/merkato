@@ -1,32 +1,19 @@
-project ('com.ekonomikas.merkato', ['c', 'vala'],
-          version: '0.1.4.4b',
-    meson_version: '>= 0.50.0',
-  default_options: [ 'warning_level=2',
-                   ],
+project('Merkato',
+          version: '0.2.0',
+    meson_version: '>= 1.0.0',
+  default_options: [ 'warning_level=2', 'werror=false', ],
 )
 
-app_binary = 'com.ekonomikas.merkato'
 
-app_id = meson.project_name () # com.ekonomikas.merkato
-app_install_prefix = get_option ('prefix')
+i18n = import('i18n')
+gnome = import('gnome')
 
-add_project_arguments ('-DGETTEXT_PACKAGE="@0@"'.format (app_id), language: 'c')
+subdir('data')
+subdir('src')
+subdir('po')
 
-conf_data = configuration_data()
-conf_data.set_quoted('APP_ID', app_id)
-conf_data.set_quoted('APP_VERSION', meson.project_version())
-conf_data.set_quoted('APP_INSTALL_PREFIX', app_install_prefix)
-app_constants = configure_file (
-    input         : 'constants.vala.in',
-    output        : 'constants.vala',
-    configuration : conf_data
+gnome.post_install(
+     glib_compile_schemas: true,
+    gtk_update_icon_cache: true,
+  update_desktop_database: true,
 )
-
-i18n  = import ('i18n')
-gnome = import ('gnome')
-
-subdir ('data')
-subdir ('src')
-subdir ('po')
-
-meson.add_install_script ('build-aux/meson/postinstall.py')

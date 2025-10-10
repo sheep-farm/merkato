@@ -1,54 +1,43 @@
-app_sources = [
-  'controller/Controller.vala',
-  'models/Symbol.vala',
-  'models/Ticker.vala',
-  'persistence/SymbolPersistence.vala',
-  'preferences/Preferences.vala',
-  'preferences/PreferencesWindow.vala',
-  'rest/RestClient.vala',
-  'rest/YahooFinanceClient.vala',
-  'views/symbol/NoSymbolView.vala',
-  'views/symbol/SymbolRow.vala',
-  'views/symbol/SymbolView.vala',
-  'views/symbol/SymbolViewBox.vala',
-  'views/ticker/NoTickerView.vala',
-  'views/ticker/TickerRow.vala',
-  'views/ticker/TickerView.vala',
-  'views/ticker/TickerViewBox.vala',
-  'views/ErrorView.vala',
-  'AboutDialog.vala',
-  'Application.vala',
-  'MainWindow.vala',
-   app_constants,
-   app_ui_resources,
-]
-
-app_deps = [
-  dependency ('gio-2.0'    , version: '>= 2.50' ),
-  dependency ('gtk+-3.0'   , version: '>= 3.22' ),
-  dependency ('libhandy-1' , version: '>= 1.0.0'),
-  dependency ('libsoup-2.4', version: '>= 2.66' ),
-  dependency ('json-glib-1.0'),
-  dependency ('gee-0.8')
-]
-
-# Include the GNOME module
+pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
+moduledir = pkgdatadir / 'merkato'
 gnome = import('gnome')
 
+subdir('blp')
 
+gnome.compile_resources('merkato',
+  'merkato.gresource.xml',
+  gresource_bundle: true,
+  dependencies: blueprints,
+  install: true,
+  install_dir: pkgdatadir,
+)
 
-app_c_args = [
-  '-DHANDY_USE_UNSTABLE_API',
+python = import('python')
+
+conf = configuration_data()
+conf.set('PYTHON', python.find_installation('python3').full_path())
+conf.set('VERSION', meson.project_version())
+conf.set('localedir', get_option('prefix') / get_option('localedir'))
+conf.set('pkgdatadir', pkgdatadir)
+
+configure_file(
+  input: 'merkato.in',
+  output: 'merkato',
+  configuration: conf,
+  install: true,
+  install_dir: get_option('bindir'),
+  install_mode: 'r-xr-xr-x'
+)
+
+merkato_sources = [
+  '__init__.py',
+  'main.py',
+  'window.py',
+  'stock.py',
+  'search_stock.py',
+  'list_stock.py',
+  'yahoo_request.py',
+  'watchlist_manager.py',
 ]
 
-
-
-executable (
-  app_binary,
-  icon_gresource,
-  app_sources,
-  vala_args: '--target-glib=2.50',
-  dependencies: app_deps,
-  c_args: app_c_args,
-  install: true,
-)
+install_data(merkato_sources, install_dir: moduledir)

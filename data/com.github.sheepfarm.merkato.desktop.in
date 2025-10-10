@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=merkato
+Exec=merkato
+Icon=com.github.sheepfarm.merkato
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

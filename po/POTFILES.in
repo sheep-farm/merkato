@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/com.github.sheepfarm.merkato.desktop.in
+data/com.github.sheepfarm.merkato.metainfo.xml.in
+data/com.github.sheepfarm.merkato.gschema.xml
+src/main.py
+src/window.py
+src/window.ui
