@@ -179,7 +179,6 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
 
     def _do_search(self, symbols):
-        """Executa a busca em background"""
         try:
             yr = YahooRequest()
             (results, errors) = yr.fetch(symbols)
@@ -195,7 +194,6 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
 
     def _update_results(self, results, errors):
-        """Atualiza a interface com os resultados (executa na thread principal)"""
         # self.list_stock.clear_all()
         for symbol, stock in results.items():
             self.list_stock.append(stock)
@@ -206,7 +204,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.search_stock_entry.clear_entry()
 
         self.last_updated_label.set_label(
-            f"Last updated: {datetime.now().strftime('%H:%M:%S')}"
+            f"{datetime.now().strftime('%H:%M:%S')}"
         )
 
         return False  # Remove o idle callback
@@ -232,7 +230,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
                 stock_item = Stock.from_dict(stock_data)
                 self.list_stock.append(stock_item)
                 self.symbols_cache.append(stock_item.symbol)
-            self.last_updated_label.set_label('Last updated: in cache')
+            self.last_updated_label.set_label('cached')
 
 
     def save_watchlist(self) -> bool:

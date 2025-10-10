@@ -1,19 +1,29 @@
-import json
+# watchlist_manager.py
+#
+# Copyright 2025 Flávio de Vasconcellos Corrêa
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# SPDX-License-Identifier: GPL-3.0-or-laterimport json
 import os
 from gi.repository import GLib
 from datetime import datetime
 
 
 class WatchlistManager:
-    """Gerencia a persistência da watchlist de tickers"""
 
     def __init__(self, app_name='merkato'):
-        """
-        Inicializa o gerenciador de watchlist
-
-        Args:
-            app_name: Nome da aplicação (usado para criar diretório de config)
-        """
         config_dir = os.path.join(GLib.get_user_config_dir(), app_name)
         os.makedirs(config_dir, exist_ok=True)
 
@@ -22,12 +32,6 @@ class WatchlistManager:
 
 
     def load(self):
-        """
-        Carrega a watchlist salva do disco
-
-        Returns:
-            list: Lista de dicionários com dados dos tickers ou lista vazia se não houver arquivo
-        """
         if not os.path.exists(self.watchlist_file):
             print("No saved watchlist found")
             return []
@@ -51,15 +55,6 @@ class WatchlistManager:
 
 
     def save(self, stocks):
-        """
-        Salva a watchlist atual no disco
-
-        Args:
-            stocks: Lista de objetos StockItem ou dicionários com dados dos tickers
-
-        Returns:
-            bool: True se salvou com sucesso, False caso contrário
-        """
         if not isinstance(stocks, list):
             print("ERROR: stocks must be a list")
             return False
@@ -95,40 +90,16 @@ class WatchlistManager:
 
 
     def clear(self):
-        """
-        Remove todos os tickers da watchlist
-
-        Returns:
-            bool: True se limpou com sucesso
-        """
         return self.save([])
 
 
     def exists(self):
-        """
-        Verifica se existe um arquivo de watchlist salvo
-
-        Returns:
-            bool: True se o arquivo existe
-        """
         return os.path.exists(self.watchlist_file)
 
 
     def get_count(self):
-        """
-        Retorna o número de tickers salvos
-
-        Returns:
-            int: Quantidade de tickers na watchlist
-        """
         return len(self.load())
 
 
     def get_file_path(self):
-        """
-        Retorna o caminho completo do arquivo de watchlist
-
-        Returns:
-            str: Caminho absoluto do arquivo
-        """
         return self.watchlist_file
