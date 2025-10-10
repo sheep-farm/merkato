@@ -55,7 +55,7 @@ class MerkatoApplication(Adw.Application):
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(application_name='merkato',
+        about = Adw.AboutDialog(application_name='Merkato',
                                 application_icon='com.github.sheepfarm.merkato',
                                 developer_name='Flávio de Vasconcellos Corrêa',
                                 version='0.2.0',
