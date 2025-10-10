@@ -1,4 +1,4 @@
-application_id = 'com.github.sheepfarm.merkato'
+application_id = 'com.ekonomikas.merkato'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(
