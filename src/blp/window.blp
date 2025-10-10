@@ -5,10 +5,10 @@ template $MerkatoWindow: Adw.ApplicationWindow {
   title: "Merkato";
   default-width: 420;
   default-height: 700;
-  width-request: 420;
+  width-request: 360;
+  height-request: 500;
 
-  content: Adw.ToolbarView
-  {
+  content: Adw.ToolbarView {
     [top]
     Adw.HeaderBar {
       title-widget: Adw.WindowTitle {
@@ -20,58 +20,109 @@ template $MerkatoWindow: Adw.ApplicationWindow {
         icon-name: "open-menu-symbolic";
         menu-model: primary_menu;
         primary: true;
+        tooltip-text: _("Main Menu");
       }
+
+      [end]
+      ToggleButton trash_view_mode {
+        icon-name: "user-trash-symbolic";
+        tooltip-text: _("Remove Stocks");
+        styles ["flat"]
+      }
+
       [end]
       Spinner spinner {
         spinning: false;
+        tooltip-text: _("Updating...");
       }
     }
+
     content: Adw.ToastOverlay toast_overlay {
-      Box left_side {
+      Box {
         orientation: vertical;
-        spacing: 6;
-        width-request: 360;
-        hexpand: false;
-        $MerkatoSearchStock search_stock_entry {}
-        Separator {}
-        $MerkatoListStock list_stock {}
-        // BARRA DE STATUS
-        Separator {
-          orientation: horizontal;
+        spacing: 0;
+
+        // Search area
+        Box {
+          orientation: vertical;
+          spacing: 0;
+
+          $MerkatoSearchStock search_stock_entry {
+            margin-top: 6;
+            margin-start: 12;
+            margin-end: 12;
+            margin-bottom: 6;
+          }
+
+          Separator {
+            margin-top: 6;
+          }
         }
 
-        Box statusbar {
-          orientation: horizontal;
-          spacing: 6;
-          margin-start: 12;
-          margin-end: 12;
-          margin-top: 6;
-          margin-bottom: 6;
-          styles ["dim-label"]
+        // Stock list
+        $MerkatoListStock list_stock {
+          vexpand: true;
+        }
 
-          Label status_label {
-            label: _("Source: Yahoo Finance");
-            halign: center;
-            hexpand: true;
-            styles ["caption"]
+        // Status bar
+        Box {
+          orientation: vertical;
+          spacing: 0;
+
+          Separator {
+            orientation: horizontal;
           }
 
-          Label {
-            label: _("Last updated: ");
-            halign: end;
-            styles ["caption"]
-          }
+          Box statusbar {
+            orientation: horizontal;
+            spacing: 12;
+            margin-start: 12;
+            margin-end: 12;
+            margin-top: 8;
+            margin-bottom: 8;
+            styles ["dim-label"]
 
-          Label last_updated_label {
-            label: "--";
-            halign: end;
-            styles ["caption"]
+            // Source label
+            Box {
+              orientation: horizontal;
+              spacing: 4;
+              halign: start;
+              hexpand: true;
+
+              Image {
+                icon-name: "emblem-system-symbolic";
+                pixel-size: 12;
+                opacity: 0.5;
+              }
+
+              Label status_label {
+                label: _("Yahoo Finance");
+                styles ["caption"]
+              }
+            }
+
+            // Last updated
+            Box {
+              orientation: horizontal;
+              spacing: 4;
+              halign: end;
+
+              Image {
+                icon-name: "media-playlist-repeat-symbolic";
+                pixel-size: 12;
+                opacity: 0.5;
+              }
+
+              Label last_updated_label {
+                label: "--";
+                styles ["caption", "numeric"]
+              }
+            }
           }
         }
       }
     };
   };
-
 }
 
 menu primary_menu {
@@ -81,15 +132,13 @@ menu primary_menu {
       action: "win.refresh";
     }
   }
+
   section {
-    // item {
-    //   label: _("_Preferences");
-    //   action: "app.preferences";
-    // }
-    // item {
-    //   label: _("_Keyboard Shortcuts");
-    //   action: "win.show-help-overlay";
-    // }
+    item {
+      label: _("_Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
     item {
       label: _("_About Merkato");
       action: "app.about";

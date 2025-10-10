@@ -37,12 +37,14 @@ class MerkatoListStock(Gtk.Box):
     _list_scroll = Gtk.Template.Child()
 
     __gsignals__ = {
-        'stock-selected': (GObject.SignalFlags.RUN_FIRST, None, (Stock,))
+        'stock-selected': (GObject.SignalFlags.RUN_FIRST, None, (Stock,)),
+        'stock-remove-requested': (GObject.SignalFlags.RUN_FIRST, None, (Stock,)),
+        'empty-state-changed': (GObject.SignalFlags.RUN_FIRST, None, (bool,))
     }
-
 
     def __init__ (self, **kwargs):
         super().__init__(**kwargs)
+        self.remove_is_enabled = False
         self.setup_css()
 
         self.stock_list_store = Gio.ListStore.new(Stock)
@@ -50,12 +52,12 @@ class MerkatoListStock(Gtk.Box):
 
         self._list_stock.bind_model(self.stock_list_store, self._create_stock_row)
 
-        # Conectar sinais para atualizar visibilidade
+        # Connect signals to update visibility
         self.stock_list_store.connect("items-changed", self._on_items_changed)
         self.updtate_state()
 
     def setup_css(self):
-        """Configura estilos CSS customizados"""
+        """Configure custom CSS styles"""
         css_provider = Gtk.CssProvider()
         css_provider.load_from_data(b"""
               .market-closed {
@@ -79,10 +81,24 @@ class MerkatoListStock(Gtk.Box):
                 );
             }
             */
-            /* Opcional: adiciona borda sutil */
+            /* Optional: add subtle border */
 
             .market-closed {
                 //border-left: 3px solid rgba(255, 193, 7, 0.3);
+            }
+
+            /* Remove button - hidden and collapsed by default */
+            .remove-button {
+                opacity: 0;
+                margin-left: 0;
+                margin-right: -40px;
+                transition: all 200ms ease;
+            }
+
+            /* Show remove button when enabled */
+            .remove-button.enabled {
+                opacity: 1;
+                margin-right: 0;
             }
 
         """)
@@ -99,20 +115,20 @@ class MerkatoListStock(Gtk.Box):
 
     def _create_stock_row (self, stock_item: Stock) -> Gtk.ListBoxRow:
         if stock_item:
-            # Criar ActionRow
+            # Create ActionRow
             row = Adw.ActionRow()
             row.set_activatable(True)
-            row.connect("activated", self._on_row_activated, f"https://finance.yahoo.com/quote/{stock_item.symbol}/")
 
             row.set_title(html.escape(stock_item.long_name))
             row.set_subtitle(stock_item.symbol)
-            # Box com preço e variação
+
+            # Box with price and change
             suffix_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
             suffix_box.set_halign(Gtk.Align.END)
             suffix_box.set_valign(Gtk.Align.CENTER)
             suffix_box.set_spacing(2)
 
-            # Label de preço
+            # Price label
             price_label = Gtk.Label()
             price_label.set_halign(Gtk.Align.END)
             price_label.add_css_class("numeric")
@@ -123,7 +139,7 @@ class MerkatoListStock(Gtk.Box):
 
             price_label.set_label(f"{currency_symbol} {stock_item.price:.2f}")
 
-            # Label de variação
+            # Change label
             change_label = Gtk.Label()
             change_label.set_halign(Gtk.Align.END)
             change_label.add_css_class("caption")
@@ -140,7 +156,26 @@ class MerkatoListStock(Gtk.Box):
 
             row.add_suffix(suffix_box)
 
-            # Armazenar referência ao Stock no row
+            # Remove button
+            remove_button = Gtk.Button()
+            remove_button.set_icon_name("user-trash-symbolic")
+            remove_button.set_valign(Gtk.Align.CENTER)
+            remove_button.add_css_class("flat")
+            remove_button.add_css_class("circular")
+            remove_button.add_css_class("remove-button")
+            remove_button.set_tooltip_text("Remove from watchlist")
+            remove_button.connect("clicked", self._on_remove_button_clicked, stock_item)
+
+            # Apply enabled state
+            if self.remove_is_enabled:
+                remove_button.add_css_class("enabled")
+
+            # Store button reference for later updates
+            row.remove_button = remove_button
+
+            row.add_suffix(remove_button)
+
+            # Store Stock reference in row
             row.stock_item = stock_item
 
             if stock_item.market_state == 'CLOSED':
@@ -162,9 +197,15 @@ class MerkatoListStock(Gtk.Box):
             return None
 
 
+    def _on_remove_button_clicked(self, button, stock_item):
+        """Handle remove button click"""
+        print(f"Remove button clicked for: {stock_item.symbol} - {stock_item.long_name}")
+        self.emit('stock-remove-requested', stock_item)
+
+
     def _on_row_activated(self, row, url):
-        launcher = Gtk.UriLauncher.new(url)
-        launcher.launch(None, None, None, None)
+        # Don't launch URL, just keep row activated to show remove button
+        pass
 
 
     def _on_row_selected (self, listbox, row):
@@ -217,10 +258,32 @@ class MerkatoListStock(Gtk.Box):
 
 
     def updtate_state (self):
-        has_items = self._list_stock.get_row_at_index(0) is not None
+        is_empty = self.stock_list_store.get_n_items() == 0
+        has_items = not is_empty
+
         self._list_scroll.set_visible(has_items)
+        self._empty_watchlist_state.set_visible(is_empty)
+
+        # Emit signal with empty state
+        self.emit('empty-state-changed', is_empty)
 
 
     def get_selected_stock(self) -> Stock:
         return self._list_stock.get_selected_row().stock_item
 
+
+    def set_remove_enabled(self, enabled: bool):
+        """Enable or disable remove buttons for all rows"""
+        self.remove_is_enabled = enabled
+
+        # Update all existing rows
+        for i in range(self.stock_list_store.get_n_items()):
+            row = self._list_stock.get_row_at_index(i)
+            if row and hasattr(row, 'remove_button'):
+                if enabled:
+                    row.remove_button.add_css_class("enabled")
+                else:
+                    row.remove_button.remove_css_class("enabled")
+
+    def is_empty(self) -> bool:
+        return self.stock_list_store.get_n_items() == 0
