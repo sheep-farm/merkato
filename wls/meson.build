@@ -31,6 +31,6 @@ wheels_dir = meson.current_source_dir()
 foreach wheel : wheels
   wheel_path = wheels_dir / wheel
 	meson.add_install_script('sh', '-c',
-	  'pip3 install --no-deps --prefix=$DESTDIR/app python-wheels/*.whl && find $DESTDIR/app -type d -name tests -exec rm -rf {} + || true'
+	  'pip3 install --no-deps --prefix=$DESTDIR/app $wheel_path && find $DESTDIR/app -type d -name tests -exec rm -rf {} + || true'
 	)
 endforeach
