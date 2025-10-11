@@ -15,18 +15,23 @@
     "--socket=wayland",
     "--device=dri"
   ],
-  "cleanup": [
-    "/include",
-    "/lib/pkgconfig",
-    "/man",
-    "/share/doc",
-    "/share/gtk-doc",
-    "/share/man",
-    "/share/pkgconfig",
-    "*.la",
-    "*.a"
-  ],
-  "modules": [
+"cleanup": [
+  "/include",
+  "/lib/pkgconfig",
+  "/man",
+  "/share/doc",
+  "/share/gtk-doc",
+  "/share/man",
+  "/share/pkgconfig",
+  "/share/vala",
+  "*.la",
+  "*.a",
+  "/lib/python3.12/site-packages/**/tests",
+  "/lib/python3.12/site-packages/**/test",
+  "/lib/python3.12/site-packages/**/__pycache__",
+  "/lib/python3.12/site-packages/**/examples",
+  "*.pyc"
+]  "modules": [
     {
       "name": "blueprint-compiler",
       "buildsystem": "meson",
