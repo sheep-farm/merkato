@@ -24,7 +24,9 @@
     "/share/man",
     "/share/pkgconfig",
     "*.la",
-    "*.a"
+    "*.a",
+    "/lib/python3.12/site-packages/**/test*",
+    "/lib/python3.12/site-packages/**/tests"
   ],
   "modules": [
     {
