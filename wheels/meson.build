@@ -1,7 +1,5 @@
-# Instala as dependências Python dos wheels
 python = import('python').find_installation('python3')
 
-# Instala cada wheel
 wheels = [
   'beautifulsoup4-4.14.2-py3-none-any.whl',
   'certifi-2025.10.5-py3-none-any.whl',
@@ -28,21 +26,13 @@ wheels = [
 
 wheels_dir = meson.current_source_dir()
 
-# Constrói lista completa de caminhos
 wheel_paths = []
 foreach w : wheels
   wheel_paths += [join_paths(wheels_dir, w)]
 endforeach
 
-# Junta todos os caminhos em uma única string separada por espaço
 wheels_str = ' '.join(wheel_paths)
 
-# Adiciona o script de instalação
-# meson.add_install_script(
-#   'sh', '-c',
-#   'pip3 install --no-deps --no-cache-dir --prefix="$MESON_INSALL_DESTDIR_PREFIX" ' + wheels_str + ' && ' +
-#   'find "$MESON_INSTALL_DESTDIR_PREFIX" -type d -name tests -exec rm -rf {} + || true'
-# )
 meson.add_install_script(
   'sh', '-c',
   'pip3 install --upgrade --no-deps --target="$MESON_INSTALL_DESTDIR_PREFIX/lib/python3.12/site-packages" --no-cache-dir ' + wheels_str + ' && ' +

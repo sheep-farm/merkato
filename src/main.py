@@ -68,16 +68,21 @@ class MerkatoApplication(Adw.Application):
         win.present()
 
 
-    def on_about_action(self, *args):
+    def on_about_action(self, widget, _):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(application_name='Merkato',
-                                application_icon='com.ekonomikas.merkato',
-                                developer_name='Flávio de Vasconcellos Corrêa',
-                                version='0.2.0',
-                                developers=['Flávio de Vasconcellos Corrêa'],
-                                copyright='© 2025 Flávio de Vasconcellos Corrêa')
-        # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
-        about.set_translator_credits(_('translator-credits'))
+        about = Adw.AboutDialog(
+            application_name='Merkato',
+            application_icon='com.ekonomikas.merkato',
+            developer_name='Flávio de Vasconcellos Corrêa',
+            version='0.2.0',
+            developers=['Flávio de Vasconcellos Corrêa <flavio.vcorrea@ufpel.edu.br>', 'Claude (Anthropic)'],
+            copyright='© 2025 Flávio de Vasconcellos Corrêa',
+            license_type=Gtk.License.GPL_3_0,
+            website='https://github.com/sheep-farm/merkato',
+            issue_url='https://github.com/sheep-farm/merkato/issues',
+            comments='Just another stock, currency and cryptocurrency tracker'
+        )
+        about.set_translator_credits('Claude (Anthropic)')
         about.present(self.props.active_window)
 
 
