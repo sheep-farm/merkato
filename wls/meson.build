@@ -28,9 +28,18 @@ wheels = [
 
 wheels_dir = meson.current_source_dir()
 
-foreach wheel : wheels
-  wheel_path = wheels_dir / wheel
-	meson.add_install_script('sh', '-c',
-	  'pip3 install --no-deps --prefix=$DESTDIR/app $wheel_path && find $DESTDIR/app -type d -name tests -exec rm -rf {} + || true'
-	)
+# Constrói lista completa de caminhos
+wheel_paths = []
+foreach w : wheels
+  wheel_paths += [join_paths(wheels_dir, w)]
 endforeach
+
+# Junta todos os caminhos em uma única string separada por espaço
+wheels_str = ' '.join(wheel_paths)
+
+# Adiciona o script de instalação
+meson.add_install_script(
+  'sh', '-c',
+  'pip3 install --no-deps --no-cache-dir --prefix="$MESON_INSTALL_DESTDIR_PREFIX" ' + wheels_str + ' && ' +
+  'find "$MESON_INSTALL_DESTDIR_PREFIX" -type d -name tests -exec rm -rf {} + || true'
+)
