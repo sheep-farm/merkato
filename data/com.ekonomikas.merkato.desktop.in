@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=merkato
 Exec=merkato
-Icon=com.github.sheepfarm.merkato
+Icon=com.ekonomikas.merkato
 Terminal=false
 Type=Application
 Categories=Utility;
