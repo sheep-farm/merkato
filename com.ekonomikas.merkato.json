@@ -32,9 +32,6 @@
   "/lib/python3.12/site-packages/**/examples",
   "*.pyc"
 ],
-    "build-commands": [
-      "pip3 install --no-deps --no-cache-dir --prefix=/app *.whl"
-    ],
     "modules": [
     {
       "name": "blueprint-compiler",

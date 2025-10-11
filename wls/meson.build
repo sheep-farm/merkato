@@ -38,8 +38,13 @@ endforeach
 wheels_str = ' '.join(wheel_paths)
 
 # Adiciona o script de instalação
+# meson.add_install_script(
+#   'sh', '-c',
+#   'pip3 install --no-deps --no-cache-dir --prefix="$MESON_INSALL_DESTDIR_PREFIX" ' + wheels_str + ' && ' +
+#   'find "$MESON_INSTALL_DESTDIR_PREFIX" -type d -name tests -exec rm -rf {} + || true'
+# )
 meson.add_install_script(
   'sh', '-c',
-  'pip3 install --no-deps --no-cache-dir --prefix="$MESON_INSTALL_DESTDIR_PREFIX" ' + wheels_str + ' && ' +
+  'pip3 install --upgrade --no-deps --target="$MESON_INSTALL_DESTDIR_PREFIX/lib/python3.12/site-packages" --no-cache-dir ' + wheels_str + ' && ' +
   'find "$MESON_INSTALL_DESTDIR_PREFIX" -type d -name tests -exec rm -rf {} + || true'
 )
