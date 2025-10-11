@@ -30,10 +30,9 @@ While Merkato is a relatively simple application, it served as an excellent foun
 
 ## Requirements
 
-- Python 3.10+
+- Python 3.12+
 - GTK 4
-- See `python-deps.json` for Python dependencies
 
 ## License
 
-See LICENSE file for details.
+See COPYNG file for details.
