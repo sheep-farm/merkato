@@ -27,17 +27,6 @@
     "*.a"
   ],
   "modules": [
-  {
-    "name": "python3-dependencies",
-    "buildsystem": "simple",
-    "build-commands": [
-      "pip3 install --prefix=${FLATPAK_DEST} pandas requests requests-futures yahooquery"
-    ],
-    "build-options": {
-      "build-args": ["--share=network"]
-    },
-    "sources": []
-  },
     {
       "name": "blueprint-compiler",
       "buildsystem": "meson",
