@@ -17,7 +17,7 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/sheep-farm/merkato/main/data/screenshots/main-window.png</image>
+      <image width="400" height="574">https://raw.githubusercontent.com/sheep-farm/merkato/main/preview.png</image>
     </screenshot>
   </screenshots>
 
