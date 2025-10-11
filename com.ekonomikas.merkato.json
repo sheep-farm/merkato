@@ -4,7 +4,6 @@
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
   "command": "merkato",
-  "only-arches": ["x86_64"],
   "build-options": {
     "strip": true,
     "no-debuginfo": true
