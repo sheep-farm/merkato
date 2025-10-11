@@ -31,7 +31,8 @@
   "/lib/python3.12/site-packages/**/__pycache__",
   "/lib/python3.12/site-packages/**/examples",
   "*.pyc"
-]  "modules": [
+],
+     "modules": [
     {
       "name": "blueprint-compiler",
       "buildsystem": "meson",
