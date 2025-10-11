@@ -192,6 +192,9 @@ class MerkatoListStock(Gtk.Box):
                 change_label.remove_css_class("success")
                 change_label.add_css_class("error")
 
+            url = f"https://finance.yahoo.com/quote/{stock_item.symbol}/"
+            row.connect("activated", lambda r: Gio.AppInfo.launch_default_for_uri(url, None))
+
             return row
         else:
             return None
@@ -201,11 +204,6 @@ class MerkatoListStock(Gtk.Box):
         """Handle remove button click"""
         print(f"Remove button clicked for: {stock_item.symbol} - {stock_item.long_name}")
         self.emit('stock-remove-requested', stock_item)
-
-
-    def _on_row_activated(self, row, url):
-        # Don't launch URL, just keep row activated to show remove button
-        pass
 
 
     def _on_row_selected (self, listbox, row):

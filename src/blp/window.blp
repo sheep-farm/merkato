@@ -95,8 +95,9 @@ template $MerkatoWindow: Adw.ApplicationWindow {
                 opacity: 0.5;
               }
 
-              Label status_label {
-                label: _("Yahoo Finance");
+              LinkButton status_label {
+                label: "Yahoo Finance";
+                uri: "https://finance.yahoo.com/";
                 styles ["caption"]
               }
             }

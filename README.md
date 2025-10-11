@@ -6,6 +6,8 @@ A financial markets tracker for stocks, currencies, and cryptocurrencies.
 
 ![](preview.png?raw=true)
 
+![](remove_preview.png?raw=true)
+
 ## Features
 
 - Track stocks, currencies, and cryptocurrencies
