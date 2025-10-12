@@ -54,7 +54,6 @@
         {
           "type": "git",
           "url": "https://github.com/sheep-farm/merkato.git",
-          "stable-only": true,
           "commit": ""
         }
       ]
