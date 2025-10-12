@@ -1,6 +1,5 @@
 {
   "app-id": "com.ekonomikas.merkato",
-  "branch": "stable",
   "runtime": "org.gnome.Platform",
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
@@ -54,7 +53,6 @@
       "sources": [
         {
           "type": "git",
-          "branch": "stable",
           "url": "https://github.com/sheep-farm/merkato.git",
           "commit": ""
         }
