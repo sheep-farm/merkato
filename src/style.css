@@ -1,10 +1,10 @@
               .market-closed {
                 background: repeating-linear-gradient(
                     45deg,
-                    rgba(255, 193, 7, 0.04),
-                    rgba(255, 193, 7, 0.04) 12px,
-                    rgba(255, 193, 7, 0.08) 12px,
-                    rgba(255, 193, 7, 0.08) 24px
+  rgba(75, 85, 99, 0.2),
+  rgba(75, 85, 99, 0.3) 12px,
+  rgba(75, 85, 99, 0.4) 12px,
+  rgba(75, 85, 99, 0.4) 24px
                 );
             }
 
