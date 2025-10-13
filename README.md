@@ -4,14 +4,14 @@ A financial markets tracker for stocks, currencies, and cryptocurrencies.
 
 ## Screenshots
 <p align="center">
-    <a>
-        <img alt="View mode" width="50%" src="(preview.png">
+    <a href="#readme">
+        <img alt="View mode" width="50%" src="preview.png">
     </a>
 </p>
 
 <p align="center">
-    <a>
-        <img alt="View mode" width="50%" src="(remove_preview.png">
+   <a href="#readme">
+        <img alt="View mode" width="50%" src="remove_preview.png">
     </a>
 </p>
 
