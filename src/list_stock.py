@@ -20,6 +20,7 @@
 import gi
 import sys
 import html
+import locale
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
@@ -84,21 +85,24 @@ class MerkatoListStock(Gtk.Box):
 
             currency_symbol = ''
             if not stock_item.symbol.startswith("^"):
-                currency_symbol = stock_item.currency_symbol;
+                currency_symbol = stock_item.currency;
 
-            price_label.set_label(f"{currency_symbol} {stock_item.price:.2f}")
+            price_fmt = locale.format_string("%.2f", stock_item.price, grouping=True, monetary=True)
+
+            price_label.set_label(f"{price_fmt} {currency_symbol}")
 
             # Change label
             change_label = Gtk.Label()
             change_label.set_halign(Gtk.Align.END)
             change_label.add_css_class("caption")
-            change = stock_item.change
-            change_pct = stock_item.change_pct * 100
 
-            if change >= 0:
-               change_label.set_label(f"+{change:.2f} ({change_pct:.2f}%)")
+            change_fmt = locale.format_string("%.2f", stock_item.change, grouping=True, monetary=True)
+            change_pct_fmt = locale.format_string("%.2f", stock_item.change_pct * 100, grouping=True, monetary=True)
+
+            if stock_item.change >= 0:
+               change_label.set_label(f"+{change_fmt} ({change_pct_fmt}%)")
             else:
-               change_label.set_label(f"{change:.2f} ({change_pct:.2f}%)")
+               change_label.set_label(f"{change_fmt} ({change_pct_fmt}%)")
 
             suffix_box.append(price_label)
             suffix_box.append(change_label)
