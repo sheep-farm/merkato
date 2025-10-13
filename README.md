@@ -4,9 +4,9 @@ A financial markets tracker for stocks, currencies, and cryptocurrencies.
 
 ## Screenshots
 
-![](preview.png?raw=true)
+![View mode](preview.png?raw=true)
 
-![](remove_preview.png?raw=true)
+![Remove mode](remove_preview.png?raw=true)
 
 ## Features
 
