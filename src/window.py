@@ -47,7 +47,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.symbols_cache = []
         self.timeout_id = None
         self.is_paused = False
-        self.update_interval = 90
+        self.update_interval = 60
 
         self.create_action('refresh', self.on_refresh_action)
         self.search_stock_entry.connect('activate', self.on_search_clicked)
@@ -166,6 +166,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
     def on_refresh_action(self, action = None, param = None):
         self.spinner.set_spinning(True)
         self.search_stock_entry.freeze(True)
+        self.trash_view_mode.set_sensitive(False)
 
         # Execute search in separate thread
         thread = threading.Thread(
@@ -194,6 +195,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
         self.spinner.set_spinning(False)
         self.search_stock_entry.freeze(False)
+        self.trash_view_mode.set_sensitive(True)
 
         self.last_updated_label.set_label(
             _(f"Last updated: {datetime.now().strftime('%H:%M:%S')}")
