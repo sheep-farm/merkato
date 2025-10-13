@@ -3,10 +3,21 @@
 A financial markets tracker for stocks, currencies, and cryptocurrencies.
 
 ## Screenshots
+<p align="center">
+    <a>
+        <img alt="View mode" width="50%" src="(preview.png">
+    </a>
+</p>
 
-![View mode](preview.png?raw=true)
+<p align="center">
+    <a>
+        <img alt="View mode" width="50%" src="(remove_preview.png">
+    </a>
+</p>
 
-![Remove mode](remove_preview.png?raw=true)
+<!-- ![View mode](preview.png?raw=true) -->
+
+<!-- ![Remove mode](remove_preview.png?raw=true) -->
 
 ## Features
 
