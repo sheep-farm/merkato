@@ -1,36 +1,23 @@
-              .market-closed {
-                background: repeating-linear-gradient(
-                    45deg,
-  rgba(75, 85, 99, 0.2),
-  rgba(75, 85, 99, 0.3) 12px,
-  rgba(75, 85, 99, 0.4) 12px,
-  rgba(75, 85, 99, 0.4) 24px
-                );
-            }
+.market-closed {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(75, 85, 99, 0.2),
+    rgba(75, 85, 99, 0.3) 12px,
+    rgba(75, 85, 99, 0.4) 12px,
+    rgba(75, 85, 99, 0.4) 24px
+  );
+}
 
-            /*
-            .market-closed {
-                background: repeating-linear-gradient(
-                    45deg,
-                    rgba(0, 0, 0, 0.015),
-                    rgba(0, 0, 0, 0.015) 10px,
-                    rgba(0, 0, 0, 0.03) 10px,
-                    rgba(0, 0, 0, 0.03) 20px
-                );
-            }
-            */
-            /* Remove button - hidden and collapsed by default */
-            .remove-button {
-                opacity: 0;
-                margin-left: 0;
-                margin-right: -40px;
-                transition: all 200ms ease;
-            }
+.remove-button {
+  opacity: 0;
+  margin-left: 0;
+  margin-right: -40px;
+  transition: all 200ms ease;
+}
 
-            /* Show remove button when enabled */
-            .remove-button.enabled {
-                opacity: 1;
-                margin-right: 0;
-            }
+.remove-button.enabled {
+  opacity: 1;
+  margin-right: 0;
+}
 
 
