@@ -44,7 +44,7 @@ class MerkatoSearchStock(Gtk.Box):
 
 
     def clear_entry(self):
-        self._entry.set_text('')
+        self.set_text('')
 
 
     def _on_activate(self, widget):
@@ -63,7 +63,6 @@ class MerkatoSearchStock(Gtk.Box):
         self._entry.connect('changed', lambda w: self._button.set_sensitive(len(self._entry.get_text()) > 0))
 
 
-
     def set_text(self, value):
         self._entry.set_text(value)
 
@@ -73,8 +72,10 @@ class MerkatoSearchStock(Gtk.Box):
 
 
     def freeze(self, value=True):
-        self._button.set_sensitive(value == False)
-        self._entry.set_sensitive(value == False)
-
+        self._entry.set_sensitive(not value)
+        if not value:
+            self._button.set_sensitive(len(self._entry.get_text()) > 0)
+        else:
+            self._button.set_sensitive(False)
 
 
