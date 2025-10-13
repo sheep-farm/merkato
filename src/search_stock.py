@@ -73,10 +73,9 @@ class MerkatoSearchStock(Gtk.Box):
 
     def freeze(self, value=True):
         self._entry.set_sensitive(not value)
-        if not value:  # Se está descongelando
-            # Mantém a lógica: só habilita se houver texto
+        if not value:
             self._button.set_sensitive(len(self._entry.get_text()) > 0)
-        else:  # Se está congelando
+        else:
             self._button.set_sensitive(False)
 
 
