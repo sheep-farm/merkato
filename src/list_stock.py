@@ -131,12 +131,12 @@ class MerkatoListStock(Gtk.Box):
             # Store Stock reference in row
             row.stock_item = stock_item
 
-            if stock_item.market_state == "CLOSED":
-                row.remove_css_class("market-opened")
-                row.add_css_class("market-closed")
-            else:
+            if stock_item.market_state == "REGULAR":
                 row.remove_css_class("market-closed")
                 row.add_css_class("market-opened")
+            else:
+                row.remove_css_class("market-opened")
+                row.add_css_class("market-closed")
 
             if stock_item.change >= 0:
                 change_label.remove_css_class("error")
