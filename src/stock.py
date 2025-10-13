@@ -101,7 +101,6 @@ class Stock(GObject.Object):
     def market_state(self, value):
         self._market_state = value
 
-
     @GObject.Property(type=str)
     def currency(self):
         return self._currency
@@ -130,6 +129,7 @@ class Stock(GObject.Object):
             'change_pct': self.change_pct,
             'market_state': self.market_state,
             'currency_symbol': self.currency_symbol,
+            'currency': self.currency,
         }
 
 

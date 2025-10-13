@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/github/sheepfarm/merkato">
+    <file>style.css</file>
     <file preprocess="xml-stripblanks">search_stock.ui</file>
     <file preprocess="xml-stripblanks">list_stock.ui</file>
     <file preprocess="xml-stripblanks">window.ui</file>

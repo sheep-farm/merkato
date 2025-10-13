@@ -77,7 +77,7 @@ class WatchlistManager:
             data = {
                 'stocks': stocks_data,
                 'last_updated': datetime.now().isoformat(),
-                'version': '2.0'
+                'version': '0.2.0'
             }
 
             # Salvar com indentação para ser legível

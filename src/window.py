@@ -182,18 +182,15 @@ class MerkatoWindow(Adw.ApplicationWindow):
             (results, errors) = yr.fetch(symbols)
 
             # Use GLib.idle_add to update UI in main thread
-            from gi.repository import GLib
             GLib.idle_add(self._refresh_results, results, errors)
-
         except Exception as e:
             print(f"Search error: {e}")
-            from gi.repository import GLib
             GLib.idle_add(self._on_search_error, str(e))
 
 
     def _refresh_results(self, results, errors):
         for symbol, stock in results.items():
-            self.list_stock.update(stock.symbol, stock.price, stock.change)
+            self.list_stock.update(stock)
 
         self.spinner.set_spinning(False)
         self.search_stock_entry.freeze(False)
@@ -237,12 +234,10 @@ class MerkatoWindow(Adw.ApplicationWindow):
             (results, errors) = yr.fetch(symbols)
 
             # Use GLib.idle_add to update UI in main thread
-            from gi.repository import GLib
             GLib.idle_add(self._update_results, results, errors)
 
         except Exception as e:
             print(f"Search error: {e}")
-            from gi.repository import GLib
             GLib.idle_add(self._on_search_error, str(e))
 
 
@@ -290,6 +285,6 @@ class MerkatoWindow(Adw.ApplicationWindow):
         is_success = self.watchlist_manager.save(self.list_stock.get_all_stocks())
 
         if not is_success:
-            print("WARNING: Failed to save watchlist")
+            print(_("WARNING: Failed to save watchlist"))
 
         return is_success

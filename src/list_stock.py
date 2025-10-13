@@ -45,7 +45,6 @@ class MerkatoListStock(Gtk.Box):
     def __init__ (self, **kwargs):
         super().__init__(**kwargs)
         self.remove_is_enabled = False
-        self.setup_css()
 
         self.stock_list_store = Gio.ListStore.new(Stock)
         self._list_stock.connect('row-selected', self._on_row_selected)
@@ -56,58 +55,6 @@ class MerkatoListStock(Gtk.Box):
         self.stock_list_store.connect("items-changed", self._on_items_changed)
         self.updtate_state()
 
-    def setup_css(self):
-        """Configure custom CSS styles"""
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_data(b"""
-              .market-closed {
-                background: repeating-linear-gradient(
-                    45deg,
-                    rgba(255, 193, 7, 0.04),
-                    rgba(255, 193, 7, 0.04) 12px,
-                    rgba(255, 193, 7, 0.08) 12px,
-                    rgba(255, 193, 7, 0.08) 24px
-                );
-            }
-
-            /*
-            .market-closed {
-                background: repeating-linear-gradient(
-                    45deg,
-                    rgba(0, 0, 0, 0.015),
-                    rgba(0, 0, 0, 0.015) 10px,
-                    rgba(0, 0, 0, 0.03) 10px,
-                    rgba(0, 0, 0, 0.03) 20px
-                );
-            }
-            */
-            /* Optional: add subtle border */
-
-            .market-closed {
-                //border-left: 3px solid rgba(255, 193, 7, 0.3);
-            }
-
-            /* Remove button - hidden and collapsed by default */
-            .remove-button {
-                opacity: 0;
-                margin-left: 0;
-                margin-right: -40px;
-                transition: all 200ms ease;
-            }
-
-            /* Show remove button when enabled */
-            .remove-button.enabled {
-                opacity: 1;
-                margin-right: 0;
-            }
-
-        """)
-
-        Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(),
-            css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        )
 
     def _on_items_changed (self, list_store, position, removed, added):
         self.updtate_state()
@@ -119,8 +66,10 @@ class MerkatoListStock(Gtk.Box):
             row = Adw.ActionRow()
             row.set_activatable(True)
 
-            row.set_title(html.escape(stock_item.long_name))
-            row.set_subtitle(stock_item.symbol)
+            if stock_item.long_name:
+                row.set_title(html.escape(stock_item.long_name))
+            if stock_item.symbol:
+                row.set_subtitle(stock_item.symbol)
 
             # Box with price and change
             suffix_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -178,7 +127,7 @@ class MerkatoListStock(Gtk.Box):
             # Store Stock reference in row
             row.stock_item = stock_item
 
-            if stock_item.market_state == 'CLOSED':
+            if stock_item.market_state == "CLOSED":
                 row.remove_css_class("market-opened")
                 row.add_css_class("market-closed")
             else:
@@ -235,13 +184,17 @@ class MerkatoListStock(Gtk.Box):
         return False
 
 
-    def update (self, symbol: str, price: float, change: float) -> bool:
+    def update (self, _stock) -> bool:
 
         for i in range(self.stock_list_store.get_n_items()):
             stock = self.stock_list_store.get_item(i)
-            if stock.symbol == symbol:
-                stock.price = price
-                stock.change = change
+            if stock.symbol == _stock.symbol:
+                stock.long_name = _stock.long_name
+                stock.price = _stock.price
+                stock.change = _stock.change
+                stock.market_state = _stock.market_state
+                stock.currency = _stock.currency
+                stock.currency_symbol = _stock.currency_symbol
                 self.stock_list_store.items_changed(i, 1, 1)
                 return True
         return False

@@ -114,6 +114,8 @@ class YahooRequest (GObject.Object):
                     if 'marketState' in data:
                         stock_item.market_state = data['marketState']
 
+
+
                     batch_results[symbol] = stock_item
                 else:
                     batch_errors.append(symbol)
