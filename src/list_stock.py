@@ -66,6 +66,7 @@ class MerkatoListStock(Gtk.Box):
             # Create ActionRow
             row = Adw.ActionRow()
             row.set_activatable(True)
+            row.set_cursor_from_name("pointer")
 
             if stock_item.long_name:
                 row.set_title(html.escape(stock_item.long_name))
