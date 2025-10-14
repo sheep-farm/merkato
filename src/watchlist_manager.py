@@ -91,6 +91,32 @@ class WatchlistManager:
             print(f"ERROR: Failed to save watchlist: {e}")
             return False
 
+    def save_sort_order(self, sort_order: str) -> bool:
+        try:
+            config_dir = GLib.get_user_config_dir()
+            app_dir = os.path.join(config_dir, 'merkato')
+            os.makedirs(app_dir, exist_ok=True)
+
+            sort_file = os.path.join(app_dir, 'sort_order.txt')
+            with open(sort_file, 'w') as f:
+                f.write(sort_order)
+            return True
+        except Exception as e:
+            print(f"Error saving sort order: {e}")
+            return False
+
+    def load_sort_order(self) -> str:
+        try:
+            config_dir = GLib.get_user_config_dir()
+            sort_file = os.path.join(config_dir, 'merkato', 'sort_order.txt')
+
+            if os.path.exists(sort_file):
+                with open(sort_file, 'r') as f:
+                    return f.read().strip()
+            return 'alphabetical'
+        except Exception as e:
+            print(f"Error loading sort order: {e}")
+            return 'alphabetical'
 
     def clear(self):
         return self.save([])

@@ -129,19 +129,34 @@ template $MerkatoWindow: Adw.ApplicationWindow {
 menu primary_menu {
   section {
     item {
-      label: _("_Refresh All");
+      label: _("Refresh");
       action: "win.refresh";
     }
   }
 
   section {
     item {
-      label: _("_Keyboard Shortcuts");
-      action: "win.show-help-overlay";
+      label: _("Sort Alphabetically");
+      action: "win.sort";
+      target: "alphabetical";
     }
 
     item {
-      label: _("_About Merkato");
+      label: _("Sort by Top Gains");
+      action: "win.sort";
+      target: "gains";
+    }
+
+    item {
+      label: _("Sort by Top Losses");
+      action: "win.sort";
+      target: "losses";
+    }
+  }
+
+  section {
+    item {
+      label: _("About");
       action: "app.about";
     }
   }
