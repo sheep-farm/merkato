@@ -15,16 +15,15 @@ A financial markets tracker for stocks, currencies, and cryptocurrencies.
     </a>
 </p>
 
-<!-- ![View mode](preview.png?raw=true) -->
-
-<!-- ![Remove mode](remove_preview.png?raw=true) -->
-
 ## Features
 
-- Track stocks, currencies, and cryptocurrencies
-- Personal portfolio management
-- Real-time data updates
-- Dark mode support
+## Features
+- Real-time stock quotes from Yahoo Finance
+- Auto-refresh every 60 seconds
+- Trash mode to remove stocks
+- Sort by gains, losses, or alphabetically
+- Persistent watchlist
+- Native GNOME/Adwaita design
 
 ## About
 

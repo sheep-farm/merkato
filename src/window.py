@@ -39,6 +39,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
     last_updated_label = Gtk.Template.Child()
     trash_view_mode = Gtk.Template.Child()
 
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -50,7 +51,16 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.is_refreshing = False
         self.update_interval = 60
 
-        self.create_action('refresh', self.on_refresh_action)
+        self.refresh_action = self.create_action('refresh', self.on_refresh_action)
+        sort_action = Gio.SimpleAction.new_stateful(
+            "sort",
+            GLib.VariantType.new("s"),
+            GLib.Variant("s", "alphabetical")
+        )
+        sort_action.connect("activate", self.on_sort_action)
+        self.add_action(sort_action)
+        self.sort_action = sort_action
+
         self.search_stock_entry.connect('activate', self.on_search_clicked)
         self.search_stock_entry.connect('changed', self.on_search_changed)
         self.connect('close-request', self._on_close_request)
@@ -69,22 +79,38 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
         self.trash_view_mode.set_visible(not self.list_stock.is_empty())
 
+    def on_sort_action(self, action, parameter):
+        sort_type = parameter.get_string()
+        action.set_state(parameter)
+
+        if sort_type == "alphabetical":
+            self.list_stock.sort_alphabetical()
+        elif sort_type == "gains":
+            self.list_stock.sort_by_gains()
+        elif sort_type == "losses":
+            self.list_stock.sort_by_losses()
+
     def on_empty_state_changed(self, widget, is_empty):
         self.trash_view_mode.set_visible(not is_empty)
 
+
     def _on_close_request(self, window):
         self.save_watchlist()
+
 
     def create_action(self, name, callback):
         action = Gio.SimpleAction.new(name, None)
         action.connect('activate', callback)
         self.add_action(action)
+        return action
+
 
     def on_search_changed(self, widget, text: str):
         if text:
             self.pause_auto_update()
         else:
             self.restart_auto_update()
+
 
     def on_trash_mode_toggled(self, toggle_button):
         is_active = toggle_button.get_active()
@@ -95,6 +121,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
             self.pause_auto_update()
         else:
             self.restart_auto_update()
+
 
     def on_stock_remove_requested(self, widget, stock_item):
         print(f"Removing stock: {stock_item.symbol} - {stock_item.long_name}")
@@ -112,6 +139,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         else:
             print(f"Failed to remove {stock_item.symbol}")
 
+
     def start_auto_update(self):
         if self.timeout_id is None:
             self.is_paused = False
@@ -120,25 +148,31 @@ class MerkatoWindow(Adw.ApplicationWindow):
                 self.on_refresh_action
             )
 
+
     def pause_auto_update(self):
         if self.timeout_id is not None:
             GLib.source_remove(self.timeout_id)
             self.timeout_id = None
             self.is_paused = True
 
+
     def stop_auto_update(self):
         self.pause_auto_update()
         self.is_paused = False
 
+
     def restart_auto_update(self):
         self.pause_auto_update()
         self.start_auto_update()
+
 
     def on_refresh_action(self, action=None, param=None):
         if self.is_refreshing:
             return True
 
         self.is_refreshing = True
+        self.refresh_action.set_enabled(False)
+        self.sort_action.set_enabled(False)
         self.spinner.set_spinning(True)
         self.search_stock_entry.freeze(True)
         self.trash_view_mode.set_sensitive(False)
@@ -155,6 +189,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
         return True
 
+
     def _do_refresh(self, symbols):
         try:
             yr = YahooRequest()
@@ -167,6 +202,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         finally:
             GLib.idle_add(self._clear_refresh_flag)
 
+
     def _refresh_results(self, results, errors):
         for symbol, stock in results.items():
             self.list_stock.update(stock)
@@ -174,23 +210,30 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.spinner.set_spinning(False)
         self.search_stock_entry.freeze(False)
         self.trash_view_mode.set_sensitive(True)
-
+        self.refresh_action.set_enabled(True)
+        self.sort_action.set_enabled(True)
         self.last_updated_label.set_label(
             _(f"Last updated: {datetime.now().strftime('%H:%M:%S')}")
         )
 
         return False
 
+
     def _clear_refresh_flag(self):
         self.is_refreshing = False
         return False
+
 
     def _on_refresh_error(self, error_msg):
         print(f"Refresh Error: {error_msg}")
         self.spinner.set_spinning(False)
         self.search_stock_entry.freeze(False)
         self.trash_view_mode.set_sensitive(True)
+        self.refresh_action.set_enabled(True)
+        self.sort_action.set_enabled(True)
+
         return False
+
 
     def on_search_clicked(self, widget, symbol_input=None):
         if self.is_searching:
@@ -218,6 +261,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         )
         thread.start()
 
+
     def _do_search(self, symbols):
         try:
             yr = YahooRequest()
@@ -230,6 +274,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
             GLib.idle_add(self._on_search_error, str(e))
         finally:
             GLib.idle_add(self._clear_search_flag)
+
 
     def _update_results(self, results, errors):
         for symbol, stock in results.items():
@@ -248,15 +293,18 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
         return False
 
+
     def _clear_search_flag(self):
         self.is_searching = False
         return False
+
 
     def _on_search_error(self, error_msg):
         print(f"Search Error: {error_msg}")
         self.spinner.set_spinning(False)
         self.search_stock_entry.freeze(False)
         return False
+
 
     def load_watchlist(self):
         saved_stocks_data = self.watchlist_manager.load()
@@ -270,8 +318,16 @@ class MerkatoWindow(Adw.ApplicationWindow):
                         self.symbols_cache.append(stock_item.symbol)
             self.last_updated_label.set_label('cached')
 
+        saved_sort = self.watchlist_manager.load_sort_order()
+        if saved_sort:
+            self.sort_action.set_state(GLib.Variant("s", saved_sort))
+            self.list_stock.current_sort = saved_sort
+            self.list_stock._apply_sort()
+
     def save_watchlist(self) -> bool:
         is_success = self.watchlist_manager.save(self.list_stock.get_all_stocks())
+
+        self.watchlist_manager.save_sort_order(self.list_stock.current_sort)
 
         if not is_success:
             print(_("WARNING: Failed to save watchlist"))
