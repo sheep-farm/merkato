@@ -102,6 +102,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         action = Gio.SimpleAction.new(name, None)
         action.connect('activate', callback)
         self.add_action(action)
+
         return action
 
 
