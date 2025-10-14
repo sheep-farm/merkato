@@ -92,7 +92,10 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
     def on_empty_state_changed(self, widget, is_empty):
         self.trash_view_mode.set_visible(not is_empty)
-        self.trash_view_mode.set_active(not is_empty)
+
+        if is_empty and self.trash_view_mode.get_active():
+            self.trash_view_mode.set_active(False)
+            print("[DEBUG] self.trash_view_mode.set_active(False) on line 98")
 
     def _on_close_request(self, window):
         self.save_watchlist()
