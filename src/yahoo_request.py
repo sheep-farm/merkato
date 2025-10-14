@@ -17,70 +17,122 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import gi
 import sys
-from gi.repository import GObject, Gio
+from gi.repository import GObject
 from yahooquery import Ticker
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
 
 from .stock import Stock
 
-class YahooRequest (GObject.Object):
+
+class YahooRequest(GObject.Object):
+    """
+    Classe responsável por fazer requisições à API do Yahoo Finance.
+    Suporta requisições paralelas com controle de batch.
+    """
     __gtype_name__ = 'YahooRequest'
 
-    def __init__(self, batch_size=1, max_workers=15):
+    # Constantes
+    DEFAULT_BATCH_SIZE = 1
+    DEFAULT_MAX_WORKERS = 15
+    MIN_BATCH_SIZE = 1
+    MIN_MAX_WORKERS = 1
+
+    def __init__(self, batch_size=DEFAULT_BATCH_SIZE, max_workers=DEFAULT_MAX_WORKERS):
         """
-        Initialize YahooRequest with concurrency support.
+        Inicializa YahooRequest com suporte a concorrência.
 
         Args:
-            batch_size: Number of symbols per request (default: 1)
-            max_workers: Maximum number of parallel threads (default: 15)
+            batch_size: Número de símbolos por requisição (padrão: 1)
+            max_workers: Número máximo de threads paralelas (padrão: 15)
         """
         super().__init__()
-        self.batch_size = batch_size
-        self.max_workers = max_workers
+        self.batch_size = max(self.MIN_BATCH_SIZE, batch_size)
+        self.max_workers = max(self.MIN_MAX_WORKERS, max_workers)
         self.lock = Lock()
+
+    # ============== Validação ==============
 
     def _is_valid_response(self, data):
         """
-        Validate if the response contains valid stock data.
+        Valida se a resposta contém dados válidos de stock.
 
         Args:
-            data: Response data from yahooquery
+            data: Dados de resposta do yahooquery
 
         Returns:
-            bool: True if valid, False otherwise
+            True se válido, False caso contrário
         """
-        # Check if data is an error response
+        # Verifica se é uma resposta de erro (string)
         if isinstance(data, str):
             return False
 
-        # Check if data is a dict with error message
+        # Verifica se é um dicionário com mensagem de erro
         if isinstance(data, dict):
-            # Yahoo returns error messages in specific keys
+            # Yahoo retorna mensagens de erro em chaves específicas
             if 'error' in data or 'Error Message' in str(data):
                 return False
 
-            # Check for "No data found" type responses
+            # Verifica por respostas tipo "No data found"
             if data.get('regularMarketPrice') is None:
                 return False
 
-            # Check if symbol exists (has a proper name or price)
+            # Verifica se o símbolo existe (tem nome ou preço)
             if 'longName' not in data and 'shortName' not in data:
                 return False
 
         return True
 
-    def _fetch_batch(self, symbols_batch):
+    # ============== Requisições ==============
+
+    def fetch(self, symbols):
         """
-        Fetch a batch of symbols.
+        Busca informações de múltiplos símbolos concorrentemente.
 
         Args:
-            symbols_batch: List of symbols to fetch
+            symbols: Lista de símbolos a buscar
 
         Returns:
-            Tuple (results_dict, errors_list)
+            Tupla (dicionário de resultados, lista de erros)
+        """
+        if not symbols:
+            return ({}, ['EMPTY_LIST'])
+
+        # Divide símbolos em lotes
+        batches = self._split_into_batches(symbols)
+
+        results = {}
+        errors = []
+
+        # Processa lotes em paralelo
+        with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+            # Submete todas as tarefas
+            future_to_batch = {
+                executor.submit(self._fetch_batch, batch): batch
+                for batch in batches
+            }
+
+            # Coleta resultados conforme completam
+            for future in as_completed(future_to_batch):
+                batch_results, batch_errors = future.result()
+
+                # Merge de resultados (thread-safe)
+                with self.lock:
+                    results.update(batch_results)
+                    errors.extend(batch_errors)
+
+        return (results, errors)
+
+    def _fetch_batch(self, symbols_batch):
+        """
+        Busca um lote de símbolos.
+
+        Args:
+            symbols_batch: Lista de símbolos do lote
+
+        Returns:
+            Tupla (dicionário de resultados, lista de erros)
         """
         batch_results = {}
         batch_errors = []
@@ -92,108 +144,97 @@ class YahooRequest (GObject.Object):
                 if isinstance(ticker.price, dict) and symbol in ticker.price:
                     data = ticker.price[symbol]
 
-                    # Validate if response is valid
+                    # Valida se a resposta é válida
                     if not self._is_valid_response(data):
                         batch_errors.append(symbol)
                         continue
 
-                    stock_item = Stock(symbol)
-
-                    if 'longName' in data:
-                        stock_item.long_name = data['longName']
-                    if 'regularMarketPrice' in data:
-                        stock_item.price = data['regularMarketPrice']
-                    if 'regularMarketChange' in data:
-                        stock_item.change = data['regularMarketChange']
-                    if 'regularMarketChangePercent' in data:
-                        stock_item.change_pct = data['regularMarketChangePercent']
-                    if 'currency' in data:
-                        stock_item.currency = data['currency']
-                    if 'currencySymbol' in data:
-                        stock_item.currency_symbol = data['currencySymbol']
-                    if 'marketState' in data:
-                        stock_item.market_state = data['marketState']
-
-
-
+                    # Cria objeto Stock com os dados
+                    stock_item = self._create_stock_from_data(symbol, data)
                     batch_results[symbol] = stock_item
                 else:
                     batch_errors.append(symbol)
 
         except Exception as e:
-            # On request error, mark all symbols as errors
+            # Em caso de erro na requisição, marca todos os símbolos como erro
             batch_errors.extend(symbols_batch)
             print(f"Error fetching batch {symbols_batch}: {e}", file=sys.stderr)
 
         return (batch_results, batch_errors)
 
-    def _split_into_batches(self, symbols):
+    def _create_stock_from_data(self, symbol, data):
         """
-        Split symbol list into batches.
+        Cria um objeto Stock a partir dos dados da API.
 
         Args:
-            symbols: List of symbols
+            symbol: Símbolo do stock
+            data: Dados retornados pela API
 
         Returns:
-            List of batches (each batch is a list of symbols)
+            Objeto Stock preenchido
+        """
+        stock_item = Stock(symbol)
+
+        # Mapeia os campos da API para o objeto Stock
+        field_mappings = {
+            'longName': 'long_name',
+            'regularMarketPrice': 'price',
+            'regularMarketChange': 'change',
+            'regularMarketChangePercent': 'change_pct',
+            'currency': 'currency',
+            'currencySymbol': 'currency_symbol',
+            'marketState': 'market_state'
+        }
+
+        for api_field, stock_field in field_mappings.items():
+            if api_field in data:
+                setattr(stock_item, stock_field, data[api_field])
+
+        return stock_item
+
+    # ============== Gerenciamento de lotes ==============
+
+    def _split_into_batches(self, symbols):
+        """
+        Divide lista de símbolos em lotes.
+
+        Args:
+            symbols: Lista de símbolos
+
+        Returns:
+            Lista de lotes (cada lote é uma lista de símbolos)
         """
         batches = []
         for i in range(0, len(symbols), self.batch_size):
             batches.append(symbols[i:i + self.batch_size])
         return batches
 
-    def fetch(self, symbols):
-        """
-        Fetch information for multiple symbols concurrently.
-
-        Args:
-            symbols: List of symbols to fetch
-
-        Returns:
-            Tuple (results_dict, errors_list)
-        """
-        if not symbols:
-            return {}, ['EMPTY ERROR']
-
-        # Split symbols into batches
-        batches = self._split_into_batches(symbols)
-
-        results = {}
-        errors = []
-
-        # Process batches in parallel
-        with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
-            # Submit all tasks
-            future_to_batch = {
-                executor.submit(self._fetch_batch, batch): batch
-                for batch in batches
-            }
-
-            # Collect results as they complete
-            for future in as_completed(future_to_batch):
-                batch_results, batch_errors = future.result()
-
-                # Merge results (thread-safe)
-                with self.lock:
-                    results.update(batch_results)
-                    errors.extend(batch_errors)
-
-        return (results, errors)
+    # ============== Configuração ==============
 
     def set_batch_size(self, size):
         """
-        Configure batch size.
+        Configura tamanho do lote.
 
         Args:
-            size: Number of symbols per request
+            size: Número de símbolos por requisição
         """
-        self.batch_size = max(1, size)
+        self.batch_size = max(self.MIN_BATCH_SIZE, size)
 
     def set_max_workers(self, workers):
         """
-        Configure maximum number of threads.
+        Configura número máximo de threads.
 
         Args:
-            workers: Maximum number of parallel threads
+            workers: Número máximo de threads paralelas
         """
-        self.max_workers = max(1, workers)
+        self.max_workers = max(self.MIN_MAX_WORKERS, workers)
+
+    # ============== Métodos auxiliares ==============
+
+    def get_batch_size(self):
+        """Retorna o tamanho atual do lote."""
+        return self.batch_size
+
+    def get_max_workers(self):
+        """Retorna o número máximo de workers."""
+        return self.max_workers

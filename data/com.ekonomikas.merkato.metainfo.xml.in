@@ -4,31 +4,96 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <name>Merkato</name>
-  <summary>Stock, currency and cryptocurrency tracker</summary>
+  <summary>Track stocks, currencies and cryptocurrencies in real-time</summary>
 
   <description>
     <p>
-      Track stocks, currencies and cryptocurrencies with Merkato.
-      A financial data tracker delivering market information to your fingertips.
+      Merkato is a modern financial data tracker that brings market information directly to your desktop.
+      Monitor your investments with ease and stay updated on market movements.
     </p>
+    <p>Features:</p>
+    <ul>
+      <li>Real-time stock prices from global markets</li>
+      <li>Track multiple assets simultaneously with customizable watchlists</li>
+      <li>Support for stocks, currencies, and cryptocurrencies</li>
+      <li>Automatic periodic updates to keep data fresh</li>
+      <li>Clean and intuitive interface built with GNOME technologies</li>
+      <li>Sort your watchlist by name, gains, or losses</li>
+      <li>Persistent watchlist that saves between sessions</li>
+      <li>Direct links to Yahoo Finance for detailed information</li>
+    </ul>
   </description>
 
   <launchable type="desktop-id">com.ekonomikas.merkato.desktop</launchable>
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/sheep-farm/merkato/stable/preview.png</image>
+      <caption>Main window showing stock watchlist with remove mode enabled</caption>
+      <image>https://raw.githubusercontent.com/sheep-farm/merkato/stable/screenshot1.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Search interface for adding new stocks to your watchlist</caption>
+      <image>https://raw.githubusercontent.com/sheep-farm/merkato/stable/screenshot2.png</image>
     </screenshot>
   </screenshots>
 
   <url type="homepage">https://github.com/sheep-farm/merkato</url>
   <url type="bugtracker">https://github.com/sheep-farm/merkato/issues</url>
+  <url type="vcs-browser">https://github.com/sheep-farm/merkato</url>
+  <url type="contribute">https://github.com/sheep-farm/merkato/blob/main/CONTRIBUTING.md</url>
 
-  <developer_name>Sheep Farm</developer_name>
+  <developer id="com.github.sheepfarm">
+    <name>Flávio de Vasconcellos Corrêa</name>
+  </developer>
 
   <releases>
-    <release version="0.2.0" date="2025-10-10"/>
+    <release version="0.2.0" date="2025-10-10">
+      <description>
+        <p>Major update with improved architecture and features:</p>
+        <ul>
+          <li>Refactored codebase with MVC architecture for better maintainability</li>
+          <li>Added stock controller to separate business logic from UI</li>
+          <li>Improved concurrent data fetching performance</li>
+          <li>Enhanced error handling and validation</li>
+          <li>Better code documentation and organization</li>
+        </ul>
+      </description>
+    </release>
   </releases>
 
+  <categories>
+    <category>Office</category>
+    <category>Finance</category>
+  </categories>
+
+  <keywords>
+    <keyword>stock</keyword>
+    <keyword>finance</keyword>
+    <keyword>market</keyword>
+    <keyword>cryptocurrency</keyword>
+    <keyword>currency</keyword>
+    <keyword>trading</keyword>
+    <keyword>investment</keyword>
+    <keyword>portfolio</keyword>
+  </keywords>
+
+  <kudos>
+    <kudo>ModernToolkit</kudo>
+    <kudo>HiDpiIcon</kudo>
+  </kudos>
+
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </recommends>
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+
   <content_rating type="oars-1.1"/>
+
+  <custom>
+    <value key="GnomeSoftware::popular-background">https://raw.githubusercontent.com/sheep-farm/merkato/stable/preview.png</value>
+  </custom>
 </component>

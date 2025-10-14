@@ -38,6 +38,7 @@ merkato_sources = [
   'list_stock.py',
   'yahoo_request.py',
   'watchlist_manager.py',
+  'stock_controller.py',
 ]
 
 install_data(merkato_sources, install_dir: moduledir)

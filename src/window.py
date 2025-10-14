@@ -17,17 +17,14 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import threading
-
 from datetime import datetime
-from gi.repository import Adw
-from gi.repository import Gtk, Gio, GLib
+from gi.repository import Adw, Gtk, Gio, GLib
 
-from .search_stock  import MerkatoSearchStock
-from .list_stock    import MerkatoListStock
-from .yahoo_request import YahooRequest
-from .watchlist_manager import WatchlistManager
+from .search_stock import MerkatoSearchStock
+from .list_stock import MerkatoListStock
+from .stock_controller import StockController
 from .stock import Stock
+
 
 @Gtk.Template(resource_path='/com/github/sheepfarm/merkato/window.ui')
 class MerkatoWindow(Adw.ApplicationWindow):
@@ -39,19 +36,28 @@ class MerkatoWindow(Adw.ApplicationWindow):
     last_updated_label = Gtk.Template.Child()
     trash_view_mode = Gtk.Template.Child()
 
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.symbols_cache = []
-        self.symbols_lock = threading.Lock()
-        self.timeout_id = None
-        self.is_paused = False
-        self.is_searching = False
-        self.is_refreshing = False
-        self.update_interval = 60
+        # Inicializa o controller
+        self.controller = StockController(update_interval=60)
 
-        self.refresh_action = self.create_action('refresh', self.on_refresh_action)
+        # Conecta sinais do controller
+        self._connect_controller_signals()
+
+        # Cria ações
+        self._create_actions()
+
+        # Conecta sinais da UI
+        self._connect_ui_signals()
+
+        # Carrega watchlist e inicia
+        self._initialize()
+
+    def _create_actions(self):
+        """Cria as ações da janela."""
+        self.refresh_action = self._create_action('refresh', self.on_refresh_action)
+
         sort_action = Gio.SimpleAction.new_stateful(
             "sort",
             GLib.VariantType.new("s"),
@@ -61,25 +67,106 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.add_action(sort_action)
         self.sort_action = sort_action
 
+    def _create_action(self, name, callback):
+        """Helper para criar ações."""
+        action = Gio.SimpleAction.new(name, None)
+        action.connect('activate', callback)
+        self.add_action(action)
+        return action
+
+    def _connect_controller_signals(self):
+        """Conecta os sinais do controller."""
+        self.controller.connect('search-started', self.on_search_started)
+        self.controller.connect('search-completed', self.on_search_completed)
+        self.controller.connect('search-error', self.on_search_error)
+
+        self.controller.connect('refresh-started', self.on_refresh_started)
+        self.controller.connect('refresh-completed', self.on_refresh_completed)
+        self.controller.connect('refresh-error', self.on_refresh_error)
+
+        self.controller.connect('watchlist-loaded', self.on_watchlist_loaded)
+        self.controller.connect('stock-added', self.on_stock_added)
+
+    def _connect_ui_signals(self):
+        """Conecta os sinais dos widgets da UI."""
         self.search_stock_entry.connect('activate', self.on_search_clicked)
         self.search_stock_entry.connect('changed', self.on_search_changed)
-        self.connect('close-request', self._on_close_request)
+        self.connect('close-request', self.on_close_request)
+
         self.list_stock.connect('empty-state-changed', self.on_empty_state_changed)
+        self.list_stock.connect('stock-remove-requested', self.on_stock_remove_requested)
 
         self.trash_view_mode.connect('toggled', self.on_trash_mode_toggled)
 
-        self.list_stock.connect('stock-remove-requested', self.on_stock_remove_requested)
-
-        self.watchlist_manager = WatchlistManager()
+    def _initialize(self):
+        """Inicializa a aplicação."""
         self.load_watchlist()
-
         self.on_refresh_action()
-
-        self.start_auto_update()
-
+        self.controller.start_auto_update()
         self.trash_view_mode.set_visible(not self.list_stock.is_empty())
 
+    # ============== Callbacks do Controller ==============
+
+    def on_search_started(self, controller):
+        """Callback quando a busca inicia."""
+        self.spinner.set_spinning(True)
+        self.search_stock_entry.freeze(True)
+
+    def on_search_completed(self, controller, results, errors):
+        """Callback quando a busca é completada."""
+        self.spinner.set_spinning(False)
+        self.search_stock_entry.freeze(False)
+        self.search_stock_entry.clear_entry()
+        self.update_timestamp()
+
+    def on_search_error(self, controller, error_msg):
+        """Callback quando ocorre erro na busca."""
+        print(f"Search Error: {error_msg}")
+        self.spinner.set_spinning(False)
+        self.search_stock_entry.freeze(False)
+
+    def on_refresh_started(self, controller):
+        """Callback quando o refresh inicia."""
+        self.refresh_action.set_enabled(False)
+        self.sort_action.set_enabled(False)
+        self.spinner.set_spinning(True)
+        self.search_stock_entry.freeze(True)
+        self.trash_view_mode.set_sensitive(False)
+
+    def on_refresh_completed(self, controller, results, errors):
+        """Callback quando o refresh é completado."""
+        for symbol, stock in results.items():
+            self.list_stock.update(stock)
+
+        self.spinner.set_spinning(False)
+        self.search_stock_entry.freeze(False)
+        self.trash_view_mode.set_sensitive(True)
+        self.refresh_action.set_enabled(True)
+        self.sort_action.set_enabled(True)
+        self.update_timestamp()
+
+    def on_refresh_error(self, controller, error_msg):
+        """Callback quando ocorre erro no refresh."""
+        print(f"Refresh Error: {error_msg}")
+        self.spinner.set_spinning(False)
+        self.search_stock_entry.freeze(False)
+        self.trash_view_mode.set_sensitive(True)
+        self.refresh_action.set_enabled(True)
+        self.sort_action.set_enabled(True)
+
+    def on_watchlist_loaded(self, controller, stocks_data):
+        """Callback quando a watchlist é carregada."""
+        if stocks_data:
+            self.last_updated_label.set_label(_('cached'))
+
+    def on_stock_added(self, controller, stock):
+        """Callback quando um stock é adicionado."""
+        self.list_stock.append(stock)
+
+    # ============== Callbacks da UI ==============
+
     def on_sort_action(self, action, parameter):
+        """Callback para ação de ordenação."""
         sort_type = parameter.get_string()
         action.set_state(parameter)
 
@@ -90,33 +177,29 @@ class MerkatoWindow(Adw.ApplicationWindow):
         elif sort_type == "losses":
             self.list_stock.sort_by_losses()
 
+        self.controller.save_sort_order(sort_type)
+
     def on_empty_state_changed(self, widget, is_empty):
+        """Callback quando o estado vazio da lista muda."""
         self.trash_view_mode.set_visible(not is_empty)
 
         if is_empty and self.trash_view_mode.get_active():
             self.trash_view_mode.set_active(False)
-            print("[DEBUG] self.trash_view_mode.set_active(False) on line 98")
 
-    def _on_close_request(self, window):
+    def on_close_request(self, window):
+        """Callback quando a janela vai ser fechada."""
         self.save_watchlist()
-
-
-    def create_action(self, name, callback):
-        action = Gio.SimpleAction.new(name, None)
-        action.connect('activate', callback)
-        self.add_action(action)
-
-        return action
-
+        self.controller.stop_auto_update()
 
     def on_search_changed(self, widget, text: str):
+        """Callback quando o texto de busca muda."""
         if text:
-            self.pause_auto_update()
+            self.controller.pause_auto_update()
         else:
-            self.restart_auto_update()
-
+            self.controller.restart_auto_update()
 
     def on_trash_mode_toggled(self, toggle_button):
+        """Callback quando o modo de remoção é alternado."""
         is_active = toggle_button.get_active()
         self.list_stock.set_remove_enabled(is_active)
         self.search_stock_entry.set_visible(not is_active)
@@ -124,216 +207,61 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.sort_action.set_enabled(not is_active)
 
         if is_active:
-            self.pause_auto_update()
+            self.controller.pause_auto_update()
         else:
-            self.restart_auto_update()
-
+            self.controller.restart_auto_update()
 
     def on_stock_remove_requested(self, widget, stock_item):
+        """Callback quando um stock é solicitado para remoção."""
         print(f"Removing stock: {stock_item.symbol} - {stock_item.long_name}")
 
         success = self.list_stock.remove_stock_by_symbol(stock_item.symbol)
 
         if success:
-            with self.symbols_lock:
-                if stock_item.symbol in self.symbols_cache:
-                    self.symbols_cache.remove(stock_item.symbol)
-
-            self.save_watchlist()
-
+            self.controller.remove_stock(stock_item.symbol)
             print(f"Successfully removed {stock_item.symbol}")
         else:
             print(f"Failed to remove {stock_item.symbol}")
 
-
-    def start_auto_update(self):
-        if self.timeout_id is None:
-            self.is_paused = False
-            self.timeout_id = GLib.timeout_add_seconds(
-                self.update_interval,
-                self.on_refresh_action
-            )
-
-
-    def pause_auto_update(self):
-        if self.timeout_id is not None:
-            GLib.source_remove(self.timeout_id)
-            self.timeout_id = None
-            self.is_paused = True
-
-
-    def stop_auto_update(self):
-        self.pause_auto_update()
-        self.is_paused = False
-
-
-    def restart_auto_update(self):
-        self.pause_auto_update()
-        self.start_auto_update()
-
-
     def on_refresh_action(self, action=None, param=None):
-        if self.is_refreshing:
-            return True
-
-        self.is_refreshing = True
-        self.refresh_action.set_enabled(False)
-        self.sort_action.set_enabled(False)
-        self.spinner.set_spinning(True)
-        self.search_stock_entry.freeze(True)
-        self.trash_view_mode.set_sensitive(False)
-
-        with self.symbols_lock:
-            symbols_copy = self.symbols_cache.copy()
-
-        thread = threading.Thread(
-            target=self._do_refresh,
-            args=(symbols_copy,),
-            daemon=True
-        )
-        thread.start()
-
+        """Callback para ação de refresh."""
+        self.controller.refresh_stocks()
         return True
 
+    def on_search_clicked(self, widget, symbol_input=None):
+        """Callback quando a busca é acionada."""
+        if symbol_input is None:
+            symbol_input = self.search_stock_entry.get_text()
 
-    def _do_refresh(self, symbols):
-        try:
-            yr = YahooRequest()
-            (results, errors) = yr.fetch(symbols)
+        if symbol_input.strip():
+            self.controller.search_stocks(symbol_input)
 
-            GLib.idle_add(self._refresh_results, results, errors)
-        except Exception as e:
-            print(f"Refresh error: {e}")
-            GLib.idle_add(self._on_refresh_error, str(e))
-        finally:
-            GLib.idle_add(self._clear_refresh_flag)
+    # ============== Métodos auxiliares ==============
 
-
-    def _refresh_results(self, results, errors):
-        for symbol, stock in results.items():
-            self.list_stock.update(stock)
-
-        self.spinner.set_spinning(False)
-        self.search_stock_entry.freeze(False)
-        self.trash_view_mode.set_sensitive(True)
-        self.refresh_action.set_enabled(True)
-        self.sort_action.set_enabled(True)
+    def update_timestamp(self):
+        """Atualiza o label de última atualização."""
         self.last_updated_label.set_label(
             _(f"Last updated: {datetime.now().strftime('%H:%M:%S')}")
         )
 
-        return False
-
-
-    def _clear_refresh_flag(self):
-        self.is_refreshing = False
-        return False
-
-
-    def _on_refresh_error(self, error_msg):
-        print(f"Refresh Error: {error_msg}")
-        self.spinner.set_spinning(False)
-        self.search_stock_entry.freeze(False)
-        self.trash_view_mode.set_sensitive(True)
-        self.refresh_action.set_enabled(True)
-        self.sort_action.set_enabled(True)
-
-        return False
-
-
-    def on_search_clicked(self, widget, symbol_input=None):
-        if self.is_searching:
-            return
-
-        if symbol_input is None:
-            symbol_input = self.search_stock_entry.get_text()
-        symbol_input = symbol_input.strip().upper()
-        symbols = [symbol.strip() for symbol in symbol_input.split(',') if symbol.strip()]
-
-        with self.symbols_lock:
-            symbols = [item for item in symbols if item not in self.symbols_cache]
-
-        if not symbols:
-            return
-
-        self.is_searching = True
-        self.spinner.set_spinning(True)
-        self.search_stock_entry.freeze(True)
-
-        thread = threading.Thread(
-            target=self._do_search,
-            args=(symbols,),
-            daemon=True
-        )
-        thread.start()
-
-
-    def _do_search(self, symbols):
-        try:
-            yr = YahooRequest()
-            (results, errors) = yr.fetch(symbols)
-
-            GLib.idle_add(self._update_results, results, errors)
-
-        except Exception as e:
-            print(f"Search error: {e}")
-            GLib.idle_add(self._on_search_error, str(e))
-        finally:
-            GLib.idle_add(self._clear_search_flag)
-
-
-    def _update_results(self, results, errors):
-        for symbol, stock in results.items():
-            self.list_stock.append(stock)
-            with self.symbols_lock:
-                if stock.symbol not in self.symbols_cache:
-                    self.symbols_cache.append(stock.symbol)
-
-        self.spinner.set_spinning(False)
-        self.search_stock_entry.freeze(False)
-        self.search_stock_entry.clear_entry()
-
-        self.last_updated_label.set_label(
-            f"{datetime.now().strftime('%H:%M:%S')}"
-        )
-
-        return False
-
-
-    def _clear_search_flag(self):
-        self.is_searching = False
-        return False
-
-
-    def _on_search_error(self, error_msg):
-        print(f"Search Error: {error_msg}")
-        self.spinner.set_spinning(False)
-        self.search_stock_entry.freeze(False)
-        return False
-
-
     def load_watchlist(self):
-        saved_stocks_data = self.watchlist_manager.load()
+        """Carrega a watchlist do controller."""
+        stocks_data, sort_order = self.controller.load_watchlist()
 
-        if saved_stocks_data:
-            for stock_data in saved_stocks_data:
+        if stocks_data:
+            for stock_data in stocks_data:
                 stock_item = Stock.from_dict(stock_data)
                 self.list_stock.append(stock_item)
-                with self.symbols_lock:
-                    if stock_item.symbol not in self.symbols_cache:
-                        self.symbols_cache.append(stock_item.symbol)
-            self.last_updated_label.set_label('cached')
 
-        saved_sort = self.watchlist_manager.load_sort_order()
-        if saved_sort:
-            self.sort_action.set_state(GLib.Variant("s", saved_sort))
-            self.list_stock.current_sort = saved_sort
+        if sort_order:
+            self.sort_action.set_state(GLib.Variant("s", sort_order))
+            self.list_stock.current_sort = sort_order
             self.list_stock._apply_sort()
 
     def save_watchlist(self) -> bool:
-        is_success = self.watchlist_manager.save(self.list_stock.get_all_stocks())
-
-        self.watchlist_manager.save_sort_order(self.list_stock.current_sort)
+        """Salva a watchlist através do controller."""
+        stocks = self.list_stock.get_all_stocks()
+        is_success = self.controller.save_watchlist(stocks)
 
         if not is_success:
             print(_("WARNING: Failed to save watchlist"))
