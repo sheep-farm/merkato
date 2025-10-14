@@ -116,6 +116,8 @@ class MerkatoWindow(Adw.ApplicationWindow):
         is_active = toggle_button.get_active()
         self.list_stock.set_remove_enabled(is_active)
         self.search_stock_entry.set_visible(not is_active)
+        self.refresh_action.set_enabled(not is_active)
+        self.sort_action.set_enabled(not is_active)
 
         if is_active:
             self.pause_auto_update()
