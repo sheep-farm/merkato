@@ -92,7 +92,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
     def on_empty_state_changed(self, widget, is_empty):
         self.trash_view_mode.set_visible(not is_empty)
-
+        self.trash_view_mode.set_active(not is_empty)
 
     def _on_close_request(self, window):
         self.save_watchlist()
@@ -102,6 +102,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         action = Gio.SimpleAction.new(name, None)
         action.connect('activate', callback)
         self.add_action(action)
+
         return action
 
 
@@ -116,6 +117,8 @@ class MerkatoWindow(Adw.ApplicationWindow):
         is_active = toggle_button.get_active()
         self.list_stock.set_remove_enabled(is_active)
         self.search_stock_entry.set_visible(not is_active)
+        self.refresh_action.set_enabled(not is_active)
+        self.sort_action.set_enabled(not is_active)
 
         if is_active:
             self.pause_auto_update()
