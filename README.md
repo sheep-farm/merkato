@@ -16,8 +16,6 @@ A financial markets tracker for stocks, currencies, and cryptocurrencies.
 </p>
 
 ## Features
-
-## Features
 - Real-time stock quotes from Yahoo Finance
 - Auto-refresh every 60 seconds
 - Trash mode to remove stocks
