@@ -33,20 +33,21 @@ from .stock import Stock
 class MerkatoWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MerkatoWindow'
 
-
     search_stock_entry = Gtk.Template.Child()
     list_stock = Gtk.Template.Child()
     spinner = Gtk.Template.Child()
     last_updated_label = Gtk.Template.Child()
     trash_view_mode = Gtk.Template.Child()
 
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         self.symbols_cache = []
+        self.symbols_lock = threading.Lock()
         self.timeout_id = None
         self.is_paused = False
+        self.is_searching = False
+        self.is_refreshing = False
         self.update_interval = 60
 
         self.create_action('refresh', self.on_refresh_action)
@@ -55,10 +56,8 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.connect('close-request', self._on_close_request)
         self.list_stock.connect('empty-state-changed', self.on_empty_state_changed)
 
-        # Connect trash mode toggle
         self.trash_view_mode.connect('toggled', self.on_trash_mode_toggled)
 
-        # Connect remove signal from list_stock
         self.list_stock.connect('stock-remove-requested', self.on_stock_remove_requested)
 
         self.watchlist_manager = WatchlistManager()
@@ -70,20 +69,16 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
         self.trash_view_mode.set_visible(not self.list_stock.is_empty())
 
-
     def on_empty_state_changed(self, widget, is_empty):
         self.trash_view_mode.set_visible(not is_empty)
 
-
     def _on_close_request(self, window):
         self.save_watchlist()
-
 
     def create_action(self, name, callback):
         action = Gio.SimpleAction.new(name, None)
         action.connect('activate', callback)
         self.add_action(action)
-
 
     def on_search_changed(self, widget, text: str):
         if text:
@@ -91,12 +86,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         else:
             self.restart_auto_update()
 
-
-    ############################################################################
-    # TRASH MODE
-    ############################################################################
     def on_trash_mode_toggled(self, toggle_button):
-        """Handle trash mode toggle"""
         is_active = toggle_button.get_active()
         self.list_stock.set_remove_enabled(is_active)
         self.search_stock_entry.set_visible(not is_active)
@@ -106,32 +96,22 @@ class MerkatoWindow(Adw.ApplicationWindow):
         else:
             self.restart_auto_update()
 
-
     def on_stock_remove_requested(self, widget, stock_item):
-        """Handle stock removal request"""
         print(f"Removing stock: {stock_item.symbol} - {stock_item.long_name}")
 
-        # Remove from list
         success = self.list_stock.remove_stock_by_symbol(stock_item.symbol)
 
         if success:
-            # Remove from cache
-            if stock_item.symbol in self.symbols_cache:
-                self.symbols_cache.remove(stock_item.symbol)
+            with self.symbols_lock:
+                if stock_item.symbol in self.symbols_cache:
+                    self.symbols_cache.remove(stock_item.symbol)
 
-            # Save watchlist
             self.save_watchlist()
 
             print(f"Successfully removed {stock_item.symbol}")
         else:
             print(f"Failed to remove {stock_item.symbol}")
 
-        self.trash_view_mode.set_active(not self.list_stock.is_empty())
-
-
-    ############################################################################
-    # REFRESH POR INTERVALO DE TEMPO
-    ############################################################################
     def start_auto_update(self):
         if self.timeout_id is None:
             self.is_paused = False
@@ -140,54 +120,52 @@ class MerkatoWindow(Adw.ApplicationWindow):
                 self.on_refresh_action
             )
 
-
     def pause_auto_update(self):
         if self.timeout_id is not None:
             GLib.source_remove(self.timeout_id)
             self.timeout_id = None
             self.is_paused = True
-            self.spinner.set_spinning(False)
-
 
     def stop_auto_update(self):
         self.pause_auto_update()
         self.is_paused = False
-        self.spinner.set_spinning(False)
-
 
     def restart_auto_update(self):
         self.pause_auto_update()
         self.start_auto_update()
 
+    def on_refresh_action(self, action=None, param=None):
+        if self.is_refreshing:
+            return True
 
-    ############################################################################
-    # REFRESH THREAD
-    ############################################################################
-    def on_refresh_action(self, action = None, param = None):
+        self.is_refreshing = True
         self.spinner.set_spinning(True)
         self.search_stock_entry.freeze(True)
         self.trash_view_mode.set_sensitive(False)
 
-        # Execute search in separate thread
+        with self.symbols_lock:
+            symbols_copy = self.symbols_cache.copy()
+
         thread = threading.Thread(
             target=self._do_refresh,
-            args=(self.symbols_cache,),
+            args=(symbols_copy,),
             daemon=True
         )
         thread.start()
 
+        return True
 
     def _do_refresh(self, symbols):
         try:
             yr = YahooRequest()
             (results, errors) = yr.fetch(symbols)
 
-            # Use GLib.idle_add to update UI in main thread
             GLib.idle_add(self._refresh_results, results, errors)
         except Exception as e:
-            print(f"Search error: {e}")
-            GLib.idle_add(self._on_search_error, str(e))
-
+            print(f"Refresh error: {e}")
+            GLib.idle_add(self._on_refresh_error, str(e))
+        finally:
+            GLib.idle_add(self._clear_refresh_flag)
 
     def _refresh_results(self, results, errors):
         for symbol, stock in results.items():
@@ -201,27 +179,38 @@ class MerkatoWindow(Adw.ApplicationWindow):
             _(f"Last updated: {datetime.now().strftime('%H:%M:%S')}")
         )
 
-        return False  # Remove idle callback
+        return False
 
+    def _clear_refresh_flag(self):
+        self.is_refreshing = False
+        return False
 
-    ############################################################################
-    # SEARCH THREAD
-    ############################################################################
-    def on_search_clicked (self, widget, symbol_input=None):
-        if symbol_input is None:
-            symbol_input = self.search_ticker_entry.get_text()
-        symbol_input = symbol_input.strip().upper()
-        symbols = [symbol.strip() for symbol in symbol_input.split(',') if symbol.strip()]
-        symbols  = [item for item in symbols if item not in self.symbols_cache]
+    def _on_refresh_error(self, error_msg):
+        print(f"Refresh Error: {error_msg}")
+        self.spinner.set_spinning(False)
+        self.search_stock_entry.freeze(False)
+        self.trash_view_mode.set_sensitive(True)
+        return False
 
-        # Avoid multiple simultaneous searches
-        if hasattr(self, 'is_searching') and self.is_searching:
+    def on_search_clicked(self, widget, symbol_input=None):
+        if self.is_searching:
             return
 
+        if symbol_input is None:
+            symbol_input = self.search_stock_entry.get_text()
+        symbol_input = symbol_input.strip().upper()
+        symbols = [symbol.strip() for symbol in symbol_input.split(',') if symbol.strip()]
+
+        with self.symbols_lock:
+            symbols = [item for item in symbols if item not in self.symbols_cache]
+
+        if not symbols:
+            return
+
+        self.is_searching = True
         self.spinner.set_spinning(True)
         self.search_stock_entry.freeze(True)
 
-        # Execute search in separate thread
         thread = threading.Thread(
             target=self._do_search,
             args=(symbols,),
@@ -229,25 +218,25 @@ class MerkatoWindow(Adw.ApplicationWindow):
         )
         thread.start()
 
-
     def _do_search(self, symbols):
         try:
             yr = YahooRequest()
             (results, errors) = yr.fetch(symbols)
 
-            # Use GLib.idle_add to update UI in main thread
             GLib.idle_add(self._update_results, results, errors)
 
         except Exception as e:
             print(f"Search error: {e}")
             GLib.idle_add(self._on_search_error, str(e))
-
+        finally:
+            GLib.idle_add(self._clear_search_flag)
 
     def _update_results(self, results, errors):
-        # self.list_stock.clear_all()
         for symbol, stock in results.items():
             self.list_stock.append(stock)
-            self.symbols_cache.append(stock.symbol)
+            with self.symbols_lock:
+                if stock.symbol not in self.symbols_cache:
+                    self.symbols_cache.append(stock.symbol)
 
         self.spinner.set_spinning(False)
         self.search_stock_entry.freeze(False)
@@ -257,31 +246,29 @@ class MerkatoWindow(Adw.ApplicationWindow):
             f"{datetime.now().strftime('%H:%M:%S')}"
         )
 
-        return False  # Remove idle callback
-
-
-    def _on_search_error(self, error_msg):
-        """Handle search errors"""
-        print(f"Error: {error_msg}")
-        self.spinner.set_spinning(False)
-        self.search_stock_entry.freeze(False)
-
         return False
 
-    ###########################################################################
-    # PERSISTENCE
-    ###########################################################################
+    def _clear_search_flag(self):
+        self.is_searching = False
+        return False
+
+    def _on_search_error(self, error_msg):
+        print(f"Search Error: {error_msg}")
+        self.spinner.set_spinning(False)
+        self.search_stock_entry.freeze(False)
+        return False
+
     def load_watchlist(self):
         saved_stocks_data = self.watchlist_manager.load()
 
         if saved_stocks_data:
-            # Convert dictionaries to StockItem and add to list
             for stock_data in saved_stocks_data:
                 stock_item = Stock.from_dict(stock_data)
                 self.list_stock.append(stock_item)
-                self.symbols_cache.append(stock_item.symbol)
+                with self.symbols_lock:
+                    if stock_item.symbol not in self.symbols_cache:
+                        self.symbols_cache.append(stock_item.symbol)
             self.last_updated_label.set_label('cached')
-
 
     def save_watchlist(self) -> bool:
         is_success = self.watchlist_manager.save(self.list_stock.get_all_stocks())
