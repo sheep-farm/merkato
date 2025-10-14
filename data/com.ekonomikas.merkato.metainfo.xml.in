@@ -28,12 +28,12 @@
 
   <screenshots>
     <screenshot type="default">
-      <caption>Main window showing stock watchlist with remove mode enabled</caption>
-      <image>https://raw.githubusercontent.com/sheep-farm/merkato/stable/screenshot1.png</image>
+      <caption>Main window showing stock watchlist</caption>
+      <image>https://raw.githubusercontent.com/sheep-farm/merkato/stable/preview.png</image>
     </screenshot>
     <screenshot>
-      <caption>Search interface for adding new stocks to your watchlist</caption>
-      <image>https://raw.githubusercontent.com/sheep-farm/merkato/stable/screenshot2.png</image>
+      <caption>Main window showing stock watchlist with remove mode enabled</caption>
+      <image>https://raw.githubusercontent.com/sheep-farm/merkato/stable/remove_preview.png</image>
     </screenshot>
   </screenshots>
 
