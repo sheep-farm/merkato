@@ -4,7 +4,12 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <name>Merkato</name>
-  <summary>Track stocks, currencies and cryptocurrencies in real-time</summary>
+  <summary>Monitor stocks and currencies</summary>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#5dd68d</color>
+    <color type="primary" scheme_preference="dark">#2d6943</color>
+  </branding>
 
   <description>
     <p>
@@ -28,11 +33,11 @@
 
   <screenshots>
     <screenshot type="default">
-      <caption>Main window showing stock watchlist</caption>
+      <caption>Stock watchlist with real-time prices</caption>
       <image>https://raw.githubusercontent.com/sheep-farm/merkato/stable/preview.png</image>
     </screenshot>
     <screenshot>
-      <caption>Main window showing stock watchlist with remove mode enabled</caption>
+      <caption>Remove mode for managing your watchlist</caption>
       <image>https://raw.githubusercontent.com/sheep-farm/merkato/stable/remove_preview.png</image>
     </screenshot>
   </screenshots>
