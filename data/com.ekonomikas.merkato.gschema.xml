@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="merkato">
-	<schema id="com.github.sheepfarm.merkato" path="/com/github/sheepfarm/merkato/">
+	<schema id="com.ekonomikas.merkato" path="/com/ekonomikas/merkato/">
+    <key name="window-width" type="i">
+      <default>450</default>
+      <summary>Window width</summary>
+    </key>
+    <key name="window-height" type="i">
+      <default>700</default>
+      <summary>Window height</summary>
+    </key>
+    <key name="window-maximized" type="b">
+      <default>false</default>
+      <summary>Window maximized state</summary>
+    </key>
 	</schema>
 </schemalist>
 

@@ -39,6 +39,13 @@ class MerkatoWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.settings = Gio.Settings.new('com.ekonomikas.merkato')
+
+        # Restore window size
+        width = self.settings.get_int('window-width')
+        height = self.settings.get_int('window-height')
+        self.set_default_size(width, height)
+
         # Inicializa o controller
         self.controller = StockController(update_interval=60)
 
@@ -187,6 +194,10 @@ class MerkatoWindow(Adw.ApplicationWindow):
             self.trash_view_mode.set_active(False)
 
     def on_close_request(self, window):
+        """Save window state before closing"""
+        self.settings.set_int('window-width', self.get_width())
+        self.settings.set_int('window-height', self.get_height())
+        self.settings.set_boolean('window-maximized', self.is_maximized())
         """Callback quando a janela vai ser fechada."""
         self.save_watchlist()
         self.controller.stop_auto_update()
