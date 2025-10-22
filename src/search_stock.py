@@ -41,10 +41,12 @@ class MerkatoSearchStock(Gtk.Box):
     _entry: Gtk.Entry = Gtk.Template.Child()
     _button: Gtk.Button = Gtk.Template.Child()
 
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._setup_signals()
         self._update_button_state()
+
 
     def _setup_signals(self):
         """Configura os sinais do widget."""
@@ -61,9 +63,11 @@ class MerkatoSearchStock(Gtk.Box):
         if text.strip():
             self.emit('activate', text)
 
+
     def _on_changed(self, widget):
         """Callback quando o texto muda."""
         self.emit('changed', self._entry.get_text())
+
 
     def _on_text_changed(self, widget):
         """Callback para atualizar estado do botão."""
@@ -80,6 +84,7 @@ class MerkatoSearchStock(Gtk.Box):
         """
         return self._entry.get_text()
 
+
     def set_text(self, text: str):
         """
         Define o texto do campo de entrada.
@@ -89,9 +94,11 @@ class MerkatoSearchStock(Gtk.Box):
         """
         self._entry.set_text(text)
 
+
     def clear_entry(self):
         """Limpa o campo de entrada."""
         self.set_text('')
+
 
     def freeze(self, frozen: bool = True):
         """
@@ -107,9 +114,11 @@ class MerkatoSearchStock(Gtk.Box):
         else:
             self._button.set_sensitive(False)
 
+
     def focus_entry(self):
         """Coloca o foco no campo de entrada."""
         self._entry.grab_focus()
+
 
     def select_all(self):
         """Seleciona todo o texto do campo."""
@@ -121,6 +130,7 @@ class MerkatoSearchStock(Gtk.Box):
         """Atualiza o estado do botão baseado no texto."""
         has_text = len(self._entry.get_text()) > 0
         self._button.set_sensitive(has_text)
+
 
     def _is_frozen(self) -> bool:
         """
