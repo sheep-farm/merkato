@@ -16,17 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: window.blp
-msgid "_Refresh All"
-msgstr "_Obnoviť všetko"
+#:main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "Sledovač finančných trhov pre akcie, meny a kryptomeny."
 
 #: window.blp
-msgid "_About Quartz"
-msgstr "_O programe Quartz"
+msgid "_Refresh"
+msgstr "_Aktualizovať Všetko"
+
+#: window.blp
+msgid "_About"
+msgstr "_O Aplikácii"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Zadajte symbol akcie (napr. AAPL, GOOGL)"
+msgstr "Zadajte symbol akcie (napr: AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
@@ -34,33 +38,61 @@ msgstr "Hľadať"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Zatiaľ žiadne akcie"
+msgstr "Zatiaľ Žiadne Akcie"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
-msgstr "Vyhľadajte a pridajte akcie do zoznamu sledovaných"
+msgstr "Vyhľadajte a pridajte akcie do sledovacieho zoznamu"
 
 #: window.blp
 msgid "Source: Yahoo Finance"
 msgstr "Zdroj: Yahoo Finance"
 
 #: window.blp
-msgid "Last updated: "
-msgstr "Naposledy aktualizované: "
+msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
+msgstr "Posledná aktualizácia: {datetime.now().strftime('%H:%M:%S')}"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "_Abecedné Poradie"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "Najväčšie _Zisky"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "Najväčšie _Straty"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_Klávesové Skratky"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "Hlavné Menu"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "Odstrániť Akcie"
+
+#: window.blp
+msgid "Updating..."
+msgstr "Aktualizuje sa..."
 
 #: window.py
 msgid "cached"
-msgstr "vo vyrovnávacej pamäti"
+msgstr "v medzipamäti"
 
 #: window.py
 #, python-brace-format
 msgid "Last updated: {0}"
-msgstr "Naposledy aktualizované: {0}"
+msgstr "Posledná aktualizácia: {0}"
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"
-msgstr "UPOZORNENIE: Nepodarilo sa uložiť zoznam sledovaných"
+msgstr "UPOZORNENIE: Nepodarilo sa uložiť sledovací zoznam"
 
 #: list_stock.py
 msgid "Remove from watchlist"
-msgstr "Odstrániť zo zoznamu sledovaných"
+msgstr "Odstrániť zo sledovacieho zoznamu"

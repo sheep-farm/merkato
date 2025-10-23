@@ -1,4 +1,4 @@
-# Portuguese (Brazil) translation for Merkato
+# Swiss German translation for Merkato
 # Copyright (C) 2025
 # This file is distributed under the same license as the Merkato package.
 #
@@ -9,90 +9,90 @@ msgstr ""
 "POT-Creation-Date: 2025-10-22 12:00+0000\n"
 "PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
-"Language-Team: Portuguese (Brazil)\n"
-"Language: pt_BR\n"
+"Language-Team: Swiss German\n"
+"Language: de_CH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #:main.py
 msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
-msgstr "Um monitor de mercados financeiros para ações, câmbio e criptomoedas."
+msgstr "En Finanzmarkt-Tracker für Aktie, Währige und Kryptowährige."
 
 #: window.blp
 msgid "_Refresh"
-msgstr "_Atualizar Tudo"
+msgstr "_Alles Aktualisiere"
 
 #: window.blp
 msgid "_About"
-msgstr "_Sobre"
+msgstr "_Über"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Digite o símbolo da ação (ex: AAPL, GOOGL)"
+msgstr "Tickersymbol iigäh (z.B. AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
-msgstr "Buscar"
+msgstr "Sueche"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Nenhuma Ação Ainda"
+msgstr "No Kei Aktie"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
-msgstr "Busque e adicione ações à sua lista de observação"
+msgstr "Sueche und füege Sie Aktie zu Ihrer Beobachtigsliste hinzu"
 
 #: window.blp
 msgid "Source: Yahoo Finance"
-msgstr "Fonte: Yahoo Finance"
+msgstr "Quelle: Yahoo Finance"
 
 #: window.blp
 msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
-msgstr "Última atualização: {datetime.now().strftime('%H:%M:%S')}"
+msgstr "Zletscht aktualisiert: {datetime.now().strftime('%H:%M:%S')}"
 
 #: window.blp
 msgid "_Sort Alphabetically"
-msgstr "Ordem _Alfabética"
+msgstr "_Alphabetischi Reihefolg"
 
 #: window.blp
 msgid "Sort by Top _Gains"
-msgstr "Maiores _ganhos"
+msgstr "Grössti _Gwünn"
 
 #: window.blp
 msgid "Sort by Top _Losses"
-msgstr "Maiores _perdas"
+msgstr "Grössti _Verlüst"
 
 #: window.blp
 msgid "_Keyboard Shortcuts"
-msgstr "_Teclas de atalho"
+msgstr "_Tasteturchbinige"
 
 #: window.blp
 msgid "Main Menu"
-msgstr "Menu Principal"
+msgstr "Hauptmenü"
 
 #: window.blp
 msgid "Remove Stocks"
-msgstr "Retirar Ações"
+msgstr "Aktie Entferne"
 
 #: window.blp
 msgid "Updating..."
-msgstr "Atualizando..."
+msgstr "Am Aktualisiere..."
 
 #: window.py
 msgid "cached"
-msgstr "em cache"
+msgstr "zwüschegschpeicheret"
 
 #: window.py
 #, python-brace-format
 msgid "Last updated: {0}"
-msgstr "Última atualização: {0}"
+msgstr "Zletscht aktualisiert: {0}"
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"
-msgstr "AVISO: Falha ao salvar lista de observação"
+msgstr "WARNIG: Beobachtigsliste het nöd chöne gschpeicheret werde"
 
 #: list_stock.py
 msgid "Remove from watchlist"
-msgstr "Remover da lista de observação"
+msgstr "Vo Beobachtigsliste entferne"

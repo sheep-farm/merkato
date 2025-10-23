@@ -16,13 +16,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#:main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "Un monitor de mercados financieros para acciones, divisas y criptomonedas."
+
 #: window.blp
-msgid "_Refresh All"
+msgid "_Refresh"
 msgstr "_Actualizar Todo"
 
 #: window.blp
-msgid "_About Quartz"
-msgstr "_Acerca de Quartz"
+msgid "_About"
+msgstr "_Acerca de"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
@@ -45,8 +49,36 @@ msgid "Source: Yahoo Finance"
 msgstr "Fuente: Yahoo Finance"
 
 #: window.blp
-msgid "Last updated: "
-msgstr "Última actualización: "
+msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
+msgstr "Última actualización: {datetime.now().strftime('%H:%M:%S')}"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "Orden _Alfabético"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "Mayores _Ganancias"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "Mayores _Pérdidas"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_Atajos de Teclado"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "Menú Principal"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "Eliminar Acciones"
+
+#: window.blp
+msgid "Updating..."
+msgstr "Actualizando..."
 
 #: window.py
 msgid "cached"

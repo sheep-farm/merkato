@@ -16,17 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: window.blp
-msgid "_Refresh All"
-msgstr "_Uppdatera allt"
+#:main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "En finansmarknadsövervakare för aktier, valutor och kryptovalutor."
 
 #: window.blp
-msgid "_About Quartz"
-msgstr "_Om Quartz"
+msgid "_Refresh"
+msgstr "_Uppdatera Allt"
+
+#: window.blp
+msgid "_About"
+msgstr "_Om"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Ange tickersymbol (t.ex. AAPL, GOOGL)"
+msgstr "Ange tickersymbol (t.ex: AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
@@ -34,19 +38,47 @@ msgstr "Sök"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Inga aktier än"
+msgstr "Inga Aktier Än"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
-msgstr "Sök och lägg till aktier till din bevakningslista"
+msgstr "Sök och lägg till aktier i din bevakningslista"
 
 #: window.blp
 msgid "Source: Yahoo Finance"
 msgstr "Källa: Yahoo Finance"
 
 #: window.blp
-msgid "Last updated: "
-msgstr "Senast uppdaterad: "
+msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
+msgstr "Senast uppdaterad: {datetime.now().strftime('%H:%M:%S')}"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "_Alfabetisk Ordning"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "Största _Vinsterna"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "Största _Förlusterna"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_Kortkommandon"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "Huvudmeny"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "Ta Bort Aktier"
+
+#: window.blp
+msgid "Updating..."
+msgstr "Uppdaterar..."
 
 #: window.py
 msgid "cached"
@@ -59,8 +91,8 @@ msgstr "Senast uppdaterad: {0}"
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"
-msgstr "VARNING: Kunde inte spara bevakningslistan"
+msgstr "VARNING: Misslyckades spara bevakningslista"
 
 #: list_stock.py
 msgid "Remove from watchlist"
-msgstr "Ta bort från bevakningslistan"
+msgstr "Ta bort från bevakningslista"

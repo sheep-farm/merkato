@@ -1,4 +1,4 @@
-# Portuguese (Brazil) translation for Merkato
+# Japanese translation for Merkato
 # Copyright (C) 2025
 # This file is distributed under the same license as the Merkato package.
 #
@@ -9,90 +9,90 @@ msgstr ""
 "POT-Creation-Date: 2025-10-22 12:00+0000\n"
 "PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
-"Language-Team: Portuguese (Brazil)\n"
-"Language: pt_BR\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #:main.py
 msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
-msgstr "Um monitor de mercados financeiros para ações, câmbio e criptomoedas."
+msgstr "株式、通貨、暗号通貨の金融市場トラッカー。"
 
 #: window.blp
 msgid "_Refresh"
-msgstr "_Atualizar Tudo"
+msgstr "すべて更新(_R)"
 
 #: window.blp
 msgid "_About"
-msgstr "_Sobre"
+msgstr "について(_A)"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Digite o símbolo da ação (ex: AAPL, GOOGL)"
+msgstr "ティッカーシンボルを入力（例：AAPL、GOOGL）"
 
 #: search_stock.blp
 msgid "Search"
-msgstr "Buscar"
+msgstr "検索"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Nenhuma Ação Ainda"
+msgstr "まだ株式がありません"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
-msgstr "Busque e adicione ações à sua lista de observação"
+msgstr "株式を検索してウォッチリストに追加"
 
 #: window.blp
 msgid "Source: Yahoo Finance"
-msgstr "Fonte: Yahoo Finance"
+msgstr "ソース：Yahoo Finance"
 
 #: window.blp
 msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
-msgstr "Última atualização: {datetime.now().strftime('%H:%M:%S')}"
+msgstr "最終更新：{datetime.now().strftime('%H:%M:%S')}"
 
 #: window.blp
 msgid "_Sort Alphabetically"
-msgstr "Ordem _Alfabética"
+msgstr "アルファベット順(_S)"
 
 #: window.blp
 msgid "Sort by Top _Gains"
-msgstr "Maiores _ganhos"
+msgstr "上昇率順(_G)"
 
 #: window.blp
 msgid "Sort by Top _Losses"
-msgstr "Maiores _perdas"
+msgstr "下落率順(_L)"
 
 #: window.blp
 msgid "_Keyboard Shortcuts"
-msgstr "_Teclas de atalho"
+msgstr "キーボードショートカット(_K)"
 
 #: window.blp
 msgid "Main Menu"
-msgstr "Menu Principal"
+msgstr "メインメニュー"
 
 #: window.blp
 msgid "Remove Stocks"
-msgstr "Retirar Ações"
+msgstr "株式を削除"
 
 #: window.blp
 msgid "Updating..."
-msgstr "Atualizando..."
+msgstr "更新中..."
 
 #: window.py
 msgid "cached"
-msgstr "em cache"
+msgstr "キャッシュ済み"
 
 #: window.py
 #, python-brace-format
 msgid "Last updated: {0}"
-msgstr "Última atualização: {0}"
+msgstr "最終更新：{0}"
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"
-msgstr "AVISO: Falha ao salvar lista de observação"
+msgstr "警告：ウォッチリストの保存に失敗しました"
 
 #: list_stock.py
 msgid "Remove from watchlist"
-msgstr "Remover da lista de observação"
+msgstr "ウォッチリストから削除"

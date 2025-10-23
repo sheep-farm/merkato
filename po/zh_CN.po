@@ -1,4 +1,4 @@
-# Simplified Chinese translation for Merkato
+# Chinese (Simplified) translation for Merkato
 # Copyright (C) 2025
 # This file is distributed under the same license as the Merkato package.
 #
@@ -16,17 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#:main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "用于股票、货币和加密货币的金融市场跟踪器。"
+
 #: window.blp
-msgid "_Refresh All"
+msgid "_Refresh"
 msgstr "全部刷新(_R)"
 
 #: window.blp
-msgid "_About Quartz"
-msgstr "关于 Quartz(_A)"
+msgid "_About"
+msgstr "关于(_A)"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "输入股票代码（例如：AAPL, GOOGL）"
+msgstr "输入股票代码（例如：AAPL、GOOGL）"
 
 #: search_stock.blp
 msgid "Search"
@@ -45,12 +49,40 @@ msgid "Source: Yahoo Finance"
 msgstr "来源：Yahoo Finance"
 
 #: window.blp
-msgid "Last updated: "
-msgstr "最后更新："
+msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
+msgstr "最后更新：{datetime.now().strftime('%H:%M:%S')}"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "按字母顺序排序(_S)"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "按涨幅排序(_G)"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "按跌幅排序(_L)"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "键盘快捷键(_K)"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "主菜单"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "删除股票"
+
+#: window.blp
+msgid "Updating..."
+msgstr "更新中..."
 
 #: window.py
 msgid "cached"
-msgstr "缓存"
+msgstr "已缓存"
 
 #: window.py
 #, python-brace-format
@@ -63,4 +95,4 @@ msgstr "警告：保存关注列表失败"
 
 #: list_stock.py
 msgid "Remove from watchlist"
-msgstr "从关注列表中移除"
+msgstr "从关注列表中删除"

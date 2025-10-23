@@ -16,17 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: window.blp
-msgid "_Refresh All"
-msgstr "_Обновить всё"
+#:main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "Трекер финансовых рынков для акций, валют и криптовалют."
 
 #: window.blp
-msgid "_About Quartz"
-msgstr "_О программе Quartz"
+msgid "_Refresh"
+msgstr "_Обновить Всё"
+
+#: window.blp
+msgid "_About"
+msgstr "_О Программе"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Введите символ акции (например, AAPL, GOOGL)"
+msgstr "Введите тикер акции (напр: AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
@@ -34,7 +38,7 @@ msgstr "Поиск"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Акций пока нет"
+msgstr "Пока Нет Акций"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
@@ -45,8 +49,36 @@ msgid "Source: Yahoo Finance"
 msgstr "Источник: Yahoo Finance"
 
 #: window.blp
-msgid "Last updated: "
-msgstr "Последнее обновление: "
+msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
+msgstr "Последнее обновление: {datetime.now().strftime('%H:%M:%S')}"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "_Алфавитный Порядок"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "Наибольший _Рост"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "Наибольшее _Падение"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_Горячие Клавиши"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "Главное Меню"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "Удалить Акции"
+
+#: window.blp
+msgid "Updating..."
+msgstr "Обновление..."
 
 #: window.py
 msgid "cached"
@@ -59,7 +91,7 @@ msgstr "Последнее обновление: {0}"
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"
-msgstr "ВНИМАНИЕ: Не удалось сохранить список наблюдения"
+msgstr "ПРЕДУПРЕЖДЕНИЕ: Не удалось сохранить список наблюдения"
 
 #: list_stock.py
 msgid "Remove from watchlist"

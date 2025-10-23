@@ -16,17 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: window.blp
-msgid "_Refresh All"
-msgstr "_Aktualigi ĉion"
+#:main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "Financa merkata observilo por akcioj, valuteroj kaj kriptomonero."
 
 #: window.blp
-msgid "_About Quartz"
-msgstr "_Pri Quartz"
+msgid "_Refresh"
+msgstr "_Ĝisdatigi Ĉion"
+
+#: window.blp
+msgid "_About"
+msgstr "_Pri"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Enigu akcibileton (ekz. AAPL, GOOGL)"
+msgstr "Enigu akcian simbolon (ekz: AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
@@ -34,19 +38,47 @@ msgstr "Serĉi"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Ankoraŭ neniuj akcioj"
+msgstr "Ankoraŭ Neniuj Akcioj"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
-msgstr "Serĉu kaj aldonu akciojn al via observlisto"
+msgstr "Serĉu kaj aldonu akciojn al via observolisto"
 
 #: window.blp
 msgid "Source: Yahoo Finance"
 msgstr "Fonto: Yahoo Finance"
 
 #: window.blp
-msgid "Last updated: "
-msgstr "Laste ĝisdatigita: "
+msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
+msgstr "Laste ĝisdatigita: {datetime.now().strftime('%H:%M:%S')}"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "Ordo _Alfabeta"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "Plej Grandaj _Gajnoj"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "Plej Grandaj _Perdoj"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_Klavaj Fulmoklavoj"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "Ĉefa Menuo"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "Forigi Akciojn"
+
+#: window.blp
+msgid "Updating..."
+msgstr "Ĝisdatigante..."
 
 #: window.py
 msgid "cached"
@@ -59,8 +91,8 @@ msgstr "Laste ĝisdatigita: {0}"
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"
-msgstr "AVERTO: Malsukcesis konservi observliston"
+msgstr "AVERTO: Malsukcesis konservi observoliston"
 
 #: list_stock.py
 msgid "Remove from watchlist"
-msgstr "Forigi el observlisto"
+msgstr "Forigi de observolisto"

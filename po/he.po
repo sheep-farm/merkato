@@ -1,4 +1,4 @@
-# Portuguese (Brazil) translation for Merkato
+# Hebrew translation for Merkato
 # Copyright (C) 2025
 # This file is distributed under the same license as the Merkato package.
 #
@@ -9,90 +9,90 @@ msgstr ""
 "POT-Creation-Date: 2025-10-22 12:00+0000\n"
 "PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
-"Language-Team: Portuguese (Brazil)\n"
-"Language: pt_BR\n"
+"Language-Team: Hebrew\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #:main.py
 msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
-msgstr "Um monitor de mercados financeiros para ações, câmbio e criptomoedas."
+msgstr "עוקב שווקים פיננסיים למניות, מטבעות ומטבעות קריפטוגרפיים."
 
 #: window.blp
 msgid "_Refresh"
-msgstr "_Atualizar Tudo"
+msgstr "_רענן הכל"
 
 #: window.blp
 msgid "_About"
-msgstr "_Sobre"
+msgstr "_אודות"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Digite o símbolo da ação (ex: AAPL, GOOGL)"
+msgstr "הזן סימול מניה (לדוגמה: AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
-msgstr "Buscar"
+msgstr "חיפוש"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Nenhuma Ação Ainda"
+msgstr "עדיין אין מניות"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
-msgstr "Busque e adicione ações à sua lista de observação"
+msgstr "חפש והוסף מניות לרשימת המעקב שלך"
 
 #: window.blp
 msgid "Source: Yahoo Finance"
-msgstr "Fonte: Yahoo Finance"
+msgstr "מקור: Yahoo Finance"
 
 #: window.blp
 msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
-msgstr "Última atualização: {datetime.now().strftime('%H:%M:%S')}"
+msgstr "עדכון אחרון: {datetime.now().strftime('%H:%M:%S')}"
 
 #: window.blp
 msgid "_Sort Alphabetically"
-msgstr "Ordem _Alfabética"
+msgstr "מיון _אלפביתי"
 
 #: window.blp
 msgid "Sort by Top _Gains"
-msgstr "Maiores _ganhos"
+msgstr "העליות ה_גבוהות"
 
 #: window.blp
 msgid "Sort by Top _Losses"
-msgstr "Maiores _perdas"
+msgstr "הירידות ה_גבוהות"
 
 #: window.blp
 msgid "_Keyboard Shortcuts"
-msgstr "_Teclas de atalho"
+msgstr "_קיצורי מקלדת"
 
 #: window.blp
 msgid "Main Menu"
-msgstr "Menu Principal"
+msgstr "תפריט ראשי"
 
 #: window.blp
 msgid "Remove Stocks"
-msgstr "Retirar Ações"
+msgstr "הסר מניות"
 
 #: window.blp
 msgid "Updating..."
-msgstr "Atualizando..."
+msgstr "מעדכן..."
 
 #: window.py
 msgid "cached"
-msgstr "em cache"
+msgstr "במטמון"
 
 #: window.py
 #, python-brace-format
 msgid "Last updated: {0}"
-msgstr "Última atualização: {0}"
+msgstr "עדכון אחרון: {0}"
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"
-msgstr "AVISO: Falha ao salvar lista de observação"
+msgstr "אזהרה: נכשל בשמירת רשימת המעקב"
 
 #: list_stock.py
 msgid "Remove from watchlist"
-msgstr "Remover da lista de observação"
+msgstr "הסר מרשימת המעקב"
