@@ -49,8 +49,8 @@ msgid "Source: Yahoo Finance"
 msgstr "Источник: Yahoo Finance"
 
 #: window.blp
-msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
-msgstr "Последнее обновление: {datetime.now().strftime('%H:%M:%S')}"
+msgid "Last updated: "
+msgstr "Последнее обновление: "
 
 #: window.blp
 msgid "_Sort Alphabetically"
@@ -83,11 +83,6 @@ msgstr "Обновление..."
 #: window.py
 msgid "cached"
 msgstr "в кэше"
-
-#: window.py
-#, python-brace-format
-msgid "Last updated: {0}"
-msgstr "Последнее обновление: {0}"
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"

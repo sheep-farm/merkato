@@ -49,8 +49,8 @@ msgid "Source: Yahoo Finance"
 msgstr "Zdroj: Yahoo Finance"
 
 #: window.blp
-msgid "Last updated: {datetime.now().strftime('%H:%M:%S')}"
-msgstr "Posledná aktualizácia: {datetime.now().strftime('%H:%M:%S')}"
+msgid "Last updated: "
+msgstr "Posledná aktualizácia: "
 
 #: window.blp
 msgid "_Sort Alphabetically"
@@ -83,11 +83,6 @@ msgstr "Aktualizuje sa..."
 #: window.py
 msgid "cached"
 msgstr "v medzipamäti"
-
-#: window.py
-#, python-brace-format
-msgid "Last updated: {0}"
-msgstr "Posledná aktualizácia: {0}"
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"
