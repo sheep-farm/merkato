@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-10 12:00+0000\n"
-"PO-Revision-Date: 2025-10-10 12:00+0000\n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: Esperanto\n"
 "Language: eo\n"
@@ -26,7 +26,7 @@ msgstr "_Pri Quartz"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Enigu akcion simbolon (ekz., AAPL, GOOGL)"
+msgstr "Enigu akcibileton (ekz. AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
@@ -49,9 +49,18 @@ msgid "Last updated: "
 msgstr "Laste ĝisdatigita: "
 
 #: window.py
-msgid "Last updated: {}"
-msgstr "Laste ĝisdatigita: {}"
+msgid "cached"
+msgstr "kaŝmemorita"
 
 #: window.py
-msgid "Last updated: in cache"
-msgstr "Laste ĝisdatigita: en kaŝmemoro"
+#, python-brace-format
+msgid "Last updated: {0}"
+msgstr "Laste ĝisdatigita: {0}"
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "AVERTO: Malsukcesis konservi observliston"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Forigi el observlisto"

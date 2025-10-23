@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-10 12:00+0000\n"
-"PO-Revision-Date: 2025-10-10 12:00+0300\n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
-"Language: ru\n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +26,7 @@ msgstr "_О программе Quartz"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Введите тикер акции (напр., AAPL, GOOGL)"
+msgstr "Введите символ акции (например, AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
@@ -34,7 +34,7 @@ msgstr "Поиск"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Акций Пока Нет"
+msgstr "Акций пока нет"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
@@ -49,9 +49,18 @@ msgid "Last updated: "
 msgstr "Последнее обновление: "
 
 #: window.py
-msgid "Last updated: {}"
-msgstr "Последнее обновление: {}"
+msgid "cached"
+msgstr "в кэше"
 
 #: window.py
-msgid "Last updated: in cache"
-msgstr "Последнее обновление: из кеша"
+#, python-brace-format
+msgid "Last updated: {0}"
+msgstr "Последнее обновление: {0}"
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "ВНИМАНИЕ: Не удалось сохранить список наблюдения"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Удалить из списка наблюдения"

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-10 12:00+0000\n"
-"PO-Revision-Date: 2025-10-10 12:00+0100\n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -26,7 +26,7 @@ msgstr "_Acerca de Quartz"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "Ingrese el símbolo bursátil (ej: AAPL, GOOGL)"
+msgstr "Ingrese el símbolo de la acción (ej: AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
@@ -34,7 +34,7 @@ msgstr "Buscar"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Aún No Hay Acciones"
+msgstr "Sin Acciones Aún"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
@@ -49,9 +49,18 @@ msgid "Last updated: "
 msgstr "Última actualización: "
 
 #: window.py
-msgid "Last updated: {}"
-msgstr "Última actualización: {}"
+msgid "cached"
+msgstr "en caché"
 
 #: window.py
-msgid "Last updated: in cache"
-msgstr "Última actualización: en caché"
+#, python-brace-format
+msgid "Last updated: {0}"
+msgstr "Última actualización: {0}"
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "ADVERTENCIA: Error al guardar la lista de seguimiento"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Eliminar de la lista de seguimiento"

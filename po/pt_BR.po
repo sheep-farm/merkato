@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-10 12:00+0000\n"
-"PO-Revision-Date: 2025-10-10 12:00-0300\n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese (Brazil)\n"
 "Language: pt_BR\n"
@@ -49,9 +49,18 @@ msgid "Last updated: "
 msgstr "Última atualização: "
 
 #: window.py
-msgid "Last updated: {}"
-msgstr "Última atualização: {}"
+msgid "cached"
+msgstr "em cache"
 
 #: window.py
-msgid "Last updated: in cache"
-msgstr "Última atualização: em cache"
+#, python-brace-format
+msgid "Last updated: {0}"
+msgstr "Última atualização: {0}"
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "AVISO: Falha ao salvar lista de observação"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Remover da lista de observação"

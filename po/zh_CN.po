@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-10 12:00+0000\n"
-"PO-Revision-Date: 2025-10-10 12:00+0800\n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: Chinese (Simplified)\n"
 "Language: zh_CN\n"
@@ -26,7 +26,7 @@ msgstr "关于 Quartz(_A)"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
-msgstr "输入股票代码(例如:AAPL, GOOGL)"
+msgstr "输入股票代码（例如：AAPL, GOOGL）"
 
 #: search_stock.blp
 msgid "Search"
@@ -49,9 +49,18 @@ msgid "Last updated: "
 msgstr "最后更新："
 
 #: window.py
-msgid "Last updated: {}"
-msgstr "最后更新：{}"
+msgid "cached"
+msgstr "缓存"
 
 #: window.py
-msgid "Last updated: in cache"
-msgstr "最后更新：缓存中"
+#, python-brace-format
+msgid "Last updated: {0}"
+msgstr "最后更新：{0}"
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "警告：保存关注列表失败"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "从关注列表中移除"

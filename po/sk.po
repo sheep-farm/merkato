@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-10 12:00+0000\n"
-"PO-Revision-Date: 2025-10-10 12:00+0100\n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: Slovak\n"
 "Language: sk\n"
@@ -22,7 +22,7 @@ msgstr "_Obnoviť všetko"
 
 #: window.blp
 msgid "_About Quartz"
-msgstr "_O aplikácii Quartz"
+msgstr "_O programe Quartz"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
@@ -38,7 +38,7 @@ msgstr "Zatiaľ žiadne akcie"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
-msgstr "Vyhľadajte a pridajte akcie do sledovaného zoznamu"
+msgstr "Vyhľadajte a pridajte akcie do zoznamu sledovaných"
 
 #: window.blp
 msgid "Source: Yahoo Finance"
@@ -46,12 +46,21 @@ msgstr "Zdroj: Yahoo Finance"
 
 #: window.blp
 msgid "Last updated: "
-msgstr "Posledná aktualizácia: "
+msgstr "Naposledy aktualizované: "
 
 #: window.py
-msgid "Last updated: {}"
-msgstr "Posledná aktualizácia: {}"
+msgid "cached"
+msgstr "vo vyrovnávacej pamäti"
 
 #: window.py
-msgid "Last updated: in cache"
-msgstr "Posledná aktualizácia: v cache"
+#, python-brace-format
+msgid "Last updated: {0}"
+msgstr "Naposledy aktualizované: {0}"
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "UPOZORNENIE: Nepodarilo sa uložiť zoznam sledovaných"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Odstrániť zo zoznamu sledovaných"

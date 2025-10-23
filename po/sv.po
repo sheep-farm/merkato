@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-10 12:00+0000\n"
-"PO-Revision-Date: 2025-10-10 12:00+0100\n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: window.blp
 msgid "_Refresh All"
-msgstr "_Uppdatera alla"
+msgstr "_Uppdatera allt"
 
 #: window.blp
 msgid "_About Quartz"
@@ -34,11 +34,11 @@ msgstr "Sök"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Inga aktier ännu"
+msgstr "Inga aktier än"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
-msgstr "Sök och lägg till aktier i din bevakningslista"
+msgstr "Sök och lägg till aktier till din bevakningslista"
 
 #: window.blp
 msgid "Source: Yahoo Finance"
@@ -49,9 +49,18 @@ msgid "Last updated: "
 msgstr "Senast uppdaterad: "
 
 #: window.py
-msgid "Last updated: {}"
-msgstr "Senast uppdaterad: {}"
+msgid "cached"
+msgstr "cachad"
 
 #: window.py
-msgid "Last updated: in cache"
-msgstr "Senast uppdaterad: i cache"
+#, python-brace-format
+msgid "Last updated: {0}"
+msgstr "Senast uppdaterad: {0}"
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "VARNING: Kunde inte spara bevakningslistan"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Ta bort från bevakningslistan"
