@@ -114,6 +114,11 @@ template $MerkatoWindow: Adw.ApplicationWindow {
                 opacity: 0.5;
               }
 
+              Label {
+                label: _("Last update: ");
+                styles ["caption"]
+              }
+
               Label last_updated_label {
                 label: "--";
                 styles ["caption", "numeric"]

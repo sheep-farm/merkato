@@ -251,9 +251,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
     def update_timestamp(self):
         """Atualiza o label de última atualização."""
-        self.last_updated_label.set_label(
-            _(f"Last updated: {datetime.now().strftime('%H:%M:%S')}")
-        )
+        self.last_updated_label.set_label(_(f"{datetime.now().strftime('%H:%M:%S')}"))
 
     def load_watchlist(self):
         """Carrega a watchlist do controller."""
