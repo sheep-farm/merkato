@@ -79,6 +79,7 @@ class MerkatoApplication(Adw.Application):
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
+        comments = _("A financial markets tracker for stocks, currencies, and cryptocurrencies.")
         about = Adw.AboutDialog(
             application_name='Merkato',
             application_icon='com.ekonomikas.merkato',
@@ -89,7 +90,7 @@ class MerkatoApplication(Adw.Application):
             license_type=Gtk.License.GPL_3_0,
             website='https://github.com/sheep-farm/merkato',
             issue_url='https://github.com/sheep-farm/merkato/issues',
-            comments=_('A financial markets tracker for stocks, currencies, and cryptocurrencies.')
+            comments=comments
         )
         about.set_translator_credits('Claude (Anthropic)')
         about.present(self.props.active_window)
