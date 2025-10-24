@@ -81,7 +81,7 @@ msgid "cached"
 msgstr "em cache"
 
 #: window.blp
-msgid "Last update: "
+msgid "Last updated: "
 msgstr "Última atualização: "
 
 #: window.py

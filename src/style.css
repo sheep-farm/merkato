@@ -1,11 +1,11 @@
 .market-closed {
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(75, 85, 99, 0.2),
-    rgba(75, 85, 99, 0.3) 12px,
-    rgba(75, 85, 99, 0.4) 12px,
-    rgba(75, 85, 99, 0.4) 24px
-  );
+  /* background: repeating-linear-gradient( */
+  /*   45deg, */
+  /*   rgba(75, 85, 99, 0.2), */
+  /*   rgba(75, 85, 99, 0.3) 12px, */
+  /*   rgba(75, 85, 99, 0.4) 12px, */
+  /*   rgba(75, 85, 99, 0.4) 24px */
+  /* ); */
 }
 
 .remove-button {

@@ -3,17 +3,7 @@
 A financial markets tracker for stocks, currencies, and cryptocurrencies.
 
 ## Screenshots
-<p align="center">
-    <a href="#readme">
-        <img alt="View mode" width="50%" src="preview.png">
-    </a>
-</p>
-
-<p align="center">
-   <a href="#readme">
-        <img alt="View mode" width="50%" src="remove_preview.png">
-    </a>
-</p>
+![Main Window](preview.png)
 
 ## Features
 - Real-time stock quotes from Yahoo Finance
