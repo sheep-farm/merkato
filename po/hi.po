@@ -1,0 +1,92 @@
+# Hindi translation for Merkato
+# Copyright (C) 2025
+# This file is distributed under the same license as the Merkato package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Merkato\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"Last-Translator: \n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "शेयर, मुद्राओं और क्रिप्टोकरेंसी के लिए एक वित्तीय बाज़ार ट्रैकर।"
+
+#: window.blp
+msgid "_Refresh"
+msgstr "_रिफ्रेश"
+
+#: window.blp
+msgid "_About"
+msgstr "_परिचय"
+
+#: search_stock.blp
+msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
+msgstr "टिकर सिंबल दर्ज करें (जैसे AAPL, GOOGL)"
+
+#: search_stock.blp
+msgid "Search"
+msgstr "खोजें"
+
+#: list_stock.blp
+msgid "No Stocks Yet"
+msgstr "अभी कोई शेयर नहीं"
+
+#: list_stock.blp
+msgid "Search and add stocks to your watchlist"
+msgstr "खोजें और शेयरों को अपनी वॉचलिस्ट में जोड़ें"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "स्रोत: Yahoo Finance"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "_वर्णक्रमानुसार क्रमित करें"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "सबसे अधिक _मुनाफ़े के अनुसार क्रमित करें"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "सबसे अधिक _नुकसान के अनुसार क्रमित करें"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_कुंजीपटल शॉर्टकट"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "मुख्य मेन्यू"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "शेयर हटाएँ"
+
+#: window.blp
+msgid "Updating..."
+msgstr "अपडेट हो रहा है…"
+
+#: window.py
+msgid "cached"
+msgstr "कैश्ड"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "अंतिम अपडेट: "
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "चेतावनी: वॉचलिस्ट सहेजने में विफल"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "वॉचलिस्ट से हटाएँ"

@@ -1,0 +1,92 @@
+# Thai translation for Merkato
+# Copyright (C) 2025
+# This file is distributed under the same license as the Merkato package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Merkato\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"Last-Translator: \n"
+"Language-Team: Thai\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+#: main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "เครื่องมือติดตามตลาดการเงินสำหรับหุ้น สกุลเงิน และสกุลเงินดิจิทัล"
+
+#: window.blp
+msgid "_Refresh"
+msgstr "_รีเฟรช"
+
+#: window.blp
+msgid "_About"
+msgstr "_เกี่ยวกับ"
+
+#: search_stock.blp
+msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
+msgstr "ป้อนสัญลักษณ์ทิกเกอร์ (เช่น AAPL, GOOGL)"
+
+#: search_stock.blp
+msgid "Search"
+msgstr "ค้นหา"
+
+#: list_stock.blp
+msgid "No Stocks Yet"
+msgstr "ยังไม่มีหุ้น"
+
+#: list_stock.blp
+msgid "Search and add stocks to your watchlist"
+msgstr "ค้นหาและเพิ่มหุ้นลงในรายการติดตามของคุณ"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "แหล่งที่มา: Yahoo Finance"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "_จัดเรียงตามตัวอักษร"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "จัดเรียงตาม _กำไรสูงสุด"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "จัดเรียงตาม _ขาดทุนสูงสุด"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_ปุ่มลัดแป้นพิมพ์"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "เมนูหลัก"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "ลบหุ้น"
+
+#: window.blp
+msgid "Updating..."
+msgstr "กำลังอัปเดต…"
+
+#: window.py
+msgid "cached"
+msgstr "แคชไว้"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "อัปเดตล่าสุด: "
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "คำเตือน: บันทึกรายการติดตามไม่สำเร็จ"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "ลบออกจากรายการติดตาม"

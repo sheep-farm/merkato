@@ -1,0 +1,92 @@
+# Czech translation for Merkato
+# Copyright (C) 2025
+# This file is distributed under the same license as the Merkato package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Merkato\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"Last-Translator: \n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1)?0:(n>=2 && n<=4)?1:2;\n"
+#: main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "Aplikace pro sledování finančních trhů pro akcie, měny a kryptoměny."
+
+#: window.blp
+msgid "_Refresh"
+msgstr "_Obnovit"
+
+#: window.blp
+msgid "_About"
+msgstr "_O aplikaci"
+
+#: search_stock.blp
+msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
+msgstr "Zadejte burzovní symbol (např.: AAPL, GOOGL)"
+
+#: search_stock.blp
+msgid "Search"
+msgstr "Hledat"
+
+#: list_stock.blp
+msgid "No Stocks Yet"
+msgstr "Zatím žádné akcie"
+
+#: list_stock.blp
+msgid "Search and add stocks to your watchlist"
+msgstr "Vyhledejte a přidejte akcie do seznamu sledování"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "Zdroj: Yahoo Finance"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "_Seřadit abecedně"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "Řadit podle největších _zisků"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "Řadit podle největších _ztrát"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_Klávesové zkratky"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "Hlavní nabídka"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "Odebrat akcie"
+
+#: window.blp
+msgid "Updating..."
+msgstr "Aktualizace…"
+
+#: window.py
+msgid "cached"
+msgstr "v mezipaměti"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "Naposledy aktualizováno: "
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "VAROVÁNÍ: Uložení seznamu sledování se nezdařilo"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Odebrat ze seznamu sledování"

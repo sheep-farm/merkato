@@ -1,0 +1,92 @@
+# Greek translation for Merkato
+# Copyright (C) 2025
+# This file is distributed under the same license as the Merkato package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Merkato\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"Last-Translator: \n"
+"Language-Team: Greek\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "Εφαρμογή παρακολούθησης χρηματαγορών για μετοχές, νομίσματα και κρυπτονομίσματα."
+
+#: window.blp
+msgid "_Refresh"
+msgstr "_Ανανέωση"
+
+#: window.blp
+msgid "_About"
+msgstr "_Σχετικά"
+
+#: search_stock.blp
+msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
+msgstr "Εισαγάγετε σύμβολο μετοχής (π.χ. AAPL, GOOGL)"
+
+#: search_stock.blp
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: list_stock.blp
+msgid "No Stocks Yet"
+msgstr "Δεν υπάρχουν μετοχές ακόμη"
+
+#: list_stock.blp
+msgid "Search and add stocks to your watchlist"
+msgstr "Αναζητήστε και προσθέστε μετοχές στη λίστα παρακολούθησής σας"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "Πηγή: Yahoo Finance"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "_Ταξινόμηση αλφαβητικά"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "Ταξινόμηση κατά _μεγαλύτερα κέρδη"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "Ταξινόμηση κατά _μεγαλύτερες απώλειες"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_Συντομεύσεις πληκτρολογίου"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "Κύριο μενού"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "Αφαίρεση μετοχών"
+
+#: window.blp
+msgid "Updating..."
+msgstr "Γίνεται ενημέρωση…"
+
+#: window.py
+msgid "cached"
+msgstr "σε προσωρινή μνήμη"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "Τελευταία ενημέρωση: "
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Αποτυχία αποθήκευσης της λίστας παρακολούθησης"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Αφαίρεση από τη λίστα παρακολούθησης"

@@ -1,0 +1,92 @@
+# Persian translation for Merkato
+# Copyright (C) 2025
+# This file is distributed under the same license as the Merkato package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Merkato\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"Last-Translator: \n"
+"Language-Team: Persian\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "ابزاری برای پایش بازارهای مالیِ سهام، ارزها و ارزهای دیجیتال."
+
+#: window.blp
+msgid "_Refresh"
+msgstr "_بازآوری"
+
+#: window.blp
+msgid "_About"
+msgstr "_درباره"
+
+#: search_stock.blp
+msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
+msgstr "نماد تیکر را وارد کنید (مثلاً: AAPL، GOOGL)"
+
+#: search_stock.blp
+msgid "Search"
+msgstr "جستجو"
+
+#: list_stock.blp
+msgid "No Stocks Yet"
+msgstr "هنوز سهامی وجود ندارد"
+
+#: list_stock.blp
+msgid "Search and add stocks to your watchlist"
+msgstr "جستجو کنید و سهام را به فهرست پیگیری خود بیفزایید"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "منبع: Yahoo Finance"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "_مرتب‌سازی الفبایی"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "مرتب‌سازی براساس بیشترین _سود"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "مرتب‌سازی براساس بیشترین _زیان"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_میان‌برهای صفحه‌کلید"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "منوی اصلی"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "حذف سهام"
+
+#: window.blp
+msgid "Updating..."
+msgstr "در حال به‌روزرسانی…"
+
+#: window.py
+msgid "cached"
+msgstr "نهان‌سازی شده"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "آخرین به‌روزرسانی: "
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "هشدار: ذخیره‌ی فهرست پیگیری ناموفق بود"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "حذف از فهرست پیگیری"

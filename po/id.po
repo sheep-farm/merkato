@@ -1,0 +1,92 @@
+# Indonesian translation for Merkato
+# Copyright (C) 2025
+# This file is distributed under the same license as the Merkato package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Merkato\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"Last-Translator: \n"
+"Language-Team: Indonesian\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+#: main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "Pelacak pasar keuangan untuk saham, mata uang, dan kripto."
+
+#: window.blp
+msgid "_Refresh"
+msgstr "_Muat Ulang"
+
+#: window.blp
+msgid "_About"
+msgstr "_Tentang"
+
+#: search_stock.blp
+msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
+msgstr "Masukkan simbol ticker (mis.: AAPL, GOOGL)"
+
+#: search_stock.blp
+msgid "Search"
+msgstr "Cari"
+
+#: list_stock.blp
+msgid "No Stocks Yet"
+msgstr "Belum ada saham"
+
+#: list_stock.blp
+msgid "Search and add stocks to your watchlist"
+msgstr "Cari dan tambahkan saham ke daftar pantauan Anda"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "Sumber: Yahoo Finance"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "_Urutkan menurut abjad"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "Urutkan berdasarkan _kenaikan tertinggi"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "Urutkan berdasarkan _penurunan tertinggi"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_Pintasan Papan Ketik"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "Menu Utama"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "Hapus Saham"
+
+#: window.blp
+msgid "Updating..."
+msgstr "Memperbarui…"
+
+#: window.py
+msgid "cached"
+msgstr "di-cache"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "Terakhir diperbarui: "
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "PERINGATAN: Gagal menyimpan daftar pantauan"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Hapus dari daftar pantauan"

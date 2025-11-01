@@ -1,0 +1,93 @@
+# Portuguese (Portugal) translation for Merkato
+# Copyright (C) 2025
+# This file is distributed under the same license as the Merkato package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Merkato\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-22 12:00+0000\n"
+"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"Last-Translator: \n"
+"Language-Team: Portuguese (Portugal)\n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: main.py
+msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
+msgstr "Um monitor dos mercados financeiros para ações, moedas e criptomoedas."
+
+#: window.blp
+msgid "_Refresh"
+msgstr "_Atualizar"
+
+#: window.blp
+msgid "_About"
+msgstr "_Sobre"
+
+#: search_stock.blp
+msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
+msgstr "Introduza o símbolo da ação (ex.: AAPL, GOOGL)"
+
+#: search_stock.blp
+msgid "Search"
+msgstr "Procurar"
+
+#: list_stock.blp
+msgid "No Stocks Yet"
+msgstr "Ainda sem ações"
+
+#: list_stock.blp
+msgid "Search and add stocks to your watchlist"
+msgstr "Procure e adicione ações à sua lista de observação"
+
+#: window.blp
+msgid "Source: Yahoo Finance"
+msgstr "Fonte: Yahoo Finance"
+
+#: window.blp
+msgid "_Sort Alphabetically"
+msgstr "Ordenar _alfabeticamente"
+
+#: window.blp
+msgid "Sort by Top _Gains"
+msgstr "Ordenar por maiores _ganhos"
+
+#: window.blp
+msgid "Sort by Top _Losses"
+msgstr "Ordenar por maiores _perdas"
+
+#: window.blp
+msgid "_Keyboard Shortcuts"
+msgstr "_Atalhos de teclado"
+
+#: window.blp
+msgid "Main Menu"
+msgstr "Menu principal"
+
+#: window.blp
+msgid "Remove Stocks"
+msgstr "Remover ações"
+
+#: window.blp
+msgid "Updating..."
+msgstr "A atualizar…"
+
+#: window.py
+msgid "cached"
+msgstr "em cache"
+
+#: window.blp
+msgid "Last updated: "
+msgstr "Última atualização: "
+
+#: window.py
+msgid "WARNING: Failed to save watchlist"
+msgstr "AVISO: Falha ao guardar a lista de observação"
+
+#: list_stock.py
+msgid "Remove from watchlist"
+msgstr "Remover da lista de observação"
