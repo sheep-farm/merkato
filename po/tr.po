@@ -53,7 +53,7 @@ msgstr "Alfabetik olarak _sırala"
 
 #: window.blp
 msgid "Sort by Top _Gains"
-msgstr "En yüksek _kazançlara göre sırala"
+msgstr "En yüksek k_azançlara göre sırala"
 
 #: window.blp
 msgid "Sort by Top _Losses"
