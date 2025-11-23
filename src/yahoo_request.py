@@ -1,4 +1,4 @@
-# yahoo_request.py
+# yahoo_request.py (MODIFICADO para incluir setor/indústria)
 #
 # Copyright 2025 Flávio de Vasconcellos Corrêa
 #
@@ -30,6 +30,7 @@ class YahooRequest(GObject.Object):
     """
     Classe responsável por fazer requisições à API do Yahoo Finance.
     Suporta requisições paralelas com controle de batch.
+    MODIFICADO para buscar também dados de categorização (setor/indústria/quoteType).
     """
     __gtype_name__ = 'YahooRequest'
 
@@ -140,20 +141,47 @@ class YahooRequest(GObject.Object):
         try:
             ticker = Ticker(symbols_batch)
 
+            # Busca price (dados básicos)
+            price_data = ticker.price
+            # Busca asset_profile (setor/indústria) - pode retornar erro para alguns símbolos
+            try:
+                profile_data = ticker.asset_profile
+            except:
+                profile_data = {}
+
+            # Busca quote_type (tipo do ativo)
+            try:
+                quote_type_data = ticker.quote_type
+            except:
+                quote_type_data = {}
+
             for symbol in symbols_batch:
-                if isinstance(ticker.price, dict) and symbol in ticker.price:
-                    data = ticker.price[symbol]
-
-                    # Valida se a resposta é válida
-                    if not self._is_valid_response(data):
-                        batch_errors.append(symbol)
-                        continue
-
-                    # Cria objeto Stock com os dados
-                    stock_item = self._create_stock_from_data(symbol, data)
-                    batch_results[symbol] = stock_item
-                else:
+                # Valida price data
+                if not isinstance(price_data, dict) or symbol not in price_data:
                     batch_errors.append(symbol)
+                    continue
+
+                data = price_data[symbol]
+
+                if not self._is_valid_response(data):
+                    batch_errors.append(symbol)
+                    continue
+
+                # Busca dados adicionais de perfil (setor/indústria)
+                profile = {}
+                if isinstance(profile_data, dict) and symbol in profile_data:
+                    if isinstance(profile_data[symbol], dict):
+                        profile = profile_data[symbol]
+
+                # Busca quote type
+                qtype = {}
+                if isinstance(quote_type_data, dict) and symbol in quote_type_data:
+                    if isinstance(quote_type_data[symbol], dict):
+                        qtype = quote_type_data[symbol]
+
+                # Cria objeto Stock com os dados completos
+                stock_item = self._create_stock_from_data(symbol, data, profile, qtype)
+                batch_results[symbol] = stock_item
 
         except Exception as e:
             # Em caso de erro na requisição, marca todos os símbolos como erro
@@ -162,20 +190,22 @@ class YahooRequest(GObject.Object):
 
         return (batch_results, batch_errors)
 
-    def _create_stock_from_data(self, symbol, data):
+    def _create_stock_from_data(self, symbol, price_data, profile_data, quote_type_data):
         """
         Cria um objeto Stock a partir dos dados da API.
 
         Args:
             symbol: Símbolo do stock
-            data: Dados retornados pela API
+            price_data: Dados de preço da API
+            profile_data: Dados de perfil (setor/indústria)
+            quote_type_data: Dados de tipo do quote
 
         Returns:
             Objeto Stock preenchido
         """
         stock_item = Stock(symbol)
 
-        # Mapeia os campos da API para o objeto Stock
+        # Mapeia os campos básicos de price
         field_mappings = {
             'longName': 'long_name',
             'regularMarketPrice': 'price',
@@ -187,8 +217,19 @@ class YahooRequest(GObject.Object):
         }
 
         for api_field, stock_field in field_mappings.items():
-            if api_field in data:
-                setattr(stock_item, stock_field, data[api_field])
+            if api_field in price_data:
+                setattr(stock_item, stock_field, price_data[api_field])
+
+        # Adiciona dados de categorização do asset_profile
+        if profile_data:
+            if 'sector' in profile_data:
+                stock_item.sector = profile_data['sector']
+            if 'industry' in profile_data:
+                stock_item.industry = profile_data['industry']
+
+        # Adiciona quote_type
+        if quote_type_data and 'quoteType' in quote_type_data:
+            stock_item.quote_type = quote_type_data['quoteType']
 
         return stock_item
 

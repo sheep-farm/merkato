@@ -83,7 +83,7 @@ class MerkatoApplication(Adw.Application):
             application_name='Merkato',
             application_icon='com.ekonomikas.merkato',
             developer_name='Flávio de Vasconcellos Corrêa',
-            version='0.2.0',
+            version='0.2.1',
             developers=['Flávio de Vasconcellos Corrêa <flavio.vcorrea@ufpel.edu.br>', 'Claude (Anthropic)'],
             copyright='© 2025 Flávio de Vasconcellos Corrêa',
             license_type=Gtk.License.GPL_3_0,

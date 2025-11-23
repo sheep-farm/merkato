@@ -1,4 +1,4 @@
-# stock.py
+# stock.py (MODIFICADO para incluir setor/indústria)
 #
 # Copyright 2025 Flávio de Vasconcellos Corrêa
 #
@@ -23,7 +23,7 @@ from gi.repository import GObject
 class Stock(GObject.Object):
     """
     Modelo de dados para representar um stock/ação.
-    Contém informações de preço, variação e estado do mercado.
+    Contém informações de preço, variação, estado do mercado e categoria.
     """
     __gtype_name__ = 'Stock'
 
@@ -36,7 +36,11 @@ class Stock(GObject.Object):
         change_pct: float = 0.0,
         market_state: str = '',
         currency: str = '',
-        currency_symbol: str = ''
+        currency_symbol: str = '',
+        # NOVOS CAMPOS PARA CATEGORIZAÇÃO
+        quote_type: str = '',
+        sector: str = '',
+        industry: str = ''
     ):
         """
         Inicializa um Stock.
@@ -50,6 +54,9 @@ class Stock(GObject.Object):
             market_state: Estado do mercado ('REGULAR', 'CLOSED', etc)
             currency: Código da moeda (ex: 'USD', 'BRL')
             currency_symbol: Símbolo da moeda (ex: '$', 'R$')
+            quote_type: Tipo (EQUITY, CRYPTOCURRENCY, ETF, etc)
+            sector: Setor (Technology, Healthcare, etc)
+            industry: Indústria específica
         """
         super().__init__()
         self._symbol = symbol
@@ -60,8 +67,11 @@ class Stock(GObject.Object):
         self._market_state = market_state
         self._currency = currency
         self._currency_symbol = currency_symbol
+        self._quote_type = quote_type
+        self._sector = sector
+        self._industry = industry
 
-    # ============== Propriedades ==============
+    # ============== Propriedades Existentes ==============
 
     @GObject.Property(type=str)
     def symbol(self) -> str:
@@ -135,6 +145,35 @@ class Stock(GObject.Object):
     def currency_symbol(self, value: str):
         self._currency_symbol = value
 
+    # ============== NOVAS Propriedades para Categorização ==============
+
+    @GObject.Property(type=str)
+    def quote_type(self) -> str:
+        """Tipo do quote (EQUITY, CRYPTOCURRENCY, ETF, etc)."""
+        return self._quote_type
+
+    @quote_type.setter
+    def quote_type(self, value: str):
+        self._quote_type = value
+
+    @GObject.Property(type=str)
+    def sector(self) -> str:
+        """Setor da empresa."""
+        return self._sector
+
+    @sector.setter
+    def sector(self, value: str):
+        self._sector = value
+
+    @GObject.Property(type=str)
+    def industry(self) -> str:
+        """Indústria específica."""
+        return self._industry
+
+    @industry.setter
+    def industry(self, value: str):
+        self._industry = value
+
     # ============== Métodos de conversão ==============
 
     def to_dict(self):
@@ -153,6 +192,9 @@ class Stock(GObject.Object):
             'market_state': self.market_state,
             'currency': self.currency,
             'currency_symbol': self.currency_symbol,
+            'quote_type': self.quote_type,
+            'sector': self.sector,
+            'industry': self.industry,
         }
 
     @classmethod
@@ -175,6 +217,9 @@ class Stock(GObject.Object):
             market_state=data.get('market_state', ''),
             currency=data.get('currency', ''),
             currency_symbol=data.get('currency_symbol', ''),
+            quote_type=data.get('quote_type', ''),
+            sector=data.get('sector', ''),
+            industry=data.get('industry', ''),
         )
 
     # ============== Métodos auxiliares ==============
@@ -206,6 +251,15 @@ class Stock(GObject.Object):
         """
         return self.market_state == "REGULAR"
 
+    def is_cryptocurrency(self) -> bool:
+        """
+        Verifica se é uma criptomoeda.
+
+        Returns:
+            True se quote_type é CRYPTOCURRENCY
+        """
+        return self.quote_type == "CRYPTOCURRENCY"
+
     def get_formatted_change_pct(self) -> str:
         """
         Retorna a variação percentual formatada.
@@ -228,5 +282,5 @@ class Stock(GObject.Object):
             f"long_name='{self.long_name}', "
             f"price={self.price}, "
             f"change={self.change}, "
-            f"change_pct={self.change_pct})"
+            f"sector='{self.sector}')"
         )

@@ -24,12 +24,17 @@ from .search_stock import MerkatoSearchStock
 from .list_stock import MerkatoListStock
 from .stock_controller import StockController
 from .stock import Stock
+from .category_model import CategoryModel
 
 
 @Gtk.Template(resource_path='/com/github/sheepfarm/merkato/window.ui')
 class MerkatoWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MerkatoWindow'
 
+    # Template children
+    split_view = Gtk.Template.Child()
+    sidebar_toggle = Gtk.Template.Child()
+    category_list = Gtk.Template.Child()
     search_stock_entry = Gtk.Template.Child()
     list_stock = Gtk.Template.Child()
     spinner = Gtk.Template.Child()
@@ -44,10 +49,21 @@ class MerkatoWindow(Adw.ApplicationWindow):
         # Restore window size
         width = self.settings.get_int('window-width')
         height = self.settings.get_int('window-height')
-        self.set_default_size(width, height)
+        is_maximized = self.settings.get_boolean('window-maximized')
+
+        if width > 0 and height > 0:
+            self.set_default_size(width, height)
+        if is_maximized:
+            self.maximize()
 
         # Inicializa o controller
         self.controller = StockController(update_interval=60)
+
+        # Inicializa o modelo de categorias
+        self.category_model = CategoryModel()
+
+        # Popula a sidebar de categorias
+        self._populate_category_sidebar()
 
         # Conecta sinais do controller
         self._connect_controller_signals()
@@ -58,8 +74,46 @@ class MerkatoWindow(Adw.ApplicationWindow):
         # Conecta sinais da UI
         self._connect_ui_signals()
 
+        # Conecta sinais de categoria
+        self._connect_category_signals()
+
         # Carrega watchlist e inicia
         self._initialize()
+
+    def _populate_category_sidebar(self):
+        """Popula a sidebar com as categorias."""
+        self.category_rows = {}
+
+        for category_key, info in self.category_model.CATEGORIES.items():
+            row = Adw.ActionRow()
+            row.set_title(info.get('label', category_key))
+            row.set_activatable(True)
+            row.category_key = category_key
+
+            # Ícone
+            icon = Gtk.Image.new_from_icon_name(info.get('icon', 'folder-symbolic'))
+            icon.set_pixel_size(16)
+            row.add_prefix(icon)
+
+            # Badge contador
+            count_label = Gtk.Label(label="0")
+            count_label.add_css_class("dim-label")
+            count_label.add_css_class("caption")
+            row.add_suffix(count_label)
+            row.count_label = count_label
+
+            self.category_list.append(row)
+            self.category_rows[category_key] = row
+
+        # Seleciona "All" por padrão
+        if "All" in self.category_rows:
+            self.category_list.select_row(self.category_rows["All"])
+
+    def _update_category_counts(self):
+        """Atualiza os contadores nas categorias."""
+        for category_key, row in self.category_rows.items():
+            count = self.category_model.get_category_count(category_key)
+            row.count_label.set_label(str(count))
 
     def _create_actions(self):
         """Cria as ações da janela."""
@@ -104,6 +158,12 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.list_stock.connect('stock-remove-requested', self.on_stock_remove_requested)
 
         self.trash_view_mode.connect('toggled', self.on_trash_mode_toggled)
+        self.sidebar_toggle.connect('toggled', self.on_sidebar_toggle)
+
+    def _connect_category_signals(self):
+        """Conecta os sinais de categoria."""
+        self.category_list.connect('row-activated', self.on_category_selected)
+        self.category_model.connect('counts-updated', self.on_category_counts_updated)
 
     def _initialize(self):
         """Inicializa a aplicação."""
@@ -111,6 +171,33 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.on_refresh_action()
         self.controller.start_auto_update()
         self.trash_view_mode.set_visible(not self.list_stock.is_empty())
+
+    # ============== Callbacks de Categoria ==============
+
+    def on_category_selected(self, listbox, row):
+        """Callback quando uma categoria é selecionada."""
+        if row and hasattr(row, 'category_key'):
+            category_key = row.category_key
+            self._filter_stocks_by_category(category_key)
+
+    def on_category_counts_updated(self, model):
+        """Callback quando as contagens são atualizadas."""
+        self._update_category_counts()
+
+    def on_sidebar_toggle(self, toggle_button):
+        """Callback para toggle da sidebar."""
+        self.split_view.set_show_sidebar(toggle_button.get_active())
+
+    def _filter_stocks_by_category(self, category_key):
+        """Filtra a lista de stocks pela categoria."""
+        self.list_stock.clear_all()
+
+        filtered_stocks = self.category_model.get_stocks_by_category(category_key)
+
+        for stock in filtered_stocks:
+            self.list_stock.append(stock)
+
+        self.list_stock._apply_sort()
 
     # ============== Callbacks do Controller ==============
 
@@ -143,6 +230,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
     def on_refresh_completed(self, controller, results, errors):
         """Callback quando o refresh é completado."""
         for symbol, stock in results.items():
+            self.category_model.update_stock(stock)
             self.list_stock.update(stock)
 
         self.spinner.set_spinning(False)
@@ -168,7 +256,15 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
     def on_stock_added(self, controller, stock):
         """Callback quando um stock é adicionado."""
-        self.list_stock.append(stock)
+        self.category_model.add_stock(stock)
+
+        # Só adiciona na lista se estiver na categoria selecionada
+        selected_row = self.category_list.get_selected_row()
+        if selected_row and hasattr(selected_row, 'category_key'):
+            current_category = selected_row.category_key
+            filtered = self.category_model.get_stocks_by_category(current_category)
+            if stock in filtered:
+                self.list_stock.append(stock)
 
     # ============== Callbacks da UI ==============
 
@@ -230,6 +326,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
         if success:
             self.controller.remove_stock(stock_item.symbol)
+            self.category_model.remove_stock(stock_item.symbol)
             print(f"Successfully removed {stock_item.symbol}")
         else:
             print(f"Failed to remove {stock_item.symbol}")
@@ -260,6 +357,7 @@ class MerkatoWindow(Adw.ApplicationWindow):
         if stocks_data:
             for stock_data in stocks_data:
                 stock_item = Stock.from_dict(stock_data)
+                self.category_model.add_stock(stock_item)
                 self.list_stock.append(stock_item)
 
         if sort_order:
@@ -267,10 +365,14 @@ class MerkatoWindow(Adw.ApplicationWindow):
             self.list_stock.current_sort = sort_order
             self.list_stock._apply_sort()
 
+        # Atualiza contadores
+        self._update_category_counts()
+
     def save_watchlist(self) -> bool:
         """Salva a watchlist através do controller."""
-        stocks = self.list_stock.get_all_stocks()
-        is_success = self.controller.save_watchlist(stocks)
+        # Pega TODOS os stocks do modelo (não da lista filtrada)
+        all_stocks = self.category_model.get_stocks_by_category("All")
+        is_success = self.controller.save_watchlist(all_stocks)
 
         if not is_success:
             print(_("WARNING: Failed to save watchlist"))

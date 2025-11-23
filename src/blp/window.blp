@@ -3,129 +3,174 @@ using Adw 1;
 
 template $MerkatoWindow: Adw.ApplicationWindow {
   title: "Merkato";
-  default-width: 420;
+  default-width: 900;
   default-height: 700;
-  width-request: 360;
+  width-request: 600;
   height-request: 500;
 
-  content: Adw.ToolbarView {
-    [top]
-    Adw.HeaderBar {
-      title-widget: Adw.WindowTitle {
-        title: "Merkato";
-      };
+  content: Adw.OverlaySplitView split_view {
+    max-sidebar-width: 280;
+    min-sidebar-width: 200;
+    sidebar-width-fraction: 0.25;
+    show-sidebar: true;
 
-      [end]
-      MenuButton {
-        icon-name: "open-menu-symbolic";
-        menu-model: primary_menu;
-        primary: true;
-        tooltip-text: _("Main Menu");
-      }
+    // SIDEBAR - Lista de Categorias
+    sidebar: Adw.NavigationPage {
+      title: _("Categories");
 
-      [end]
-      ToggleButton trash_view_mode {
-        icon-name: "user-trash-symbolic";
-        tooltip-text: _("Remove Stocks");
-        styles ["flat"]
-      }
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-start-title-buttons: false;
 
-      [end]
-      Spinner spinner {
-        spinning: false;
-        tooltip-text: _("Updating...");
-      }
-    }
-
-    content: Adw.ToastOverlay toast_overlay {
-      Box {
-        orientation: vertical;
-        spacing: 0;
-
-        // Search area
-        Box {
-          orientation: vertical;
-          spacing: 0;
-
-          $MerkatoSearchStock search_stock_entry {
-            margin-top: 6;
-            margin-start: 12;
-            margin-end: 12;
-            margin-bottom: 6;
-          }
-
-          Separator {
-            margin-top: 6;
+          [title]
+          Label {
+            label: _("Categories");
+            styles ["title-4"]
           }
         }
 
-        // Stock list
-        $MerkatoListStock list_stock {
+        content: ScrolledWindow {
+          hscrollbar-policy: never;
           vexpand: true;
-        }
 
-        // Status bar
-        Box {
-          orientation: vertical;
-          spacing: 0;
+          ListBox category_list {
+            styles ["navigation-sidebar"]
+            selection-mode: single;
 
-          Separator {
-            orientation: horizontal;
+            // As categorias serão adicionadas via código
+          }
+        };
+      }
+    };
+
+    // CONTENT - Lista de Stocks
+    content: Adw.NavigationPage {
+      title: "Merkato";
+
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar header_bar {
+          [start]
+          ToggleButton sidebar_toggle {
+            icon-name: "sidebar-show-symbolic";
+            active: true;
+            tooltip-text: _("Toggle Sidebar");
           }
 
-          Box statusbar {
-            orientation: horizontal;
-            spacing: 12;
-            margin-start: 12;
-            margin-end: 12;
-            margin-top: 8;
-            margin-bottom: 8;
-            styles ["dim-label"]
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            menu-model: primary_menu;
+            primary: true;
+            tooltip-text: _("Main Menu");
+          }
 
-            // Source label
+          [end]
+          ToggleButton trash_view_mode {
+            icon-name: "user-trash-symbolic";
+            tooltip-text: _("Remove Stocks");
+            styles ["flat"]
+          }
+
+          [end]
+          Spinner spinner {
+            spinning: false;
+            tooltip-text: _("Updating...");
+          }
+        }
+
+        content: Adw.ToastOverlay toast_overlay {
+          Box {
+            orientation: vertical;
+            spacing: 0;
+
+            // Search area
             Box {
-              orientation: horizontal;
-              spacing: 4;
-              halign: start;
-              hexpand: true;
+              orientation: vertical;
+              spacing: 0;
 
-              Image {
-                icon-name: "emblem-system-symbolic";
-                pixel-size: 12;
-                opacity: 0.5;
+              $MerkatoSearchStock search_stock_entry {
+                margin-top: 6;
+                margin-start: 12;
+                margin-end: 12;
+                margin-bottom: 6;
               }
 
-              LinkButton status_label {
-                label: "Yahoo Finance";
-                uri: "https://finance.yahoo.com/";
-                styles ["caption"]
+              Separator {
+                margin-top: 6;
               }
             }
 
-            // Last updated
+            // Stock list
+            $MerkatoListStock list_stock {
+              vexpand: true;
+            }
+
+            // Status bar
             Box {
-              orientation: horizontal;
-              spacing: 4;
-              halign: end;
+              orientation: vertical;
+              spacing: 0;
 
-              Image {
-                icon-name: "media-playlist-repeat-symbolic";
-                pixel-size: 12;
-                opacity: 0.5;
+              Separator {
+                orientation: horizontal;
               }
 
-              Label {
-                label: _("Last updated: ");
-                styles ["caption"]
-              }
+              Box statusbar {
+                orientation: horizontal;
+                spacing: 12;
+                margin-start: 12;
+                margin-end: 12;
+                margin-top: 8;
+                margin-bottom: 8;
+                styles ["dim-label"]
 
-              Label last_updated_label {
-                label: "--";
-                styles ["caption", "numeric"]
+                // Source label
+                Box {
+                  orientation: horizontal;
+                  spacing: 4;
+                  halign: start;
+                  hexpand: true;
+
+                  Image {
+                    icon-name: "emblem-system-symbolic";
+                    pixel-size: 12;
+                    opacity: 0.5;
+                  }
+
+                  LinkButton status_label {
+                    label: "Yahoo Finance";
+                    uri: "https://finance.yahoo.com/";
+                    styles ["caption"]
+                  }
+                }
+
+                // Last updated
+                Box {
+                  orientation: horizontal;
+                  spacing: 4;
+                  halign: end;
+
+                  Image {
+                    icon-name: "media-playlist-repeat-symbolic";
+                    pixel-size: 12;
+                    opacity: 0.5;
+                  }
+
+                  Label {
+                    label: _("Last updated: ");
+                    styles ["caption"]
+                  }
+
+                  Label last_updated_label {
+                    label: "--";
+                    styles ["caption", "numeric"]
+                  }
+                }
               }
             }
           }
-        }
+        };
       }
     };
   };

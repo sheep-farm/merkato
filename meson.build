@@ -1,5 +1,5 @@
 project('Merkato',
-          version: '0.2.0',
+          version: '0.2.1',
     meson_version: '>= 1.0.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
@@ -8,10 +8,11 @@ project('Merkato',
 i18n = import('i18n')
 gnome = import('gnome')
 
-subdir('wheels')
+
 subdir('data')
 subdir('src')
 subdir('po')
+subdir('wheels')
 
 gnome.post_install(
      glib_compile_schemas: true,
