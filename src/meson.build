@@ -41,6 +41,7 @@ merkato_sources = [
   'stock_controller.py',
   'category_model.py',
   'category_sidebar.py',
+  'heatmap_view.py',
 ]
 
 install_data(merkato_sources, install_dir: moduledir)

@@ -8,7 +8,7 @@ template $MerkatoWindow: Adw.ApplicationWindow {
   width-request: 600;
   height-request: 500;
 
-  content: Adw.OverlaySplitView split_view {
+  content: Adw.OverlaySplitView  split_view {
     max-sidebar-width: 280;
     min-sidebar-width: 200;
     sidebar-width-fraction: 0.25;
@@ -37,16 +37,14 @@ template $MerkatoWindow: Adw.ApplicationWindow {
           ListBox category_list {
             styles ["navigation-sidebar"]
             selection-mode: single;
-
-            // As categorias serão adicionadas via código
           }
         };
       }
     };
 
-    // CONTENT - Lista de Stocks
+    // CONTENT - ViewStack com Lista e Heatmap
     content: Adw.NavigationPage {
-      title: "Merkato";
+      title: _("Stocks");
 
       Adw.ToolbarView {
         [top]
@@ -56,6 +54,12 @@ template $MerkatoWindow: Adw.ApplicationWindow {
             icon-name: "sidebar-show-symbolic";
             active: true;
             tooltip-text: _("Toggle Sidebar");
+          }
+
+          [title]
+          Adw.ViewSwitcher view_switcher {
+            stack: view_stack;
+            policy: wide;
           }
 
           [end]
@@ -81,93 +85,196 @@ template $MerkatoWindow: Adw.ApplicationWindow {
         }
 
         content: Adw.ToastOverlay toast_overlay {
-          Box {
-            orientation: vertical;
-            spacing: 0;
+          Adw.ViewStack view_stack {
+            // PÁGINA 1: Lista de Stocks
+            Adw.ViewStackPage {
+              name: "list";
+              title: _("List");
+              icon-name: "view-list-symbolic";
 
-            // Search area
-            Box {
-              orientation: vertical;
-              spacing: 0;
+              child: Box {
+                orientation: vertical;
+                spacing: 0;
 
-              $MerkatoSearchStock search_stock_entry {
-                margin-top: 6;
-                margin-start: 12;
-                margin-end: 12;
-                margin-bottom: 6;
-              }
-
-              Separator {
-                margin-top: 6;
-              }
-            }
-
-            // Stock list
-            $MerkatoListStock list_stock {
-              vexpand: true;
-            }
-
-            // Status bar
-            Box {
-              orientation: vertical;
-              spacing: 0;
-
-              Separator {
-                orientation: horizontal;
-              }
-
-              Box statusbar {
-                orientation: horizontal;
-                spacing: 12;
-                margin-start: 12;
-                margin-end: 12;
-                margin-top: 8;
-                margin-bottom: 8;
-                styles ["dim-label"]
-
-                // Source label
+                // Search area
                 Box {
-                  orientation: horizontal;
-                  spacing: 4;
-                  halign: start;
-                  hexpand: true;
+                  orientation: vertical;
+                  spacing: 0;
 
-                  Image {
-                    icon-name: "emblem-system-symbolic";
-                    pixel-size: 12;
-                    opacity: 0.5;
+                  $MerkatoSearchStock search_stock_entry {
+                    margin-top: 6;
+                    margin-start: 12;
+                    margin-end: 12;
+                    margin-bottom: 6;
                   }
 
-                  LinkButton status_label {
-                    label: "Yahoo Finance";
-                    uri: "https://finance.yahoo.com/";
-                    styles ["caption"]
+                  Separator {
+                    margin-top: 6;
                   }
                 }
 
-                // Last updated
+                // Stock list
+                $MerkatoListStock list_stock {
+                  vexpand: true;
+                }
+
+                // Status bar
+                Box {
+                  orientation: vertical;
+                  spacing: 0;
+
+                  Separator {
+                    orientation: horizontal;
+                  }
+
+                  Box statusbar {
+                    orientation: horizontal;
+                    spacing: 12;
+                    margin-start: 12;
+                    margin-end: 12;
+                    margin-top: 8;
+                    margin-bottom: 8;
+                    styles ["dim-label"]
+
+                    Box {
+                      orientation: horizontal;
+                      spacing: 4;
+                      halign: start;
+                      hexpand: true;
+
+                      Image {
+                        icon-name: "emblem-system-symbolic";
+                        pixel-size: 12;
+                        opacity: 0.5;
+                      }
+
+                      LinkButton status_label {
+                        label: "Yahoo Finance";
+                        uri: "https://finance.yahoo.com/";
+                        styles ["caption"]
+                      }
+                    }
+
+                    Box {
+                      orientation: horizontal;
+                      spacing: 4;
+                      halign: end;
+
+                      Image {
+                        icon-name: "media-playlist-repeat-symbolic";
+                        pixel-size: 12;
+                        opacity: 0.5;
+                      }
+
+                      Label {
+                        label: _("Last updated: ");
+                        styles ["caption"]
+                      }
+
+                      Label last_updated_label {
+                        label: "--";
+                        styles ["caption", "numeric"]
+                      }
+                    }
+                  }
+                }
+              };
+            }
+
+            // PÁGINA 2: Heatmap
+            Adw.ViewStackPage {
+              name: "heatmap";
+              title: _("Heatmap");
+              icon-name: "view-grid-symbolic";
+
+              child: Box {
+                orientation: vertical;
+                spacing: 0;
+
+                // Legenda do heatmap
                 Box {
                   orientation: horizontal;
-                  spacing: 4;
-                  halign: end;
+                  spacing: 12;
+                  margin-start: 12;
+                  margin-end: 12;
+                  margin-top: 12;
+                  margin-bottom: 6;
+                  halign: center;
+                  styles ["toolbar"]
 
-                  Image {
-                    icon-name: "media-playlist-repeat-symbolic";
-                    pixel-size: 12;
-                    opacity: 0.5;
+                  Label {
+                    label: "📉";
+                  }
+
+                  Box {
+                    orientation: horizontal;
+                    spacing: 4;
+
+                    Box {
+                      width-request: 20;
+                      height-request: 20;
+                      styles ["heatmap-loss-strong"]
+                    }
+                    Box {
+                      width-request: 20;
+                      height-request: 20;
+                      styles ["heatmap-loss"]
+                    }
+                    Box {
+                      width-request: 20;
+                      height-request: 20;
+                      styles ["heatmap-neutral"]
+                    }
+                    Box {
+                      width-request: 20;
+                      height-request: 20;
+                      styles ["heatmap-gain"]
+                    }
+                    Box {
+                      width-request: 20;
+                      height-request: 20;
+                      styles ["heatmap-gain-strong"]
+                    }
                   }
 
                   Label {
-                    label: _("Last updated: ");
-                    styles ["caption"]
-                  }
-
-                  Label last_updated_label {
-                    label: "--";
-                    styles ["caption", "numeric"]
+                    label: "📈";
                   }
                 }
-              }
+
+                Separator {}
+
+                // Heatmap view
+                $HeatmapView heatmap_view {
+                  vexpand: true;
+                  hexpand: true;
+                }
+
+                // Status bar
+                Box {
+                  orientation: vertical;
+                  spacing: 0;
+
+                  Separator {
+                    orientation: horizontal;
+                  }
+
+                  Box {
+                    orientation: horizontal;
+                    spacing: 12;
+                    margin-start: 12;
+                    margin-end: 12;
+                    margin-top: 8;
+                    margin-bottom: 8;
+                    halign: center;
+                    styles ["dim-label", "caption"]
+
+                    Label {
+                      label: _("Click on a stock to view details");
+                    }
+                  }
+                }
+              };
             }
           }
         };

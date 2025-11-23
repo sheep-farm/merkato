@@ -3,6 +3,7 @@ using Gtk 4.0;
 template $MerkatoSearchStock: Gtk.Box {
     orientation: horizontal;
     spacing: 6;
+    hexpand: true;
 
     Gtk.SearchEntry _entry {
       placeholder-text: _("Enter ticker symbol (e.g., AAPL, GOOGL)");

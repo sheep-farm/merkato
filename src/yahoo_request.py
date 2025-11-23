@@ -148,7 +148,7 @@ class YahooRequest(GObject.Object):
                 profile_data = ticker.asset_profile
             except:
                 profile_data = {}
-
+            
             # Busca quote_type (tipo do ativo)
             try:
                 quote_type_data = ticker.quote_type
@@ -172,7 +172,7 @@ class YahooRequest(GObject.Object):
                 if isinstance(profile_data, dict) and symbol in profile_data:
                     if isinstance(profile_data[symbol], dict):
                         profile = profile_data[symbol]
-
+                
                 # Busca quote type
                 qtype = {}
                 if isinstance(quote_type_data, dict) and symbol in quote_type_data:
@@ -226,7 +226,7 @@ class YahooRequest(GObject.Object):
                 stock_item.sector = profile_data['sector']
             if 'industry' in profile_data:
                 stock_item.industry = profile_data['industry']
-
+        
         # Adiciona quote_type
         if quote_type_data and 'quoteType' in quote_type_data:
             stock_item.quote_type = quote_type_data['quoteType']

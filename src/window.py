@@ -25,6 +25,7 @@ from .list_stock import MerkatoListStock
 from .stock_controller import StockController
 from .stock import Stock
 from .category_model import CategoryModel
+from .heatmap_view import HeatmapView
 
 
 @Gtk.Template(resource_path='/com/github/sheepfarm/merkato/window.ui')
@@ -35,8 +36,10 @@ class MerkatoWindow(Adw.ApplicationWindow):
     split_view = Gtk.Template.Child()
     sidebar_toggle = Gtk.Template.Child()
     category_list = Gtk.Template.Child()
+    view_stack = Gtk.Template.Child()
     search_stock_entry = Gtk.Template.Child()
     list_stock = Gtk.Template.Child()
+    heatmap_view = Gtk.Template.Child()
     spinner = Gtk.Template.Child()
     last_updated_label = Gtk.Template.Child()
     trash_view_mode = Gtk.Template.Child()
@@ -76,6 +79,9 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
         # Conecta sinais de categoria
         self._connect_category_signals()
+
+        # Conecta sinais do heatmap
+        self._connect_heatmap_signals()
 
         # Carrega watchlist e inicia
         self._initialize()
@@ -165,6 +171,10 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.category_list.connect('row-activated', self.on_category_selected)
         self.category_model.connect('counts-updated', self.on_category_counts_updated)
 
+    def _connect_heatmap_signals(self):
+        """Conecta os sinais do heatmap."""
+        self.heatmap_view.connect('stock-selected', self.on_heatmap_stock_selected)
+
     def _initialize(self):
         """Inicializa a aplicação."""
         self.load_watchlist()
@@ -190,14 +200,28 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
     def _filter_stocks_by_category(self, category_key):
         """Filtra a lista de stocks pela categoria."""
-        self.list_stock.clear_all()
-
         filtered_stocks = self.category_model.get_stocks_by_category(category_key)
 
+        # Atualiza lista
+        self.list_stock.clear_all()
         for stock in filtered_stocks:
             self.list_stock.append(stock)
-
         self.list_stock._apply_sort()
+
+        # Atualiza heatmap
+        self.heatmap_view.set_stocks(filtered_stocks)
+
+    # ============== Callbacks do Heatmap ==============
+
+    def on_heatmap_stock_selected(self, heatmap, stock):
+        """Callback quando um stock é selecionado no heatmap."""
+        print(f"Heatmap: Selected {stock.symbol}")
+
+        # Muda para view de lista
+        self.view_stack.set_visible_child_name("list")
+
+        # Opcional: scroll até o stock na lista
+        # (implementar se quiser)
 
     # ============== Callbacks do Controller ==============
 
@@ -233,6 +257,12 @@ class MerkatoWindow(Adw.ApplicationWindow):
             self.category_model.update_stock(stock)
             self.list_stock.update(stock)
 
+        # Atualiza heatmap com stocks atualizados
+        selected_row = self.category_list.get_selected_row()
+        if selected_row and hasattr(selected_row, 'category_key'):
+            filtered_stocks = self.category_model.get_stocks_by_category(selected_row.category_key)
+            self.heatmap_view.set_stocks(filtered_stocks)
+
         self.spinner.set_spinning(False)
         self.search_stock_entry.freeze(False)
         self.trash_view_mode.set_sensitive(True)
@@ -258,13 +288,15 @@ class MerkatoWindow(Adw.ApplicationWindow):
         """Callback quando um stock é adicionado."""
         self.category_model.add_stock(stock)
 
-        # Só adiciona na lista se estiver na categoria selecionada
+        # Atualiza views se stock pertence à categoria atual
         selected_row = self.category_list.get_selected_row()
         if selected_row and hasattr(selected_row, 'category_key'):
             current_category = selected_row.category_key
             filtered = self.category_model.get_stocks_by_category(current_category)
             if stock in filtered:
                 self.list_stock.append(stock)
+                # Atualiza heatmap
+                self.heatmap_view.set_stocks(filtered)
 
     # ============== Callbacks da UI ==============
 
@@ -327,6 +359,13 @@ class MerkatoWindow(Adw.ApplicationWindow):
         if success:
             self.controller.remove_stock(stock_item.symbol)
             self.category_model.remove_stock(stock_item.symbol)
+
+            # Atualiza heatmap
+            selected_row = self.category_list.get_selected_row()
+            if selected_row and hasattr(selected_row, 'category_key'):
+                filtered = self.category_model.get_stocks_by_category(selected_row.category_key)
+                self.heatmap_view.set_stocks(filtered)
+
             print(f"Successfully removed {stock_item.symbol}")
         else:
             print(f"Failed to remove {stock_item.symbol}")
@@ -365,12 +404,13 @@ class MerkatoWindow(Adw.ApplicationWindow):
             self.list_stock.current_sort = sort_order
             self.list_stock._apply_sort()
 
-        # Atualiza contadores
+        # Atualiza contadores e heatmap inicial
         self._update_category_counts()
+        all_stocks = self.category_model.get_stocks_by_category("All")
+        self.heatmap_view.set_stocks(all_stocks)
 
     def save_watchlist(self) -> bool:
         """Salva a watchlist através do controller."""
-        # Pega TODOS os stocks do modelo (não da lista filtrada)
         all_stocks = self.category_model.get_stocks_by_category("All")
         is_success = self.controller.save_watchlist(all_stocks)
 

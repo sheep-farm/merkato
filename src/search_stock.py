@@ -50,23 +50,27 @@ class MerkatoSearchStock(Gtk.Box):
 
     def _setup_signals(self):
         """Configura os sinais do widget."""
-        self._entry.connect('activate', self._on_activate)
-        self._entry.connect('changed', self._on_changed)
-        self._entry.connect('changed', self._on_text_changed)
-        self._button.connect('clicked', self._on_activate)
+        if self._entry:
+            self._entry.connect('activate', self._on_activate)
+            self._entry.connect('changed', self._on_changed)
+            self._entry.connect('changed', self._on_text_changed)
+        if self._button:
+            self._button.connect('clicked', self._on_activate)
 
     # ============== Callbacks ==============
 
     def _on_activate(self, widget):
         """Callback quando o usuário ativa a busca."""
-        text = self._entry.get_text()
-        if text.strip():
-            self.emit('activate', text)
+        if self._entry:
+            text = self._entry.get_text()
+            if text.strip():
+                self.emit('activate', text)
 
 
     def _on_changed(self, widget):
         """Callback quando o texto muda."""
-        self.emit('changed', self._entry.get_text())
+        if self._entry:
+            self.emit('changed', self._entry.get_text())
 
 
     def _on_text_changed(self, widget):
@@ -82,8 +86,10 @@ class MerkatoSearchStock(Gtk.Box):
         Returns:
             Texto do campo
         """
-        return self._entry.get_text()
+        if self._entry:
+            return self._entry.get_text()
 
+        return None
 
     def set_text(self, text: str):
         """
@@ -92,7 +98,8 @@ class MerkatoSearchStock(Gtk.Box):
         Args:
             text: Texto a ser definido
         """
-        self._entry.set_text(text)
+        if self._entry:
+            self._entry.set_text(text)
 
 
     def clear_entry(self):
@@ -107,29 +114,34 @@ class MerkatoSearchStock(Gtk.Box):
         Args:
             frozen: True para congelar, False para descongelar
         """
-        self._entry.set_sensitive(not frozen)
+        if self._entry:
+            self._entry.set_sensitive(not frozen)
 
-        if not frozen:
-            self._update_button_state()
-        else:
-            self._button.set_sensitive(False)
+            if not frozen:
+                self._update_button_state()
+            else:
+                if self._button:
+                    self._button.set_sensitive(False)
 
 
     def focus_entry(self):
         """Coloca o foco no campo de entrada."""
-        self._entry.grab_focus()
+        if self._entry:
+            self._entry.grab_focus()
 
 
     def select_all(self):
         """Seleciona todo o texto do campo."""
-        self._entry.select_region(0, -1)
+        if self._entry:
+            self._entry.select_region(0, -1)
 
     # ============== Métodos privados ==============
 
     def _update_button_state(self):
         """Atualiza o estado do botão baseado no texto."""
-        has_text = len(self._entry.get_text()) > 0
-        self._button.set_sensitive(has_text)
+        if self._entry:
+            has_text = len(self._entry.get_text()) > 0
+            self._button.set_sensitive(has_text)
 
 
     def _is_frozen(self) -> bool:
@@ -139,4 +151,7 @@ class MerkatoSearchStock(Gtk.Box):
         Returns:
             True se está congelado
         """
-        return not self._entry.get_sensitive()
+        if self._entry:
+            return not self._entry.get_sensitive()
+
+        return false;
