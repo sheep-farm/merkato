@@ -283,13 +283,19 @@ class MerkatoListStock(Gtk.Box):
         return remove_button
 
     def _apply_market_state_style(self, row: Gtk.Widget, stock_item: Stock):
-        """Aplica estilo baseado no estado do mercado."""
-        if stock_item.market_state == "REGULAR":
-            row.remove_css_class("market-closed")
-            row.add_css_class("market-opened")
-        else:
+        # """Aplica estilo baseado no estado do mercado."""
+        # if stock_item.market_state == "REGULAR":
+        #     row.remove_css_class("market-closed")
+        #     row.add_css_class("market-opened")
+        # else:
+        #     row.remove_css_class("market-opened")
+        #     row.add_css_class("market-closed")
+        if stock_item.market_state == "CLOSED":
             row.remove_css_class("market-opened")
             row.add_css_class("market-closed")
+        else:
+            row.remove_css_class("market-closed")
+            row.add_css_class("market-opened")
 
     # ============== Callbacks ==============
 

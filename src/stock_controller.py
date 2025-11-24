@@ -1,4 +1,4 @@
-# stock_controller.py
+# stock_controller.py (CORRIGIDO)
 #
 # Copyright 2025 Flávio de Vasconcellos Corrêa
 #
@@ -83,6 +83,7 @@ class StockController(GObject.Object):
             symbols_input: String com símbolos separados por vírgula
         """
         if self.is_searching:
+            print("DEBUG: Busca já em andamento, ignorando nova requisição")
             return
 
         symbols_input = symbols_input.strip().upper()
@@ -93,8 +94,10 @@ class StockController(GObject.Object):
             symbols = [s for s in symbols if s not in self._symbols]
 
         if not symbols:
+            print(f"DEBUG: Nenhum símbolo novo para buscar (todos já existem)")
             return
 
+        print(f"DEBUG: Iniciando busca de {len(symbols)} símbolos: {symbols}")
         self.is_searching = True
         self.emit('search-started')
 
@@ -108,33 +111,50 @@ class StockController(GObject.Object):
     def _do_search(self, symbols: List[str]):
         """Executa a busca em thread separada."""
         try:
+            print(f"DEBUG: Executando fetch para {symbols}")
             results, errors = self.yahoo_request.fetch(symbols)
+            print(f"DEBUG: Fetch completado - {len(results)} sucessos, {len(errors)} erros")
+
+            if errors:
+                print(f"DEBUG: Erros encontrados: {errors}")
+
             GLib.idle_add(self._on_search_completed, results, errors)
         except Exception as e:
-            print(f"Search error: {e}")
+            print(f"ERROR: Search error: {e}")
+            import traceback
+            traceback.print_exc()
             GLib.idle_add(self._on_search_error, str(e))
         finally:
             GLib.idle_add(self._clear_search_flag)
 
     def _on_search_completed(self, results: dict, errors: list):
         """Callback quando a busca é completada."""
+        print(f"DEBUG: _on_search_completed chamado com {len(results)} resultados")
+
         for symbol, stock in results.items():
+            print(f"DEBUG: Processando stock {symbol}: {stock.long_name}")
             with self._symbols_lock:
                 if stock.symbol not in self._symbols:
                     self._symbols.append(stock.symbol)
+                    print(f"DEBUG: Símbolo {stock.symbol} adicionado à lista interna")
+
+            print(f"DEBUG: Emitindo sinal 'stock-added' para {stock.symbol}")
             self.emit('stock-added', stock)
 
-        self.save_watchlist()
+        # NÃO salva aqui - deixa a window salvar quando apropriado
+        print(f"DEBUG: Emitindo sinal 'search-completed'")
         self.emit('search-completed', results, errors)
         return False
 
     def _on_search_error(self, error_msg: str):
         """Callback quando ocorre erro na busca."""
+        print(f"ERROR: Search error callback: {error_msg}")
         self.emit('search-error', error_msg)
         return False
 
     def _clear_search_flag(self):
         """Limpa flag de busca em andamento."""
+        print(f"DEBUG: Limpando flag de busca")
         self.is_searching = False
         return False
 
@@ -177,7 +197,7 @@ class StockController(GObject.Object):
 
     def _on_refresh_completed(self, results: dict, errors: list):
         """Callback quando o refresh é completado."""
-        self.save_watchlist()
+        # NÃO salva aqui - deixa a window salvar
         self.emit('refresh-completed', results, errors)
         return False
 
@@ -206,7 +226,6 @@ class StockController(GObject.Object):
         with self._symbols_lock:
             if symbol in self._symbols:
                 self._symbols.remove(symbol)
-                self.save_watchlist()
                 self.emit('stock-removed', symbol)
                 return True
         return False
@@ -241,8 +260,10 @@ class StockController(GObject.Object):
             True se salvo com sucesso
         """
         if stocks is None:
+            print("DEBUG: save_watchlist chamado sem stocks, ignorando")
             return True
 
+        print(f"DEBUG: Salvando watchlist com {len(stocks)} stocks")
         return self.watchlist_manager.save(stocks)
 
     def save_sort_order(self, sort_order: str) -> bool:

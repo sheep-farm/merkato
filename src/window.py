@@ -235,24 +235,6 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
     # ============== Callbacks do Controller ==============
 
-    def on_search_started(self, controller):
-        """Callback quando a busca inicia."""
-        self.spinner.set_spinning(True)
-        self.search_stock_entry.freeze(True)
-
-    def on_search_completed(self, controller, results, errors):
-        """Callback quando a busca é completada."""
-        self.spinner.set_spinning(False)
-        self.search_stock_entry.freeze(False)
-        self.search_stock_entry.clear_entry()
-        self.update_timestamp()
-
-    def on_search_error(self, controller, error_msg):
-        """Callback quando ocorre erro na busca."""
-        print(f"Search Error: {error_msg}")
-        self.spinner.set_spinning(False)
-        self.search_stock_entry.freeze(False)
-
     def on_refresh_started(self, controller):
         """Callback quando o refresh inicia."""
         self.refresh_action.set_enabled(False)
@@ -260,6 +242,39 @@ class MerkatoWindow(Adw.ApplicationWindow):
         self.spinner.set_spinning(True)
         self.search_stock_entry.freeze(True)
         self.trash_view_mode.set_sensitive(False)
+
+    def on_search_started(self, controller):
+        """Callback quando a busca inicia."""
+        print("DEBUG: on_search_started chamado")
+        self.spinner.set_spinning(True)
+        self.search_stock_entry.freeze(True)
+
+    def on_search_completed(self, controller, results, errors):
+        """Callback quando a busca é completada."""
+        print(f"DEBUG: on_search_completed - {len(results)} resultados, {len(errors)} erros")
+
+        # Mostra resultados
+        for symbol in results.keys():
+            print(f"DEBUG: Resultado recebido: {symbol}")
+
+        # Mostra erros
+        if errors:
+            print(f"DEBUG: Erros: {errors}")
+
+        self.spinner.set_spinning(False)
+        self.search_stock_entry.freeze(False)
+        self.search_stock_entry.clear_entry()
+        self.update_timestamp()
+
+        # IMPORTANTE: Salva a watchlist após adicionar stocks
+        print("DEBUG: Salvando watchlist após busca")
+        self.save_watchlist()
+
+    def on_search_error(self, controller, error_msg):
+        """Callback quando ocorre erro na busca."""
+        print(f"ERROR: Search Error: {error_msg}")
+        self.spinner.set_spinning(False)
+        self.search_stock_entry.freeze(False)
 
     def on_refresh_completed(self, controller, results, errors):
         """Callback quando o refresh é completado."""
@@ -294,18 +309,33 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
     def on_stock_added(self, controller, stock):
         """Callback quando um stock é adicionado."""
+        print(f"DEBUG: on_stock_added chamado para {stock.symbol} - {stock.long_name}")
+
+        # Adiciona ao modelo de categoria
         self.category_model.add_stock(stock)
+        print(f"DEBUG: Stock adicionado ao category_model")
         
         # Atualiza views se stock pertence à categoria atual
         selected_row = self.category_list.get_selected_row()
         if selected_row and hasattr(selected_row, 'category_key'):
             current_category = selected_row.category_key
+            print(f"DEBUG: Categoria atual: {current_category}")
+
             filtered = self.category_model.get_stocks_by_category(current_category)
+            print(f"DEBUG: {len(filtered)} stocks na categoria {current_category}")
+
             if stock in filtered:
+                print(f"DEBUG: Stock {stock.symbol} pertence à categoria, adicionando à lista")
                 self.list_stock.append(stock)
+
                 # Atualiza heatmap com ordem da lista
                 sorted_stocks = self.list_stock.get_all_stocks()
                 self.heatmap_view.set_stocks(sorted_stocks)
+                print(f"DEBUG: Stock adicionado à visualização")
+            else:
+                print(f"DEBUG: Stock {stock.symbol} NÃO pertence à categoria atual")
+        else:
+            print(f"DEBUG: Nenhuma categoria selecionada ou row inválida")
 
     # ============== Callbacks da UI ==============
 
