@@ -88,16 +88,6 @@
     </release>
   </releases>
 
-  <content_rating type="oars-1.1">
-    <violence>none</violence>
-    <drugs>none</drugs>
-    <sex>none</sex>
-    <language>none</language>
-    <social-info>none</social-info>
-    <money>info</money>
-    <online>info</online>
-  </content_rating>
-
   <url type="homepage">https://github.com/sheep-farm/merkato</url>
   <url type="bugtracker">https://github.com/sheep-farm/merkato/issues</url>
   <url type="help">https://github.com/sheep-farm/merkato</url>
