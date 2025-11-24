@@ -2,10 +2,8 @@
 <component type="desktop">
   <id>com.ekonomikas.merkato</id>
   <launchable type="desktop-id">com.ekonomikas.merkato.desktop</launchable>
-
   <metadata_license>FSFAP</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
-
   <name>Merkato</name>
   <summary>A modern financial market tracker for GNOME</summary>
 
@@ -20,7 +18,6 @@
       elegant interface for monitoring stocks, indices, currencies, and
       cryptocurrencies in real-time using Yahoo Finance data.
     </p>
-
     <p>
       The application offers both a traditional list view and an interactive
       heatmap view, allowing users to visualize market performance in multiple
@@ -29,15 +26,13 @@
       persistent watchlists, automatic refresh, sorting options, and support for
       27 languages.
     </p>
-
     <p>
       Merkato is fully open source and built with performance and simplicity in
-      mind, following GNOME’s Human Interface Guidelines to deliver a clean,
+      mind, following GNOME's Human Interface Guidelines to deliver a clean,
       consistent, and distraction-free user experience.
     </p>
   </description>
 
-  <!-- GNOME Keywords -->
   <keywords>
     <keyword>stock</keyword>
     <keyword>finance</keyword>
@@ -48,49 +43,45 @@
     <keyword>GNOME</keyword>
   </keywords>
 
-  <!-- Categories compliant with AppStream -->
   <categories>
     <category>Office</category>
     <category>Finance</category>
   </categories>
 
-  <!-- Screenshots -->
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/sheep-farm/merkato/master/screenshots/list_view.svg</image>
+      <caption>List View</caption>
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/sheep-farm/merkato/master/screenshots/heatmap_view.svg</image>
+      <caption>Heatmap View</caption>
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/sheep-farm/merkato/master/screenshots/remove_view.svg</image>
+      <caption>Remove View</caption>
     </screenshot>
   </screenshots>
 
-  <!-- Releases -->
   <releases>
-    <release version="0.2.1" date="2025-11-24">
-      <description>
+    <release version="0.2.1" date="2024-11-23">
+      <description translate="no">
         <p>Improved sector categorization, translations, and heatmap performance.</p>
-      </description>
-    </release>
-
-    <release version="0.2.0" date="2024-12-15">
-      <description>
-        <p>Added multi-language support, sorting improvements, and UI refinements.</p>
-      </description>
-    </release>
-
-    <release version="0.1.0" date="2024-11-20">
-      <description>
-        <p>Initial release of Merkato for GNOME.</p>
       </description>
     </release>
   </releases>
 
   <url type="homepage">https://github.com/sheep-farm/merkato</url>
   <url type="bugtracker">https://github.com/sheep-farm/merkato/issues</url>
+  <url type="vcs-browser">https://github.com/sheep-farm/merkato</url>
   <url type="help">https://github.com/sheep-farm/merkato</url>
 
-</component>
+  <content_rating type="oars-1.1"/>
 
+  <update_contact>flavio.vcorrea at ufpel.edu.br</update_contact>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#3584e4</color>
+    <color type="primary" scheme_preference="dark">#1c71d8</color>
+  </branding>
+</component>
