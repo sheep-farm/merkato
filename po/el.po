@@ -7,7 +7,8 @@ msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-22 12:00+0000\n"
-"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"PO-Revision-Date: 2025-01-23 12:00-0300
+"
 "Last-Translator: \n"
 "Language-Team: Greek\n"
 "Language: el\n"
@@ -90,3 +91,63 @@ msgstr "ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Αποτυχία αποθήκευσης τη
 #: list_stock.py
 msgid "Remove from watchlist"
 msgstr "Αφαίρεση από τη λίστα παρακολούθησης"
+
+#: category_model.py category_sidebar.py
+msgid "All Stocks"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Cryptocurrency"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Technology"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Healthcare"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Energy"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Financial Services"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Consumer Cyclical"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Consumer Defensive"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Industrial"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Real Estate"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Basic Materials"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Communication Services"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Utilities"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Others"
+msgstr ""
+
+#: category_sidebar.py
+msgid "Categories"
+msgstr ""

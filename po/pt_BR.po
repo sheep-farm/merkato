@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:00+0000\n"
-"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"POT-Creation-Date: 2025-01-23 12:00+0000\n"
+"PO-Revision-Date: 2025-01-23 12:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese (Brazil)\n"
 "Language: pt_BR\n"
@@ -91,3 +91,63 @@ msgstr "AVISO: Falha ao salvar lista de observação"
 #: list_stock.py
 msgid "Remove from watchlist"
 msgstr "Remover da lista de observação"
+
+#: category_model.py category_sidebar.py
+msgid "All Stocks"
+msgstr "Todas as Ações"
+
+#: category_model.py category_sidebar.py
+msgid "Cryptocurrency"
+msgstr "Criptomoedas"
+
+#: category_model.py category_sidebar.py
+msgid "Technology"
+msgstr "Tecnologia"
+
+#: category_model.py category_sidebar.py
+msgid "Healthcare"
+msgstr "Saúde"
+
+#: category_model.py category_sidebar.py
+msgid "Energy"
+msgstr "Energia"
+
+#: category_model.py category_sidebar.py
+msgid "Financial Services"
+msgstr "Serviços Financeiros"
+
+#: category_model.py category_sidebar.py
+msgid "Consumer Cyclical"
+msgstr "Consumo Cíclico"
+
+#: category_model.py category_sidebar.py
+msgid "Consumer Defensive"
+msgstr "Consumo Defensivo"
+
+#: category_model.py category_sidebar.py
+msgid "Industrial"
+msgstr "Industrial"
+
+#: category_model.py category_sidebar.py
+msgid "Real Estate"
+msgstr "Imobiliário"
+
+#: category_model.py category_sidebar.py
+msgid "Basic Materials"
+msgstr "Materiais Básicos"
+
+#: category_model.py category_sidebar.py
+msgid "Communication Services"
+msgstr "Serviços de Comunicação"
+
+#: category_model.py category_sidebar.py
+msgid "Utilities"
+msgstr "Utilidades Públicas"
+
+#: category_model.py category_sidebar.py
+msgid "Others"
+msgstr "Outros"
+
+#: category_sidebar.py
+msgid "Categories"
+msgstr "Categorias"

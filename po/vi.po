@@ -90,3 +90,63 @@ msgstr "CẢNH BÁO: Lưu danh sách theo dõi không thành công"
 #: list_stock.py
 msgid "Remove from watchlist"
 msgstr "Xóa khỏi danh sách theo dõi"
+
+#: category_model.py category_sidebar.py
+msgid "All Stocks"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Cryptocurrency"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Technology"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Healthcare"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Energy"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Financial Services"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Consumer Cyclical"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Consumer Defensive"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Industrial"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Real Estate"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Basic Materials"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Communication Services"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Utilities"
+msgstr ""
+
+#: category_model.py category_sidebar.py
+msgid "Others"
+msgstr ""
+
+#: category_sidebar.py
+msgid "Categories"
+msgstr ""
