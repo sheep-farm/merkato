@@ -165,6 +165,8 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
         self.trash_view_mode.connect('toggled', self.on_trash_mode_toggled)
         self.sidebar_toggle.connect('toggled', self.on_sidebar_toggle)
+
+        self.view_stack.connect('notify::visible-child-name', self.on_view_changed)
     
     def _connect_category_signals(self):
         """Conecta os sinais de categoria."""
@@ -194,6 +196,18 @@ class MerkatoWindow(Adw.ApplicationWindow):
         """Callback quando as contagens são atualizadas."""
         self._update_category_counts()
     
+    def on_view_changed(self, stack, param):
+        """Callback quando a view muda entre List e Heatmap."""
+        visible_child = stack.get_visible_child_name()
+
+        # Mostra lixeira apenas na view List
+        is_list_view = (visible_child == "list")
+        self.trash_view_mode.set_visible(is_list_view and not self.list_stock.is_empty())
+
+        # Se estava ativo e mudou para heatmap, desativa
+        if not is_list_view and self.trash_view_mode.get_active():
+            self.trash_view_mode.set_active(False)
+
     def on_sidebar_toggle(self, toggle_button):
         """Callback para toggle da sidebar."""
         self.split_view.set_show_sidebar(toggle_button.get_active())
@@ -315,7 +329,9 @@ class MerkatoWindow(Adw.ApplicationWindow):
 
     def on_empty_state_changed(self, widget, is_empty):
         """Callback quando o estado vazio da lista muda."""
-        self.trash_view_mode.set_visible(not is_empty)
+        visible_child = self.view_stack.get_visible_child_name()
+        is_list_view = (visible_child == "list")
+        self.trash_view_mode.set_visible(is_list_view and not is_empty)
 
         if is_empty and self.trash_view_mode.get_active():
             self.trash_view_mode.set_active(False)

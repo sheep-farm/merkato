@@ -23,437 +23,524 @@ import math
 
 
 class Rectangle:
-    """Representa um retângulo no treemap."""
+    """Rectangle representing a single stock tile."""
     def __init__(self, x, y, width, height, stock=None):
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
+        self.x = float(x)
+        self.y = float(y)
+        self.width = float(width)
+        self.height = float(height)
         self.stock = stock
+
+
+class SectorRect:
+    """Rectangle representing a sector block (group of stocks)."""
+    def __init__(self, x, y, width, height, name):
+        self.x = float(x)
+        self.y = float(y)
+        self.width = float(width)
+        self.height = float(height)
+        self.name = name or "Other"
 
 
 class HeatmapView(Gtk.DrawingArea):
     """
-    Widget de heatmap usando Cairo.
-    Um treemap com áreas proporcionais ao peso (derivado de change_pct).
-    Verde = ganhos, Vermelho = perdas.
-    Estilo mais próximo do treemap do Yahoo Finance.
+    Yahoo-style heatmap using a squarified treemap with 2 levels:
+    - Sector blocks
+    - Stock tiles inside each sector
     """
 
-    __gtype_name__ = 'HeatmapView'
+    __gtype_name__ = "HeatmapView"
 
     __gsignals__ = {
-        'stock-selected': (GObject.SignalFlags.RUN_FIRST, None, (object,)),
+        "stock-selected": (GObject.SignalFlags.RUN_FIRST, None, (object,)),
     }
 
     def __init__(self):
         super().__init__()
 
+        self.set_hexpand(True)
+        self.set_vexpand(True)
+
         self.stocks = []
-        self.rectangles = []
+        self.rectangles = []        # list[Rectangle] stocks
+        self.sector_rectangles = [] # list[SectorRect]
         self.hovered_rect = None
 
-        # Para evitar re-layout desnecessário
         self._last_width = 0
         self._last_height = 0
 
-        # Configurar eventos
+        # Drawing
         self.set_draw_func(self._on_draw)
 
-        motion_controller = Gtk.EventControllerMotion()
-        motion_controller.connect('motion', self._on_motion)
-        motion_controller.connect('leave', self._on_leave)
-        self.add_controller(motion_controller)
+        # Motion / hover
+        motion = Gtk.EventControllerMotion()
+        motion.connect("motion", self._on_motion)
+        motion.connect("leave", self._on_leave)
+        self.add_controller(motion)
 
-        click_controller = Gtk.GestureClick()
-        click_controller.connect('pressed', self._on_click)
-        self.add_controller(click_controller)
+        # Click
+        click = Gtk.GestureClick()
+        click.connect("pressed", self._on_click)
+        self.add_controller(click)
 
+        # Tooltip
         self.set_has_tooltip(True)
-        self.connect('query-tooltip', self._on_query_tooltip)
+        self.connect("query-tooltip", self._on_query_tooltip)
 
-    # ---------------------------------------------------------------------
-    # API pública
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------ #
+    # Public API                                                         #
+    # ------------------------------------------------------------------ #
     def set_stocks(self, stocks):
         """
-        Define a lista de stocks a ser exibida.
+        Set list of stock objects to display.
 
-        Args:
-            stocks: Lista de objetos Stock
-                    Espera-se que tenham: symbol, change_pct, price,
-                    opcionalmente sector, industry, long_name.
+        Each stock is expected to have at least:
+        - symbol: str
+        - change_pct: float (fraction, e.g. 0.0123 = 1.23%)
+        - price: float
+
+        Optional (improves layout / tooltip):
+        - change: float (absolute dollar change)
+        - sector: str
+        - industry: str
+        - long_name: str
+        - market_cap: float
+        - volume: float
         """
-        self.stocks = list(stocks)
+        self.stocks = list(stocks) if stocks else []
+        # Invalida cache para forçar recálculo
+        self._last_width = 0
+        self._last_height = 0
         self._calculate_layout()
         self.queue_draw()
 
-    # ---------------------------------------------------------------------
-    # Layout - Treemap Squarified
-    # ---------------------------------------------------------------------
-    def _calculate_layout(self, width=None, height=None):
+    # ------------------------------------------------------------------ #
+    # Weight / grouping / treemap utilities                              #
+    # ------------------------------------------------------------------ #
+    def _compute_stock_weight(self, stock):
         """
-        Calcula o layout dos retângulos usando algoritmo de
-        treemap squarified (Bruls et al., 2000).
+        Compute weight used for area of the tile.
+
+        Priority:
+        1) market_cap, if present and positive
+        2) volume * price, if both present and positive
+        3) price * (abs(change_pct) + 0.2)
+        4) fallback 1.0
         """
-        if not self.stocks:
-            self.rectangles = []
-            return
+        try:
+            mc = getattr(stock, "market_cap", None)
+            if mc is not None and mc > 0:
+                return float(mc)
+        except Exception:
+            pass
 
-        # Descobre tamanho disponível
-        if width is None or height is None:
-            width = self.get_width()
-            height = self.get_height()
+        try:
+            vol = getattr(stock, "volume", None)
+            price = getattr(stock, "price", None)
+            if vol is not None and price is not None and vol > 0 and price > 0:
+                return float(vol) * float(price)
+        except Exception:
+            pass
 
-        if width <= 0 or height <= 0:
-            width = 800
-            height = 600
+        try:
+            price = float(getattr(stock, "price", 1.0) or 1.0)
+            cp = float(getattr(stock, "change_pct", 0.0) or 0.0)
+            return price * (abs(cp) + 0.2)
+        except Exception:
+            return 1.0
 
-        # Guarda para saber se precisa recalcular depois
-        self._last_width = width
-        self._last_height = height
-
-        padding = 8
-        inner_x = padding
-        inner_y = padding
-        inner_width = max(1, width - 2 * padding)
-        inner_height = max(1, height - 2 * padding)
-
-        # ---------------------------------------------
-        # 1. Calcula pesos positivos a partir de change_pct
-        # ---------------------------------------------
-        # Normaliza para que todos os pesos sejam positivos
-        min_change = min(s.change_pct for s in self.stocks)
-        offset = abs(min_change) + 0.5 if min_change < 0 else 0.5
-
-        weights = []
+    def _group_by_sector(self):
+        """Return dict sector_name -> list[stock]."""
+        groups = {}
         for s in self.stocks:
-            w = s.change_pct + offset
-            # Evita peso zero ou negativo por segurança numérica
-            w = max(w, 0.01)
-            weights.append((w, s))
+            sec = getattr(s, "sector", None) or "Other"
+            groups.setdefault(sec, []).append(s)
+        return groups
 
-        total_weight = sum(w for w, _ in weights)
-        if total_weight <= 0:
-            total_weight = len(weights)
+    def _squarified_treemap(self, items, x, y, w, h, horizontal_first=True):
+        """
+        Squarified treemap implementation.
 
-        total_area = float(inner_width * inner_height)
-        # Área correspondente a cada peso
-        norm_weights = [(w / total_weight) * total_area for (w, s) in weights]
+        items: list of (area, payload)
+        Returns: list of (x, y, width, height, payload)
+        """
+        items = [(float(a), p) for a, p in items if a > 0]
+        if not items or w <= 0 or h <= 0:
+            return []
 
-        # Ordena por área decrescente (melhora a "squarificação")
-        items = list(zip(norm_weights, [s for (_, s) in weights]))
         items.sort(key=lambda t: t[0], reverse=True)
 
-        # ---------------------------------------------
-        # 2. Squarified treemap
-        # ---------------------------------------------
-        rectangles = []
-
-        def worst_aspect_ratio(row, row_area, side_len):
-            """Calcula o pior aspect ratio da linha atual."""
-            if not row:
-                return float('inf')
-            max_area = max(row)
-            min_area = min(row)
-            # Fórmula clássica de squarified
+        def worst_aspect(row_areas, side_len):
+            if not row_areas or side_len <= 0:
+                return float("inf")
+            row_area = sum(row_areas)
+            if row_area <= 0:
+                return float("inf")
+            max_a = max(row_areas)
+            min_a = min(row_areas)
+            s2 = side_len * side_len
             return max(
-                (side_len ** 2) * max_area / (row_area ** 2),
-                (row_area ** 2) / ((side_len ** 2) * min_area)
+                s2 * max_a / (row_area * row_area),
+                (row_area * row_area) / (s2 * min_a),
             )
 
-        def layout_row(row_items, x, y, w, h, horizontal=True):
-            """
-            Distribui uma "linha" de itens dentro da área atual.
-            row_items: lista de (area, stock).
-            horizontal: se True, coloca retângulos lado a lado na horizontal;
-                        caso contrário, empilha na vertical.
-            """
+        def layout_row(row_items, x, y, w, h, horizontal):
             row_area = sum(a for a, _ in row_items)
-            if row_area <= 0:
+            if row_area <= 0 or w <= 0 or h <= 0:
                 return [], x, y, w, h
 
-            rects = []
-
+            out = []
             if horizontal:
-                # Altura fixa, largura variável
                 row_height = row_area / w
-                curr_x = x
-                for a, stk in row_items:
-                    rect_width = a / row_height if row_height > 0 else 0
-                    rects.append(
-                        Rectangle(curr_x, y, rect_width, row_height, stk)
-                    )
-                    curr_x += rect_width
-                # Atualiza área remanescente
+                cx = x
+                for a, payload in row_items:
+                    rw = a / row_height if row_height > 0 else 0
+                    out.append((cx, y, rw, row_height, payload))
+                    cx += rw
                 y += row_height
                 h -= row_height
             else:
-                # Largura fixa, altura variável
                 row_width = row_area / h
-                curr_y = y
-                for a, stk in row_items:
-                    rect_height = a / row_width if row_width > 0 else 0
-                    rects.append(
-                        Rectangle(x, curr_y, row_width, rect_height, stk)
-                    )
-                    curr_y += rect_height
-                # Atualiza área remanescente
+                cy = y
+                for a, payload in row_items:
+                    rh = a / row_width if row_width > 0 else 0
+                    out.append((x, cy, row_width, rh, payload))
+                    cy += rh
                 x += row_width
                 w -= row_width
 
-            return rects, x, y, w, h
+            return out, x, y, w, h
 
-        # Algoritmo principal
-        x, y = inner_x, inner_y
-        w, h = inner_width, inner_height
-        row = []
+        rects = []
+        row_items = []
         row_areas = []
-        horizontal = True  # alterna direção a cada linha
+        horizontal = horizontal_first
+        remaining = list(items)
 
-        for area, stock in items:
-            if area <= 0:
+        while remaining:
+            a, payload = remaining.pop(0)
+            if not row_items:
+                row_items.append((a, payload))
+                row_areas.append(a)
                 continue
 
-            # Tenta adicionar o item à linha atual
-            new_row = row_areas + [area]
             side_len = h if horizontal else w
-            if side_len <= 0:
-                break
+            current = worst_aspect(row_areas, side_len)
+            new = worst_aspect(row_areas + [a], side_len)
 
-            if not row_areas:
-                row_areas.append(area)
-                row.append((area, stock))
-                continue
-
-            prev_worst = worst_aspect_ratio(row_areas, sum(row_areas), side_len)
-            new_worst = worst_aspect_ratio(new_row, sum(new_row), side_len)
-
-            if new_worst <= prev_worst:
-                # Ainda melhora / mantém, coloca junto
-                row_areas.append(area)
-                row.append((area, stock))
+            if new <= current:
+                row_items.append((a, payload))
+                row_areas.append(a)
             else:
-                # Layout da linha atual e começa uma nova
-                new_rects, x, y, w, h = layout_row(row, x, y, w, h, horizontal)
-                rectangles.extend(new_rects)
+                new_rects, x, y, w, h = layout_row(row_items, x, y, w, h, horizontal)
+                rects.extend(new_rects)
                 horizontal = not horizontal
-                row = [(area, stock)]
-                row_areas = [area]
+                row_items = [(a, payload)]
+                row_areas = [a]
 
-        # Última linha
-        if row:
-            new_rects, x, y, w, h = layout_row(row, x, y, w, h, horizontal)
-            rectangles.extend(new_rects)
+        if row_items:
+            new_rects, x, y, w, h = layout_row(row_items, x, y, w, h, horizontal)
+            rects.extend(new_rects)
 
-        self.rectangles = rectangles
+        # filter degenerate rectangles
+        cleaned = []
+        for rx, ry, rw, rh, payload in rects:
+            if rw <= 0 or rh <= 0:
+                continue
+            cleaned.append((rx, ry, rw, rh, payload))
+        return cleaned
 
-    # ---------------------------------------------------------------------
-    # Cores e desenho
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------ #
+    # Layout                                                             #
+    # ------------------------------------------------------------------ #
+    def _calculate_layout(self, width=None, height=None):
+        """Calculate simple grid layout with equal-sized squares."""
+        if width is None:
+            width = self.get_width()
+        if height is None:
+            height = self.get_height()
+
+        if width <= 0 or height <= 0:
+            self.rectangles = []
+            self.sector_rectangles = []
+            return
+
+        if (
+            width == self._last_width
+            and height == self._last_height
+            and self.rectangles
+        ):
+            return
+
+        self._last_width = width
+        self._last_height = height
+        self.rectangles = []
+        self.sector_rectangles = []
+
+        if not self.stocks:
+            return
+
+        # Calculate grid dimensions
+        n = len(self.stocks)
+        if n == 0:
+            return
+
+        # Find optimal grid layout (closest to square)
+        cols = math.ceil(math.sqrt(n * width / height))
+        rows = math.ceil(n / cols)
+
+        # Calculate cell size with small gap
+        gap = 2
+        cell_width = (width - (cols + 1) * gap) / cols
+        cell_height = (height - (rows + 1) * gap) / rows
+
+        # Create rectangles
+        for i, stock in enumerate(self.stocks):
+            col = i % cols
+            row = i // cols
+
+            x = gap + col * (cell_width + gap)
+            y = gap + row * (cell_height + gap)
+
+            self.rectangles.append(Rectangle(x, y, cell_width, cell_height, stock))
+
+    # ------------------------------------------------------------------ #
+    # Colors                                                             #
+    # ------------------------------------------------------------------ #
     def _get_color_for_stock(self, stock, is_hover=False):
         """
-        Retorna cor RGB baseada na mudança percentual.
-        Verde para ganhos, vermelho para perdas.
-        Intensidade contínua, estilo heatmap.
-
-        Args:
-            stock: Objeto Stock
-            is_hover: Se está em hover
-
-        Returns:
-            Tupla (r, g, b) com valores 0-1
+        Cores vibrantes e saturadas: verde para positivo, vermelho para negativo.
+        change_pct is assumed to be a fraction.
         """
-        change = stock.change_pct
-        abs_change = abs(change)
+        cp = float(getattr(stock, "change_pct", 0.0) or 0.0)
+        abs_cp = abs(cp)
 
-        # Saturação limitada (±8% vira "cheio")
-        max_ref = 8.0
-        t = min(abs_change / max_ref, 1.0)
+        max_ref = 0.08  # 8% saturates the color
+        t = min(abs_cp / max_ref, 1.0)
 
-        # Verde para alta, vermelho para queda
-        if change >= 0:
-            # Base verde mais escura
-            base_r, base_g, base_b = (0.25, 0.45, 0.25)
-            dark_r, dark_g, dark_b = (0.0, 0.39, 0.0)
+        if cp >= 0:
+            # Verde vibrante: do verde médio ao verde intenso
+            base = (0.15, 0.60, 0.20)  # verde médio
+            high = (0.05, 0.95, 0.25)  # verde muito saturado
         else:
-            # Base vermelha mais escura
-            base_r, base_g, base_b = (0.45, 0.20, 0.20)
-            dark_r, dark_g, dark_b = (0.55, 0.0, 0.0)
+            # Vermelho vibrante: do vermelho médio ao vermelho intenso
+            base = (0.70, 0.15, 0.15)  # vermelho médio
+            high = (0.95, 0.05, 0.05)  # vermelho muito saturado
 
-
-        r = base_r + (dark_r - base_r) * t
-        g = base_g + (dark_g - base_g) * t
-        b = base_b + (dark_b - base_b) * t
+        r = base[0] + (high[0] - base[0]) * t
+        g = base[1] + (high[1] - base[1]) * t
+        b = base[2] + (high[2] - base[2]) * t
 
         if is_hover:
-            # Ilumina um pouco no hover
+            # Hover: adiciona brilho
             r = min(1.0, r + 0.15)
             g = min(1.0, g + 0.15)
             b = min(1.0, b + 0.15)
 
-        return (r, g, b)
+        return r, g, b
 
+    # ------------------------------------------------------------------ #
+    # Drawing                                                            #
+    # ------------------------------------------------------------------ #
     def _on_draw(self, area, cr, width, height):
-        """Callback de desenho do Cairo."""
-        # Recalcula layout se o tamanho mudou
-        if width != self._last_width or height != self._last_height:
-            self._calculate_layout(width, height)
+        self._calculate_layout(width, height)
 
-        # Background
-        cr.set_source_rgb(0.12, 0.12, 0.12)
+        # Background (matches Adwaita dark reasonably)
+        cr.set_source_rgb(0.08, 0.08, 0.10)
         cr.paint()
 
         if not self.rectangles:
-            # Mensagem quando vazio
             cr.set_source_rgb(0.7, 0.7, 0.7)
             cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-            cr.set_font_size(18)
-
+            cr.set_font_size(16)
             text = "No stocks in this category"
-            extents = cr.text_extents(text)
-            x = (width - extents.width) / 2
-            y = (height + extents.height) / 2
-
+            ext = cr.text_extents(text)
+            x = (width - ext.width) / 2
+            y = (height + ext.height) / 2
             cr.move_to(x, y)
             cr.show_text(text)
             return
 
-        # Desenha cada retângulo
+        # 1) stock tiles (fill)
         for rect in self.rectangles:
-            if not rect.stock:
+            stock = rect.stock
+            if not stock:
                 continue
-
-            # Cor baseada em performance
-            is_hover = (rect == self.hovered_rect)
-            r, g, b = self._get_color_for_stock(rect.stock, is_hover)
-
-            # Retângulo preenchido
+            is_hover = rect is self.hovered_rect
+            r, g, b = self._get_color_for_stock(stock, is_hover)
             cr.set_source_rgb(r, g, b)
             cr.rectangle(rect.x, rect.y, rect.width, rect.height)
             cr.fill()
 
-            # Borda sutil
-            cr.set_source_rgb(0.2, 0.2, 0.2)
-            cr.set_line_width(1)
+        # 2) thin borders for tiles
+        cr.set_line_width(1.0)
+        cr.set_source_rgb(0.12, 0.12, 0.14)
+        for rect in self.rectangles:
             cr.rectangle(rect.x, rect.y, rect.width, rect.height)
             cr.stroke()
 
-            # Texto
-            self._draw_text(cr, rect)
+        # 3) text inside tiles
+        for rect in self.rectangles:
+            self._draw_stock_text(cr, rect)
 
-    def _draw_text(self, cr, rect):
-        """Desenha texto dentro do retângulo."""
-        min_width = 50
-        min_height = 30
+    def _draw_sectors(self, cr):
+        """Draw sector border and label."""
+        for srect in self.sector_rectangles:
+            # Border
+            cr.set_line_width(2.0)
+            cr.set_source_rgba(1.0, 1.0, 1.0, 0.15)
+            cr.rectangle(srect.x, srect.y, srect.width, srect.height)
+            cr.stroke()
 
-        if rect.width < min_width or rect.height < min_height:
+            if srect.width < 40 or srect.height < 16:
+                continue
+
+            name = srect.name
+            if len(name) > 24:
+                name = name[:21] + "..."
+
+            # Text style
+            cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+            font_size = min(12.0, srect.height * 0.20)
+            cr.set_font_size(font_size)
+
+            ext = cr.text_extents(name)
+            tx = srect.x + 4
+            ty = srect.y + ext.height + 2
+
+            # Background behind text
+            pad_x = 3
+            pad_y = 1
+            bg_w = ext.width + pad_x * 2
+            bg_h = ext.height + pad_y * 2
+            cr.set_source_rgba(0.02, 0.02, 0.02, 0.75)
+            cr.rectangle(tx - pad_x, srect.y + 1, bg_w, bg_h)
+            cr.fill()
+
+            # Text
+            cr.set_source_rgb(0.92, 0.92, 0.94)
+            cr.move_to(tx, ty)
+            cr.show_text(name)
+
+    def _draw_stock_text(self, cr, rect: Rectangle):
+        """Draw symbol, change% and optionally price inside a tile."""
+        stock = rect.stock
+        if not stock:
             return
 
-        stock = rect.stock
-        cr.set_source_rgb(1, 1, 1)
+        if rect.width < 48 or rect.height < 26:
+            return
 
-        # Símbolo (bold)
+        symbol = getattr(stock, "symbol", "?")
+        cp = float(getattr(stock, "change_pct", 0.0) or 0.0)
+        cp_percent = cp * 100.0
+        change_text = f"{cp_percent:+.1f}%"
+
+        cr.set_source_rgb(1.0, 1.0, 1.0)
+
+        # Symbol
         cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-        font_size = min(rect.width / 4, rect.height / 3, 20)
-        cr.set_font_size(font_size)
+        sym_size = min(18.0, rect.height * 0.45, max(10.0, rect.width * 0.28))
+        cr.set_font_size(sym_size)
 
-        symbol = stock.symbol
-        extents = cr.text_extents(symbol)
-        text_x = rect.x + (rect.width - extents.width) / 2
-        text_y = rect.y + rect.height / 2 - 4
-
-        cr.move_to(text_x, text_y)
+        ext_sym = cr.text_extents(symbol)
+        sym_x = rect.x + (rect.width - ext_sym.width) / 2
+        sym_y = rect.y + rect.height * 0.45
+        cr.move_to(sym_x, sym_y)
         cr.show_text(symbol)
 
-        # Mudança % (bold)
-        cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-        font_size = min(rect.width / 5, rect.height / 4, 16)
-        cr.set_font_size(font_size)
+        # Change %
+        cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ch_size = min(14.0, rect.height * 0.30, max(9.0, rect.width * 0.24))
+        cr.set_font_size(ch_size)
 
-        change = stock.change_pct * 100
-        change_text = f"{change:+.1f}%"
-        extents = cr.text_extents(change_text)
-        text_x = rect.x + (rect.width - extents.width) / 2
-        text_y = rect.y + rect.height / 2 + extents.height + 2
-
-        cr.move_to(text_x, text_y)
+        ext_ch = cr.text_extents(change_text)
+        ch_x = rect.x + (rect.width - ext_ch.width) / 2
+        ch_y = sym_y + ext_ch.height + 2
+        cr.move_to(ch_x, ch_y)
         cr.show_text(change_text)
 
-        # Preço (pequeno, se houver espaço)
-        if rect.width > 100 and rect.height > 70:
-            cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-            cr.set_font_size(11)
+        # Price (only if enough room)
+        if rect.width > 90 and rect.height > 55:
+            price = getattr(stock, "price", None)
+            if price is not None:
+                price_text = f"${price:.2f}"
+                cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+                cr.set_font_size(14.0)
+                ext_p = cr.text_extents(price_text)
+                px = rect.x + (rect.width - ext_p.width) / 2
+                py = rect.y + rect.height - 6
+                cr.move_to(px, py)
+                cr.show_text(price_text)
 
-            price_text = f"${stock.price:.2f}"
-            extents = cr.text_extents(price_text)
-            text_x = rect.x + (rect.width - extents.width) / 2
-            text_y = rect.y + rect.height - 6
-
-            cr.move_to(text_x, text_y)
-            cr.show_text(price_text)
-
-    # ---------------------------------------------------------------------
-    # Hit-testing / eventos
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------ #
+    # Hit-testing / events                                               #
+    # ------------------------------------------------------------------ #
     def _find_rect_at(self, x, y):
-        """Encontra retângulo na posição x, y."""
         for rect in self.rectangles:
-            if (rect.x <= x <= rect.x + rect.width and
-                rect.y <= y <= rect.y + rect.height):
+            if rect.x <= x <= rect.x + rect.width and rect.y <= y <= rect.y + rect.height:
                 return rect
         return None
 
     def _on_motion(self, controller, x, y):
-        """Callback de movimento do mouse."""
         rect = self._find_rect_at(x, y)
-
-        if rect != self.hovered_rect:
+        if rect is not self.hovered_rect:
             self.hovered_rect = rect
             self.queue_draw()
 
-            if rect:
-                # Dependendo da versão do GTK, pode precisar do display:
-                # display = self.get_display()
-                # self.set_cursor(Gdk.Cursor.new_from_name(display, "pointer"))
-                self.set_cursor(Gdk.Cursor.new_from_name("pointer", None))
+            # Gtk4 + Adwaita (Wayland/X11) safe cursor usage:
+            if rect is not None:
+                try:
+                    cursor = Gdk.Cursor.new_from_name("pointer")
+                except TypeError:
+                    # If API signature differs, just don't use a custom cursor
+                    cursor = None
+                self.set_cursor(cursor)
             else:
                 self.set_cursor(None)
 
     def _on_leave(self, controller):
-        """Callback quando mouse sai."""
-        if self.hovered_rect:
+        if self.hovered_rect is not None:
             self.hovered_rect = None
             self.queue_draw()
         self.set_cursor(None)
 
     def _on_click(self, gesture, n_press, x, y):
-        """Callback de clique."""
         rect = self._find_rect_at(x, y)
-
         if rect and rect.stock:
-            self.emit('stock-selected', rect.stock)
+            self.emit("stock-selected", rect.stock)
 
     def _on_query_tooltip(self, widget, x, y, keyboard_mode, tooltip):
-        """Callback para tooltip."""
         rect = self._find_rect_at(x, y)
+        if not rect or not rect.stock:
+            return False
 
-        if rect and rect.stock:
-            stock = rect.stock
+        stock = rect.stock
+        symbol = getattr(stock, "symbol", "?")
+        long_name = getattr(stock, "long_name", "") or ""
+        price = getattr(stock, "price", None)
+        cp = float(getattr(stock, "change_pct", 0.0) or 0.0)
+        cp_percent = cp * 100.0
+        change_abs = getattr(stock, "change", None)
+        sector = getattr(stock, "sector", None)
+        industry = getattr(stock, "industry", None)
 
-            # Tooltip detalhado
-            text = f"<b>{stock.symbol}</b> - {getattr(stock, 'long_name', '')}\n\n"
-            text += f"<b>Price:</b> ${stock.price:.2f}\n"
-            text += f"<b>Change:</b> {stock.change_pct * 100:+.2f}%\n"
-            text += f"<b>Change $:</b> ${stock.change:+.2f}\n"
+        text = f"<b>{symbol}</b>"
+        if long_name:
+            text += f" - {long_name}"
+        text += "\n\n"
 
-            if hasattr(stock, 'sector') and stock.sector:
-                text += f"<b>Sector:</b> {stock.sector}\n"
+        if price is not None:
+            text += f"<b>Price:</b> ${price:.2f}\n"
 
-            if hasattr(stock, 'industry') and stock.industry:
-                text += f"<b>Industry:</b> {stock.industry}"
+        text += f"<b>Change:</b> {cp_percent:+.2f}%\n"
+        if change_abs is not None:
+            text += f"<b>Change $:</b> ${change_abs:+.2f}\n"
 
-            tooltip.set_markup(text)
-            return True
+        if sector:
+            text += f"<b>Sector:</b> {sector}\n"
+        if industry:
+            text += f"<b>Industry:</b> {industry}"
 
-        return False
+        tooltip.set_markup(text)
+        return True

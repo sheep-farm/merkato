@@ -94,6 +94,11 @@ class CategoryModel(GObject.Object):
             "icon": "system-run-symbolic",
             "label": _("Utilities")
         },
+        "Others": {
+            "filter": "special",  # Marcador especial para lógica customizada
+            "icon": "folder-symbolic",
+            "label": _("Others")
+        },
     }
 
     __gsignals__ = {
@@ -196,6 +201,10 @@ class CategoryModel(GObject.Object):
         if category == "All":
             return [data['stock_obj'] for data in self._stocks.values()]
 
+        # Categoria "Others" tem lógica especial
+        if category == "Others":
+            return self._get_uncategorized_stocks()
+
         filter_criteria = self.CATEGORIES.get(category, {}).get('filter')
         if not filter_criteria:
             return []
@@ -211,6 +220,45 @@ class CategoryModel(GObject.Object):
                 filtered.append(data['stock_obj'])
 
         return filtered
+
+    def _get_uncategorized_stocks(self) -> List:
+        """
+        Retorna stocks que não se encaixam em nenhuma categoria.
+
+        Returns:
+            Lista de objetos Stock não categorizados
+        """
+        uncategorized = []
+
+        for data in self._stocks.values():
+            # Verifica se o stock se encaixa em alguma categoria
+            belongs_to_category = False
+
+            for cat_key, cat_info in self.CATEGORIES.items():
+                # Ignora "All" e "Others"
+                if cat_key in ["All", "Others"]:
+                    continue
+
+                filter_criteria = cat_info.get('filter')
+                if not filter_criteria:
+                    continue
+
+                # Verifica se o stock atende aos critérios
+                match = True
+                for key, value in filter_criteria.items():
+                    if data.get(key) != value:
+                        match = False
+                        break
+
+                if match:
+                    belongs_to_category = True
+                    break
+
+            # Se não pertence a nenhuma categoria, adiciona a Others
+            if not belongs_to_category:
+                uncategorized.append(data['stock_obj'])
+
+        return uncategorized
 
     def get_category_count(self, category: str) -> int:
         """
