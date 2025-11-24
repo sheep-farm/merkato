@@ -24,12 +24,16 @@ Merkato is a beautiful and intuitive application for tracking stocks, currencies
 
 ## Screenshots
 
-![Main Window](screenshots/list_view.png)
-
 ### List View
+
+![List View](screenshots/list_view.png)
+
 View your stocks in a clean, organized list with real-time prices and changes.
 
 ### Heatmap View
+
+![Heatmap View](screenshots/heatmap_view.png)
+
 Visualize market performance with color-coded tiles - green for gains, red for losses.
 
 ### Categories
