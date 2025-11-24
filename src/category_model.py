@@ -20,83 +20,68 @@
 from gi.repository import GObject
 from typing import List, Dict
 
-
 class CategoryModel(GObject.Object):
     """
     Modelo para gerenciar categorização de stocks por setor/tipo.
     """
     __gtype_name__ = 'CategoryModel'
 
-    # Definição de categorias baseadas nos setores do Yahoo Finance
+    # Categorias sem ícones
     CATEGORIES = {
         "All": {
             "filter": None,
-            "icon": "view-list-symbolic",
             "label": _("All Stocks")
         },
         "Cryptocurrency": {
             "filter": {"quoteType": "CRYPTOCURRENCY"},
-            "icon": "network-wireless-symbolic",
             "label": _("Cryptocurrency")
         },
         "Technology": {
             "filter": {"sector": "Technology"},
-            "icon": "computer-symbolic",
             "label": _("Technology")
         },
         "Healthcare": {
             "filter": {"sector": "Healthcare"},
-            "icon": "healthcare-symbolic",
             "label": _("Healthcare")
         },
         "Energy": {
             "filter": {"sector": "Energy"},
-            "icon": "battery-symbolic",
             "label": _("Energy")
         },
         "Financial": {
             "filter": {"sector": "Financial Services"},
-            "icon": "document-properties-symbolic",
             "label": _("Financial Services")
         },
         "Consumer Cyclical": {
             "filter": {"sector": "Consumer Cyclical"},
-            "icon": "shopping-cart-symbolic",
             "label": _("Consumer Cyclical")
         },
         "Consumer Defensive": {
             "filter": {"sector": "Consumer Defensive"},
-            "icon": "package-symbolic",
             "label": _("Consumer Defensive")
         },
         "Industrial": {
             "filter": {"sector": "Industrial"},
-            "icon": "utilities-system-monitor-symbolic",
             "label": _("Industrial")
         },
         "Real Estate": {
             "filter": {"sector": "Real Estate"},
-            "icon": "user-home-symbolic",
             "label": _("Real Estate")
         },
         "Basic Materials": {
             "filter": {"sector": "Basic Materials"},
-            "icon": "preferences-system-symbolic",
             "label": _("Basic Materials")
         },
         "Communication": {
             "filter": {"sector": "Communication Services"},
-            "icon": "network-transmit-receive-symbolic",
             "label": _("Communication Services")
         },
         "Utilities": {
             "filter": {"sector": "Utilities"},
-            "icon": "system-run-symbolic",
             "label": _("Utilities")
         },
         "Others": {
-            "filter": "special",  # Marcador especial para lógica customizada
-            "icon": "folder-symbolic",
+            "filter": "special",
             "label": _("Others")
         },
     }
@@ -127,12 +112,7 @@ class CategoryModel(GObject.Object):
     # ============== Gerenciamento de Stocks ==============
 
     def add_stock(self, stock):
-        """
-        Adiciona um stock ao modelo.
-
-        Args:
-            stock: Objeto Stock com os dados
-        """
+        """Adiciona um stock ao modelo."""
         self._stocks[stock.symbol] = {
             'symbol': stock.symbol,
             'long_name': stock.long_name,
@@ -144,12 +124,7 @@ class CategoryModel(GObject.Object):
         self.emit('counts-updated')
 
     def update_stock(self, stock):
-        """
-        Atualiza um stock existente.
-
-        Args:
-            stock: Objeto Stock com dados atualizados
-        """
+        """Atualiza um stock existente."""
         if stock.symbol in self._stocks:
             self._stocks[stock.symbol].update({
                 'long_name': stock.long_name,
@@ -161,12 +136,7 @@ class CategoryModel(GObject.Object):
             self.emit('counts-updated')
 
     def remove_stock(self, symbol: str):
-        """
-        Remove um stock do modelo.
-
-        Args:
-            symbol: Símbolo do stock
-        """
+        """Remove um stock do modelo."""
         if symbol in self._stocks:
             del self._stocks[symbol]
             self.emit('counts-updated')
@@ -177,31 +147,17 @@ class CategoryModel(GObject.Object):
         self.emit('counts-updated')
 
     def load_stocks(self, stocks: List):
-        """
-        Carrega múltiplos stocks de uma vez.
-
-        Args:
-            stocks: Lista de objetos Stock
-        """
+        """Carrega múltiplos stocks de uma vez."""
         for stock in stocks:
             self.add_stock(stock)
 
     # ============== Filtragem ==============
 
     def get_stocks_by_category(self, category: str) -> List:
-        """
-        Retorna lista de stocks filtrados por categoria.
-
-        Args:
-            category: Nome da categoria
-
-        Returns:
-            Lista de objetos Stock
-        """
+        """Retorna lista de stocks filtrados por categoria."""
         if category == "All":
             return [data['stock_obj'] for data in self._stocks.values()]
 
-        # Categoria "Others" tem lógica especial
         if category == "Others":
             return self._get_uncategorized_stocks()
 
@@ -222,94 +178,56 @@ class CategoryModel(GObject.Object):
         return filtered
 
     def _get_uncategorized_stocks(self) -> List:
-        """
-        Retorna stocks que não se encaixam em nenhuma categoria.
-
-        Returns:
-            Lista de objetos Stock não categorizados
-        """
+        """Retorna stocks que não se encaixam em nenhuma categoria."""
         uncategorized = []
 
         for data in self._stocks.values():
-            # Verifica se o stock se encaixa em alguma categoria
-            belongs_to_category = False
-
-            for cat_key, cat_info in self.CATEGORIES.items():
-                # Ignora "All" e "Others"
+            belongs = False
+            for cat_key, info in self.CATEGORIES.items():
                 if cat_key in ["All", "Others"]:
                     continue
 
-                filter_criteria = cat_info.get('filter')
-                if not filter_criteria:
+                filt = info.get('filter')
+                if not filt:
                     continue
 
-                # Verifica se o stock atende aos critérios
                 match = True
-                for key, value in filter_criteria.items():
-                    if data.get(key) != value:
+                for key, val in filt.items():
+                    if data.get(key) != val:
                         match = False
                         break
 
                 if match:
-                    belongs_to_category = True
+                    belongs = True
                     break
 
-            # Se não pertence a nenhuma categoria, adiciona a Others
-            if not belongs_to_category:
+            if not belongs:
                 uncategorized.append(data['stock_obj'])
 
         return uncategorized
 
     def get_category_count(self, category: str) -> int:
-        """
-        Retorna quantidade de stocks em uma categoria.
-
-        Args:
-            category: Nome da categoria
-
-        Returns:
-            Número de stocks
-        """
+        """Retorna quantidade de stocks em uma categoria."""
         return len(self.get_stocks_by_category(category))
 
     def get_all_category_counts(self) -> Dict[str, int]:
-        """
-        Retorna dicionário com contagem de todas as categorias.
-
-        Returns:
-            Dicionário {categoria: quantidade}
-        """
-        return {
-            category: self.get_category_count(category)
-            for category in self.CATEGORIES.keys()
-        }
-
-    # ============== Informações ==============
+        """Retorna contagem de todas as categorias."""
+        return {cat: self.get_category_count(cat) for cat in self.CATEGORIES.keys()}
 
     def get_stock_category(self, symbol: str) -> str:
-        """
-        Retorna a categoria principal de um stock.
-
-        Args:
-            symbol: Símbolo do stock
-
-        Returns:
-            Nome da categoria ou "Unknown"
-        """
+        """Retorna a categoria principal de um stock."""
         if symbol not in self._stocks:
             return "Unknown"
 
-        stock_data = self._stocks[symbol]
+        data = self._stocks[symbol]
 
-        # Verifica cryptocurrency primeiro
-        if stock_data.get('quoteType') == 'CRYPTOCURRENCY':
+        if data.get('quoteType') == 'CRYPTOCURRENCY':
             return "Cryptocurrency"
 
-        # Procura por setor
-        sector = stock_data.get('sector', 'Unknown')
+        sector = data.get('sector', 'Unknown')
         for category, info in self.CATEGORIES.items():
-            filter_criteria = info.get('filter')
-            if filter_criteria and filter_criteria.get('sector') == sector:
+            filt = info.get('filter')
+            if filt and filt.get('sector') == sector:
                 return category
 
         return "Unknown"
@@ -321,3 +239,4 @@ class CategoryModel(GObject.Object):
     def get_stock_count(self) -> int:
         """Retorna número total de stocks."""
         return len(self._stocks)
+
