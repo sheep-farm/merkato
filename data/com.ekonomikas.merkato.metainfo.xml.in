@@ -69,7 +69,7 @@
 
   <!-- Releases -->
   <releases>
-    <release version="0.2.1" date="2025-01-01">
+    <release version="0.2.1" date="2025-11-24">
       <description>
         <p>Improved sector categorization, translations, and heatmap performance.</p>
       </description>
