@@ -278,6 +278,7 @@ class MerkatoListStock(Gtk.Box):
         remove_button.add_css_class("flat")
         remove_button.add_css_class("circular")
         remove_button.add_css_class("remove-button")
+        remove_button.add_css_class('destructive-action')
         remove_button.set_tooltip_text(_("Remove from watchlist"))
         remove_button.connect("clicked", self._on_remove_button_clicked, stock_item)
 
