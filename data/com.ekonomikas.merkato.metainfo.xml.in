@@ -64,6 +64,11 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.2" date="2025-12-15">
+      <description translate="no">
+        <p>Improved alerts.</p>
+      </description>
+    </release>
     <release version="0.2.1" date="2025-11-23">
       <description translate="no">
         <p>Improved sector categorization, translations, and heatmap performance.</p>
