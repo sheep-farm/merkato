@@ -1,0 +1,394 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Merkato package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Merkato 0.2.1\n"
+"Report-Msgid-Bugs-To: flavio.vcorrea@ufpel.edu.br\n"
+"POT-Creation-Date: 2025-11-26 07:43-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/com.ekonomikas.merkato.desktop.in:2
+#: data/com.ekonomikas.merkato.metainfo.xml.in:7
+msgid "Merkato"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.desktop.in:8
+msgid "GTK;"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.gschema.xml:6
+msgid "Window width"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.gschema.xml:10
+msgid "Window height"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.gschema.xml:14
+msgid "Window maximized state"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:8
+msgid "A modern financial market tracker for GNOME"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:11
+msgid "Flávio de Vasconcellos Corrêa"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:15
+msgid ""
+"Merkato is a modern and intuitive financial market tracker designed for the "
+"GNOME desktop. Built with GTK4 and Libadwaita, it provides a native and "
+"elegant interface for monitoring stocks, indices, currencies, and "
+"cryptocurrencies in real-time using Yahoo Finance data."
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:21
+msgid ""
+"The application offers both a traditional list view and an interactive "
+"heatmap view, allowing users to visualize market performance in multiple "
+"ways. Stocks are automatically categorized into sectors such as Technology, "
+"Healthcare, Energy, Financial Services, and more. Merkato also features "
+"persistent watchlists, automatic refresh, sorting options, and support for "
+"27 languages."
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:29
+msgid ""
+"Merkato is fully open source and built with performance and simplicity in "
+"mind, following GNOME's Human Interface Guidelines to deliver a clean, "
+"consistent, and distraction-free user experience."
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:37
+msgid "stock"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:38
+msgid "finance"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:39
+msgid "market"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:40
+msgid "cryptocurrency"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:41
+msgid "investing"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:42
+msgid "heatmap"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:43
+msgid "GNOME"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:54
+msgid "List View"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:58
+msgid "Heatmap View"
+msgstr ""
+
+#: data/com.ekonomikas.merkato.metainfo.xml.in:62
+msgid "Remove View"
+msgstr ""
+
+#. Option: Add Alert
+#: src/blp/alert_dialog.blp:5 src/list_stock.py:304
+msgid "Add Price Alert"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:17
+msgid "Cancel"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:22
+msgid "Create"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:39
+msgid "Stock Information"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:42
+msgid "Symbol"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:51
+msgid "Stock Name"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:52
+msgid "Not selected"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:63
+msgid "Alert Configuration"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:66
+msgid "Alert Type"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:69
+msgid "When price goes above (Maximum)"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:70
+msgid "When price goes below (Minimum)"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:81
+msgid "Target Price"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:96 src/blp/alert_dialog.blp:99
+msgid "Current Price"
+msgstr ""
+
+#: src/blp/alert_dialog.blp:100
+msgid "--"
+msgstr ""
+
+#: src/blp/alerts_view.blp:12
+msgid "Add New Alert"
+msgstr ""
+
+#: src/blp/alerts_view.blp:19
+msgid "Alerts Menu"
+msgstr ""
+
+#: src/blp/alerts_view.blp:24
+msgid "Price Alerts"
+msgstr ""
+
+#: src/blp/alerts_view.blp:25
+msgid "0 alerts"
+msgstr ""
+
+#: src/blp/alerts_view.blp:39
+msgid "No Alerts"
+msgstr ""
+
+#: src/blp/alerts_view.blp:40
+msgid ""
+"Right-click any stock in the list and select 'Add Price Alert' to get started"
+msgstr ""
+
+#: src/blp/alerts_view.blp:55
+msgid "Active Alerts"
+msgstr ""
+
+#: src/blp/alerts_view.blp:56
+msgid "Monitoring price changes"
+msgstr ""
+
+#: src/blp/alerts_view.blp:69
+msgid "Triggered Alerts"
+msgstr ""
+
+#: src/blp/alerts_view.blp:70
+msgid "Alerts that have been activated"
+msgstr ""
+
+#: src/blp/alerts_view.blp:83
+msgid "Disabled Alerts"
+msgstr ""
+
+#: src/blp/alerts_view.blp:84
+msgid "Inactive alerts"
+msgstr ""
+
+#: src/blp/alerts_view.blp:103
+msgid "Clear Triggered Alerts"
+msgstr ""
+
+#: src/blp/alerts_view.blp:108
+msgid "Clear All Alerts"
+msgstr ""
+
+#: src/blp/list_stock.blp:25
+msgid "No Stocks Yet"
+msgstr ""
+
+#: src/blp/list_stock.blp:26
+msgid "Search and add stocks to your watchlist"
+msgstr ""
+
+#: src/blp/search_stock.blp:9
+msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
+msgstr ""
+
+#: src/blp/search_stock.blp:15
+msgid "Search"
+msgstr ""
+
+#: src/blp/window.blp:19 src/category_sidebar.py:76
+msgid "Categories"
+msgstr ""
+
+#: src/blp/window.blp:56
+msgid "Toggle Sidebar"
+msgstr ""
+
+#: src/blp/window.blp:70
+msgid "Main Menu"
+msgstr ""
+
+#: src/blp/window.blp:76
+msgid "Remove Stocks"
+msgstr ""
+
+#: src/blp/window.blp:83
+msgid "Updating..."
+msgstr ""
+
+#: src/blp/window.blp:92
+msgid "List"
+msgstr ""
+
+#: src/blp/window.blp:170
+msgid "Last updated: "
+msgstr ""
+
+#: src/blp/window.blp:187
+msgid "Heatmap"
+msgstr ""
+
+#: src/blp/window.blp:265
+msgid "Click on a stock to view details"
+msgstr ""
+
+#: src/blp/window.blp:275
+msgid "Alerts"
+msgstr ""
+
+#: src/blp/window.blp:293
+msgid "_Refresh"
+msgstr ""
+
+#: src/blp/window.blp:300
+msgid "_Sort Alphabetically"
+msgstr ""
+
+#: src/blp/window.blp:306
+msgid "Sort by Top _Gains"
+msgstr ""
+
+#: src/blp/window.blp:312
+msgid "Sort by Top _Losses"
+msgstr ""
+
+#: src/blp/window.blp:320
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: src/blp/window.blp:325
+msgid "_About"
+msgstr ""
+
+#: src/category_model.py:33
+msgid "All Stocks"
+msgstr ""
+
+#: src/category_model.py:37
+msgid "Cryptocurrency"
+msgstr ""
+
+#: src/category_model.py:41
+msgid "Technology"
+msgstr ""
+
+#: src/category_model.py:45
+msgid "Healthcare"
+msgstr ""
+
+#: src/category_model.py:49
+msgid "Energy"
+msgstr ""
+
+#: src/category_model.py:53
+msgid "Financial Services"
+msgstr ""
+
+#: src/category_model.py:57
+msgid "Consumer Cyclical"
+msgstr ""
+
+#: src/category_model.py:61
+msgid "Consumer Defensive"
+msgstr ""
+
+#: src/category_model.py:65
+msgid "Industrial"
+msgstr ""
+
+#: src/category_model.py:69
+msgid "Real Estate"
+msgstr ""
+
+#: src/category_model.py:73
+msgid "Basic Materials"
+msgstr ""
+
+#: src/category_model.py:77
+msgid "Communication Services"
+msgstr ""
+
+#: src/category_model.py:81
+msgid "Utilities"
+msgstr ""
+
+#: src/category_model.py:85
+msgid "Others"
+msgstr ""
+
+#: src/list_stock.py:281
+msgid "Remove from watchlist"
+msgstr ""
+
+#. Option: Open in Yahoo Finance
+#: src/list_stock.py:307
+msgid "Open in Yahoo Finance"
+msgstr ""
+
+#: src/window.py:328
+msgid "cached"
+msgstr ""
+
+#: src/window.py:480
+msgid "WARNING: Failed to save watchlist"
+msgstr ""
+
+#. Notification title
+#: src/window.py:545
+msgid "Price Alert Triggered"
+msgstr ""
+
+#: src/window.py:549
+#, python-brace-format
+msgid "{symbol} reached ${price:.2f} (above target)"
+msgstr ""
+
+#: src/window.py:554
+#, python-brace-format
+msgid "{symbol} reached ${price:.2f} (below target)"
+msgstr ""

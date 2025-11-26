@@ -1,4 +1,4 @@
-# stock.py (MODIFICADO para incluir setor/indústria)
+# stock.py (MODIFIED to include sector/industry)
 #
 # Copyright 2025 Flávio de Vasconcellos Corrêa
 #
@@ -22,8 +22,8 @@ from gi.repository import GObject
 
 class Stock(GObject.Object):
     """
-    Modelo de dados para representar um stock/ação.
-    Contém informações de preço, variação, estado do mercado e categoria.
+    Data model to represent a stock.
+    Contains information about price, change, market state, and category.
     """
     __gtype_name__ = 'Stock'
 
@@ -37,26 +37,26 @@ class Stock(GObject.Object):
         market_state: str = '',
         currency: str = '',
         currency_symbol: str = '',
-        # NOVOS CAMPOS PARA CATEGORIZAÇÃO
+        # NEW FIELDS FOR CATEGORIZATION
         quote_type: str = '',
         sector: str = '',
         industry: str = ''
     ):
         """
-        Inicializa um Stock.
+        Initializes a Stock.
 
         Args:
-            symbol: Símbolo do ticker (ex: 'AAPL', 'PETR4.SA')
-            long_name: Nome completo da empresa
-            price: Preço atual
-            change: Variação absoluta
-            change_pct: Variação percentual (0.05 = 5%)
-            market_state: Estado do mercado ('REGULAR', 'CLOSED', etc)
-            currency: Código da moeda (ex: 'USD', 'BRL')
-            currency_symbol: Símbolo da moeda (ex: '$', 'R$')
-            quote_type: Tipo (EQUITY, CRYPTOCURRENCY, ETF, etc)
-            sector: Setor (Technology, Healthcare, etc)
-            industry: Indústria específica
+            symbol: Ticker symbol (e.g., 'AAPL', 'PETR4.SA')
+            long_name: Company full name
+            price: Current price
+            change: Absolute change
+            change_pct: Percentage change (0.05 = 5%)
+            market_state: Market state ('REGULAR', 'CLOSED', etc)
+            currency: Currency code (e.g., 'USD', 'BRL')
+            currency_symbol: Currency symbol (e.g., '$', 'R$')
+            quote_type: Type (EQUITY, CRYPTOCURRENCY, ETF, etc)
+            sector: Sector (Technology, Healthcare, etc)
+            industry: Specific industry
         """
         super().__init__()
         self._symbol = symbol
@@ -71,11 +71,11 @@ class Stock(GObject.Object):
         self._sector = sector
         self._industry = industry
 
-    # ============== Propriedades Existentes ==============
+    # ============== Existing Properties ==============
 
     @GObject.Property(type=str)
     def symbol(self) -> str:
-        """Símbolo do ticker."""
+        """Ticker symbol."""
         return self._symbol
 
     @symbol.setter
@@ -84,7 +84,7 @@ class Stock(GObject.Object):
 
     @GObject.Property(type=str)
     def long_name(self) -> str:
-        """Nome completo da empresa."""
+        """Company full name."""
         return self._long_name
 
     @long_name.setter
@@ -93,7 +93,7 @@ class Stock(GObject.Object):
 
     @GObject.Property(type=float)
     def price(self) -> float:
-        """Preço atual."""
+        """Current price."""
         return self._price
 
     @price.setter
@@ -102,7 +102,7 @@ class Stock(GObject.Object):
 
     @GObject.Property(type=float)
     def change(self) -> float:
-        """Variação absoluta do preço."""
+        """Absolute price change."""
         return self._change
 
     @change.setter
@@ -111,7 +111,7 @@ class Stock(GObject.Object):
 
     @GObject.Property(type=float)
     def change_pct(self) -> float:
-        """Variação percentual (0.05 = 5%)."""
+        """Percentage change (0.05 = 5%)."""
         return self._change_pct
 
     @change_pct.setter
@@ -120,7 +120,7 @@ class Stock(GObject.Object):
 
     @GObject.Property(type=str)
     def market_state(self) -> str:
-        """Estado do mercado."""
+        """Market state."""
         return self._market_state
 
     @market_state.setter
@@ -129,7 +129,7 @@ class Stock(GObject.Object):
 
     @GObject.Property(type=str)
     def currency(self) -> str:
-        """Código da moeda."""
+        """Currency code."""
         return self._currency
 
     @currency.setter
@@ -138,18 +138,18 @@ class Stock(GObject.Object):
 
     @GObject.Property(type=str)
     def currency_symbol(self) -> str:
-        """Símbolo da moeda."""
+        """Currency symbol."""
         return self._currency_symbol
 
     @currency_symbol.setter
     def currency_symbol(self, value: str):
         self._currency_symbol = value
 
-    # ============== NOVAS Propriedades para Categorização ==============
+    # ============== NEW Properties for Categorization ==============
 
     @GObject.Property(type=str)
     def quote_type(self) -> str:
-        """Tipo do quote (EQUITY, CRYPTOCURRENCY, ETF, etc)."""
+        """Quote type (EQUITY, CRYPTOCURRENCY, ETF, etc)."""
         return self._quote_type
 
     @quote_type.setter
@@ -158,7 +158,7 @@ class Stock(GObject.Object):
 
     @GObject.Property(type=str)
     def sector(self) -> str:
-        """Setor da empresa."""
+        """Company sector."""
         return self._sector
 
     @sector.setter
@@ -167,21 +167,21 @@ class Stock(GObject.Object):
 
     @GObject.Property(type=str)
     def industry(self) -> str:
-        """Indústria específica."""
+        """Specific industry."""
         return self._industry
 
     @industry.setter
     def industry(self, value: str):
         self._industry = value
 
-    # ============== Métodos de conversão ==============
+    # ============== Conversion Methods ==============
 
     def to_dict(self):
         """
-        Converte o Stock para dicionário.
+        Converts the Stock to a dictionary.
 
         Returns:
-            Dicionário com todos os dados do stock
+            Dictionary with all stock data
         """
         return {
             'symbol': self.symbol,
@@ -200,13 +200,13 @@ class Stock(GObject.Object):
     @classmethod
     def from_dict(cls, data):
         """
-        Cria um Stock a partir de um dicionário.
+        Creates a Stock from a dictionary.
 
         Args:
-            data: Dicionário com dados do stock
+            data: Dictionary with stock data
 
         Returns:
-            Instância de Stock
+            Stock instance
         """
         return cls(
             symbol=data.get('symbol', ''),
@@ -222,32 +222,32 @@ class Stock(GObject.Object):
             industry=data.get('industry', ''),
         )
 
-    # ============== Métodos auxiliares ==============
+    # ============== Helper Methods ==============
 
     def is_gaining(self) -> bool:
         """
-        Verifica se o stock está em alta.
+        Checks if the stock is gaining.
 
         Returns:
-            True se a variação é positiva
+            True if change is positive
         """
         return self.change > 0
 
     def is_losing(self) -> bool:
         """
-        Verifica se o stock está em queda.
+        Checks if the stock is losing.
 
         Returns:
-            True se a variação é negativa
+            True if change is negative
         """
         return self.change < 0
 
     def is_market_open(self) -> bool:
         """
-        Verifica se o mercado está aberto.
+        Checks if the market is open.
 
         Returns:
-            True se o mercado está em horário regular
+            True if market is in regular hours
         """
         return self.market_state == "REGULAR"
 

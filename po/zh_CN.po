@@ -1,4 +1,4 @@
-# Chinese (Simplified) translation for Merkato
+# Zh Cn translation for Merkato
 # Copyright (C) 2025
 # This file is distributed under the same license as the Merkato package.
 #
@@ -6,15 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:00+0000\n"
-"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"POT-Creation-Date: 2025-01-26 12:00+0000\n"
+"PO-Revision-Date: 2025-01-26 12:00+0000\n"
 "Last-Translator: \n"
-"Language-Team: Chinese (Simplified)\n"
+"Language-Team: zh_CN\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #:main.py
 msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
@@ -94,60 +93,209 @@ msgstr "从关注列表中删除"
 
 #: category_model.py category_sidebar.py
 msgid "All Stocks"
-msgstr ""
+msgstr "All Stocks"
 
 #: category_model.py category_sidebar.py
 msgid "Cryptocurrency"
-msgstr ""
+msgstr "Cryptocurrency"
 
 #: category_model.py category_sidebar.py
 msgid "Technology"
-msgstr ""
+msgstr "Technology"
 
 #: category_model.py category_sidebar.py
 msgid "Healthcare"
-msgstr ""
+msgstr "Healthcare"
 
 #: category_model.py category_sidebar.py
 msgid "Energy"
-msgstr ""
+msgstr "Energy"
 
 #: category_model.py category_sidebar.py
 msgid "Financial Services"
-msgstr ""
+msgstr "Financial Services"
 
 #: category_model.py category_sidebar.py
 msgid "Consumer Cyclical"
-msgstr ""
+msgstr "Consumer Cyclical"
 
 #: category_model.py category_sidebar.py
 msgid "Consumer Defensive"
-msgstr ""
+msgstr "Consumer Defensive"
 
 #: category_model.py category_sidebar.py
 msgid "Industrial"
-msgstr ""
+msgstr "Industrial"
 
 #: category_model.py category_sidebar.py
 msgid "Real Estate"
-msgstr ""
+msgstr "Real Estate"
 
 #: category_model.py category_sidebar.py
 msgid "Basic Materials"
-msgstr ""
+msgstr "Basic Materials"
 
 #: category_model.py category_sidebar.py
 msgid "Communication Services"
-msgstr ""
+msgstr "Communication Services"
 
 #: category_model.py category_sidebar.py
 msgid "Utilities"
-msgstr ""
+msgstr "Utilities"
 
 #: category_model.py category_sidebar.py
 msgid "Others"
-msgstr ""
+msgstr "Others"
 
 #: category_sidebar.py
 msgid "Categories"
-msgstr ""
+msgstr "分类"
+
+#: window.blp
+msgid "Toggle Sidebar"
+msgstr "切换侧边栏"
+
+#: window.blp
+msgid "List"
+msgstr "列表"
+
+#: window.blp
+msgid "Heatmap"
+msgstr "热力图"
+
+#: window.blp
+msgid "Alerts"
+msgstr "提醒"
+
+#: window.blp
+msgid "Click on a stock to view details"
+msgstr "点击股票查看详情"
+
+#: list_stock.py
+msgid "Add Price Alert"
+msgstr "添加价格提醒"
+
+#: list_stock.py
+msgid "Open in Yahoo Finance"
+msgstr "在Yahoo Finance中打开"
+
+#: alert_dialog.blp
+msgid "Cancel"
+msgstr "取消"
+
+#: alert_dialog.blp
+msgid "Create"
+msgstr "创建"
+
+#: alert_dialog.blp
+msgid "Stock Information"
+msgstr "股票信息"
+
+#: alert_dialog.blp
+msgid "Symbol"
+msgstr "代码"
+
+#: alert_dialog.blp
+msgid "Stock Name"
+msgstr "股票名称"
+
+#: alert_dialog.blp
+msgid "Not selected"
+msgstr "未选择"
+
+#: alert_dialog.blp
+msgid "Alert Configuration"
+msgstr "提醒配置"
+
+#: alert_dialog.blp
+msgid "Alert Type"
+msgstr "提醒类型"
+
+#: alert_dialog.blp
+msgid "When price goes above (Maximum)"
+msgstr "当价格超过（最大值）"
+
+#: alert_dialog.blp
+msgid "When price goes below (Minimum)"
+msgstr "当价格低于（最小值）"
+
+#: alert_dialog.blp
+msgid "Target Price"
+msgstr "目标价格"
+
+#: alert_dialog.blp
+msgid "Current Price"
+msgstr "当前价格"
+
+#: alert_dialog.blp
+msgid "--"
+msgstr "--"
+
+#: alerts_view.blp
+msgid "Add New Alert"
+msgstr "添加新提醒"
+
+#: alerts_view.blp
+msgid "Alerts Menu"
+msgstr "提醒菜单"
+
+#: alerts_view.blp
+msgid "Price Alerts"
+msgstr "价格提醒"
+
+#: alerts_view.blp
+msgid "0 alerts"
+msgstr "0个提醒"
+
+#: alerts_view.blp
+msgid "No Alerts"
+msgstr "没有提醒"
+
+#: alerts_view.blp
+msgid "Right-click any stock in the list and select 'Add Price Alert' to get started"
+msgstr "右键单击列表中的任何股票并选择""添加价格提醒""以开始"
+
+#: alerts_view.blp
+msgid "Active Alerts"
+msgstr "活跃提醒"
+
+#: alerts_view.blp
+msgid "Monitoring price changes"
+msgstr "监控价格变化"
+
+#: alerts_view.blp
+msgid "Triggered Alerts"
+msgstr "已触发提醒"
+
+#: alerts_view.blp
+msgid "Alerts that have been activated"
+msgstr "已激活的提醒"
+
+#: alerts_view.blp
+msgid "Disabled Alerts"
+msgstr "已禁用提醒"
+
+#: alerts_view.blp
+msgid "Inactive alerts"
+msgstr "非活跃提醒"
+
+#: alerts_view.blp
+msgid "Clear Triggered Alerts"
+msgstr "清除已触发提醒"
+
+#: alerts_view.blp
+msgid "Clear All Alerts"
+msgstr "清除所有提醒"
+
+#: window.py
+msgid "Price Alert Triggered"
+msgstr "价格提醒已触发"
+
+#: window.py
+msgid "{symbol} reached ${price:.2f} (above target)"
+msgstr "{symbol}达到${price:.2f}（高于目标）"
+
+#: window.py
+msgid "{symbol} reached ${price:.2f} (below target)"
+msgstr "{symbol}达到${price:.2f}（低于目标）"
+

@@ -1,4 +1,4 @@
-# Portuguese (Brazil) translation for Merkato
+# Pt Br translation for Merkato
 # Copyright (C) 2025
 # This file is distributed under the same license as the Merkato package.
 #
@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-23 12:00+0000\n"
-"PO-Revision-Date: 2025-01-23 12:00-0300\n"
+"POT-Creation-Date: 2025-01-26 12:00+0000\n"
+"PO-Revision-Date: 2025-01-26 12:00+0000\n"
 "Last-Translator: \n"
-"Language-Team: Portuguese (Brazil)\n"
+"Language-Team: pt_BR\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,3 +151,152 @@ msgstr "Outros"
 #: category_sidebar.py
 msgid "Categories"
 msgstr "Categorias"
+
+#: window.blp
+msgid "Toggle Sidebar"
+msgstr "Alternar Barra Lateral"
+
+#: window.blp
+msgid "List"
+msgstr "Lista"
+
+#: window.blp
+msgid "Heatmap"
+msgstr "Mapa de Calor"
+
+#: window.blp
+msgid "Alerts"
+msgstr "Alertas"
+
+#: window.blp
+msgid "Click on a stock to view details"
+msgstr "Clique em uma ação para ver detalhes"
+
+#: list_stock.py
+msgid "Add Price Alert"
+msgstr "Adicionar Alerta de Preço"
+
+#: list_stock.py
+msgid "Open in Yahoo Finance"
+msgstr "Abrir no Yahoo Finance"
+
+#: alert_dialog.blp
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: alert_dialog.blp
+msgid "Create"
+msgstr "Criar"
+
+#: alert_dialog.blp
+msgid "Stock Information"
+msgstr "Informações da Ação"
+
+#: alert_dialog.blp
+msgid "Symbol"
+msgstr "Símbolo"
+
+#: alert_dialog.blp
+msgid "Stock Name"
+msgstr "Nome da Ação"
+
+#: alert_dialog.blp
+msgid "Not selected"
+msgstr "Não selecionado"
+
+#: alert_dialog.blp
+msgid "Alert Configuration"
+msgstr "Configuração do Alerta"
+
+#: alert_dialog.blp
+msgid "Alert Type"
+msgstr "Tipo de Alerta"
+
+#: alert_dialog.blp
+msgid "When price goes above (Maximum)"
+msgstr "Quando o preço ultrapassar (Máximo)"
+
+#: alert_dialog.blp
+msgid "When price goes below (Minimum)"
+msgstr "Quando o preço cair abaixo (Mínimo)"
+
+#: alert_dialog.blp
+msgid "Target Price"
+msgstr "Preço Alvo"
+
+#: alert_dialog.blp
+msgid "Current Price"
+msgstr "Preço Atual"
+
+#: alert_dialog.blp
+msgid "--"
+msgstr "--"
+
+#: alerts_view.blp
+msgid "Add New Alert"
+msgstr "Adicionar Novo Alerta"
+
+#: alerts_view.blp
+msgid "Alerts Menu"
+msgstr "Menu de Alertas"
+
+#: alerts_view.blp
+msgid "Price Alerts"
+msgstr "Alertas de Preço"
+
+#: alerts_view.blp
+msgid "0 alerts"
+msgstr "0 alertas"
+
+#: alerts_view.blp
+msgid "No Alerts"
+msgstr "Nenhum Alerta"
+
+#: alerts_view.blp
+msgid "Right-click any stock in the list and select 'Add Price Alert' to get started"
+msgstr "Clique com o botão direito em qualquer ação da lista e selecione ""Adicionar Alerta de Preço"" para começar"
+
+#: alerts_view.blp
+msgid "Active Alerts"
+msgstr "Alertas Ativos"
+
+#: alerts_view.blp
+msgid "Monitoring price changes"
+msgstr "Monitorando mudanças de preço"
+
+#: alerts_view.blp
+msgid "Triggered Alerts"
+msgstr "Alertas Disparados"
+
+#: alerts_view.blp
+msgid "Alerts that have been activated"
+msgstr "Alertas que foram ativados"
+
+#: alerts_view.blp
+msgid "Disabled Alerts"
+msgstr "Alertas Desativados"
+
+#: alerts_view.blp
+msgid "Inactive alerts"
+msgstr "Alertas inativos"
+
+#: alerts_view.blp
+msgid "Clear Triggered Alerts"
+msgstr "Limpar Alertas Disparados"
+
+#: alerts_view.blp
+msgid "Clear All Alerts"
+msgstr "Limpar Todos os Alertas"
+
+#: window.py
+msgid "Price Alert Triggered"
+msgstr "Alerta de Preço Disparado"
+
+#: window.py
+msgid "{symbol} reached ${price:.2f} (above target)"
+msgstr "{symbol} atingiu ${price:.2f} (acima do alvo)"
+
+#: window.py
+msgid "{symbol} reached ${price:.2f} (below target)"
+msgstr "{symbol} atingiu ${price:.2f} (abaixo do alvo)"
+

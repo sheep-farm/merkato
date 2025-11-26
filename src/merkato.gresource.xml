@@ -5,6 +5,8 @@
     <file preprocess="xml-stripblanks">search_stock.ui</file>
     <file preprocess="xml-stripblanks">list_stock.ui</file>
     <file preprocess="xml-stripblanks">window.ui</file>
+    <file preprocess="xml-stripblanks">alert_dialog.ui</file>
+    <file preprocess="xml-stripblanks">alerts_view.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
   </gresource>
 </gresources>

@@ -1,0 +1,114 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlertsView: Gtk.Box {
+  orientation: vertical;
+  spacing: 0;
+
+  Adw.HeaderBar toolbar {
+    show-end-title-buttons: false;
+
+    // [start]
+    // Gtk.Button add_alert_button {
+    //   icon-name: "list-add-symbolic";
+    //   tooltip-text: _("Add New Alert");
+    // }
+
+    [end]
+    Gtk.MenuButton {
+      icon-name: "open-menu-symbolic";
+      menu-model: alerts_menu;
+      tooltip-text: _("Alerts Menu");
+    }
+
+    [title]
+    Adw.WindowTitle title_widget {
+      title: _("Price Alerts");
+      subtitle: _("0 alerts");
+    }
+  }
+
+  Gtk.ScrolledWindow {
+    vexpand: true;
+    hexpand: true;
+
+    Gtk.Box main_box {
+      orientation: vertical;
+      spacing: 0;
+
+      Adw.StatusPage empty_state {
+        icon-name: "alarm-symbolic";
+        title: _("No Alerts");
+        description: _("Right-click any stock in the list and select 'Add Price Alert' to get started");
+        vexpand: true;
+        hexpand: true;
+      }
+
+      Gtk.Box alerts_container {
+        orientation: vertical;
+        spacing: 12;
+        margin-top: 12;
+        margin-bottom: 12;
+        margin-start: 12;
+        margin-end: 12;
+        visible: false;
+
+        Adw.PreferencesGroup active_group {
+          title: _("Active Alerts");
+          description: _("Monitoring price changes");
+          visible: false;
+
+          Gtk.ListBox active_alerts_list {
+            selection-mode: none;
+
+            styles [
+              "boxed-list",
+            ]
+          }
+        }
+
+        Adw.PreferencesGroup triggered_group {
+          title: _("Triggered Alerts");
+          description: _("Alerts that have been activated");
+          visible: false;
+
+          Gtk.ListBox triggered_alerts_list {
+            selection-mode: none;
+
+            styles [
+              "boxed-list",
+            ]
+          }
+        }
+
+        Adw.PreferencesGroup disabled_group {
+          title: _("Disabled Alerts");
+          description: _("Inactive alerts");
+          visible: false;
+
+          Gtk.ListBox disabled_alerts_list {
+            selection-mode: none;
+
+            styles [
+              "boxed-list",
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+
+menu alerts_menu {
+  section {
+    item {
+      label: _("Clear Triggered Alerts");
+      action: "alerts.clear-triggered";
+    }
+
+    item {
+      label: _("Clear All Alerts");
+      action: "alerts.clear-all";
+    }
+  }
+}

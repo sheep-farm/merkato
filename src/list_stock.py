@@ -41,6 +41,7 @@ class MerkatoListStock(Gtk.Box):
         'stock-selected': (GObject.SignalFlags.RUN_FIRST, None, (Stock,)),
         'stock-remove-requested': (GObject.SignalFlags.RUN_FIRST, None, (Stock,)),
         'empty-state-changed': (GObject.SignalFlags.RUN_FIRST, None, (bool,)),
+        'add-alert-requested': (GObject.SignalFlags.RUN_FIRST, None, (Stock,)),
     }
 
     def __init__(self, **kwargs):
@@ -224,9 +225,12 @@ class MerkatoListStock(Gtk.Box):
         # Estilo baseado no estado do mercado
         self._apply_market_state_style(row, stock_item)
 
-        # Ação ao clicar (abre no Yahoo Finance)
+        # Action on click (open in Yahoo Finance)
         url = f"https://finance.yahoo.com/quote/{stock_item.symbol}/"
         row.connect("activated", lambda r: Gio.AppInfo.launch_default_for_uri(url, None))
+
+        # Context menu (right click)
+        self._add_context_menu(row, stock_item)
 
         return row
 
@@ -283,19 +287,59 @@ class MerkatoListStock(Gtk.Box):
         return remove_button
 
     def _apply_market_state_style(self, row: Gtk.Widget, stock_item: Stock):
-        # """Aplica estilo baseado no estado do mercado."""
-        # if stock_item.market_state == "REGULAR":
-        #     row.remove_css_class("market-closed")
-        #     row.add_css_class("market-opened")
-        # else:
-        #     row.remove_css_class("market-opened")
-        #     row.add_css_class("market-closed")
+        """Apply style based on market state."""
         if stock_item.market_state == "CLOSED":
             row.remove_css_class("market-opened")
             row.add_css_class("market-closed")
         else:
             row.remove_css_class("market-closed")
             row.add_css_class("market-opened")
+
+    def _add_context_menu(self, row: Gtk.Widget, stock_item: Stock):
+        """Add context menu (right click) to row."""
+        # Create menu model
+        menu = Gio.Menu()
+
+        # Option: Add Alert
+        menu.append(_("Add Price Alert"), "stock.add-alert")
+
+        # Option: Open in Yahoo Finance
+        menu.append(_("Open in Yahoo Finance"), "stock.open-yahoo")
+
+        # Create popover
+        popover = Gtk.PopoverMenu()
+        popover.set_menu_model(menu)
+        popover.set_parent(row)
+        popover.set_has_arrow(False)
+
+        # Create action group
+        action_group = Gio.SimpleActionGroup()
+
+        # Action: add-alert
+        add_alert_action = Gio.SimpleAction.new("add-alert", None)
+        add_alert_action.connect("activate", lambda a, p: self._on_add_alert_clicked(stock_item))
+        action_group.add_action(add_alert_action)
+
+        # Action: open-yahoo
+        open_yahoo_action = Gio.SimpleAction.new("open-yahoo", None)
+        url = f"https://finance.yahoo.com/quote/{stock_item.symbol}/"
+        open_yahoo_action.connect("activate", lambda a, p: Gio.AppInfo.launch_default_for_uri(url, None))
+        action_group.add_action(open_yahoo_action)
+
+        row.insert_action_group("stock", action_group)
+
+        # Gesture for right click
+        gesture = Gtk.GestureClick.new()
+        gesture.set_button(3)  # Right button
+        gesture.connect("pressed", lambda g, n, x, y: popover.popup())
+        row.add_controller(gesture)
+
+        # Store popover reference
+        row.context_popover = popover
+
+    def _on_add_alert_clicked(self, stock_item: Stock):
+        """Callback when 'Add Alert' is clicked in context menu."""
+        self.emit('add-alert-requested', stock_item)
 
     # ============== Callbacks ==============
 

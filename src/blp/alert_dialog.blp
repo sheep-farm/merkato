@@ -1,0 +1,110 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlertDialog: Adw.Dialog {
+  title: _("Add Price Alert");
+  content-width: 400;
+  content-height: 350;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-end-title-buttons: false;
+      show-start-title-buttons: false;
+
+      [start]
+      Gtk.Button cancel_button {
+        label: _("Cancel");
+      }
+
+      [end]
+      Gtk.Button create_button {
+        label: _("Create");
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Gtk.Box {
+      orientation: vertical;
+      margin-top: 24;
+      margin-bottom: 24;
+      margin-start: 24;
+      margin-end: 24;
+      spacing: 18;
+
+      Adw.PreferencesGroup {
+        title: _("Stock Information");
+
+        Adw.EntryRow symbol_entry {
+          title: _("Symbol");
+
+          [suffix]
+          Gtk.Image {
+            icon-name: "edit-find-symbolic";
+          }
+        }
+
+        Adw.ActionRow stock_name_row {
+          title: _("Stock Name");
+          subtitle: _("Not selected");
+          sensitive: false;
+
+          [prefix]
+          Gtk.Image {
+            icon-name: "chart-line-symbolic";
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Alert Configuration");
+
+        Adw.ComboRow alert_type_row {
+          title: _("Alert Type");
+          model: Gtk.StringList {
+            strings [
+              _("When price goes above (Maximum)"),
+              _("When price goes below (Minimum)"),
+            ]
+          };
+
+          [prefix]
+          Gtk.Image {
+            icon-name: "alarm-symbolic";
+          }
+        }
+
+        Adw.EntryRow target_price_entry {
+          title: _("Target Price");
+          input-purpose: number;
+
+          [suffix]
+          Gtk.Label currency_label {
+            label: "$";
+
+            styles [
+              "dim-label",
+            ]
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Current Price");
+
+        Adw.ActionRow current_price_row {
+          title: _("Current Price");
+          subtitle: _("--");
+
+          [prefix]
+          Gtk.Image {
+            icon-name: "dialog-information-symbolic";
+          }
+        }
+      }
+    };
+  };
+}

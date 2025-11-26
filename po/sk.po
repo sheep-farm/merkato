@@ -1,4 +1,4 @@
-# Slovak translation for Merkato
+# Sk translation for Merkato
 # Copyright (C) 2025
 # This file is distributed under the same license as the Merkato package.
 #
@@ -6,15 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:00+0000\n"
-"PO-Revision-Date: 2025-10-22 12:00-0300\n"
+"POT-Creation-Date: 2025-01-26 12:00+0000\n"
+"PO-Revision-Date: 2025-01-26 12:00+0000\n"
 "Last-Translator: \n"
-"Language-Team: Slovak\n"
+"Language-Team: sk\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #:main.py
 msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
@@ -94,60 +93,209 @@ msgstr "Odstrániť zo sledovacieho zoznamu"
 
 #: category_model.py category_sidebar.py
 msgid "All Stocks"
-msgstr ""
+msgstr "All Stocks"
 
 #: category_model.py category_sidebar.py
 msgid "Cryptocurrency"
-msgstr ""
+msgstr "Cryptocurrency"
 
 #: category_model.py category_sidebar.py
 msgid "Technology"
-msgstr ""
+msgstr "Technology"
 
 #: category_model.py category_sidebar.py
 msgid "Healthcare"
-msgstr ""
+msgstr "Healthcare"
 
 #: category_model.py category_sidebar.py
 msgid "Energy"
-msgstr ""
+msgstr "Energy"
 
 #: category_model.py category_sidebar.py
 msgid "Financial Services"
-msgstr ""
+msgstr "Financial Services"
 
 #: category_model.py category_sidebar.py
 msgid "Consumer Cyclical"
-msgstr ""
+msgstr "Consumer Cyclical"
 
 #: category_model.py category_sidebar.py
 msgid "Consumer Defensive"
-msgstr ""
+msgstr "Consumer Defensive"
 
 #: category_model.py category_sidebar.py
 msgid "Industrial"
-msgstr ""
+msgstr "Industrial"
 
 #: category_model.py category_sidebar.py
 msgid "Real Estate"
-msgstr ""
+msgstr "Real Estate"
 
 #: category_model.py category_sidebar.py
 msgid "Basic Materials"
-msgstr ""
+msgstr "Basic Materials"
 
 #: category_model.py category_sidebar.py
 msgid "Communication Services"
-msgstr ""
+msgstr "Communication Services"
 
 #: category_model.py category_sidebar.py
 msgid "Utilities"
-msgstr ""
+msgstr "Utilities"
 
 #: category_model.py category_sidebar.py
 msgid "Others"
-msgstr ""
+msgstr "Others"
 
 #: category_sidebar.py
 msgid "Categories"
-msgstr ""
+msgstr "Categories"
+
+#: window.blp
+msgid "Toggle Sidebar"
+msgstr "Toggle Sidebar"
+
+#: window.blp
+msgid "List"
+msgstr "List"
+
+#: window.blp
+msgid "Heatmap"
+msgstr "Heatmap"
+
+#: window.blp
+msgid "Alerts"
+msgstr "Alerts"
+
+#: window.blp
+msgid "Click on a stock to view details"
+msgstr "Click on a stock to view details"
+
+#: list_stock.py
+msgid "Add Price Alert"
+msgstr "Add Price Alert"
+
+#: list_stock.py
+msgid "Open in Yahoo Finance"
+msgstr "Open in Yahoo Finance"
+
+#: alert_dialog.blp
+msgid "Cancel"
+msgstr "Cancel"
+
+#: alert_dialog.blp
+msgid "Create"
+msgstr "Create"
+
+#: alert_dialog.blp
+msgid "Stock Information"
+msgstr "Stock Information"
+
+#: alert_dialog.blp
+msgid "Symbol"
+msgstr "Symbol"
+
+#: alert_dialog.blp
+msgid "Stock Name"
+msgstr "Stock Name"
+
+#: alert_dialog.blp
+msgid "Not selected"
+msgstr "Not selected"
+
+#: alert_dialog.blp
+msgid "Alert Configuration"
+msgstr "Alert Configuration"
+
+#: alert_dialog.blp
+msgid "Alert Type"
+msgstr "Alert Type"
+
+#: alert_dialog.blp
+msgid "When price goes above (Maximum)"
+msgstr "When price goes above (Maximum)"
+
+#: alert_dialog.blp
+msgid "When price goes below (Minimum)"
+msgstr "When price goes below (Minimum)"
+
+#: alert_dialog.blp
+msgid "Target Price"
+msgstr "Target Price"
+
+#: alert_dialog.blp
+msgid "Current Price"
+msgstr "Current Price"
+
+#: alert_dialog.blp
+msgid "--"
+msgstr "--"
+
+#: alerts_view.blp
+msgid "Add New Alert"
+msgstr "Add New Alert"
+
+#: alerts_view.blp
+msgid "Alerts Menu"
+msgstr "Alerts Menu"
+
+#: alerts_view.blp
+msgid "Price Alerts"
+msgstr "Price Alerts"
+
+#: alerts_view.blp
+msgid "0 alerts"
+msgstr "0 alerts"
+
+#: alerts_view.blp
+msgid "No Alerts"
+msgstr "No Alerts"
+
+#: alerts_view.blp
+msgid "Right-click any stock in the list and select 'Add Price Alert' to get started"
+msgstr "Right-click any stock in the list and select 'Add Price Alert' to get started"
+
+#: alerts_view.blp
+msgid "Active Alerts"
+msgstr "Active Alerts"
+
+#: alerts_view.blp
+msgid "Monitoring price changes"
+msgstr "Monitoring price changes"
+
+#: alerts_view.blp
+msgid "Triggered Alerts"
+msgstr "Triggered Alerts"
+
+#: alerts_view.blp
+msgid "Alerts that have been activated"
+msgstr "Alerts that have been activated"
+
+#: alerts_view.blp
+msgid "Disabled Alerts"
+msgstr "Disabled Alerts"
+
+#: alerts_view.blp
+msgid "Inactive alerts"
+msgstr "Inactive alerts"
+
+#: alerts_view.blp
+msgid "Clear Triggered Alerts"
+msgstr "Clear Triggered Alerts"
+
+#: alerts_view.blp
+msgid "Clear All Alerts"
+msgstr "Clear All Alerts"
+
+#: window.py
+msgid "Price Alert Triggered"
+msgstr "Price Alert Triggered"
+
+#: window.py
+msgid "{symbol} reached ${price:.2f} (above target)"
+msgstr "{symbol} reached ${price:.2f} (above target)"
+
+#: window.py
+msgid "{symbol} reached ${price:.2f} (below target)"
+msgstr "{symbol} reached ${price:.2f} (below target)"
+

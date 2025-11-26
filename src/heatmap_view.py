@@ -108,7 +108,7 @@ class HeatmapView(Gtk.DrawingArea):
         - volume: float
         """
         self.stocks = list(stocks) if stocks else []
-        # Invalida cache para forçar recálculo
+        # Invalidate cache to force recalculation
         self._last_width = 0
         self._last_height = 0
         self._calculate_layout()

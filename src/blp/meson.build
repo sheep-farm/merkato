@@ -3,6 +3,8 @@ blueprints = custom_target('blueprints',
     'search_stock.blp',
     'list_stock.blp',
     'window.blp',
+    'alert_dialog.blp',
+    'alerts_view.blp',
   ),
   output: '.',
   command: [

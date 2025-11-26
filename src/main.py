@@ -32,7 +32,7 @@ gettext.textdomain('merkato')
 locale.bindtextdomain('merkato', localedir)
 locale.textdomain('merkato')
 
-# Define _ globalmente
+# Define _ globally for translations
 builtins._ = gettext.gettext
 
 import gi
@@ -54,6 +54,7 @@ class MerkatoApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
+        self.create_action('show-alerts', self.on_show_alerts_action)
         self.set_accels_for_action("win.refresh", ['F5'])
 
         css_provider = Gtk.CssProvider()
@@ -84,7 +85,7 @@ class MerkatoApplication(Adw.Application):
             application_icon='com.ekonomikas.merkato',
             developer_name='Flávio de Vasconcellos Corrêa',
             version='0.2.1',
-            developers=['Flávio de Vasconcellos Corrêa <flavio.vcorrea@ufpel.edu.br>', 'Claude (Anthropic)'],
+            developers=['Flávio de Vasconcellos Corrêa <flavio.vcorrea@ufpel.edu.br>'],
             copyright='© 2025 Flávio de Vasconcellos Corrêa',
             license_type=Gtk.License.GPL_3_0,
             website='https://github.com/sheep-farm/merkato',
@@ -99,6 +100,20 @@ class MerkatoApplication(Adw.Application):
         """Callback for the app.preferences action."""
         print('app.preferences action activated')
 
+    def on_show_alerts_action(self, widget, _):
+        """Callback for the app.show-alerts action (from system notification)."""
+        # Get or create window
+        win = self.props.active_window
+        if not win:
+            win = MerkatoWindow(application=self)
+
+        # Present window (focus)
+        win.present()
+
+        # Switch to Alerts tab
+        if hasattr(win, 'view_stack'):
+            win.view_stack.set_visible_child_name('alerts')
+            print('Switched to alerts view from notification')
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.

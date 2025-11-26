@@ -25,6 +25,7 @@ from typing import List, Callable, Optional
 from .yahoo_request import YahooRequest
 from .watchlist_manager import WatchlistManager
 from .stock import Stock
+from .alert_manager import AlertManager
 
 
 class StockController(GObject.Object):
@@ -44,6 +45,7 @@ class StockController(GObject.Object):
         'stock-added': (GObject.SignalFlags.RUN_FIRST, None, (Stock,)),
         'stock-removed': (GObject.SignalFlags.RUN_FIRST, None, (str,)),
         'watchlist-loaded': (GObject.SignalFlags.RUN_FIRST, None, (object,)),
+        'alerts-triggered': (GObject.SignalFlags.RUN_FIRST, None, (object,)),
     }
 
     def __init__(self, update_interval: int = 60):
@@ -59,6 +61,7 @@ class StockController(GObject.Object):
 
         self.watchlist_manager = WatchlistManager()
         self.yahoo_request = YahooRequest()
+        self.alert_manager = AlertManager()
 
     # ============== Propriedades ==============
 
@@ -89,7 +92,7 @@ class StockController(GObject.Object):
         symbols_input = symbols_input.strip().upper()
         symbols = [s.strip() for s in symbols_input.split(',') if s.strip()]
 
-        # Filtra símbolos que já existem
+        # Filter symbols that already exist
         with self._symbols_lock:
             symbols = [s for s in symbols if s not in self._symbols]
 
@@ -141,7 +144,7 @@ class StockController(GObject.Object):
             print(f"DEBUG: Emitindo sinal 'stock-added' para {stock.symbol}")
             self.emit('stock-added', stock)
 
-        # NÃO salva aqui - deixa a window salvar quando apropriado
+        # DON'T save here - let the window save when appropriate
         print(f"DEBUG: Emitindo sinal 'search-completed'")
         self.emit('search-completed', results, errors)
         return False
@@ -196,9 +199,13 @@ class StockController(GObject.Object):
             GLib.idle_add(self._clear_refresh_flag)
 
     def _on_refresh_completed(self, results: dict, errors: list):
-        """Callback quando o refresh é completado."""
-        # NÃO salva aqui - deixa a window salvar
+        """Callback when refresh is completed."""
+        # DON'T save here - let the window save
         self.emit('refresh-completed', results, errors)
+
+        # Check alerts with new prices
+        self._check_alerts(results)
+
         return False
 
     def _on_refresh_error(self, error_msg: str):
@@ -331,3 +338,25 @@ class StockController(GObject.Object):
             self.yahoo_request.set_batch_size(batch_size)
         if max_workers is not None:
             self.yahoo_request.set_max_workers(max_workers)
+
+    # ============== Alerts ==============
+
+    def _check_alerts(self, results: dict):
+        """
+        Check alerts with updated prices.
+
+        Args:
+            results: Dictionary {symbol: Stock}
+        """
+        if not results:
+            return
+
+        # Create prices dictionary
+        prices = {symbol: stock.price for symbol, stock in results.items()}
+
+        # Check alerts
+        triggered = self.alert_manager.check_all_alerts(prices)
+
+        if triggered:
+            print(f"DEBUG: {len(triggered)} alerts triggered")
+            self.emit('alerts-triggered', triggered)

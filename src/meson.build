@@ -42,6 +42,10 @@ merkato_sources = [
   'category_model.py',
   'category_sidebar.py',
   'heatmap_view.py',
+  'alert.py',
+  'alert_manager.py',
+  'alert_dialog.py',
+  'alerts_view.py',
 ]
 
 install_data(merkato_sources, install_dir: moduledir)

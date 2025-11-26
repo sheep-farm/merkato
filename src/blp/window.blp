@@ -268,6 +268,18 @@ template $MerkatoWindow: Adw.ApplicationWindow {
                 }
               };
             }
+
+            // PÁGINA 3: Alerts
+            Adw.ViewStackPage {
+              name: "alerts";
+              title: _("Alerts");
+              icon-name: "alarm-symbolic";
+
+              child: $AlertsView alerts_view {
+                vexpand: true;
+                hexpand: true;
+              };
+            }
           }
         };
       }

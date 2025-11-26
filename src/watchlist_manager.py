@@ -63,7 +63,7 @@ class WatchlistManager:
             return False
 
         try:
-            # Converter StockItems para dicionários se necessário
+            # Convert StockItems to dictionaries if needed
             stocks_data = []
             for stock in stocks:
                 if hasattr(stock, 'to_dict'):
@@ -80,7 +80,7 @@ class WatchlistManager:
                 'version': '0.2.0'
             }
 
-            # Salvar com indentação para ser legível
+            # Save with indentation for readability
             with open(self.watchlist_file, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
 

@@ -34,25 +34,25 @@ class CategoryRow(Adw.ActionRow):
         self.set_title(label)
         self.set_activatable(True)
 
-        # Ícone
+        # Icon
         icon = Gtk.Image.new_from_icon_name(icon_name)
         icon.set_pixel_size(16)
         self.add_prefix(icon)
 
-        # Badge com contador
+        # Badge with counter
         self.count_label = Gtk.Label(label=str(count))
         self.count_label.add_css_class("dim-label")
         self.count_label.add_css_class("caption")
         self.add_suffix(self.count_label)
 
     def update_count(self, count: int):
-        """Atualiza o contador."""
+        """Updates the counter."""
         self.count_label.set_label(str(count))
 
 
 class CategorySidebar(Gtk.Box):
     """
-    Sidebar com lista de categorias de stocks.
+    Sidebar with list of stock categories.
     """
     __gtype_name__ = 'CategorySidebar'
 
@@ -81,12 +81,12 @@ class CategorySidebar(Gtk.Box):
 
         self.append(header_box)
 
-        # ScrolledWindow para a lista
+        # ScrolledWindow for the list
         scrolled = Gtk.ScrolledWindow()
         scrolled.set_vexpand(True)
         scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
-        # ListBox com categorias
+        # ListBox with categories
         self.listbox = Gtk.ListBox()
         self.listbox.add_css_class("navigation-sidebar")
         self.listbox.set_selection_mode(Gtk.SelectionMode.SINGLE)
@@ -106,24 +106,24 @@ class CategorySidebar(Gtk.Box):
         scrolled.set_child(self.listbox)
         self.append(scrolled)
 
-        # Seleciona "All" por padrão
+        # Select "All" by default
         if "All" in self.rows:
             self.listbox.select_row(self.rows["All"])
 
-        # Conecta ao sinal de atualização de contagens
+        # Connect to counts update signal
         self.category_model.connect('counts-updated', self._on_counts_updated)
 
     def _on_row_activated(self, listbox, row):
-        """Callback quando uma categoria é selecionada."""
+        """Callback when a category is selected."""
         if row and hasattr(row, 'category_key'):
             self.emit('category-selected', row.category_key)
 
     def _on_counts_updated(self, model):
-        """Callback quando as contagens são atualizadas."""
+        """Callback when counts are updated."""
         self.update_counts()
 
     def update_counts(self):
-        """Atualiza os contadores de todas as categorias."""
+        """Updates counters for all categories."""
         counts = self.category_model.get_all_category_counts()
         for category_key, row in self.rows.items():
             count = counts.get(category_key, 0)
