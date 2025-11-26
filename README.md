@@ -54,30 +54,30 @@ Set custom price alerts to be notified when stocks reach your target prices. Ale
 flatpak install flathub com.ekonomikas.merkato
 ```
 
-### From Source
+<!-- ### From Source -->
 
-#### Dependencies
+<!-- #### Dependencies -->
 
-- Python 3.10+
-- GTK 4
-- Libadwaita 1
-- Python packages:
-  - yahooquery
-  - PyGObject
+<!-- - Python 3.10+ -->
+<!-- - GTK 4 -->
+<!-- - Libadwaita 1 -->
+<!-- - Python packages: -->
+<!--   - yahooquery -->
+<!--   - PyGObject -->
 
-#### Build Instructions
+<!-- #### Build Instructions -->
 
-```bash
-# Clone the repository
-git clone https://github.com/sheep-farm/merkato.git
-cd merkato
+<!-- ```bash -->
+<!-- # Clone the repository -->
+<!-- git clone https://github.com/sheep-farm/merkato.git -->
+<!-- cd merkato -->
 
-# Install dependencies
-pip install yahooquery pygobject --break-system-packages
+<!-- # Install dependencies -->
+<!-- pip install yahooquery pygobject --break-system-packages -->
 
-# Run the application
-python -m merkato
-```
+<!-- # Run the application -->
+<!-- python -m merkato -->
+<!-- ``` -->
 
 ## Usage
 
