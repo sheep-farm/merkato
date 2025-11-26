@@ -125,12 +125,12 @@ class AlertsView(Gtk.Box):
 
         # Update title
         total = len(active) + len(triggered) + len(disabled)
-        if total == 0:
-            self.title_widget.set_subtitle("No alerts")
-        elif total == 1:
-            self.title_widget.set_subtitle("1 alert")
-        else:
-            self.title_widget.set_subtitle(f"{total} alerts")
+        # if total == 0:
+        #     self.title_widget.set_subtitle("No alerts")
+        # elif total == 1:
+        #     self.title_widget.set_subtitle("1 alert")
+        # else:
+        #     self.title_widget.set_subtitle(f"{total} alerts")
 
         # Show/hide empty state
         has_alerts = total > 0
@@ -251,6 +251,7 @@ class AlertsView(Gtk.Box):
         delete_btn = Gtk.Button(icon_name='user-trash-symbolic')
         delete_btn.set_tooltip_text("Delete alert")
         delete_btn.add_css_class('flat')
+        delete_btn.add_css_class('circular')
         delete_btn.add_css_class('destructive-action')
         delete_btn.connect('clicked', self.on_delete_alert, alert)
         actions_box.append(delete_btn)
