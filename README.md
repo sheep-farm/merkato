@@ -18,6 +18,7 @@ Merkato is a beautiful and intuitive application for tracking stocks, currencies
 - 🔥 **Heatmap View** - Visual representation of market performance with color-coded tiles
 - 📋 **List View** - Detailed stock information in an organized list
 - 💾 **Persistent Watchlist** - Your selections are automatically saved
+- 🔔 **Price Alerts** - Set alerts for target prices with automatic notifications
 - 🔄 **Auto-refresh** - Automatic updates every 60 seconds
 - 🌍 **Multi-language** - Support for 27 languages
 - 🎯 **Multiple Sort Options** - Alphabetical, top gains, or top losses
@@ -38,6 +39,12 @@ Visualize market performance with color-coded tiles - green for gains, red for l
 
 ### Categories
 Browse stocks by sector: Technology, Healthcare, Energy, Financial Services, and more.
+
+### Price Alerts
+
+![Price Alerts](screenshots/alerts_view.png)
+
+Set custom price alerts to be notified when stocks reach your target prices. Alerts can be configured to trigger when prices go above or below specific thresholds.
 
 ## Installation
 
@@ -109,6 +116,40 @@ Use the menu to sort stocks by:
 2. Click the trash button next to any stock to remove it
 3. Click the trash icon again to exit removal mode
 
+### Price Alerts
+
+Monitor your stocks with customizable price alerts:
+
+#### Creating Alerts
+
+1. Click the bell icon in the header bar to open the Alerts view
+2. Click "Add Alert" button
+3. Enter or select a stock symbol
+4. Choose alert type:
+   - **Above** - Trigger when price rises above target
+   - **Below** - Trigger when price falls below target
+5. Set your target price
+6. Click "Create"
+
+#### Managing Alerts
+
+Alerts are organized into three categories:
+
+- **Active** - Enabled alerts waiting to trigger
+- **Triggered** - Alerts that have reached their target price
+- **Disabled** - Paused alerts
+
+For each alert you can:
+- **Pause/Resume** - Temporarily disable or re-enable alerts
+- **Reset** - Clear triggered status and reactivate
+- **Delete** - Permanently remove the alert
+
+#### Alert Persistence
+
+- All alerts are automatically saved to `~/.config/merkato/alerts.json`
+- Alerts persist between application sessions
+- Triggered alerts remain visible until manually cleared or reset
+
 ## Keyboard Shortcuts
 
 - `F5` - Refresh all stocks
@@ -142,8 +183,10 @@ Arabic, Chinese (Simplified), Chinese (Traditional), Czech, Dutch, English, Espe
 - **Yahoo Request** - Handles concurrent API requests to Yahoo Finance
 - **Category Model** - Organizes stocks by sector
 - **Watchlist Manager** - Persists user selections
+- **Alert Manager** - Manages price alerts (CRUD, persistence, verification)
 - **Heatmap View** - Custom Cairo-based visualization widget
 - **List View** - GTK ListBox with custom stock rows
+- **Alerts View** - Organized display of active, triggered, and disabled alerts
 
 ### Data Flow
 
@@ -154,6 +197,8 @@ Arabic, Chinese (Simplified), Chinese (Traditional), Czech, Dutch, English, Espe
 5. Views (List/Heatmap) display the filtered data
 6. WatchlistManager saves to `~/.config/merkato/watchlist.json`
 7. Auto-refresh updates every 60 seconds
+8. AlertManager checks price conditions and triggers notifications
+9. Triggered alerts are persisted to `~/.config/merkato/alerts.json`
 
 ## Development
 
@@ -162,12 +207,16 @@ Arabic, Chinese (Simplified), Chinese (Traditional), Czech, Dutch, English, Espe
 ```
 merkato/
 ├── src/merkato/
-│   ├── category_model.py      # Sector categorization
+│   ├── alert.py                # Alert data model
+│   ├── alert_dialog.py         # Alert creation dialog
+│   ├── alert_manager.py        # Alert CRUD and persistence
+│   ├── alerts_view.py          # Alerts view widget
+│   ├── category_model.py       # Sector categorization
 │   ├── heatmap_view.py         # Visual grid view
 │   ├── list_stock.py           # List view widget
 │   ├── stock.py                # Stock data model
-│   ├── stock_controller.py    # Business logic controller
-│   ├── watchlist_manager.py   # Persistence layer
+│   ├── stock_controller.py     # Business logic controller
+│   ├── watchlist_manager.py    # Persistence layer
 │   ├── yahoo_request.py        # API client
 │   └── window.py               # Main window
 ├── po/                         # Translations
