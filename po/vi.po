@@ -1,19 +1,21 @@
 # Vi translation for Merkato
 # Copyright (C) 2025
 # This file is distributed under the same license as the Merkato package.
-#
+# Loc Huynh <huynhloc.contact@gmail.com>, 2025
+
 msgid ""
 msgstr ""
 "Project-Id-Version: Merkato\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-26 12:00+0000\n"
-"PO-Revision-Date: 2025-01-26 12:00+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-12-04 20:51+0700\n"
+"Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
 "Language-Team: vi\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: main.py
 msgid "A financial markets tracker for stocks, currencies, and cryptocurrencies."
@@ -21,11 +23,11 @@ msgstr "Công cụ theo dõi thị trường tài chính cho cổ phiếu, tiề
 
 #: window.blp
 msgid "_Refresh"
-msgstr "_Làm mới"
+msgstr "_Làm Mới"
 
 #: window.blp
 msgid "_About"
-msgstr "_Giới thiệu"
+msgstr "_Giới Thiệu"
 
 #: search_stock.blp
 msgid "Enter ticker symbol (e.g., AAPL, GOOGL)"
@@ -33,11 +35,11 @@ msgstr "Nhập mã cổ phiếu (ví dụ: AAPL, GOOGL)"
 
 #: search_stock.blp
 msgid "Search"
-msgstr "Tìm kiếm"
+msgstr "Tìm Kiếm"
 
 #: list_stock.blp
 msgid "No Stocks Yet"
-msgstr "Chưa có cổ phiếu"
+msgstr "Chưa Có Cổ Phiếu"
 
 #: list_stock.blp
 msgid "Search and add stocks to your watchlist"
@@ -49,31 +51,31 @@ msgstr "Nguồn: Yahoo Finance"
 
 #: window.blp
 msgid "_Sort Alphabetically"
-msgstr "_Sắp xếp theo bảng chữ cái"
+msgstr "_Sắp Xếp Theo Bảng Chữ Cái"
 
 #: window.blp
 msgid "Sort by Top _Gains"
-msgstr "Sắp xếp theo _mức tăng cao nhất"
+msgstr "Sắp Xếp Theo _Mức Tăng Cao Nhất"
 
 #: window.blp
 msgid "Sort by Top _Losses"
-msgstr "Sắp xếp theo _mức giảm cao nhất"
+msgstr "Sắp Xếp Theo _Mức Giảm Cao Nhất"
 
 #: window.blp
 msgid "_Keyboard Shortcuts"
-msgstr "_Phím tắt"
+msgstr "_Phím Tắt"
 
 #: window.blp
 msgid "Main Menu"
-msgstr "Trình đơn chính"
+msgstr "Trình Đơn Chính"
 
 #: window.blp
 msgid "Remove Stocks"
-msgstr "Xóa cổ phiếu"
+msgstr "Xóa Cổ Phiếu"
 
 #: window.blp
 msgid "Updating..."
-msgstr "Đang cập nhật…"
+msgstr "Đang cập nhật..."
 
 #: window.py
 msgid "cached"
@@ -85,7 +87,7 @@ msgstr "Cập nhật lần cuối: "
 
 #: window.py
 msgid "WARNING: Failed to save watchlist"
-msgstr "CẢNH BÁO: Lưu danh sách theo dõi không thành công"
+msgstr "CẢNH BÁO: Không thể lưu danh sách theo dõi"
 
 #: list_stock.py
 msgid "Remove from watchlist"
@@ -93,139 +95,139 @@ msgstr "Xóa khỏi danh sách theo dõi"
 
 #: category_model.py category_sidebar.py
 msgid "All Stocks"
-msgstr "All Stocks"
+msgstr "Tất Cả Cổ Phiếu"
 
 #: category_model.py category_sidebar.py
 msgid "Cryptocurrency"
-msgstr "Cryptocurrency"
+msgstr "Tiền Mã Hóa"
 
 #: category_model.py category_sidebar.py
 msgid "Technology"
-msgstr "Technology"
+msgstr "Công Nghệ"
 
 #: category_model.py category_sidebar.py
 msgid "Healthcare"
-msgstr "Healthcare"
+msgstr "Chăm Sóc Sức Khỏe"
 
 #: category_model.py category_sidebar.py
 msgid "Energy"
-msgstr "Energy"
+msgstr "Năng Lượng"
 
 #: category_model.py category_sidebar.py
 msgid "Financial Services"
-msgstr "Financial Services"
+msgstr "Dịch Vụ Tài Chính"
 
 #: category_model.py category_sidebar.py
 msgid "Consumer Cyclical"
-msgstr "Consumer Cyclical"
+msgstr "Tiêu Dùng Chu Kỳ"
 
 #: category_model.py category_sidebar.py
 msgid "Consumer Defensive"
-msgstr "Consumer Defensive"
+msgstr "Tiêu Dùng Phòng Thủ"
 
 #: category_model.py category_sidebar.py
 msgid "Industrial"
-msgstr "Industrial"
+msgstr "Công Nghiệp"
 
 #: category_model.py category_sidebar.py
 msgid "Real Estate"
-msgstr "Real Estate"
+msgstr "Bất Động Sản"
 
 #: category_model.py category_sidebar.py
 msgid "Basic Materials"
-msgstr "Basic Materials"
+msgstr "Vật Liệu Cơ Bản"
 
 #: category_model.py category_sidebar.py
 msgid "Communication Services"
-msgstr "Communication Services"
+msgstr "Dịch Vụ Truyền Thông"
 
 #: category_model.py category_sidebar.py
 msgid "Utilities"
-msgstr "Utilities"
+msgstr "Tiện Ích"
 
 #: category_model.py category_sidebar.py
 msgid "Others"
-msgstr "Others"
+msgstr "Khác"
 
 #: category_sidebar.py
 msgid "Categories"
-msgstr "Categories"
+msgstr "Danh Mục"
 
 #: window.blp
 msgid "Toggle Sidebar"
-msgstr "Toggle Sidebar"
+msgstr "Bật/Tắt Thanh Bên"
 
 #: window.blp
 msgid "List"
-msgstr "List"
+msgstr "Danh Sách"
 
 #: window.blp
 msgid "Heatmap"
-msgstr "Heatmap"
+msgstr "Bản Đồ Nhiệt"
 
 #: window.blp
 msgid "Alerts"
-msgstr "Alerts"
+msgstr "Cảnh Báo"
 
 #: window.blp
 msgid "Click on a stock to view details"
-msgstr "Click on a stock to view details"
+msgstr "Nhấp vào một cổ phiếu để xem chi tiết"
 
 #: list_stock.py
 msgid "Add Price Alert"
-msgstr "Add Price Alert"
+msgstr "Thêm Cảnh Báo Giá"
 
 #: list_stock.py
 msgid "Open in Yahoo Finance"
-msgstr "Open in Yahoo Finance"
+msgstr "Mở trong Yahoo Finance"
 
 #: alert_dialog.blp
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Hủy"
 
 #: alert_dialog.blp
 msgid "Create"
-msgstr "Create"
+msgstr "Tạo"
 
 #: alert_dialog.blp
 msgid "Stock Information"
-msgstr "Stock Information"
+msgstr "Thông Tin Cổ Phiếu"
 
 #: alert_dialog.blp
 msgid "Symbol"
-msgstr "Symbol"
+msgstr "Mã"
 
 #: alert_dialog.blp
 msgid "Stock Name"
-msgstr "Stock Name"
+msgstr "Tên Cổ Phiếu"
 
 #: alert_dialog.blp
 msgid "Not selected"
-msgstr "Not selected"
+msgstr "Chưa chọn"
 
 #: alert_dialog.blp
 msgid "Alert Configuration"
-msgstr "Alert Configuration"
+msgstr "Cấu Hình Cảnh Báo"
 
 #: alert_dialog.blp
 msgid "Alert Type"
-msgstr "Alert Type"
+msgstr "Loại Cảnh Báo"
 
 #: alert_dialog.blp
 msgid "When price goes above (Maximum)"
-msgstr "When price goes above (Maximum)"
+msgstr "Khi giá vượt quá (Tối Đa)"
 
 #: alert_dialog.blp
 msgid "When price goes below (Minimum)"
-msgstr "When price goes below (Minimum)"
+msgstr "Khi giá xuống dưới (Tối Thiểu)"
 
 #: alert_dialog.blp
 msgid "Target Price"
-msgstr "Target Price"
+msgstr "Giá Mục Tiêu"
 
 #: alert_dialog.blp
 msgid "Current Price"
-msgstr "Current Price"
+msgstr "Giá Hiện Tại"
 
 #: alert_dialog.blp
 msgid "--"
@@ -233,69 +235,68 @@ msgstr "--"
 
 #: alerts_view.blp
 msgid "Add New Alert"
-msgstr "Add New Alert"
+msgstr "Thêm Cảnh Báo Mới"
 
 #: alerts_view.blp
 msgid "Alerts Menu"
-msgstr "Alerts Menu"
+msgstr "Trình Đơn Cảnh Báo"
 
 #: alerts_view.blp
 msgid "Price Alerts"
-msgstr "Price Alerts"
+msgstr "Cảnh Báo Giá"
 
 #: alerts_view.blp
 msgid "0 alerts"
-msgstr "0 alerts"
+msgstr "0 cảnh báo"
 
 #: alerts_view.blp
 msgid "No Alerts"
-msgstr "No Alerts"
+msgstr "Không Có Cảnh Báo"
 
 #: alerts_view.blp
 msgid "Right-click any stock in the list and select 'Add Price Alert' to get started"
-msgstr "Right-click any stock in the list and select 'Add Price Alert' to get started"
+msgstr "Nhấp chuột phải vào bất kỳ cổ phiếu nào trong danh sách và chọn 'Thêm Cảnh Báo Giá' để bắt đầu"
 
 #: alerts_view.blp
 msgid "Active Alerts"
-msgstr "Active Alerts"
+msgstr "Cảnh Báo Đang Hoạt Động"
 
 #: alerts_view.blp
 msgid "Monitoring price changes"
-msgstr "Monitoring price changes"
+msgstr "Đang theo dõi thay đổi giá"
 
 #: alerts_view.blp
 msgid "Triggered Alerts"
-msgstr "Triggered Alerts"
+msgstr "Cảnh Báo Đã Kích Hoạt"
 
 #: alerts_view.blp
 msgid "Alerts that have been activated"
-msgstr "Alerts that have been activated"
+msgstr "Các cảnh báo đã được kích hoạt"
 
 #: alerts_view.blp
 msgid "Disabled Alerts"
-msgstr "Disabled Alerts"
+msgstr "Cảnh Báo Đã Tắt"
 
 #: alerts_view.blp
 msgid "Inactive alerts"
-msgstr "Inactive alerts"
+msgstr "Cảnh báo không hoạt động"
 
 #: alerts_view.blp
 msgid "Clear Triggered Alerts"
-msgstr "Clear Triggered Alerts"
+msgstr "Xóa Cảnh Báo Đã Kích Hoạt"
 
 #: alerts_view.blp
 msgid "Clear All Alerts"
-msgstr "Clear All Alerts"
+msgstr "Xóa Tất Cả Cảnh Báo"
 
 #: window.py
 msgid "Price Alert Triggered"
-msgstr "Price Alert Triggered"
+msgstr "Cảnh Báo Giá Đã Kích Hoạt"
 
 #: window.py
 msgid "{symbol} reached ${price:.2f} (above target)"
-msgstr "{symbol} reached ${price:.2f} (above target)"
+msgstr "{symbol} đạt ${price:.2f} (trên mục tiêu)"
 
 #: window.py
 msgid "{symbol} reached ${price:.2f} (below target)"
-msgstr "{symbol} reached ${price:.2f} (below target)"
-
+msgstr "{symbol} đạt ${price:.2f} (dưới mục tiêu)"
