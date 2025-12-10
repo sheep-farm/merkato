@@ -61,7 +61,7 @@ class CategoryModel(GObject.Object):
             "label": _("Consumer Defensive")
         },
         "Industrial": {
-            "filter": {"sector": "Industrial"},
+            "filter": {"sector": "Industrials"},
             "label": _("Industrial")
         },
         "Real Estate": {
