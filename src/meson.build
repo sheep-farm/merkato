@@ -1,51 +1,56 @@
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
-moduledir = pkgdatadir / 'merkato'
 gnome = import('gnome')
-
-subdir('blp')
 
 gnome.compile_resources('merkato',
   'merkato.gresource.xml',
   gresource_bundle: true,
-  dependencies: blueprints,
   install: true,
   install_dir: pkgdatadir,
 )
 
-python = import('python')
-
 conf = configuration_data()
-conf.set('PYTHON', python.find_installation('python3').full_path())
-conf.set('VERSION', meson.project_version())
-conf.set('localedir', get_option('prefix') / get_option('localedir'))
-conf.set('pkgdatadir', pkgdatadir)
+conf.set_quoted('VERSION', meson.project_version())
+conf.set_quoted('GETTEXT_PACKAGE', 'merkato')
+conf.set_quoted('LOCALEDIR', get_option('prefix') / get_option('localedir'))
+conf.set_quoted('PKGDATADIR', pkgdatadir)
 
 configure_file(
-  input: 'merkato.in',
-  output: 'merkato',
-  configuration: conf,
-  install: true,
-  install_dir: get_option('bindir'),
-  install_mode: 'r-xr-xr-x'
+    input: 'config.rs.in',
+    output: 'config.rs',
+    configuration: conf
 )
 
-merkato_sources = [
-  '__init__.py',
-  'main.py',
-  'window.py',
-  'stock.py',
-  'search_stock.py',
-  'list_stock.py',
-  'yahoo_request.py',
-  'watchlist_manager.py',
-  'stock_controller.py',
-  'category_model.py',
-  'category_sidebar.py',
-  'heatmap_view.py',
-  'alert.py',
-  'alert_manager.py',
-  'alert_dialog.py',
-  'alerts_view.py',
-]
+# Copy the config.rs output to the source directory.
+run_command(
+  'cp',
+  meson.project_build_root() / 'src' / 'config.rs',
+  meson.project_source_root() / 'src' / 'config.rs',
+  check: true
+)
 
-install_data(merkato_sources, install_dir: moduledir)
+cargo_bin  = find_program('cargo')
+cargo_opt  = [ '--manifest-path', meson.project_source_root() / 'Cargo.toml' ]
+cargo_opt += [ '--target-dir', meson.project_build_root()  / 'src' ]
+cargo_env  = [ 'CARGO_HOME=' + meson.project_build_root()  / 'cargo-home' ]
+
+if get_option('buildtype') == 'release'
+  cargo_opt += [ '--release' ]
+  rust_target = 'release'
+else
+  rust_target = 'debug'
+endif
+
+cargo_build = custom_target(
+  'cargo-build',
+  build_by_default: true,
+  build_always_stale: true,
+  output: meson.project_name(),
+  console: true,
+  install: true,
+  install_dir: get_option('bindir'),
+  command: [
+    'env', cargo_env,
+    cargo_bin, 'build',
+    cargo_opt, '&&', 'cp', 'src' / rust_target / meson.project_name(), '@OUTPUT@',
+  ]
+)

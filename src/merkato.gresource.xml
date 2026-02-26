@@ -2,11 +2,12 @@
 <gresources>
   <gresource prefix="/com/github/sheepfarm/merkato">
     <file>style.css</file>
-    <file preprocess="xml-stripblanks">search_stock.ui</file>
-    <file preprocess="xml-stripblanks">list_stock.ui</file>
-    <file preprocess="xml-stripblanks">window.ui</file>
-    <file preprocess="xml-stripblanks">alert_dialog.ui</file>
-    <file preprocess="xml-stripblanks">alerts_view.ui</file>
+    <!-- UI files compiled from Blueprint sources in blp/ -->
+    <file alias="search_stock.ui" preprocess="xml-stripblanks">blp/search_stock.ui</file>
+    <file alias="list_stock.ui" preprocess="xml-stripblanks">blp/list_stock.ui</file>
+    <file alias="window.ui" preprocess="xml-stripblanks">blp/window.ui</file>
+    <file alias="alert_dialog.ui" preprocess="xml-stripblanks">blp/alert_dialog.ui</file>
+    <file alias="alerts_view.ui" preprocess="xml-stripblanks">blp/alerts_view.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
   </gresource>
 </gresources>

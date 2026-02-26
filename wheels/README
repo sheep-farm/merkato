@@ -1,1 +1,0 @@
-Execute in root "pip3 download --python-version 3.12 --only-binary=:all: -d wheels <PACKAGES>" to get dependencies

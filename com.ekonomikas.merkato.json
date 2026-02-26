@@ -1,62 +1,51 @@
 {
-  "app-id": "com.ekonomikas.merkato",
-  "runtime": "org.gnome.Platform",
-  "runtime-version": "48",
-  "sdk": "org.gnome.Sdk",
-  "command": "merkato",
-  "build-options": {
-    "strip": true,
-    "no-debuginfo": true
-  },
-  "finish-args": [
-    "--share=network",
-    "--share=ipc",
-    "--socket=fallback-x11",
-    "--socket=wayland",
-    "--device=dri"
-  ],
-  "cleanup": [
-    "/include",
-    "/lib/pkgconfig",
-    "/man",
-    "/share/doc",
-    "/share/gtk-doc",
-    "/share/man",
-    "/share/pkgconfig",
-    "/share/vala",
-    "*.la",
-    "*.a",
-    "/lib/python3.12/site-packages/**/tests",
-    "/lib/python3.12/site-packages/**/test",
-    "/lib/python3.12/site-packages/**/__pycache__",
-    "/lib/python3.12/site-packages/**/examples",
-    "*.pyc"
-  ],
-  "modules": [
-    {
-      "name": "blueprint-compiler",
-      "buildsystem": "meson",
-      "cleanup": ["*"],
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler.git",
-          "tag": "v0.18.0"
+    "id" : "com.ekonomikas.merkato",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "49",
+    "sdk" : "org.gnome.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
+    "command" : "merkato",
+    "finish-args" : [
+        "--share=network",
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--device=dri",
+        "--socket=wayland"
+    ],
+    "build-options" : {
+        "append-path" : "/usr/lib/sdk/rust-stable/bin",
+        "build-args" : [
+            "--share=network"
+        ],
+        "env" : {
+            "RUST_BACKTRACE" : "1",
+            "RUST_LOG" : "merkato=debug"
         }
-      ]
     },
-    {
-      "name": "com.ekonomikas.merkato",
-      "builddir": true,
-      "buildsystem": "meson",
-      "config-opts": ["--libdir=lib"],
-      "sources": [
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
         {
-          "type": "git",
-          "url": "https://github.com/sheep-farm/merkato.git",
-          "commit": ""
+            "name" : "merkato",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "file:///home/flavio/Projects"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }

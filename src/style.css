@@ -20,4 +20,30 @@
   margin-right: 0;
 }
 
+/* Heatmap legend colors */
+.heatmap-loss-strong {
+  background-color: #cc0000;
+  border-radius: 4px;
+}
+
+.heatmap-loss {
+  background-color: #cc4400;
+  border-radius: 4px;
+}
+
+.heatmap-neutral {
+  background-color: #555555;
+  border-radius: 4px;
+}
+
+.heatmap-gain {
+  background-color: #2e7d32;
+  border-radius: 4px;
+}
+
+.heatmap-gain-strong {
+  background-color: #00897b;
+  border-radius: 4px;
+}
+
 
