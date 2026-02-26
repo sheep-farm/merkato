@@ -49,7 +49,7 @@ Set custom price alerts to be notified when stocks reach your target prices.
 
 ### From Flatpak (Recommended)
 
-```bash
+```sh
 flatpak install flathub com.ekonomikas.merkato
 
 ```
@@ -64,7 +64,7 @@ flatpak install flathub com.ekonomikas.merkato
 
 #### Build Instructions
 
-```bash
+```sh
 # Clone the repository
 git clone [https://github.com/sheep-farm/merkato.git](https://github.com/sheep-farm/merkato.git)
 cd merkato
@@ -131,7 +131,3 @@ merkato/
 ## License
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License.
-
----
-
-**Made with ❤️ for the GNOME desktop**
