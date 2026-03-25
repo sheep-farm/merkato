@@ -1,7 +1,7 @@
 {
     "id" : "com.ekonomikas.merkato",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "49",
+    "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -43,11 +43,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : ""
+                    "url" : "file:///home/flavop/GitHub"
                 }
-            ],
-            "config-opts" : [
-                "--libdir=lib"
             ]
         }
     ]
