@@ -132,84 +132,50 @@ impl ListStock {
         *imp.model.borrow_mut() = Some(model);
 
         let factory = gtk4::SignalListItemFactory::new();
-        factory.connect_setup(glib::clone!(
-            #[weak(rename_to = list_widget)]
-            self,
-            move |_, list_item| {
-                let row = libadwaita::ActionRow::new();
-                row.set_activatable(true);
-                row.set_cursor_from_name(Some("pointer"));
-
-                let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
-                list_item.set_child(Some(&row));
-
-                row.connect_activated(glib::clone!(
-                    #[weak]
-                    list_item,
-                    move |_| {
-                        if let Some(obj) = list_item.item().and_downcast::<StockObject>() {
-                            let symbol = obj.stock().symbol;
-                            let url = format!("https://finance.yahoo.com/quote/{}/", symbol);
-                            let _ = gio::AppInfo::launch_default_for_uri(&url, gio::AppLaunchContext::NONE);
-                        }
-                    }
-                ));
-
-                list_widget.bind_row(&row, list_item);
-            }
-        ));
-
         factory.connect_bind(glib::clone!(
             #[weak(rename_to = list_widget)]
             self,
             move |_, list_item| {
                 let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
-                if let Some(row) = list_item.child().and_downcast::<libadwaita::ActionRow>() {
-                    list_widget.update_row(&row, list_item);
-                }
+                list_item.set_child(None::<&gtk4::Widget>);
+
+                let Some(obj) = list_item.item().and_downcast::<StockObject>() else { return };
+                let stock = obj.stock();
+                let row = list_widget.build_row(&stock);
+                list_item.set_child(Some(&row));
             }
         ));
 
         imp.list_view.set_factory(Some(&factory));
     }
 
-    fn bind_row(&self, _row: &libadwaita::ActionRow, _list_item: &gtk4::ListItem) {
-        // Context menu is rebuilt on every bind in update_row
-    }
-
-    fn update_row(&self, row: &libadwaita::ActionRow, list_item: &gtk4::ListItem) {
+    fn build_row(&self, stock: &Stock) -> libadwaita::ActionRow {
         let imp = self.imp();
         let remove_mode = *imp.remove_mode.borrow();
-        let Some(obj) = list_item.item().and_downcast::<StockObject>() else { return };
-        let stock = obj.stock();
 
+        let row = libadwaita::ActionRow::new();
         row.set_title(&glib::markup_escape_text(&stock.long_name));
         row.set_subtitle(&stock.symbol);
+        row.set_activatable(true);
+        row.set_cursor_from_name(Some("pointer"));
 
-        // CSS classes
-        row.remove_css_class("market-opened");
-        row.remove_css_class("market-closed");
         if stock.is_market_open() {
             row.add_css_class("market-opened");
         } else {
             row.add_css_class("market-closed");
         }
 
-        // Clear old suffixes
-        while let Some(child) = row.last_child() {
-            row.remove(&child);
-        }
+        let symbol = stock.symbol.clone();
+        row.connect_activated(move |_| {
+            let url = format!("https://finance.yahoo.com/quote/{}/", symbol);
+            let _ = gio::AppInfo::launch_default_for_uri(&url, gio::AppLaunchContext::NONE);
+        });
 
-        // Price box
-        let price_box = self.build_price_box(&stock);
-        row.add_suffix(&price_box);
+        row.add_suffix(&self.build_price_box(stock));
+        row.add_suffix(&self.build_remove_button(&stock.symbol, remove_mode));
+        self.attach_context_menu(&row, stock);
 
-        // Remove button
-        let remove_btn = self.build_remove_button(&stock.symbol, remove_mode);
-        row.add_suffix(&remove_btn);
-
-        // Context menu
-        self.attach_context_menu(row, &stock);
+        row
     }
 
     fn build_price_box(&self, stock: &Stock) -> gtk4::Box {
@@ -275,6 +241,12 @@ impl ListStock {
         let popover = gtk4::PopoverMenu::from_model(Some(&menu));
         popover.set_parent(row);
         popover.set_has_arrow(false);
+
+        // Unparent the popover before the row is finalized to avoid warnings
+        let popover_for_destroy = popover.clone();
+        row.connect_destroy(move |_| {
+            popover_for_destroy.unparent();
+        });
 
         let action_group = gio::SimpleActionGroup::new();
 
