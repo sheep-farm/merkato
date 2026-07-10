@@ -64,6 +64,13 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.0" date="2026-07-09">
+      <description translate="no">
+        <p>Complete rewrite in Rust for improved performance and memory safety.</p>
+        <p>Modern GTK4/Libadwaita interface with list view, heatmap view, and price alerts.</p>
+        <p>Added persistent watchlist, auto-refresh, and multi-language support.</p>
+      </description>
+    </release>
     <release version="0.2.2.u20251211" date="2025-12-11">
       <description translate="no">
         <p>Bug fixes</p>

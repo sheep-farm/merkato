@@ -43,7 +43,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : ""
+                    "url" : "https://github.com/sheep-farm/merkato.git",
+                    "tag" : "v0.3.0"
                 }
             ],
             "config-opts" : [
