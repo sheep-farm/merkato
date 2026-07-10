@@ -9,6 +9,7 @@ use std::path::PathBuf;
 
 use chrono::Local;
 use serde::{Deserialize, Serialize};
+use tracing::{debug, error, info};
 
 use crate::stock::Stock;
 
@@ -32,34 +33,34 @@ impl WatchlistManager {
         let watchlist_file = config_dir.join("watchlist.json");
         let sort_file = config_dir.join("sort_order.txt");
 
-        eprintln!("Watchlist file: {}", watchlist_file.display());
+        info!(watchlist_file = %watchlist_file.display(), "watchlist path");
 
         Self { watchlist_file, sort_file }
     }
 
     pub fn load(&self) -> Vec<Stock> {
         if !self.watchlist_file.exists() {
-            eprintln!("No saved watchlist found");
+            debug!("no saved watchlist found");
             return Vec::new();
         }
 
         match fs::read_to_string(&self.watchlist_file) {
             Ok(content) => match serde_json::from_str::<WatchlistFile>(&content) {
                 Ok(data) => {
-                    eprintln!(
-                        "Loaded {} tickers from watchlist (last updated: {})",
-                        data.stocks.len(),
-                        data.last_updated
+                    info!(
+                        tickers = data.stocks.len(),
+                        last_updated = %data.last_updated,
+                        "loaded watchlist"
                     );
                     data.stocks
                 }
                 Err(e) => {
-                    eprintln!("ERROR: Invalid JSON in watchlist file: {e}");
+                    error!(error = %e, "invalid JSON in watchlist file");
                     Vec::new()
                 }
             },
             Err(e) => {
-                eprintln!("ERROR: Failed to load watchlist: {e}");
+                error!(error = %e, "failed to load watchlist");
                 Vec::new()
             }
         }
@@ -75,16 +76,16 @@ impl WatchlistManager {
         match serde_json::to_string_pretty(&data) {
             Ok(json) => match fs::write(&self.watchlist_file, json.as_bytes()) {
                 Ok(_) => {
-                    eprintln!("Saved {} tickers to watchlist", stocks.len());
+                    info!(tickers = stocks.len(), "saved watchlist");
                     true
                 }
                 Err(e) => {
-                    eprintln!("ERROR: Failed to write watchlist: {e}");
+                    error!(error = %e, "failed to write watchlist");
                     false
                 }
             },
             Err(e) => {
-                eprintln!("ERROR: Failed to serialize watchlist: {e}");
+                error!(error = %e, "failed to serialize watchlist");
                 false
             }
         }
@@ -94,7 +95,7 @@ impl WatchlistManager {
         match fs::write(&self.sort_file, sort_order) {
             Ok(_) => true,
             Err(e) => {
-                eprintln!("Error saving sort order: {e}");
+                error!(error = %e, "failed to save sort order");
                 false
             }
         }

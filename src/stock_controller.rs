@@ -5,8 +5,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 use std::collections::HashMap;
-use std::sync::{mpsc, Arc};
+use std::sync::Arc;
 
+use async_channel::Receiver;
 use tokio::runtime::Runtime;
 
 use crate::alert_manager::AlertManager;
@@ -33,7 +34,6 @@ impl std::fmt::Debug for StockController {
             .finish()
     }
 }
-
 
 impl StockController {
     pub fn new() -> Self {
@@ -72,13 +72,13 @@ impl StockController {
 
     // ─── Search ───────────────────────────────────────────────────────────────
 
-    /// Search for stocks. Returns an mpsc Receiver for the result.
+    /// Search for stocks. Returns an async channel receiver for the result.
     pub fn search_stocks(
         &self,
         input: &str,
         existing_symbols: &[String],
-    ) -> mpsc::Receiver<SearchResult> {
-        let (tx, rx) = mpsc::channel();
+    ) -> Receiver<SearchResult> {
+        let (tx, rx) = async_channel::bounded(1);
 
         let symbols: Vec<String> = input
             .split(',')
@@ -88,7 +88,7 @@ impl StockController {
             .collect();
 
         if symbols.is_empty() {
-            tx.send((HashMap::new(), vec![])).ok();
+            let _ = tx.try_send((HashMap::new(), vec![]));
             return rx;
         }
 
@@ -97,7 +97,7 @@ impl StockController {
 
         std::thread::spawn(move || {
             let result = rt.block_on(yahoo.fetch(&symbols));
-            tx.send(result).ok();
+            let _ = tx.try_send(result);
         });
 
         rx
@@ -105,19 +105,19 @@ impl StockController {
 
     // ─── Refresh ──────────────────────────────────────────────────────────────
 
-    /// Refresh prices for existing stocks. Returns an mpsc Receiver.
-    pub fn refresh_stocks(&self, symbols: Vec<String>) -> Option<mpsc::Receiver<RefreshResult>> {
+    /// Refresh prices for existing stocks. Returns an async channel receiver.
+    pub fn refresh_stocks(&self, symbols: Vec<String>) -> Option<Receiver<RefreshResult>> {
         if symbols.is_empty() {
             return None;
         }
 
-        let (tx, rx) = mpsc::channel();
+        let (tx, rx) = async_channel::bounded(1);
         let yahoo = Arc::clone(&self.yahoo);
         let rt = Arc::clone(&self.runtime);
 
         std::thread::spawn(move || {
             let result = rt.block_on(yahoo.refresh(&symbols));
-            tx.send(result).ok();
+            let _ = tx.try_send(result);
         });
 
         Some(rx)
@@ -133,7 +133,7 @@ impl StockController {
         alert_manager.check_all_alerts(prices)
     }
 
-    // ─── Auto-refresh ─────────────────────────────────────────────────────────
+    // ─── Auto-refresh ───────────────────────────────────────────────────────────
 
     pub fn start_auto_refresh<F>(&mut self, callback: F)
     where

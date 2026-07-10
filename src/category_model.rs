@@ -128,3 +128,50 @@ impl CategoryModel {
         self.stocks.len()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn sample_stock(symbol: &str, sector: &str, quote_type: &str) -> Stock {
+        let mut stock = Stock::new(symbol);
+        stock.sector = sector.to_string();
+        stock.quote_type = quote_type.to_string();
+        stock
+    }
+
+    #[test]
+    fn all_category_returns_everything() {
+        let mut model = CategoryModel::new();
+        model.add_stock(sample_stock("AAPL", "Technology", "EQUITY"));
+        model.add_stock(sample_stock("MSFT", "Technology", "EQUITY"));
+        assert_eq!(model.get_stocks_by_category("All").len(), 2);
+    }
+
+    #[test]
+    fn filter_by_sector() {
+        let mut model = CategoryModel::new();
+        model.add_stock(sample_stock("AAPL", "Technology", "EQUITY"));
+        model.add_stock(sample_stock("PFE", "Healthcare", "EQUITY"));
+        assert_eq!(model.get_stocks_by_category("Technology").len(), 1);
+        assert_eq!(model.get_stocks_by_category("Healthcare").len(), 1);
+    }
+
+    #[test]
+    fn cryptocurrency_filter_overrides_sector() {
+        let mut model = CategoryModel::new();
+        model.add_stock(sample_stock("BTC-USD", "", "CRYPTOCURRENCY"));
+        assert_eq!(model.get_stocks_by_category("Cryptocurrency").len(), 1);
+    }
+
+    #[test]
+    fn counts_match_stocks() {
+        let mut model = CategoryModel::new();
+        model.add_stock(sample_stock("AAPL", "Technology", "EQUITY"));
+        model.add_stock(sample_stock("PFE", "Healthcare", "EQUITY"));
+        let counts = model.all_category_counts();
+        assert_eq!(counts["All"], 2);
+        assert_eq!(counts["Technology"], 1);
+        assert_eq!(counts["Healthcare"], 1);
+    }
+}

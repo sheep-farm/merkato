@@ -6,11 +6,9 @@
 
 use std::cell::RefCell;
 use std::collections::HashMap;
-use std::sync::mpsc;
 
 use gtk4::prelude::*;
 use gtk4::subclass::prelude::*;
-use libadwaita::prelude::AdwDialogExt;
 use gtk4::{glib, CompositeTemplate};
 
 use crate::alert_dialog::AlertDialog;
@@ -22,7 +20,7 @@ use crate::heatmap_view::HeatmapView;
 use crate::list_stock::{ListStock, SortMode};
 use crate::search_stock::SearchStock;
 use crate::stock::Stock;
-use crate::stock_controller::{SearchResult, StockController};
+use crate::stock_controller::StockController;
 
 mod imp {
     use super::*;
@@ -130,7 +128,7 @@ glib::wrapper! {
     pub struct MerkatoWindow(ObjectSubclass<imp::MerkatoWindow>)
         @extends libadwaita::ApplicationWindow, gtk4::ApplicationWindow,
                  gtk4::Window, gtk4::Widget,
-        @implements gtk4::Accessible, gtk4::Buildable, gtk4::ConstraintTarget,
+        @implements gtk4::Buildable, gtk4::ConstraintTarget,
                     gtk4::Native, gtk4::Root, gtk4::ShortcutManager,
                     gio::ActionGroup, gio::ActionMap;
 }
@@ -278,7 +276,7 @@ impl MerkatoWindow {
 
     // ─── Background operations ────────────────────────────────────────────────
 
-    /// Begin an async search and poll for results via idle_add_local.
+    /// Begin an async search and receive results via glib channel.
     fn begin_search(&self, input: String) {
         let existing: Vec<String> = self
             .imp()
@@ -297,46 +295,29 @@ impl MerkatoWindow {
         self.imp().spinner.set_spinning(true);
         self.imp().search_stock_entry.set_frozen(true);
 
-        self.poll_search_result(rx);
-    }
-
-    fn poll_search_result(&self, rx: mpsc::Receiver<SearchResult>) {
-        glib::idle_add_local(glib::clone!(
+        glib::spawn_future_local(glib::clone!(
             #[weak(rename_to = win)]
             self,
-            #[upgrade_or]
-            glib::ControlFlow::Break,
-            move || win.check_search_rx(&rx)
+            async move {
+                if let Ok((stocks, errors)) = rx.recv().await {
+                    win.imp().spinner.set_spinning(false);
+                    win.imp().search_stock_entry.set_frozen(false);
+                    win.imp().search_stock_entry.set_text("");
+
+                    if !errors.is_empty() {
+                        win.show_toast(&format!("Could not find: {}", errors.join(", ")));
+                    }
+                    for stock in stocks.into_values() {
+                        win.add_stock(stock);
+                    }
+                    win.save_watchlist();
+                    win.update_last_refreshed();
+                }
+            }
         ));
     }
 
-    fn check_search_rx(&self, rx: &mpsc::Receiver<SearchResult>) -> glib::ControlFlow {
-        match rx.try_recv() {
-            Ok((stocks, errors)) => {
-                self.imp().spinner.set_spinning(false);
-                self.imp().search_stock_entry.set_frozen(false);
-                self.imp().search_stock_entry.set_text("");
-
-                if !errors.is_empty() {
-                    self.show_toast(&format!("Could not find: {}", errors.join(", ")));
-                }
-                for stock in stocks.into_values() {
-                    self.add_stock(stock);
-                }
-                self.save_watchlist();
-                self.update_last_refreshed();
-                glib::ControlFlow::Break
-            }
-            Err(mpsc::TryRecvError::Empty) => glib::ControlFlow::Continue,
-            Err(_) => {
-                self.imp().spinner.set_spinning(false);
-                self.imp().search_stock_entry.set_frozen(false);
-                glib::ControlFlow::Break
-            }
-        }
-    }
-
-    /// Begin an async refresh and poll for results.
+    /// Begin an async refresh and receive results via async channel.
     fn begin_refresh(&self, symbols: Vec<String>) {
         let rx = match self.imp().controller.borrow().refresh_stocks(symbols) {
             Some(r) => r,
@@ -344,36 +325,17 @@ impl MerkatoWindow {
         };
 
         self.imp().spinner.set_spinning(true);
-        self.poll_refresh_result(rx);
-    }
-
-    fn poll_refresh_result(&self, rx: mpsc::Receiver<crate::stock_controller::RefreshResult>) {
-        glib::idle_add_local(glib::clone!(
+        glib::spawn_future_local(glib::clone!(
             #[weak(rename_to = win)]
             self,
-            #[upgrade_or]
-            glib::ControlFlow::Break,
-            move || win.check_refresh_rx(&rx)
+            async move {
+                if let Ok((stocks, _errors)) = rx.recv().await {
+                    win.imp().spinner.set_spinning(false);
+                    win.apply_refresh(stocks);
+                    win.update_last_refreshed();
+                }
+            }
         ));
-    }
-
-    fn check_refresh_rx(
-        &self,
-        rx: &mpsc::Receiver<crate::stock_controller::RefreshResult>,
-    ) -> glib::ControlFlow {
-        match rx.try_recv() {
-            Ok((stocks, _errors)) => {
-                self.imp().spinner.set_spinning(false);
-                self.apply_refresh(stocks);
-                self.update_last_refreshed();
-                glib::ControlFlow::Break
-            }
-            Err(mpsc::TryRecvError::Empty) => glib::ControlFlow::Continue,
-            Err(_) => {
-                self.imp().spinner.set_spinning(false);
-                glib::ControlFlow::Break
-            }
-        }
     }
 
     // ─── UI setup ─────────────────────────────────────────────────────────────
@@ -491,7 +453,7 @@ impl MerkatoWindow {
             }
         ));
 
-        dialog.present(Some(self));
+        libadwaita::prelude::AdwDialogExt::present(&dialog, Some(self));
     }
 
     // ─── Helpers ──────────────────────────────────────────────────────────────

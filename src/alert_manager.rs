@@ -9,6 +9,7 @@ use std::fs;
 use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
+use tracing::{error, info};
 
 use crate::alert::{Alert, AlertType};
 
@@ -58,11 +59,11 @@ impl AlertManager {
                         .into_iter()
                         .map(|a| (a.alert_id.clone(), a))
                         .collect();
-                    eprintln!("Loaded {} alerts", self.alerts.len());
+                    info!(alerts = self.alerts.len(), "loaded alerts");
                 }
-                Err(e) => eprintln!("ERROR: Failed to parse alerts: {e}"),
+                Err(e) => error!(error = %e, "failed to parse alerts"),
             },
-            Err(e) => eprintln!("ERROR: Failed to read alerts: {e}"),
+            Err(e) => error!(error = %e, "failed to read alerts"),
         }
     }
 

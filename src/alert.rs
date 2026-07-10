@@ -110,3 +110,39 @@ impl std::fmt::Display for Alert {
         )
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn above_alert_triggers_when_price_reaches_target() {
+        let alert = Alert::new("AAPL", AlertType::Above, 150.0);
+        assert!(alert.check_condition(150.0));
+        assert!(alert.check_condition(155.0));
+        assert!(!alert.check_condition(149.99));
+    }
+
+    #[test]
+    fn below_alert_triggers_when_price_drops_to_target() {
+        let alert = Alert::new("AAPL", AlertType::Below, 150.0);
+        assert!(alert.check_condition(150.0));
+        assert!(alert.check_condition(145.0));
+        assert!(!alert.check_condition(150.01));
+    }
+
+    #[test]
+    fn triggered_alert_does_not_trigger_again() {
+        let mut alert = Alert::new("AAPL", AlertType::Above, 150.0);
+        assert!(alert.check_condition(155.0));
+        alert.trigger();
+        assert!(!alert.check_condition(160.0));
+    }
+
+    #[test]
+    fn disabled_alert_never_triggers() {
+        let mut alert = Alert::new("AAPL", AlertType::Above, 150.0);
+        alert.enabled = false;
+        assert!(!alert.check_condition(200.0));
+    }
+}

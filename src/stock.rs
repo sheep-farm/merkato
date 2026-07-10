@@ -66,3 +66,41 @@ impl std::fmt::Display for Stock {
         write!(f, "{} ({}): {} {}", self.symbol, self.long_name, self.price, self.currency)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn formatted_price_includes_symbol() {
+        let mut stock = Stock::new("AAPL");
+        stock.price = 150.5;
+        stock.currency_symbol = "$".to_string();
+        assert_eq!(stock.formatted_price(), "$150.50");
+    }
+
+    #[test]
+    fn formatted_change_pct_positive() {
+        let mut stock = Stock::new("AAPL");
+        stock.change_pct = 0.0523;
+        assert_eq!(stock.formatted_change_pct(), "+5.23%");
+    }
+
+    #[test]
+    fn formatted_change_pct_negative() {
+        let mut stock = Stock::new("AAPL");
+        stock.change_pct = -0.0245;
+        assert_eq!(stock.formatted_change_pct(), "-2.45%");
+    }
+
+    #[test]
+    fn gain_and_loss_helpers() {
+        let mut stock = Stock::new("AAPL");
+        stock.change = 1.0;
+        assert!(stock.is_gaining());
+        assert!(!stock.is_losing());
+        stock.change = -1.0;
+        assert!(!stock.is_gaining());
+        assert!(stock.is_losing());
+    }
+}

@@ -43,7 +43,7 @@
                     "type" : "git",
                     "url" : "https://github.com/sheep-farm/merkato.git",
                     "tag" : "v0.3.0",
-                    "commit" : "ed07086eff1cdd026c1b257d2406fe3f89df887e"
+                    "commit" : "7417e6e939fdb3aae0f8e48cfdc88c320ab2aa0a"
                 },
                 "cargo-sources.json",
                 {

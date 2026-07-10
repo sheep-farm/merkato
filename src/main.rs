@@ -11,11 +11,13 @@ mod alerts_view;
 mod application;
 mod category_model;
 mod category_sidebar;
+mod data_cache;
 mod heatmap_view;
 mod list_stock;
 mod search_stock;
 mod stock;
 mod stock_controller;
+mod stock_object;
 mod watchlist_manager;
 mod window;
 mod yahoo_request;
@@ -25,6 +27,8 @@ use gtk4::prelude::*;
 use application::MerkatoApplication;
 
 fn main() {
+    tracing_subscriber::fmt::init();
+
     // Register GLib resources (compiled by build.rs / pre-compiled)
     let resources_bytes =
         include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/src/merkato.gresource"));

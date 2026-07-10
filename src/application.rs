@@ -45,10 +45,10 @@ mod imp {
 
             // Create or raise window
             if let Some(win) = app.active_window() {
-                win.present();
+                gtk4::prelude::GtkWindowExt::present(&win);
             } else {
                 let win = MerkatoWindow::new(app.upcast_ref::<libadwaita::Application>());
-                win.present();
+                gtk4::prelude::GtkWindowExt::present(&win);
             }
         }
 

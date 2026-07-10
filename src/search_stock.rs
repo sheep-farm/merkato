@@ -61,7 +61,7 @@ mod imp {
 glib::wrapper! {
     pub struct SearchStock(ObjectSubclass<imp::SearchStock>)
         @extends gtk4::Box, gtk4::Widget,
-        @implements gtk4::Accessible, gtk4::Buildable, gtk4::ConstraintTarget, gtk4::Orientable;
+        @implements gtk4::Buildable, gtk4::ConstraintTarget, gtk4::Orientable;
 }
 
 impl SearchStock {

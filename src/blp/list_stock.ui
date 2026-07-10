@@ -15,11 +15,10 @@ corresponding .blp file and regenerate this file with blueprint-compiler.
         <property name="hscrollbar-policy">2</property>
         <property name="visible">true</property>
         <child>
-          <object class="GtkListBox" id="_list_stock">
+          <object class="GtkListView" id="_list_stock">
             <style>
               <class name="navigation-sidebar"/>
             </style>
-            <property name="selection-mode">1</property>
           </object>
         </child>
       </object>

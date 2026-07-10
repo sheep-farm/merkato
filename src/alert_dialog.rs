@@ -137,7 +137,7 @@ mod imp {
 glib::wrapper! {
     pub struct AlertDialog(ObjectSubclass<imp::AlertDialog>)
         @extends libadwaita::Dialog, gtk4::Widget,
-        @implements gtk4::Accessible, gtk4::Buildable, gtk4::ConstraintTarget;
+        @implements gtk4::Buildable, gtk4::ConstraintTarget;
 }
 
 impl AlertDialog {

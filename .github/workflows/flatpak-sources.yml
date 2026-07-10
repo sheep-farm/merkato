@@ -1,0 +1,45 @@
+name: Generate Flatpak cargo-sources
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cargo-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install flatpak-builder-tools dependencies
+        run: |
+          python3 -m venv /tmp/venv
+          /tmp/venv/bin/pip install aiohttp tomlkit
+
+      - name: Clone flatpak-builder-tools
+        run: |
+          git clone --depth 1 https://github.com/flatpak/flatpak-builder-tools.git /tmp/flatpak-builder-tools
+
+      - name: Generate cargo-sources.json
+        run: |
+          /tmp/venv/bin/python3 /tmp/flatpak-builder-tools/cargo/flatpak-cargo-generator.py Cargo.lock -o cargo-sources.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cargo-sources
+          path: cargo-sources.json
+
+      - name: Commit cargo-sources.json back to release tag (optional)
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cargo-sources.json
+          git diff --cached --quiet || git commit -m "chore(flatpak): update cargo-sources.json for ${{ github.ref_name }}"
+          git push
