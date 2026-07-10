@@ -16,12 +16,10 @@
     ],
     "build-options" : {
         "append-path" : "/usr/lib/sdk/rust-stable/bin",
-        "build-args" : [
-            "--share=network"
-        ],
         "env" : {
             "RUST_BACKTRACE" : "1",
-            "RUST_LOG" : "merkato=debug"
+            "RUST_LOG" : "merkato=debug",
+            "CARGO_NET_OFFLINE" : "true"
         }
     },
     "cleanup" : [
@@ -44,7 +42,16 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/sheep-farm/merkato.git",
-                    "tag" : "v0.3.0"
+                    "tag" : "v0.3.0",
+                    "commit" : "ed07086eff1cdd026c1b257d2406fe3f89df887e"
+                },
+                "cargo-sources.json",
+                {
+                    "type" : "shell",
+                    "commands" : [
+                        "mkdir -p .cargo",
+                        "cp -vf cargo/config .cargo/config.toml"
+                    ]
                 }
             ],
             "config-opts" : [
